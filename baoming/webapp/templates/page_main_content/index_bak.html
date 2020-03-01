@@ -1,0 +1,171 @@
+<div class="like_form">
+    {% if need_login %}
+    <div style="background-color: #0d7796">
+        {% if reset_pwd_info == "true"%}
+        <span style="background-color: #d5ff10;border: 1px;border-radius: 3px; margin-top: 10px">您的登录密码已更改！请在右侧进行重新登录，以便更好地为您服务</span>
+        {% else %}
+        <span style="background-color: #d5ff10;border: 1px;border-radius: 3px; margin-top: 10px">您尚未登录，或登录超时！请在右侧进行登录或注册新用户，以便更好地为您服务</span>
+        {% endif%}
+    </div>
+    <br>
+    <br>
+    {% else %}
+    {% endif %}
+
+    {% if request.session.role_name == 'administrator' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉信息汇总系统</label>
+    <hr>
+    {% elif request.session.role_name == 'teacher' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉负责人审核系统</label>
+    <hr>
+    {% else %}
+    <!--    <p style="text-align: center"><label style="color: whitesmoke">◉欢迎进入◉</label></p>-->
+    <!--    <hr>-->
+    <p>
+        <img src="/static/image/index/leling.png" style="width: 30%;height: 15%"
+             class="main_pic"
+             title="欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉学员信息填报系统"/>
+
+    </p>
+    <!--    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉信息填报系统</label>-->
+    <!--    <hr>-->
+    {%if no_term%}
+    <p style="text-align: center">
+        <label style="color: yellowgreen;font-size: 10px">报名截止日期尚未开始或结束，请不要继续操作</label>{% if is_report %}
+    <font color='#ff0000'>* </font>
+    <span class="input_text" style="width: 20%; height: 8%; font-size: 10px">您已有填报记录，
+                <a href='/report/report_student_info_list/'
+                   style="color: #00FF00">&nbsp;&nbsp;管理已填报信息&nbsp;&nbsp;</a></span>
+
+    <!--        <span class="input_text" style="width: 20%; height: 15%; font-size: 20px">继续填报的工种：</span>-->
+    <!--    <div class="dropdown-index">-->
+    <!--        <button class="dropbtn-index" style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">-->
+    <!--            继续报考工种-->
+    <!--        </button>-->
+    <!--        <div class="dropdown-index-content">-->
+    <!--            <a href='/report/worker?type=1' title="（机电）电工">电工</a>-->
+    <!--            <a href='/report/worker?type=2' title="（机电）焊工">焊工</a>-->
+    <!--            <a href='/report/worker?type=3' title="（机电）钳工">钳工</a>-->
+    <!--            <a href='/report/worker?type=4'>育婴员</a>-->
+    <!--            <a href='/report/worker?type=5'>保育员</a>-->
+    <!--            <a href='/report/worker?type=6'>劳动关系协调员</a>-->
+    <!--            <a href='/report/worker?type=7' title="（化工）防腐蚀工">防腐蚀工</a>-->
+    <!--            <a href='/report/worker?type=8' title="（化工）有机合成工">有机合成工</a>-->
+    <!--            <a href='/report/worker?type=9' title="（化工）工业废水处理工">工业废水处理工</a>-->
+    <!--            <a href='/report/worker?type=10' title="（化工）无机化学反应生产工">无机化学反应生产</a>-->
+    <!--            <a href='/report/worker?type=11' title="（化工）固体废物处理工">固体废物处理工</a>-->
+    <!--        </div>-->
+    <!--</div>-->
+
+    {% else %}
+    <!--        <span class="input_text" style="width: 20%; height: 15%; font-size: 20px">：</span>-->
+
+    <!--    <div class="dropdown-index">-->
+    <!--        <button class="dropbtn-index" style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">-->
+    <!--            请选择报考工种-->
+    <!--        </button>-->
+    <!--        <div class="dropdown-index-content">-->
+    <!--            <a href='/report/worker?type=1' title="（机电）电工">电工</a>-->
+    <!--            <a href='/report/worker?type=2' title="（机电）焊工">焊工</a>-->
+    <!--            <a href='/report/worker?type=3' title="（机电）钳工">钳工</a>-->
+    <!--            <a href='/report/worker?type=4'>育婴员</a>-->
+    <!--            <a href='/report/worker?type=5'>保育员</a>-->
+    <!--            <a href='/report/worker?type=6'>劳动关系协调员</a>-->
+    <!--            <a href='/report/worker?type=7' title="（化工）防腐蚀工">防腐蚀工</a>-->
+    <!--            <a href='/report/worker?type=8' title="（化工）有机合成工">有机合成工</a>-->
+    <!--            <a href='/report/worker?type=9' title="（化工）工业废水处理工">工业废水处理工</a>-->
+    <!--            <a href='/report/worker?type=10' title="（化工）无机化学反应生产工">无机化学反应生产</a>-->
+    <!--            <a href='/report/worker?type=11' title="（化工）固体废物处理工">固体废物处理工</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    {% endif %}
+    {% endif%}
+        <label
+                style="color: mediumvioletred;font-size: 20px">{{school_term.school_term_name}}</label>
+        <label style="color: whitesmoke">本期报名开始日期：</label><label style="color: red">{{school_term.school_term_start|date:"Y-m-d"}}</label>
+        <label style="color: whitesmoke">本期报名结束日期：</label><label style="color: red">{{school_term.school_term_end|date:"Y-m-d"}}</label>
+    </p>
+    {% else %}
+    <p style="text-align: center">
+
+        <label
+                style="color: mediumvioletred;font-size: 20px">{{school_term.school_term_name}}</label>
+        <label style="color: whitesmoke">本期报名开始日期：</label><label style="color: red">{{school_term.school_term_start|date:"Y-m-d"}}</label>
+        <label style="color: whitesmoke">本期报名结束日期：</label><label style="color: red">{{school_term.school_term_end|date:"Y-m-d"}}</label>
+    </p>
+    {%endif%}
+    <hr>
+
+
+    <div class="report_list">
+        <div class="dropdown-index report_list_direct">
+            <button class="dropbtn-index"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">
+                请选择报考职业
+            </button>
+        </div>
+        <hr class="bor_direct">
+        <p class="work_type_a">
+            <a href='/report/worker?type=1' title="（机电）电工">电工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=2' title="（机电）焊工">焊工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=3' title="（机电）钳工">钳工</a>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <a href='/report/worker?type=4'>育婴员</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=5'>保育员</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=6'>劳动关系协调员</a>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <a href='/report/worker?type=7' title="（化工）防腐蚀工">防腐蚀工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=8' title="（化工）有机合成工">有机合成工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=9' title="（化工）工业废水处理工">工业废水处理工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=10' title="（化工）无机化学反应生产工">无机化学反应生产工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=11' title="（化工）固体废物处理工">固体废物处理工</a>
+        </p>
+        <!--        后面加的-->
+        <hr class="bor">
+        <p class="work_type_a">
+            <a href='/report/worker?type=12' title="车工">车工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=13' title="机床装调维修工">机床装调维修工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=14' title="电梯安装维修工">电梯安装维修工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=15' title="起重装卸机械操作工">起重装卸机械操作工</a>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <a href='/report/worker?type=16' title="架子工">架子工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=17' title="防水工">防水工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=18' title="手工木工">手工木工</a>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <a href='/report/worker?type=19' title="砌筑工">砌筑工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=20' title="钢筋工">钢筋工</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/report/worker?type=21' title="混凝土工">混凝土工</a>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <a href='/report/worker?type=22' title="智能楼宇管理员">智能楼宇管理员</a>
+        </p>
+    </div>
+    <hr>
+    <div class="dropdown-index">
+        <a href="/report/introduction/" target="_blank">
+            <button class="dropbtn-index"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">
+                报考须知
+            </button>
+        </a>
+    </div>
+    <div class="dropdown-index">
+        <a href="/report/system_guide/" target="_blank">
+            <button class="dropbtn-index"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">
+                系统操作指南
+            </button>
+        </a>
+    </div>
+
+</div>
+

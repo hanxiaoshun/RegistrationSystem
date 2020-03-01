@@ -1,0 +1,184 @@
+<div class="nav_header">
+    <nav>
+        <!--    <div class='sub_main_img'>-->
+        <!--        <a href="/report/to_index" style="width: 100%"><img src="/static/image/index/leling.png" class="main_pic"-->
+        <!--                                                            title="返回首页"/></a>-->
+        <!--    </div>-->
+
+        <div class='sub_main_nav'>
+            <ul class='navbar_nav' data-in='fadeInDown' data-out='fadeOutUp'>
+                {% if request.session.role_name == 'administrator' %}
+                <!--            <li class='active'>-->
+                <!--                <a href='/report/to_index/'>首页</a></li>-->
+                <li class='dropdown'>
+                    <a href='javascript:void(0)'>报表管理</a>
+                    <div class='dropdown_menu special_div'>
+                        <a href='/report/administrator_all_student_base_info/' class="special" title="学员报名表">学员报名表</a>
+                        <a href='/report/administrator_reporter_chemical' class="special"
+                           title="报名资料汇总表(化工类)">报名资料汇总表(化工类)</a>
+                        <a href='/report/administrator_reporter_chemical_not' class="special" style="font-size: 10px"
+                           title="德州市申请职业技能鉴定（技术等级鉴定）颁发职业资格证书花名册">德州市申请职业技能鉴定（技术等级鉴定）颁发职业资格证书花名册</a>
+                    </div>
+                </li>
+                <li class='dropdown'>
+                    <a href='javascript:void(0)'>系统管理</a>
+                    <div class='dropdown_menu'>
+                        <a href='/report/report_teacher_list/' title="负责人管理">负责人管理</a>
+                        <a href='/report/report_school_term_list/' title="报名周期管理">报名周期管理</a>
+                        <a href='/report/report_operation_log_list/' title="查看操作记录">查看操作记录</a>
+                        <a href='/report/report_system_info_detail/' title="查看运行信息">查看运行信息</a>
+                        <a href='/report/report_delete_force/' title="深度删除">深度删除</a>
+                    </div>
+                </li>
+                <li><a href='/report/report_info_confirm/'>信息确认</a>
+                    {% elif request.session.role_name == 'teacher'%}
+                <li class='active'>
+                <li><a href='/report/report_info_review/'>信息审核</a>
+                    {% else %}
+                <li class='active'>
+                <li class='active'><a href='/report/to_index/'>返回首页</a></li>
+                {%if need_list == False%}
+                {% else%}
+                <li><a href='/report/report_student_info_list/'>管理已填报信息</a></li>
+                {%endif%}
+                {% endif %}
+            </ul>
+            <div id="sideMenu">
+                {% if request.session.nickname %}
+                <span class="fa" title="欢迎:{{ request.session.nickname }}">欢迎:</span>
+                <a href="/report/user_setting">
+                    <font color="#7fff00">{{ request.session.nickname }}</font>
+                </a>|
+                <a href="/report/sign_out">
+                    <span class="fa" title="退出">退出</span>
+                </a>|
+                {% else %}
+                <a href="/report/to_login">
+                    <span class="fa" title="您好！请登录">登录</span>
+                </a>|
+                <a href="javascript:void(0);">
+                    <span class="btn">注册</span>
+                </a>|
+                {% endif %}
+                <a href='/report/receive/'>消息(<span id="system-message-alert"
+                                                    style="color: deeppink;text-decoration: black">{{message_not_confirm}}</span>)</a>|
+                <a href="javascript:void(0);" title="导航菜单" class="more-menu"><span class="fa fa-navicon more-menu-span"
+                                                                                   id="sideMenuClosed"
+                                                                                   style="color: red">更多</span></a>
+            </div>
+        </div>
+
+    </nav>
+    <div id="sideMenuContainer" style="overflow: auto;">
+        {% if request.session.role_name == 'administrator' %}
+        <a href="/report/user_info_list/" title="用户管理"><span class="fa fa-user"></span></a>
+        <a href="/report/message_add/" title="发送信息"><span class="fa fa-user"></span></a>
+        <!--    <a href='/report/reset_password/' title="修改密码"><span class="fa fa-user"></span></a>-->
+        <!--    <a href="/report/role_info_list/" title="角色管理"><span class="fa fa-user"></span></a>-->
+        {% else %}
+        {% if request.session.username %}
+        <a href='/report/reset_password/' title="修改密码"><span class="fa fa-user"></span></a>
+        <a href="/report/message_add/" title="发送信息"><span class="fa fa-user"></span></a>
+        {% else %}
+        {% endif %}
+
+        {% endif %}
+        <!--    <a href="javascript:void(0);" title="申报条件"><span class="fa fa-thumbs-up" aria-hidden="true" onclick=""></span></a>-->
+        <!--    <a href="javascript:void(0);" title="公告通知"><span class="fa fa-thumbs-up" aria-hidden="true" onclick=""></span></a>-->
+        <!--    <a href="javascript:void(0);" title="合作咨询"><span class="fa fa-thumbs-up" aria-hidden="true"></span></a>-->
+        <!--    <a href="javascript:void(0);" title="联系我们"><span class="fa fa-thumbs-up" aria-hidden="true"></span></a>-->
+        <!--    <a href="javascript:void(0);" title="关于我们"><span class="fa fa-thumbs-up" aria-hidden="true"></span></a>-->
+        <!--    <a href="javascript:void(0);" title="常见问题"><span class="fa fa-question-circle"></span></a>-->
+    </div>
+
+    <div class="box">
+        <div class="regiest">
+            <form action="/report/register/" id='register-form' method="post">
+                {% csrf_token %}
+                {{ form }}
+                <table style="margin-top: 10%;margin-left: auto;margin-right: auto;">
+                    <tbody>
+                    <tr>
+                        <td><label style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;用户名:</label></td>
+                        <td><input type="text" name="username" id="username" value="{{username}}" required="required"
+                                   placeholder="用户名"
+                                   onblur="check_username();" onchange="check_username();"></td>
+                        <td style="width: auto;"><span class="message-label"
+                                                       style="color:red;margin-left: 1%; float: left;"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label
+                                style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昵称:</label>
+                        </td>
+                        <td><input type="text" name="nickname" id="nickname" placeholder="昵称" required="required"
+                                   onblur="check_nickname();" onchange="check_nickname();"></td>
+                        <td style="width: auto;"><span class="message-label"
+                                                       style="color:red;margin-left: 1%; float: left"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label
+                                style="color: honeydew; float: right; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:</label>
+                        </td>
+                        <td><input type="password" name="password" id="passwordReg" placeholder="密码" required="required"
+                                   onblur="check_password();" onchange="check_password();"></td>
+                        <td style="width: auto;"><span class="message-label"
+                                                       style="color:red;margin-left: 1%; float: left"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label style="color: honeydew; float: right;">确认密码:</label></td>
+                        <td><input type="password" id="finalPWD" placeholder="确认密码" required="required"
+                                   onblur="check_equal();" onchange="check_equal();"></td>
+                        <td style="width: auto;"><span class="message-label"
+                                                       style="color:red;margin-left: 1%; float: left"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p>
+                <div id="btn2" style="margin-left: 20%;">
+                    <ul>
+                        <li><input type="submit" value="提交" class="submit" style="color: white"/></li>
+                        <li><input type="button" value="关闭" class="close" style="color: white"/></li>
+                    </ul>
+                </div>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<div id="timeArea"><script type="text/javascript">LoadBlogParts();</script></div>-->
+
+<script type="text/javascript">
+    $(function () {
+        $(".btn").click(function () {
+            let username = $("#username");
+            username.empty();
+            let passwordReg = $("#passwordReg");
+            passwordReg.empty();
+            let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+            let height = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box").addClass("animated bounceIn").show().css({left: left, top: top});
+            $(".opacity_bg").css("opacity", "0.3").show();
+        });
+
+
+        $(".close").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;
+            let top = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box").show().animate({
+                width: "-$(window).width()*0.35",
+                height: "-$(window).height()*0.5",
+                left: "-" + left + "px",
+                top: "-" + top + "px"
+            }, 1000, function () {
+                let width1 = $(window).width() * 0.35;
+                let height1 = $(window).height() * 0.5;
+                console.log(width1);
+                $(this).css({width: width1, height: height1}).hide();
+            });
+
+        });
+
+
+    });
+</script>

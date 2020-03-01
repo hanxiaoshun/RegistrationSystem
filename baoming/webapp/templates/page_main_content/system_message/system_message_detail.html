@@ -1,0 +1,116 @@
+{% load filter_model %}
+{% load filter_status %}
+{% load filter_system_message %}
+<div class="teacher_ordinary" style="text-align: center">
+
+    <p style="text-align: center">
+        <label class="input_text_head">{{system_message_type}}消息列表&nbsp;&nbsp;</label>
+        <a href="/report/receive/"><label style="color: yellow">未读消息(<span
+                style="color: deeppink;text-decoration: black">{{message_not_confirm}}</span>)|</label></a>
+        <a href="/report/send/"><label style="color: #00FF00">已发送消息(<span
+                style="color: deeppink;text-decoration: black">{{message_already_sent}}</span>)|</label></a>
+        <a href="/report/admin_message/"><label style="color: red">系统公告(<span
+                style="color: deeppink;text-decoration: black">{{system_announcement}}</span>)</label></a>
+    </p>
+    <p style="text-align: right" class="p-search">
+        <a href="/report/message_add/" target="_blank">
+            <input type='button' style="color: midnightblue" value='发送信息' class='form-button'/>
+        </a>
+<!--        <a href="javascript:void(0);" target="_blank">-->
+<!--            <input type='button' style="color: hotpink" value='<<展示查询条件' onclick="recover_search();"-->
+<!--                   class='form-button'/>-->
+<!--        </a>-->
+    </p>
+
+    <div class="system_message_send" style="text-align: center">
+        <table style="margin-top: 5%;margin-left: auto;margin-right: auto;">
+            <tbody>
+            {% if message_type == "receive" %}
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">发信人：</label>
+                </td>
+                <td class="form-label td-input">
+                    <label style='color:white'>{{ system_message.sender.real_name }}</label>
+                </td>
+            </tr>
+            {% else %}
+            {% if system_message.message_range == "1" %}
+            {% elif system_message.message_range == "3" %}
+            {% elif system_message.message_range == "6" %}
+            {% else %}
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">收信人：</label>
+                </td>
+                <td class="form-label td-input">
+                    <label style='color:white'>{{ system_message.receiver.real_name }}</label>
+                </td>
+            </tr>
+            {% endif %}
+
+            {% endif %}
+
+            {% if system_message.message_range %}
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">消息发送范围：</label>
+                </td>
+                <td class="form-label td-input">
+                    <label style='color:white'>{{ system_message.message_range|get_message_range }}</label>
+                </td>
+
+                <td style="width: auto;"><span class="message-label" id="message_range_label"
+                                               style="color:red;margin-left: 1%; float: right;"></span></td>
+                </td>
+            </tr>
+            {% else %}
+            {% endif%}
+
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">消息发送级别：</label>
+                </td>
+                <td class="form-label td-input">
+                    <label style='color:white'>{{ system_message.message_level|get_message_level }}</label>
+                </td>
+                <td style="width: auto;"><span class="message-label" id="message_level_label"
+                                               style="color:red;margin-left: 1%; float: right;"></span></td>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span" colspan="8">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">标题：</label>
+                </td>
+                <td class="form-label td-input">
+                    <label style="color: honeydew;">{{system_message.message_title}}</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span" colspan="8">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">内容：</label>
+                </td>
+                <td class="form-label td-input">
+                    <label style="color: honeydew;">{{system_message.message_content}}</label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

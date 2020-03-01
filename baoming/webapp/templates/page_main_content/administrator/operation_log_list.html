@@ -1,0 +1,102 @@
+<!--电工、焊工、钳工、劳动员、育婴员、保育员 填报页面-->
+{% load filter_model %}
+<div class="teacher_ordinary">
+    <label class="input_text_head">山东省职业技能鉴定报名系统操作信息日志列表</label>
+<!--    <div>-->
+<!--        <p style="text-align: right">-->
+<!--            <a href="javascript:void(0);">-->
+<!--                <input type='button' style="color: deeppink" value='添加负责人' class='form-button-add-teacher'/>-->
+<!--            </a>-->
+<!--        </p>-->
+<!--    </div>-->
+    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+    <div class="table-wrapper">
+
+<!--        <table class="fl-table" border="1.5"-->
+<!--               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">-->
+       <table class="fl-table" border="1.5">
+<!--&lt;!&ndash;               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">     -->
+        <thead>
+            <tr class="table-head">
+                <th>序号</th>
+                <th>用&nbsp;户&nbsp;名</th>
+                <th>操作</th>
+                <th>操作设备IP地址</th>
+                <th>操作级别</th>
+                <th>操作结果</th>
+                <th>操作说明</th>
+                <th>操作时间</th>
+<!--                <th>操作</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            {% for interview_audit in contacts %}
+            <tr class="table-tr">
+                <td>{{forloop.counter}}</td>
+                <td>{{interview_audit.username}}</td>
+                <td>{{interview_audit.operation}}</td>
+                <td>{{interview_audit.ip_address}}</td>
+                <td>{{interview_audit.operation_level}}</td>
+                <td>{{ interview_audit.operation_result }}</td>
+                <td>{{ interview_audit.operation_message }}</td>
+                <td>{{ interview_audit.create_time|date:"Y-m-d H:m:s" }}</td>
+<!--                <td>-->
+<!--                    <div class="dropdown">-->
+<!--                        <button class="dropbtn">操作</button>-->
+<!--                        <div class="dropdown-content">-->
+<!--                            <a href='javascript:void(0);'-->
+<!--                               onclick="to_log_detail('{{teacher.pk}}')">-->
+<!--                                <button>详情</button>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+                <!--            <td>-->
+                <!--                <div class="dropdown">-->
+                <!--                    <button class="dropbtn">操作</button>-->
+                <!--                    <div class="dropdown-content">-->
+                <!--                        <a href='javascript:void(0);'-->
+                <!--                           onclick="to_update_teacher('{{teacher.pk}}')">-->
+                <!--                            <button>修改</button>-->
+                <!--                        </a>-->
+                <!--                        &lt;!&ndash;                        <a href='/report/student_info_detail?studentId={{student.pk}}'>&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                            <button>详情</button>&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                        </a>&ndash;&gt;-->
+                <!--                        {% if teacher.status == "1"%}-->
+                <!--                        <a href='javascript:void(0);' onclick="cancel_teacher('{{teacher.pk}}')">-->
+                <!--                            <button>注销</button>-->
+                <!--                        </a>-->
+                <!--                        {% elif teacher.status == "2"%}-->
+                <!--                        <a href='javascript:void(0);' onclick="start_teacher('{{teacher.pk}}')">-->
+                <!--                            <button>启用</button>-->
+                <!--                        </a>-->
+                <!--                        {% else%}-->
+                <!--                        {% endif%}-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </td>-->
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination" style="color: ghostwhite">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a style="color: #00FF00" href="?page=1">&laquo; 首页</a>
+            <a style="color: yellow" href="?page={{ contacts.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ contacts.number }} 页 ,总共 {{ contacts.paginator.num_pages }} 页.
+        </span>
+
+        {% if contacts.has_next %}
+            <a style="color: yellow" href="?page={{ contacts.next_page_number }}">下一页</a>
+            <a style="color: red" href="?page={{ contacts.paginator.num_pages }}">尾页 &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+<!--    <div style="display: block;height: 5px;top: 80%"></div>-->
+</div>
+

@@ -1,0 +1,101 @@
+
+
+.datalist-table {
+    border: 1px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1px;
+    margin-left: auto;
+    margin-right: auto;
+
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+@media (min-width: 992px) {
+    .datalist-table {
+        width: 970px;
+    }
+}
+
+.datalist-table {
+    width: 100%;
+    margin-bottom: 30px;
+    table-layout: fixed;
+}
+
+/*float: left;*/
+@media (min-width: 992px) {
+    .datalist-table {
+        width: 25%;
+        margin-bottom: 0;
+        table-layout: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .datalist-table:first-child {
+        width: 50%;
+    }
+}
+
+.datalist-table table {
+    width: 100%;
+}
+
+.datalist-table tr + tr {
+    border-top: 1px solid #eee;
+}
+
+.datalist-table td {
+    /*padding: 20px;*/
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .datalist-table td {
+        text-align: center;
+    }
+}
+
+.datalist-table .td-title {
+    color: #f1ffff;
+}
+
+@media (min-width: 992px) {
+    .datalist-table .td-title {
+        text-align: center;
+        border-right: 1px solid #eee;
+
+    }
+}
+
+.datalist-table .td-title + td {
+    background-color: #f9f9f9;
+}
+
+@media (min-width: 992px) {
+    .datalist-table .td-title + td {
+        background-color: transparent;
+    }
+}
+
+.datalist-table + .datalist-table table {
+    border-left: 1px solid #eee;
+}
+
+@media (min-width: 992px) {
+    .datalist-table + .datalist-table .td-title:first-child {
+        display: none;
+    }
+}
+
+.submitBtn {
+    display: block;
+    padding: 12px 0;
+    color: #fff;
+    background-color: #00b2bd;
+    text-decoration: none;
+    border-radius: 3px;
+    text-align: center;
+}

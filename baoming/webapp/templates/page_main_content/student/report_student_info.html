@@ -1,0 +1,661 @@
+<!--电工、焊工、钳工、劳动员、育婴员、保育员 填报页面-->
+{% load filter_model %}
+<div class="like_form">
+    <label class="input_text_head">国家资格证德州杏林学校报名系统</label>
+    <hr>
+    <div class="image-box">
+        <div class="images">
+            <form action="/report/image_upload/" id='imageUpload-form' method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <input type="hidden" name='photo_type' id="photo_type" value="">
+                <table>
+                    <tbody>
+                    <!--                    <tr>-->
+                    <!--                        <td><label style="color: honeydew;float: right">&nbsp;&nbsp;&nbsp;&nbsp;图片说明:</label></td>-->
+                    <!--                        <td><input type="text" name="picture_name" id="picture_name" style="float: left" placeholder="可以为空"></td>-->
+                    <!--                        <td style="width: auto;"><span class="message-label" style="color:red;margin-left: 1%; float: left;"></span></td>-->
+                    <!--                    </tr>-->
+                    <tr>
+                        <td colspan="3" style="text-align: left">
+                            <label style="color: greenyellow" class="input_text">
+                                请认真阅读以下图片上传说明，以便更好地为您服务
+                            </label>
+                            <br>
+                            <label style="color: white" class="input_text">
+                                ①图片格式为:jpg
+                            </label>
+                            <br>
+                            <label style="color: white" class="input_text">
+                                ②大小不大于100k
+                            </label>
+                            <br>
+                            <label style="color: white" class="input_text">
+                                ③把大体积图片缩小为小于100k图片的方法：在电脑上点"开始"→"所有程序"→"附件"→"画图"n→点菜单中
+                                的"打开"→选择要缩小的图片→点击"调整大小和扭曲"→按照图片大小小于100k的要求
+                                缩小"重新调整大小"的"百分比"数值→确定→菜单栏"另存为"到指定路径→确认照片体积是否符合要求
+                                （尽量使处理后的图片为100k，不能小太多，否则不清晰。）
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center">
+                            <!--                            <label for="file" style="color: honeydew"-->
+                            <!--                                   class="input_text">&nbsp;&nbsp;&nbsp;&nbsp;选择图片:</label>-->
+                            <input type="file" accept="image/*" name="file" id="file" required="required" class="ipt"
+                                   value="选择图片"
+                                   title="请选择将要上传的图片">
+                        </td>
+                        <td style="width: auto;"><span class="message-label"
+                                                       style="color:red;margin-left: 1%; float: left;"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div id="btn2" style="margin-left: 20%;">
+                    <ul>
+                        <li><input type="button" value="提交" class="image-submit" id="image-upload" style="color: white"
+                                   onclick="image_upload()"/></li>
+                        <li><input type="button" value="关闭" class="image-close" style="color: white"/></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+    <form action="/report/add_student_info/" method="post" id="add-student-info-id">
+        {% csrf_token %}
+        {{ form }}
+        <table class='form-table' border="1">
+            <tbody>
+            <!--            第 1 行-->
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">申报鉴定职业</span>
+                    <br>
+                    <span class="input_text">(申报职业)：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='declaration_of_occupation' required='required' value='{{worker}}'
+                           id="declaration_of_occupation"
+                           readonly="readonly" class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+
+                <td class="form-label td-span">
+
+                    <!--                    <span class="input_text">申报鉴定级别</span>-->
+                    <!--                    <br>-->
+                    <!--                    <span class="input_text">(鉴定级别)：</span>-->
+                    <div class="dropdown">
+                        <span class="dropbtn length_level_dropbtn">选择申报鉴定级别(鉴定级别)</span>
+                        <div class="dropdown-content  length_level">
+                            {% if worker != '劳动关系协调员'%}
+                            {% if worker != "机床装调维修工"%}
+                            {% if worker != "智能楼宇管理员"%}
+                            <a href='javascript:void(0);' title="初级（五级）" onclick="check_identification_level(5);">
+                                <span>初级（五级）</span>
+                            </a>
+                            {% else %}
+                            {% endif%}
+                            {% else %}
+                            {% endif%}
+                            {% else %}
+                            {% endif%}
+
+
+                            <a href='javascript:void(0);' title="中级（四级）" onclick="check_identification_level(4);">
+                                <span>中级（四级）</span>
+                            </a>
+                            <a href='javascript:void(0);' title="高级（三级）" onclick="check_identification_level(3);">
+                                <span>高级（三级）</span>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+                <td class="form-label td-input">
+                    <!--                    <span class="input_text" >已选择级别：</span>-->
+                    <input type="hidden" name="identification_level" id="identification-level" value="">
+                    <label for="identification-level" id="identification-level-label" class="identification_level_label"
+                           style="color: yellow">-----未选择-----</label>
+                </td>
+                <!--                <td class="form-label td-span">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text" >已选择级别：</span>-->
+                <!--                    <input type="hidden" name="identification_level" id="identification-level" value="">-->
+                <!--                    <label for="identification-level" id="identification-level-label" class="identification_level_label"-->
+                <!--                           style="color: yellow">-&#45;&#45;&#45;&#45;未选择-&#45;&#45;&#45;&#45;</label>-->
+
+                <!--                </td>-->
+                <!--                <td class="form-label td-input">-->
+                <!--                    <input type="hidden" name="identification_level" id="identification-level" value="">-->
+                <!--                    <label for="identification-level" id="identification-level-label" class="identification_level_label" style="color: yellow">-&#45;&#45;&#45;&#45;未选择-&#45;&#45;&#45;&#45;</label>-->
+                <!--                </td>-->
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">选择申报条件：</span>
+                </td>
+                <td class="form-label td-input condition_selected" colspan="5">
+                </td>
+            </tr>
+            <tr class="apprentice">
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">本职业学徒期开始时间：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='date' name='apprentice_start' id='apprentice_start' value=''
+                           onblur="change_apprentice_time_start(this.value)"
+                           maxlength="10"
+                           title="本职业学徒开始时间,格式:1990-01-20"
+                           placeholder="格式:1990-01-20"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">本职业学徒期结束时间：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='date' name='apprentice_end' id='apprentice_end' value='' class='ipt'
+                           onblur="change_apprentice_time_end(this.value)"
+                           maxlength="10"
+                           title="本职业学徒结束时间,格式:1990-01-20"
+                           placeholder="格式:1990-01-20"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">本职业学徒期：</span>
+                    <input type="hidden" name="apprentice_year" value="" id="apprentice_year"/>
+                    <label id="apprentice_year_label" style='color:white;text-decoration: black'></label>
+                    <input type="hidden" name="apprentice_month" value="" id="apprentice_month"/>
+                    <label id="apprentice_month_label" style='color:white;text-decoration: black'></label>
+                </td>
+                <!--                <td class="form-label td-input">-->
+                <!--                    <input type="number" name="apprentice_year" value="" style="width: 60px" id="apprentice_year"/>-->
+                <!--                    <label for="apprentice_year" style='color:white'>：年</label>-->
+                <!--                    <input type="number" name="apprentice_month" value="" style="width: 60px" id="apprentice_month"/>-->
+                <!--                    <label for="apprentice_month" style='color:white'>：月</label>-->
+                <!--                </td>-->
+
+            </tr>
+            <tr>
+                <td class="form-label td-span start_the_work_of_this_occupation">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">从事本职业工作</span>
+                    <br>
+                    <span class="input_text">开始时间：</span>
+                </td>
+                <td class="form-label td-input start_the_work_of_this_occupation">
+                    <input type='date' name='start_the_work_of_this_occupation' id='start_the_work_of_this_occupation'
+                           onblur="change_start_the_work_of_this_occupation(this.value)"
+                           value='' class='ipt'
+                           maxlength="10"
+                           title="从事本职业工作开始时间,格式:1990-01-20"
+                           placeholder="格式:1990-01-20"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span career_life">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">累计从事本职业时间</span>
+                    <br>
+                    <span class="input_text">或从事本工种工龄（职业年限）：</span>
+                </td>
+                <td class="form-label td-input career_life">
+                    <!--                           onchange="check_career_life(this.value);" onblur="check_career_life(this.value);"-->
+                    <input type='hidden' name='career_life' value='' id="career_life" max="50"
+                           title="累计从事本职业年限"
+                           placeholder="累计从事本职业年限"
+                           class='ipt'/>
+                    <!--                    <font color='#ff0000'>* </font>-->
+                    <label for="career_life" class="input_text" style="color: whitesmoke"
+                           id="career_life_label_value"></label>
+                    <label for="career_life" class="input_text" style="color: red"
+                           id="career_life_label"></label>
+                </td>
+
+                <td class="form-label td-span career_life_time">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">累计从事本职业要求年限(职业年限要求)：</span>
+                </td>
+                <td class="form-label td-input career_life_time">
+                    <!--                           onchange="check_career_life(this.value);" onblur="check_career_life(this.value);"-->
+                    <input type='number' name='career_life_time' value='' id="career_life_time" max="50"
+                           title="累计从事本职业年限要求"
+                           placeholder="累计从事本职业年限要求"
+                           class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="form-label td-span primary_level">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">证书级别：</span>
+                </td>
+                <td class="form-label td-input primary_level">
+                    <input type="hidden" name="primary_level" id='primary_level' value="">
+                    <label for="primary_level" id="primary_level_value"
+                               style='color:white'></label>
+<!--                    <label for="primary_level" style='color:white' id="primary_level_label_value"></label>-->
+                </td>
+                <td class="form-label td-span former_occupation">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">证书本职业（工种）</span>
+                    <br>
+                    <span class="input_text">或相关职业（工种）：</span>
+                </td>
+                <td class="form-label td-input former_occupation">
+                    <input type="text" name="former_occupation" id='former_occupation' value="">
+                </td>
+            </tr>
+
+            <tr>
+                <!--                <td class="form-label td-span has_qualification">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text" >有无本工种资格证（技能等级证书）：&nbsp;</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input has_qualification">-->
+                <!--                    <select class='form-select' style="width: 80px" title="有无本工种的资格证"-->
+                <!--                            onchange="check_has_qualification(this.options[this.options.selectedIndex].value);">-->
+                <!--                        <option value="0">-&#45;&#45;请选择-&#45;&#45;</option>-->
+                <!--                        <option value="1">有资格证（技能等级证书）</option>-->
+                <!--                        <option value="2">无资格证（技能等级证书）</option>-->
+                <!--                    </select>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-span primary_level">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text">现持有职业资格证</span>-->
+                <!--                    <br>-->
+                <!--                    <span class="input_text">或技能等级证书的级别（原级别）：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input primary_level" >-->
+                <!--                    <select class='form-select' name="primary_level" id='primary_level' hidden="hidden"-->
+                <!--                            title="现持有职业资格证或技能等级证书的级别（原级别）:中级（四级）、初级（五级）">-->
+                <!--                        &lt;!&ndash;                            onchange="level_change(this.options[this.options.selectedIndex].value);">&ndash;&gt;-->
+                <!--                        <option value="0">-&#45;&#45;请选择-&#45;&#45;</option>-->
+                <!--                        <option value="4">中级（四级）</option>-->
+                <!--                        <option value="5">初级（五级）</option>-->
+                <!--                    </select>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+                <td class="form-label td-span original_certificate_number">
+                    <!--                    <select class='form-select' name="primary_level" id='primary_level' hidden="hidden"-->
+                    <!--                            title="现持有职业资格证或技能等级证书的级别（原级别）:中级（四级）、初级（五级）">-->
+                    <!--                        &lt;!&ndash;                            onchange="level_change(this.options[this.options.selectedIndex].value);">&ndash;&gt;-->
+                    <!--                        <option value="0">-&#45;&#45;请选择-&#45;&#45;</option>-->
+                    <!--                        <option value="4">中级（四级）</option>-->
+                    <!--                        <option value="5">初级（五级）</option>-->
+                    <!--                    </select>-->
+                    <!--                    -->
+
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">现持有职业资格证书</span>
+                    <br>
+                    <span class="input_text">编号(原证书编号)：</span>
+                </td>
+                <td class="form-label td-input original_certificate_number">
+                    <input type='text' name='original_certificate_number' value='' id="original_certificate_number"
+                           title="此项目有证书填写相关证书16位编号，没有证书填写“无”"
+                           placeholder="此项目有证书填写相关证书16位编号，没有证书填写“无”" class='ipt form-number'/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span issue_unit">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">现有资格证书发证单位：</span>
+                </td>
+                <td class="form-label td-input issue_unit">
+                    <input type='text' name='issue_unit' value='' id='issue_unit' class='ipt'
+
+                           maxlength="50"
+                           title="此项由证书填写证书发证机构（发证机构公章名称），无证书填写“无”"
+                           placeholder="此项由证书填写证书发证机构（发证机构公章名称），无证书填写“无”"/>
+                    <label style='color:red'></label>
+                </td>
+                <!--                <td class="form-label td-span original_certificate_name" style="width: 150px;">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text" style="font-size: 10px">现持有职业资格证书名称：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input original_certificate_name">-->
+                <!--                    <input type='text' name='original_certificate_name' value='' id="original_certificate_name"-->
+                <!--                           title="此项目有证书填写相关证书16位编号，没有证书填写“无”"-->
+                <!--                           placeholder="此项目有证书填写相关证书16位编号，没有证书填写“无”" class='ipt form-number'/>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+
+            </tr>
+
+            <tr>
+                <td class="form-label td-span issuance_time">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">现有职业资格证发证时间：</span>
+                </td>
+                <td class="form-label td-input issuance_time">
+                    <input type="date" name='issuance_time' id='issuance_time' value='' class='ipt'
+                           maxlength="10"
+                           title="填写现持有证书发证日期,格式:1990-01-20"
+                           placeholder="格式:1990-01-20" onblur="change_original_certificate_worker_time(this.value)">
+                    <label style='color:red'></label>
+                </td>
+
+                <td class="form-label td-span original_certificate_worker_time">
+                    <input type='hidden' readonly="readonly" name='original_certificate_worker_year' value=''
+                           id='original_certificate_worker_year' class='ipt'
+                           maxlength="50"
+                           title="获得现有资格证书后工作年限"
+                           placeholder="自动生成"/>
+
+                    <span class="input_text">
+                        获得现有
+<!--                        <label for="primary_level" id="primary_level_value"-->
+<!--                               style='color:white'></label>-->
+                        资格证书后工作年限：
+                    </span>
+                </td>
+                <td class="form-label td-input original_certificate_worker_time">
+
+                    <label for="original_certificate_worker_year" id="original_certificate_worker_year_value"
+                           style='color:white'></label>
+                    <!--                    <font color='#ff0000'>* </font>-->
+                    <label class="input_text"
+                           id="original_certificate_worker_year_label" style='color:red'></label>
+                </td>
+                <td class="form-label td-span from_certificate_need_year">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">取得本职业原级工职业资格证书后工作年限要求：</span>
+                </td>
+                <td class="form-label td-input from_certificate_need_year">
+                    <input type='number' readonly="readonly" name='from_certificate_need_year'
+                           id='from_certificate_need_year' class='ipt'
+                           maxlength="50"
+                           title="要求工作年限"
+                           placeholder="自动生成"/>
+                    <label for="from_certificate_need_year" style='color:white'>：年</label>
+                </td>
+            </tr>
+
+            <tr>
+                <!--                <td class="form-label td-span graduation_status">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text" >毕业证件：&nbsp;</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input graduation_status">-->
+                <!--                    &lt;!&ndash;                    onchange="check_graduation_status(this.options[this.options.selectedIndex].value);">&ndash;&gt;-->
+                <!--                    <select class='form-select' style="font-size:10px;width: 250px" title="毕业状态"-->
+                <!--                            name="graduation_status"-->
+                <!--                            id="graduation_status">-->
+                <!--                        <option value="0">-&#45;&#45;请选择-&#45;&#45;</option>-->
+                <!--                        <option value="1">-初级中学-</option>-->
+                <!--                        <option value="2">-技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-</option>-->
+                <!--                        <option value="3">-中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-</option>-->
+                <!--                        <option value="4">-高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）-</option>-->
+                <!--                        <option value="5">-高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-</option>-->
+                <!--                        <option value="6">-大专及以上本专业或相关专业毕业证书-</option>-->
+                <!--                        <option value="7">-大学本科本专业或相关专业毕业证书-</option>-->
+                <!--                        <option value="8">-硕士研究生及以上本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-</option>-->
+                <!--                        <option value="9">-本职业初级正规培训-</option>-->
+                <!--                        <option value="10">-本职业中级正规培训结业证书-</option>-->
+                <!--                        <option value="11">-本职业高级正规培训结业证书-</option>-->
+                <!--                    </select>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+
+                <td class="form-label td-span school_name">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text" id="school_name_value">院校名称：</span>
+                </td>
+                <td class="form-label td-input school_name">
+                    <input type='text' name='school_name' value='' id='school_name' class='ipt'
+                           maxlength="10"
+                           title="院校名称"
+                           placeholder="院校名称"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span major">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">本专业或相关专业：</span>
+                </td>
+                <td class="form-label td-input major">
+                    <input type='text' name='major' value='' id='major' class='ipt' title="本专业或相关专业"
+                           placeholder="本专业或相关专业"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">培训课时：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <input type='number' name='course_hours' value='{{ student_info.course_hours}}' id='course_hours'
+                           class='ipt'
+                           title="培训课时"
+                           placeholder="培训课时"/>
+                    <label style='color:red'></label>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span graduation_time">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text" id="graduation_time_value">毕业时间(结业时间)：</span>
+                </td>
+                <td class="form-label td-input graduation_time">
+                    <input type='date' name='graduation_time' id='graduation_time' value='' class='ipt'
+                           onblur="change_graduation_result(this.value)"
+                           maxlength="10"
+                           title="填写现持有专业院校毕业证书发证日期,格式:1990-01-20"
+                           placeholder="格式:1990-01-20"/>
+                    <label style='color:red'></label>
+                </td>
+                <!--                <td class="form-label td-span school_name">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text">是否毕业：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input school_name">-->
+                <!--                    <input type="radio" name='graduation_result' value='0' onclick="javascript:return false"-->
+                <!--                           id='graduation_result_0' class='ipt'-->
+                <!--                           title="是否毕业"/>-->
+                <!--                    <label style='color:greenyellow'>:已毕业</label>-->
+                <!--                    <input type="radio" name='graduation_result' value='1' onclick="javascript:return false"-->
+                <!--                           id='graduation_result_1' class='ipt graduation_result_1'-->
+                <!--                           maxlength="10"-->
+                <!--                           title="是否毕业"/>-->
+                <!--                    <label style='color:red' class="graduation_result_1">:未毕业</label>-->
+                <!--                    <font color='#ff0000' class="strict_status">* </font>-->
+                <!--                    <label style='color:orangered' class="strict_status">:必须获取相关的毕业或结业证书！</label>-->
+                <!--                </td>-->
+
+                <!--                <td class="form-label td-span graduation_worker_time">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text" >获得现有毕业证书后工作年限：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input graduation_worker_time">-->
+                <!--                    <input type='number' readonly="readonly" name='graduation_worker_year' value=''-->
+                <!--                           id='graduation_worker_year' class='ipt'-->
+                <!--                           style="font-size:12px;width: 60px"-->
+                <!--                           maxlength="50"-->
+                <!--                           title="获得现有毕业证书后工作年限，根据现有职业资格证发证时间自动生成"-->
+                <!--                           placeholder="自动生成"/>-->
+                <!--                    <label for="graduation_worker_year" style='color:white'>：年</label>-->
+                <!--                </td>-->
+
+
+            </tr>
+
+            <tr>
+                <td class="form-label td-span" hidden="hidden">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">个人工作及职业培训简历：</span>
+                </td>
+                <td class="form-label td-input" style="text-align: center" hidden="hidden">
+                        <textarea name='work_training' class='ipt form-textarea' rows="2"
+                                  maxlength="80"
+                                  id="work_training"
+                                  required="required"
+                                  cols="30">
+                        </textarea>
+                    <label style='color:red'></label>
+                </td>
+                <!--                <td class="form-label td-span worker_level_desc">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <label for='' class="input_text worker_level_desc_label"-->
+                <!--                           >申报{{worker}}等级：</label>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input worker_level_desc_content" colspan="3" style="text-align: center">-->
+                <!--                        <textarea name='worker_level_desc_content'-->
+                <!--                                  class='ipt form-textarea worker_level_desc_content_textarea' rows="1"-->
+                <!--                                  maxlength="500"-->
+                <!--                                  cols="75">-->
+                <!--                        </textarea>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+                <td class="form-label td-span certificate_photos" id="certificate_photos_td01">
+                    <font color='#ff0000'>* </font>
+                    <input type="button" value="上传资格证件照" id='val2' class="form-button image-btn-certificate"
+                           style="color: purple;"/>
+                    <input type="hidden" name="certificate_photos_form" value="" id="certificate_photos">
+                </td>
+                <td class="form-label td-input certificate_photos" rowspan="2" style="text-align: center"
+                    id="certificate_photos_td02">
+                    <img src="" id='certificate-photos' width="70px" height="80px" alt="资格证件照">
+                </td>
+
+                <td class="form-label td-span diploma_certificate_photos"
+                    id="diploma_certificate_photos_td01">
+                    <font color='#ff0000'>* </font>
+                    <input type="button" value="上传毕业证件照" id='val3' class="form-button diploma-image-btn-certificate"
+                           style="color: purple;"/>
+                    <input type="hidden" name="diploma_certificate_photos_form" value=""
+                           id="diploma_certificate_photos">
+                </td>
+                <td class="form-label td-input diploma_certificate_photos" rowspan="2" style="text-align: center"
+                    id="diploma_certificate_photos_td02">
+                    <img src="" id='diploma-certificate-photos' width="70px" height="80px"
+                         alt="毕业证件照">
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <input type='submit' style="color: green;" value='保存' id="continue"
+               class='form-button continue'/>
+    </form>
+</div>
+<input type="hidden" value="" id="condition-a"/>
+<input type="hidden" value="" id="condition-b"/>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.apprentice').hide();
+        $(".apprentice_start").hide();
+        $(".apprentice_end").hide();
+
+
+        $(".continue").show();
+        $(".worker_level_desc").hide();
+        $(".worker_level_desc_content").hide();
+
+        $(".graduation_status").hide();
+        $(".has_qualification").hide();
+
+//职业年限情况
+        $('.career_life').hide();
+        $('.profession').hide();
+        $('.start_the_work_of_this_occupation').hide();
+        $('.career_life_time').hide();
+
+// //有关证书情况
+        $('.primary_level').hide();
+        $('.former_occupation').hide();
+        $('.original_certificate_number').hide();
+        $('.issue_unit').hide();
+        $('.issuance_time').hide();
+        $('.from_certificate_need_year').hide();
+        $('.original_certificate_worker_time').hide();
+
+        $('.certificate_photos').hide();
+
+//院校毕业证书情况
+        $('.education_degree_form').hide();
+        $('.school_name').hide();
+        $('.graduation_time').hide();
+        $('.graduation_worker_time').hide();
+        $('.strict_status').hide();
+        $('.major').hide();
+
+        let course_hours_class = $('.course_hours');
+        course_hours_class.hide();
+
+        $('.diploma_certificate_photos').hide();
+
+        $(".image-btn-certificate").click(function () {
+            alert("①图片格式为:jpg\n②大小不大于100k\n③把大体积图片缩小为小于100k图片的方法：\n   在电脑上点\"开始\"→\"所有程序\"→\"附件\"→\"画图\"\n→点菜单中的\"打开\"→选择要缩小的图片→点击\"调整大小和扭曲\"→按照图片大小小于100k的要求缩小\"重新调整大小\"的\"百分比\"数值→确定→菜单栏\"另存为\"\n到指定路径→确认照片体积是否符合要求\n（尽量使处理后的图片为100k，不能小太多，否则不清晰。）");
+            $('#photo_type').val('val2');
+            let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+            let height = ($(window).height() * (1 - 0.5)) / 2;
+            $(".image-box").addClass("animated bounceIn").show().css({left: left, top: height});
+            $(".image-opacity-bg").css("opacity", "0.3").show();
+        });
+
+        $(".diploma-image-btn-certificate").click(function () {
+            $('#photo_type').val('val3');
+            alert("①图片格式为:jpg\n②大小不大于100k\n③把大体积图片缩小为小于100k图片的方法：\n   在电脑上点\"开始\"→\"所有程序\"→\"附件\"→\"画图\"\n→点菜单中的\"打开\"→选择要缩小的图片→点击\"调整大小和扭曲\"→按照图片大小小于100k的要求缩小\"重新调整大小\"的\"百分比\"数值→确定→菜单栏\"另存为\"\n到指定路径→确认照片体积是否符合要求\n（尽量使处理后的图片为100k，不能小太多，否则不清晰。）");
+            let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+            let height = ($(window).height() * (1 - 0.5)) / 2;
+            $(".image-box").addClass("animated bounceIn").show().css({left: left, top: height});
+            $(".image-opacity-bg").css("opacity", "0.3").show();
+        });
+
+        $(".image-close").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;
+            let top = ($(window).height() * (1 - 0.5)) / 2;
+            $(".image-box").show().animate({
+                width: "-$(window).width()*0.35",
+                height: "-$(window).height()*0.5",
+                left: "-" + left + "px",
+                top: "-" + top + "px"
+            }, 1000, function () {
+                let width1 = $(window).width() * 0.35;
+                let height1 = $(window).height() * 0.5;
+                console.log(width1);
+                $(this).css({width: width1, height: height1}).hide();
+            });
+        });
+
+        $("#add-student-info-id").submit(function () {
+            let condition_a = $('#condition-a').val();
+            let condition_b = $('#condition-b').val();
+            let certificate_photos = $("#certificate_photos").val();
+            let diploma_certificate_photos = $("#diploma_certificate_photos").val();
+            if (condition_a.length > 0) {
+                if (certificate_photos.length > 0) {
+                    console.log("检测图片已上传！")
+                } else {
+                    alert("证件图片未上传，请您确认重新上传！如有问题请联系系统管理员");
+                    return false;
+                }
+            } else {
+                console.log("检测图片已上传程序！")
+            }
+            if (condition_b.length > 0) {
+                if (diploma_certificate_photos.length > 0) {
+                    console.log("检测图片已上传！")
+                } else {
+                    alert("毕业（或结业）证件图片未上传，请您确认重新上传！如有问题请联系系统管理员");
+                    return false;
+                }
+            } else {
+                console.log("检测图片已上传程序！")
+            }
+        });
+
+    });
+</script>
+
+

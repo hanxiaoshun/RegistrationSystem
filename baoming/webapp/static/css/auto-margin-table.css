@@ -1,0 +1,166 @@
+
+h2 {
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+/* Table Styles */
+
+.table-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    /*margin: 10px 70px 70px;*/
+    box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+
+.table_wrapper_no_action_list {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    /*margin: 10px 70px 70px;*/
+    box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+
+.table_head_term_div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    /*margin: 10px 70px 70px;*/
+    box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+
+.fl-table {
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 95%;
+    max-width: 93%;
+    white-space: nowrap;
+    /*background-color: white;*/
+}
+
+/*.fl-table thead tr {*/
+/*    !*position:fixed;*!*/
+/*    height: 15px;*/
+/*}*/
+
+.fl-table thead tr th{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+
+.fl-table tbody tr td {
+    border-right: 1px solid #f8f8f8;
+    text-align: center;
+    word-wrap: break-word;
+    height: 15px;
+    font-size: 10px;
+    color: white;
+
+    /*后置属性*/
+    word-break: break-all;
+    white-space: normal;
+    max-width: 80px;
+}
+
+.long_head_more{
+    font-size: 8px;
+}
+.fix_small{
+    width: 30px;
+}
+.fix_small_middle{
+    width: 35px;
+}
+.fix_small_middle_achievement{
+    width: 50px;
+}
+.fix_small_middle_year{
+    width: 50px;
+}
+.fix_width{
+    width: 80px;
+}
+.fix_width_small{
+    width: 50px;
+}
+.fix_width_more_worker{
+    width: 100px;
+}
+.fix_width_middle{
+    width: 60px;
+}
+.date_head{
+    width: 80px;
+}
+.name_head{
+    width: 50px;
+}
+.name_head_teacher{
+    width: 65px;
+}
+.term_head{
+    width: 80px;
+}
+.id_number_list_head {
+    width: 150px;
+}
+.fix_width_worker{
+    width: 100px;
+}
+.id_number_list{
+    font-size: 8px;
+}
+.fl-table thead tr th {
+    color: rgba(255, 251, 255, 0.99);
+    /*height: 15%;*/
+    /*background: #c0ecc2;*/
+
+    text-align: center;
+    word-wrap: break-word;
+    /*border: 1px;*/
+    /*border-bottom-left-radius: 1px;*/
+    /*border-bottom-right-radius: 1px;*/
+    height: 30px;
+    font-size: 12px;
+    color: white;
+    /*后置属性*/
+    word-break: break-all;
+    white-space: normal;
+    max-width: 80px;
+}
+
+
+/*.fl-table thead th:nth-child(odd) {*/
+/*    color: #ffffff;*/
+/*    !*background: #efcaea;*!*/
+/*}*/
+
+/*.fl-table tr:nth-child(even) {*/
+/*    !*background: #F8F8F8;*!*/
+/*}*/
+.long_head {
+    font-size: 10px;
+}
+
+.long_head_achievement{
+    font-size: 8px;
+}
+
+.too_long_head {
+    font-size: 7px;
+}
+
+/* Responsive */
+
+/* Responsive */

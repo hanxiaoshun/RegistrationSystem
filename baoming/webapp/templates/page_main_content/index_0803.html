@@ -1,0 +1,146 @@
+<div class="index_like index_like_form">
+    {% if request.session.role_name == 'administrator' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉信息汇总系统</label>
+    <hr>
+    {% elif request.session.role_name == 'teacher' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉负责人审核系统</label>
+    <hr>
+    {% else %}
+    <!--    <p style="text-align: center"><label style="color: whitesmoke">◉欢迎进入◉</label></p>-->
+    <!--    <hr>-->
+    <p style="text-align: center">
+        <img src="/static/image/index/leling.png" style="width: 25%;height: 10%"
+             class="main_pic"
+             title="欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉学员信息填报系统"/>
+
+    </p>
+    <!--    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉信息填报系统</label>-->
+    <!--    <hr>-->
+
+    <!--    <p style="text-align: center" class="last_term_info">-->
+
+    <!--    </p>-->
+    <table style="margin-left: auto;margin-right: auto">
+        <tbody>
+        {% if need_login %}
+            {% if reset_pwd_info == "true"%}
+            <tr style="text-align: center">
+                <td colspan="2">
+                    <label class="input_text_head" style="color: #d5ff10">您的登录密码已更改！请重新
+                        <a href="/report/to_login" title="您好！请登录" style="color: red;">登录</a>
+                    </label>
+                </td>
+            </tr>
+            {% else %}
+            <tr style="text-align: center">
+                <td colspan="2">
+                    <label class="input_text_head" style="color: #d5ff10">您尚未登录或登录超时！请
+                        <a href="/report/to_login" title="您好！请登录"  style="color: red">登录</a>
+                    </label>
+                </td>
+            </tr>
+            {% endif%}
+        {% else %}
+        {% endif %}
+
+        {%if no_term%}
+
+        {% else %}
+           <tr style="text-align: center">
+                        <td colspan="2">
+                            <label class="last_term_info_warning">报名尚未开始或未登录，请不要继续操作</label>
+                        </td>
+           </tr>
+        {%endif%}
+        {% if is_report %}
+                    <tr style="text-align: center">
+                        <td colspan="2">
+                            <label class="input_text" style="text-align: center"><a href='/report/report_student_info_list/'
+                                                 style="color: #00FF00">管理已填报信息</a></label>
+                        </td>
+                    </tr>
+                    {% else %}
+                    {% endif %}
+        <tr>
+            <td rowspan="2"><label class="last_term_info_name">{{school_term.school_term_name}}</label></td>
+            <td style="float: left"><label class="last_term_info_start">开始日期：</label><label
+                    class="last_term_info_start_date">{{school_term.school_term_start|date:"Y-m-d"}}</label></td>
+            <!--                <td style="float: left"><label class="last_term_info_end">结束日期：</label><label class="last_term_info_end_date">{{school_term.school_term_end|date:"Y-m-d"}}</label></td>-->
+        </tr>
+        <tr>
+            <!--                <td style="float: left"><label class="last_term_info_start">开始日期：</label><label class="last_term_info_start_date">{{school_term.school_term_start|date:"Y-m-d"}}</label></td>-->
+
+            <td style="float: left"><label class="last_term_info_end">结束日期：</label><label
+                    class="last_term_info_end_date">{{school_term.school_term_end|date:"Y-m-d"}}</label></td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    {% endif%}
+    <div class="report_list">
+
+        <span class="input_text" >
+            ↓请选择报考职业↓
+        </span>
+        <hr class="bor_direct">
+        <p class="work_type_a">
+            <button><a class="worker_size" href='/report/worker?type=1' title="（机电）电工">电工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=2' title="（机电）焊工">焊工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=3' title="（机电）钳工">钳工</a></button>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <button><a class="worker_size" href='/report/worker?type=4'>育婴员</a></button>
+            <button><a class="worker_size" href='/report/worker?type=6'>劳动关系协调员</a></button>
+            <button><a class="worker_size" href='/report/worker?type=5'>保育员</a></button>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <button><a class="worker_size" href='/report/worker?type=7' title="（化工）防腐蚀工">防腐蚀工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=8' title="（化工）有机合成工">有机合成工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=9' title="（化工）工业废水处理工">工业废水处理工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=10' title="（化工）无机化学反应生产工">无机化学反应生产工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=11' title="（化工）工业固体废物处理处置工">工业固体废物处理处置工</a></button>
+        </p>
+        <!--        后面加的-->
+        <hr class="bor">
+        <p class="work_type_a">
+            <button><a class="worker_size" href='/report/worker?type=12' title="车工">车工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=13' title="机床装调维修工">机床装调维修工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=14' title="电梯安装维修工">电梯安装维修工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=15' title="起重装卸机械操作工">起重装卸机械操作工</a></button>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <button><a class="worker_size" href='/report/worker?type=16' title="架子工">架子工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=17' title="防水工">防水工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=18' title="手工木工">手工木工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=19' title="砌筑工">砌筑工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=20' title="钢筋工">钢筋工</a></button>
+            <button><a class="worker_size" href='/report/worker?type=21' title="混凝土工">混凝土工</a></button>
+        </p>
+        <hr class="bor">
+        <p class="work_type_a">
+            <button><a class="worker_size" href='/report/worker?type=22' title="智能楼宇管理员">智能楼宇管理员</a></button>
+        </p>
+    </div>
+    <hr>
+    <!--    <div class="dropdown-index">-->
+    <!--        <a href="/report/introduction/" target="_blank">-->
+    <!--            <button class="dropbtn-index"-->
+    <!--                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">-->
+    <!--                报考须知-->
+    <!--            </button>-->
+    <!--        </a>-->
+    <!--    </div>-->
+    <!--    <div class="dropdown-index">-->
+    <!--        <a href="/report/system_guide/" target="_blank">-->
+    <!--            <button class="dropbtn-index"-->
+    <!--                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">-->
+    <!--                系统操作指南-->
+    <!--            </button>-->
+    <!--        </a>-->
+    <!--    </div>-->
+
+</div>
+

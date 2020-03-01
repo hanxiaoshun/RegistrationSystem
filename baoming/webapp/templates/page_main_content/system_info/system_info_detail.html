@@ -1,0 +1,251 @@
+<!--电工、焊工、钳工、劳动员、育婴员、保育员 填报页面-->
+{% load filter_model %}
+{% load condition_selected %}
+<div class="like_form">
+    <label class="input_text_head">系统运行信息概览</label>
+    <table class='form-table' border="1">
+        <tr>
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head_small" style="color: white">内存信息</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">总内存：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.memory_total }}G</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">可用内存：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.memory_available }}G</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">已使用空间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.memory_used }}G</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">未使用空间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.memory_free }}G</label>
+            </td>
+        </tr>
+        </tr>
+        <td class="form-label td-span">
+            <font color='#ff0000'>* </font>
+            <span class="input_text">使用率：</span>
+        </td>
+        <td class="form-label td-input">
+            <label style='color:white' class="input_text">{{ ps_info.memory_percent }}%</label>
+        </td>
+        <td class="form-label td-span">
+            <font color='#ff0000'>* </font>
+            <span class="input_text">未使用率：</span>
+        </td>
+        <td class="form-label td-input">
+            <label style='color:white' class="input_text">{{ ps_info.memory_percent_unused }}%</label>
+        </td>
+        </tr>
+
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">交换区内存：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.sswap_memory_total }}G</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">交换区已使用空间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.sswap_memory_used }}G</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">交换区未使用空间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.sswap_memory_free }}G</label>
+            </td>
+
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">交换区使用率：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.sswap_memory_percent }}%</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">交换区未使用率：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ ps_info.sswap_memory_percent_unused }}%</label>
+            </td>
+        </tr>
+        <!--            第 1 行-->
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head_small" style="color: white">磁盘信息（数据）</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">总空间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ disk_info.disk_total }}G</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">已使用空间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ disk_info.disk_used }}G</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">未使用空间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ disk_info.disk_free }}G</label>
+            </td>
+
+        </tr>
+        <!--            第 2 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">已使用：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ disk_info.disk_percent }}%</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">未使用：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ disk_info.disk_percent_unused }}%</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head_small" style="color: white">操作系统信息</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">名称：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ system_info.os_name}}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">平台：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ system_info.os_platform }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">版本：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ system_info.os_version }}</label>
+            </td>
+
+        </tr>
+        <!--            第 2 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">架构位数：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ system_info.os_architecture }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">计算类型：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ system_info.os_machine }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">网络名称：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ system_info.os_network_name }}</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head_small" style="color: white">主要编程语言信息</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">名称：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">Python</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">版本：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">3.6.8</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">服务器：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">Nginx</label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,57 @@
+<div class="like_form" style="top: 35px;">
+    <div class="dropdown-index">
+        <a href='javascript:void(0)'>
+            <button class="dropbtn-index" onclick="delete_force('student_info')" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                删除所有学员填报信息
+            </button>
+        </a>
+        <hr>
+        <a href='javascript:void(0)'>
+            <button class="dropbtn-index" onclick="delete_force('student_user_info')" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                删除所有学员基础信息
+            </button>
+        </a>
+        <hr>
+        <a href='javascript:void(0)'>
+            <button class="dropbtn-index" onclick="delete_force('student_register_info')" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                删除所有学员注册信息
+            </button>
+        </a>
+        <hr>
+        <a href='javascript:void(0)'>
+            <button class="dropbtn-index" onclick="delete_force('student_img_file')" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                清理所有图片和文件
+            </button>
+        </a>
+        <hr>
+        <a href='javascript:void(0)'>
+            <button class="dropbtn-index" onclick="delete_force('action_info')" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                删除所有操作记录
+            </button>
+        </a>
+        <hr>
+        <a href='javascript:void(0)'>
+            <button class="dropbtn-index" onclick="delete_force('system_message')" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                删除所有消息记录
+            </button>
+        </a>
+        <hr>
+        <a href='javascript:void(0)'>
+            <button class="dropbtn-index" onclick="delete_force('force_all')" title="{{message}}"
+                    style="background-color: red;color: white;border: 1px;border-radius: 5px;width: 100%">
+                清理以上全部内容
+            </button>
+        </a>
+        <hr>
+    </div>
+</div>
+
+<form action="" id='form-school-term' method="post">
+    {% csrf_token %}
+</form>

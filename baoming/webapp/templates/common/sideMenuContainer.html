@@ -1,0 +1,11 @@
+<div id="sideMenuContainer" style="overflow: auto;" class="sideMenuContainer">
+    {% if request.session.role_name == 'administrator' %}
+        <a href="/report/users" title="用户管理"><span class="fa fa-user"></span></a>
+    {% else %}
+    {% endif %}
+    <a href="/report/course" title="课程简介"><span class="fa fa-thumbs-up" aria-hidden="true"></span></a>
+    <a href="/report/cooperation" title="合作咨询"><span class="fa fa-thumbs-up" aria-hidden="true"></span></a>
+    <a href="/report/contact" title="联系我们"><span class="fa fa-thumbs-up" aria-hidden="true"></span></a>
+    <a href="/report/about" title="关于我们"><span class="fa fa-thumbs-up" aria-hidden="true"></span></a>
+    <a href="/FAQ" title="常见问题"><span class="fa fa-question-circle"></span></a>
+</div>

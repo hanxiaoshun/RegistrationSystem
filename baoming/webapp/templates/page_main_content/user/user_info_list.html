@@ -1,0 +1,155 @@
+{% load filter_model %}
+{% load filter_status %}
+<div class="teacher_ordinary">
+    <p style="text-align: center">
+        <label class="input_text_head">用户列表</label>
+    </p>
+
+    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+    <div class="table-wrapper">
+
+        <table class="fl-table" border="1.5">
+<!--               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">-->
+            <thead>
+            <tr class="table-head">
+                <th style="width: 5%">序号</th>
+                <th>用户名</th>
+                <th>姓名</th>
+                <th>昵称</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>角色</th>
+                <th>电话</th>
+                <th>身份证</th>
+                <th>注册时间</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user_info in contacts %}
+            <tr class="table-tr">
+                <td>{{forloop.counter}}</td>
+                <td>{{ user_info.register_user_info.username }}</td>
+                <td>{{ user_info.real_name }}</td>
+                <td>{{ user_info.register_user_info.nickname }}</td>
+                <td>{{user_info.sex|get_sex}}</td>
+                <td>{{ user_info.age|get_none }}</td>
+                <td>{{ user_info.register_user_info.role.role_alias }}</td>
+                <td>{{ user_info.contact_number|get_none }}</td>
+                <td>{{ user_info.id_number|get_none }}</td>
+                <td>{{ user_info.register_user_info.create_time|date:"Y-m-d" }}</td>
+                <td>{{ user_info.explain|get_none }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="dropbtn">操作</button>
+                        <div class="dropdown-content action-content">
+                            <a href='/report/reset_password?username={{user_info.register_user_info.username}}'>
+                                <button>账户管理</button>
+                            </a>
+                            <a href='javascript:void(0);'
+                               onclick="del_deep_register('{{user_info.register_user_info.id}}')">
+                                <button>删除用户</button>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination" style="color: ghostwhite;text-align: center">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a style="color: #00FF00" href="?page=1">&laquo; 首页</a>
+            <a style="color: yellow" href="?page={{ contacts.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ contacts.number }} 页 ,总共 {{ contacts.paginator.num_pages }} 页.
+        </span>
+
+        {% if contacts.has_next %}
+            <a style="color: yellow" href="?page={{ contacts.next_page_number }}">下一页</a>
+            <a style="color: red" href="?page={{ contacts.paginator.num_pages }}">尾页 &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+</div>
+
+
+<div class="box box_register">
+    <div class="regiest">
+        <form action="" id='form-register' method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="hidden" value="" name='update_id' id="update-id">
+            <table style="margin-top: 10%;margin-left: auto;margin-right: auto;">
+                <tbody>
+                <tr>
+                    <td><label style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;角色名:</label></td>
+                    <td><input type="text" name="register_name" id="register-name" value="" required="required"
+                               title="英文单词" placeholder="角色名的英译"/></td>
+                    <td style="width: auto;"><label class="message-label" id="register-name-label" for="register-name"
+                                                    style="color:red;margin-left: 1%; float: left;"></label></td>
+                </tr>
+                <tr>
+                    <td><label
+                            style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色说明:</label>
+                    </td>
+                    <td>
+                        <textarea name='explain' class='ipt form-textarea' rows="1"
+                                  maxlength="60"
+                                  id="register_explain"
+                                  cols="20">
+                        </textarea>
+                        <label for="register_explain"></label>
+                    </td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+            <div id="btn2" style="margin-left: 20%;">
+                <ul>
+                    <li><input type="button" value="提交" class="submit-register" style="color: white"
+                               id='register_button'
+                               onclick="add_register();"/></li>
+                    <li><input type="button" value="关闭" class="close close_register" style="color: white"/></li>
+                </ul>
+            </div>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}'}});
+    $(function () {
+        $(".form-button-add-register").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+            let height = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box_register").addClass("animated bounceIn").show().css({left: left, top: top});
+            $(".opacity_bg").css("opacity", "0.3").show();
+            let form_button = $('#register_button');
+            form_button.attr('onclick', "add_register();");
+        });
+        $(".close_register").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;
+            let top = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box_register").show().animate({
+                width: "-$(window).width()*0.35",
+                height: "-$(window).height()*0.5",
+                left: "-" + left + "px",
+                top: "-" + top + "px"
+            }, 1000, function () {
+                let width1 = $(window).width() * 0.35;
+                let height1 = $(window).height() * 0.5;
+                $(this).css({width: width1, height: height1}).hide();
+            });
+
+        });
+    });
+</script>

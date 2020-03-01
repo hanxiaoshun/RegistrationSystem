@@ -1,0 +1,502 @@
+<div class="index_like index_like_form" style="margin-top: 5%">
+    {% if request.session.role_name == 'administrator' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉信息汇总系统</label>
+    <hr>
+    {% elif request.session.role_name == 'teacher' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉负责人审核系统</label>
+    <hr>
+    {% else %}
+    <!--    <p style="text-align: center"><label style="color: whitesmoke">◉欢迎进入◉</label></p>-->
+    <!--    <hr>-->
+    <!--    <p style="text-align: center">-->
+    <!--        <button><a class="worker_size" href='/report/worker?type=16' title="架子工">报名首页</a></button>-->
+    <!--        <button>欢迎<a href="/report/user_setting">-->
+    <!--                    <font color="#7fff00">{{ request.session.nickname }}</font>-->
+    <!--                </a></button>-->
+    <!--        <img src="/static/image/index/leling2.png" style="width: 25%;height: 10%"-->
+    <!--             class="main_pic"-->
+    <!--             title="欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉学员信息填报系统"/>-->
+
+    <!--    </p>-->
+    <table class="system_index_table">
+        {% if need_login%}
+        <tr style="text-align: center">
+            <td colspan="2">
+                <label class="input_text_warning_login" style="color: #d5ff10">您尚未登录或登录超时！请
+                    <a href="/report/to_login" title="您好！请登录" style="color: red">登录</a>|
+                    <a href="javascript:void(0);">
+                        <span class="input_text_warning_login" style="color: red" onclick="register_button();">注册</span>
+                    </a>
+                </label>
+            </td>
+        </tr>
+        {% else %}
+        {% endif %}
+
+        <tr>
+            <td>
+                <img class="button_index_top" src="/static/image/index/baomingshouye.png" height="15%" width="100%"
+                     style="margin-top: 20%;text-align: left"/>
+                <!--                <button class="button_index_top" style="margin-top: 20%;text-align: left"><b>报名首页</b></button>-->
+            </td>
+            <td rowspan="2" style="padding-left: 8%;height: 120px;width: 600px">
+                <div>
+                    <img src="/static/image/index/baomingxitong.png" height="20%" width="90%"
+                         title="欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉学员信息填报系统"/>
+                </div>
+                <div>
+                    <table>
+                        <tr style="height: 20%">
+                            <td style="width: 20%">
+                                <a href='/report/report_student_info_list/'>
+                                    <img src="/static/image/index/guanliyitianbao.png" height="20%" width="100%"
+                                         title="管理已填报消息" style="margin-left:5%;text-align: left"/>
+                                    <!--                        <button class="button_index_top button_index_top_large" style="margin-left:5%;text-align: left">-->
+                                    <!--                            </button>-->
+                                </a>
+                            </td>
+                            <td style="width: 20%">
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td style="width: 46%;margin-right: -1%">
+                                            <a href='/report/receive/'>
+                                                <!--                                    <table style="width: 10%">-->
+                                                <!--                                        <tr>-->
+                                                <!--                                            <td style="width: 50%">-->
+                                                <!--                                                <img src="/static/image/index/xiaoxi01.png" height="15%" width="80%"-->
+                                                <!--                                                     title="消息" style="margin-left:1%;text-align: right"/>-->
+                                                <!--                                            </td>-->
+                                                <!--                                            <td class="index_img_a">-->
+                                                <!--                                                <label style="color: whitesmoke;margin-right: auto;margin-left: auto">{{not_confirm}}</label>-->
+                                                <!--                                            </td>-->
+                                                <!--                                        </tr>-->
+                                                <!--                                    </table>-->
+                                                <img src="/static/image/index/xiaoxi01.png" height="20%"
+                                                     width="100%"
+                                                     title="消息" style="margin-right: -1%"/>
+                                                <!--                        <b>消息:({{not_confirm}})</b>-->
+                                                <!--                        <button class="button_index_top_middle_index_message" style="margin-left:1%;text-align: left"><b>消息:({{not_confirm}})</b>-->
+                                                <!--                        </button>-->
+                                            </a>
+                                        </td>
+                                        <td style="width: 54%;padding-bottom: 6%;padding-left: -1%" class="index_img_a">
+                                            <a href='/report/receive/' style="margin-left: -1%;height: 40%">
+                                                <span style="color: whitesmoke;margin-right: auto;margin-left: auto;height: 50%">{{not_confirm}}</span>
+                                            </a>
+                                        </td>
+
+
+                                    </tr>
+
+                                </table>
+
+                            </td>
+                            <!--                            <td style="width: 10%;" class="index_img_a">-->
+                            <!--                                <a href='/report/receive/' style="margin-left: -1%">-->
+                            <!--                                    <label style="color: whitesmoke;margin-right: auto;margin-left: auto">{{not_confirm}}</label>-->
+                            <!--                                </a>-->
+                            <!--                                    <table style="width: 10%">-->
+                            <!--                                        <tr>-->
+                            <!--                                            <td style="width: 50%">-->
+                            <!--                                                <img src="/static/image/index/xiaoxi01.png" height="15%" width="80%"-->
+                            <!--                                                     title="消息" style="margin-left:1%;text-align: right"/>-->
+                            <!--                                            </td>-->
+                            <!--                                            <td class="index_img_a">-->
+                            <!--                                                <label style="color: whitesmoke;margin-right: auto;margin-left: auto">{{not_confirm}}</label>-->
+                            <!--                                            </td>-->
+                            <!--                                        </tr>-->
+                            <!--                                    </table>-->
+                            <!--                        <img src="/static/image/index/xiaoxi01.png" height="4%" width="8%"-->
+                            <!--                             title="消息" style="margin-left:1%;text-align: right"/>-->
+                            <!--                        <b>消息:({{not_confirm}})</b>-->
+                            <!--                        <button class="button_index_top_middle_index_message" style="margin-left:1%;text-align: left"><b>消息:({{not_confirm}})</b>-->
+                            <!--                        </button>-->
+                            <!--                                </a>-->
+                            <!--                            </td>-->
+                            <td style="width: 20%">
+                                <a href='/report/reset_password/' title="修改密码">
+                                    <img src="/static/image/index/xiugaimima.png" height="20%" width="100%"
+                                         title="修改密码" style="margin-left:1%;text-align: left"/>
+                                    <!--                        <button class="button_index_top_middle" style="margin-left:1%;text-align: left"><b>修改密码</b>-->
+                                    <!--                        </button>-->
+                                </a>
+                            </td>
+                            <td style="width: 20%">
+                                <a href="/report/message_add/" title="发送信息">
+                                    <img src="/static/image/index/fasongxiaoxi.png" height="20%" width="100%"
+                                         title="发送消息" style="margin-left:1%;text-align: left"/>
+                                    <!--                        <button class="button_index_top_middle" style="margin-left:1%;text-align: left"><b>发送信息</b>-->
+                                    <!--                        </button>-->
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    <!--                    <a href='/report/receive/' class="index_img_a"-->
+                    <!--                       style="margin-left:-1%;margin-bottom:5%;text-align: center">-->
+                    <!--                        {{not_confirm}}-->
+                    <!--                        &lt;!&ndash;                        <img src="/static/image/index/xiaoxi02.png" height="4%" width="10%"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                             title="消息" style="text-align: left"/>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        <b>消息:({{not_confirm}})</b>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        <button class="button_index_top_middle_index_message" style="margin-left:1%;text-align: left"><b>消息:({{not_confirm}})</b>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        </button>&ndash;&gt;-->
+                    <!--                    </a>-->
+
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="width: 39%;margin-right: -1%">
+                            <a href='/report/receive/'>
+                                <img src="/static/image/index/huanying2.png" height="20%"
+                                     width="100%"
+                                     title="欢迎{{ request.session.nickname }}" style="margin-right: -1%"/>
+                            </a>
+                        </td>
+                        <td style="width: 61%;padding-bottom: 6%;padding-left: -1%" class="index_img_span">
+                            <a href='/report/user_setting/' style="margin-left: -2%;">
+                                <span style="color: whitesmoke;margin:auto;">{{ request.session.nickname }}</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!--                <table style="margin-bottom: 40%;"  border="0" cellspacing="0" cellpadding="0">-->
+                <!--                    <tr>-->
+                <!--                        <td style="float: left;width: 46%;padding-top: 15%">-->
+                <!--                            <img src="/static/image/index/huanying2.png" height="200%" width="200%"-->
+                <!--                                 title="欢迎{{ request.session.nickname }}"/>-->
+                <!--                        </td>-->
+                <!--                        <td class="user_span" style="width: 54%">-->
+                <!--                            &lt;!&ndash;                             <a href="/report/user_setting/" style="color: honeydew;">{{ request.session.nickname }}</a>&ndash;&gt;-->
+                <!--                            <a href="/report/user_setting/">-->
+                <!--                                <span style="padding-bottom: 15%;color: honeydew; height:50%;width:100%">-->
+                <!--                                    {{ request.session.nickname }}-->
+                <!--                                </span>-->
+                <!--                            </a>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                </table>-->
+
+                <!--                <p>-->
+                <!--                    <a href="/report/user_setting/" style="color: honeydew"><img src="/static/image/index/huanying2.png" height="18%" width="50%"-->
+                <!--                         title="欢迎{{ request.session.nickname }}" style="margin-bottom: 40%;text-align: left"/>{{ request.session.nickname }}</a>-->
+                <!--                    <button class="button_index_top_label" style="margin-bottom: 40%;text-align:right;"><b>欢迎: <a-->
+                <!--                            href="/report/user_setting/" style="color: honeydew">{{ request.session.nickname }}</a></b>-->
+                <!--                                </button>-->
+                <!--                <button class="button_index_top_label" style="margin-bottom: 40%;text-align:right;"><b>欢迎: <a-->
+                <!--                        href="/report/user_setting/" style="color: honeydew">{{ request.session.nickname }}</a></b>-->
+                <!--                </button>-->
+                <!--                </p>-->
+
+            </td>
+        </tr>
+        {%if no_term%}
+        {% else %}
+        <tr style="text-align: center">
+            <td colspan="2">
+                <label class="last_term_info_warning">报名尚未开始或未登录，请不要继续操作</label>
+            </td>
+        </tr>
+        {%endif%}
+    </table>
+    <!--    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉信息填报系统</label>-->
+    <!--    <hr>-->
+
+    <!--    <p style="text-align: center" class="last_term_info">-->
+
+    <!--    </p>-->
+    <table class="term_table">
+        <tbody>
+        <tr style="margin-left: 12%">
+            <td><label class="last_term_info_name_index">{{school_term.school_term_name}}(</label></td>
+            <td style="float: left">
+                <span
+                        class="last_term_info_start_date_index">起：{{school_term.school_term_start|date:"Y-m-d"}}</span>
+                <br>
+                <span
+                        class="last_term_info_end_date_index">止：{{school_term.school_term_end|date:"Y-m-d"}}</span>
+                <!--                <label-->
+                <!--                    class="last_term_info_start_date_index">起：{{school_term.school_term_start|date:"Y-m-d"}}</label>-->
+                <!--                 <br>-->
+                <!--                <label-->
+                <!--                    class="last_term_info_end_date_index">止：{{school_term.school_term_end|date:"Y-m-d"}}</label>-->
+            </td>
+            <td><label class="last_term_info_name_index">)</label></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <!--    <hr>-->
+
+
+    <!--    <table class="direct_table">-->
+    <!--        <tbody>-->
+    <!--        <tr>-->
+    <!--            <td style="text-align: left">-->
+    <!--                <button class="button_index_top" style="margin-top: 20%;text-align: left"><a href="/report/system_guide/" style="color: white"><b>系统操作指南</b></a>-->
+    <!--                </button>-->
+    <!--            </td>-->
+    <!--            <td rowspan="2" style="padding-left: 8%;width: 600px;height: auto"></td>-->
+    <!--        </tr>-->
+    <!--        <tr>-->
+    <!--            <td style="text-align: left">-->
+    <!--                <button class="button_index_top" style="margin-top: 20%;text-align: left"><a href="/report/introduction/" style="color: white"><b>报名条件</b></a>-->
+    <!--                </button>-->
+    <!--            </td>-->
+    <!--        </tr>-->
+    <!--        </tbody>-->
+    <!--    </table>-->
+
+    <table class="worker_table">
+        <tbody>
+        <tr>
+            <td>
+                <a href="/report/system_guide/" style="color: white;font-size: 15px">
+                    <img class="button_index_top" src="/static/image/index/xitongcaozuozhinan.png" height="18%"
+                         width="100%"
+                         style="margin-top: 10%;text-align: left"/>
+
+                    <!--                    <button class="button_index_top" style="color: white;text-align: left;width: 120px;"><b>系统操作指南</b>-->
+                    <!--                    </button>-->
+                </a>
+            </td>
+            <td class="worker_table_sub_td">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/report/introduction/" style="color: white;font-size: 15px">
+                    <img class="button_index_top" src="/static/image/index/baomingtiaojian.png" height="18%"
+                         width="100%"/>
+                    <!--                    <button class="button_index_top" style="color: white;text-align: left;width: 120px;"><b>报名条件</b>-->
+                    <!--                    </button>-->
+                </a>
+            </td>
+            <td class="worker_table_sub_td">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img class="button_index_top" src="/static/image/index/xuanzebaokaozhiye.png" height="18%"
+                     width="100%"/>
+                <!--                <button class="button_index_top" style="color: white;text-align: left;font-size: 15px;width: 120px;"><b>选择报考职业</b>-->
+                <!--                </button>-->
+            </td>
+            <td class="worker_table_sub_td">
+                <a class="worker_size" href='/report/worker?type=1' title="（机电）电工">电工</a>
+                <a class="worker_size" href='/report/worker?type=2' title="（机电）焊工">焊工</a>
+                <a class="worker_size" href='/report/worker?type=3' title="（机电）钳工">钳工</a>
+                <a class="worker_size" href='/report/worker?type=4'>育婴员</a>
+                <a class="worker_size" href='/report/worker?type=5'>保育员</a>
+                <a class="worker_size" href='/report/worker?type=6'>劳动关系协调员</a>
+                <a class="worker_size" href='/report/worker?type=22' title="智能楼宇管理员">智能楼宇管理员</a>
+                <a class="worker_size" href='/report/worker?type=7' title="（化工）防腐蚀工">防腐蚀工</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td class="worker_table_sub_td">
+                <a class="worker_size" href='/report/worker?type=8' title="（化工）有机合成工">有机合成工</a>
+                <a class="worker_size" href='/report/worker?type=9' title="（化工）工业废水处理工">工业废水处理工</a>
+                <a class="worker_size" href='/report/worker?type=10' title="（化工）无机化学反应生产工">无机化学反应生产工</a>
+                <a class="worker_size" href='/report/worker?type=11' title="（化工）工业固体废物处理处置工">工业固体废物处理处置工</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td class="worker_table_sub_td">
+                <a class="worker_size" href='/report/worker?type=12' title="车工">车工</a>
+                <a class="worker_size" href='/report/worker?type=13' title="机床装调维修工">机床装调维修工</a>
+                <a class="worker_size" href='/report/worker?type=14' title="电梯安装维修工">电梯安装维修工</a>
+                <a class="worker_size" href='/report/worker?type=15' title="起重装卸机械操作工">起重装卸机械操作工</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td class="worker_table_sub_td">
+                <a class="worker_size" href='/report/worker?type=16' title="架子工">架子工</a>
+                <a class="worker_size" href='/report/worker?type=17' title="防水工">防水工</a>
+                <a class="worker_size" href='/report/worker?type=18' title="手工木工">手工木工</a>
+                <a class="worker_size" href='/report/worker?type=19' title="砌筑工">砌筑工</a>
+                <a class="worker_size" href='/report/worker?type=20' title="钢筋工">钢筋工</a>
+                <a class="worker_size" href='/report/worker?type=21' title="混凝土工">混凝土工</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td class="worker_table_sub_td">
+                <a class="worker_size" href='/report/worker?type=23' title="中式面点师">中式面点师</a>
+                <a class="worker_size" href='/report/worker?type=24' title="中式烹调师">中式烹调师</a>
+                <a class="worker_size" href='/report/worker?type=25' title="美容师">美容师</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td class="worker_table_sub_td">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td class="worker_table_sub_td">
+
+            </td>
+        </tr>
+        {% if request.session.username %}
+        <tr>
+            <td>
+            </td>
+            <td class="worker_table_sub_td">
+                <a href="/report/sign_out" style="margin-left:65%">
+                    <img class="button_index_top" src="/static/image/index/tuichu.png" height="7%" width="70%"/>
+                    <!--                    <button class="button_index_top" style="text-align: center;width: 65px"><b>退出</b></button>-->
+                </a>
+            </td>
+        </tr>
+        {% else %}
+        {% endif %}
+        </tbody>
+    </table>
+
+    <!--    <div class="dropdown-index">-->
+    <!--        <a href="/report/introduction/" target="_blank">-->
+    <!--            <button class="dropbtn-index"-->
+    <!--                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">-->
+    <!--                报考须知-->
+    <!--            </button>-->
+    <!--        </a>-->
+    <!--    </div>-->
+    <!--    <div class="dropdown-index">-->
+    <!--        <a href="/report/system_guide/" target="_blank">-->
+    <!--            <button class="dropbtn-index"-->
+    <!--                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;">-->
+    <!--                系统操作指南-->
+    <!--            </button>-->
+    <!--        </a>-->
+    <!--    </div>-->
+
+</div>
+{% endif%}
+
+<div class="box box_index">
+    <div class="regiest">
+        <form action="/report/register/" id='register-form-index' method="post">
+            {% csrf_token %}
+            {{ form }}
+            <table style="margin-top: 10%;margin-left: auto;margin-right: auto;">
+                <tbody>
+                <tr>
+                    <td><label style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;用户名:</label></td>
+                    <td><input type="text" name="username" id="username_index" value="{{username}}" required="required"
+                               placeholder="用户名"
+                               onblur="check_username_index();" onchange="check_username_index();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left;"></span></td>
+                </tr>
+                <tr>
+                    <td><label
+                            style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昵称:</label>
+                    </td>
+                    <td><input type="text" name="nickname" id="nickname_index" placeholder="昵称" required="required"
+                               onblur="check_nickname_index();" onchange="check_nickname_index();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                <tr>
+                    <td><label
+                            style="color: honeydew; float: right; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:</label>
+                    </td>
+                    <td><input type="password" name="password" id="passwordReg_index" placeholder="密码"
+                               required="required"
+                               onblur="check_password_index();" onchange="check_password_index();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                <tr>
+                    <td><label style="color: honeydew; float: right;">确认密码:</label></td>
+                    <td><input type="password" id="finalPWD_index" placeholder="确认密码" required="required"
+                               onblur="check_equal_index();" onchange="check_equal_index();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type='submit' style="color: hotpink;width: 15%" value='提交'
+                   class='submit_index form-button submit-teacher'/>
+
+            <input type='button' style="color: hotpink;width: 15%" value="关闭" onclick="close_button();"
+                   class='form-button close_school_term'/>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function register_button() {
+        let username = $("#username");
+        username.empty();
+        let passwordReg = $("#passwordReg");
+        passwordReg.empty();
+        let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+        let top = ($(window).height() * (1 - 0.7)) / 2;
+
+        if ($(window).width() < 1350) {
+            if ($(window).width() < 750) {
+                $(".box_nav").addClass("animated bounceIn").show().css({
+                    left: left,
+                    top: top,
+                    width: $(window).width() * 0.75,
+                    height: $(window).height() * 0.35
+                });
+                $(".opacity_bg").css("opacity", "0.3").show();
+            } else {
+                $(".box_index").addClass("animated bounceIn").show().css({
+                    left: left,
+                    top: top,
+                    width: $(window).width() * 0.50,
+                    height: $(window).height() * 0.35
+                });
+                $(".opacity_bg").css("opacity", "0.3").show();
+            }
+        } else {
+            $(".box_index").addClass("animated bounceIn").show().css({
+                left: left,
+                top: top,
+                width: $(window).width() * 0.35,
+                height: $(window).height() * 0.3
+            });
+            $(".opacity_bg").css("opacity", "0.3").show();
+        }
+
+    }
+
+
+    function close_button() {
+        let left = ($(window).width() * (1 - 0.35)) / 2;
+        let top = ($(window).height() * (1 - 0.7)) / 2;
+        $(".box_index").show().animate({
+            width: "-$(window).width()*0.35",
+            height: "-$(window).height()*0.3",
+            left: "-" + left + "px",
+            top: "-" + top + "px"
+        }, 500, function () {
+            let width1 = $(window).width() * 0.35;
+            let height1 = $(window).height() * 0.3;
+            console.log(width1);
+            $(this).css({width: width1, height: height1}).hide();
+        });
+    }
+</script>

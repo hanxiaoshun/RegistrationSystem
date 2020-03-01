@@ -1,0 +1,415 @@
+.input_text {
+    text-align: right;
+    word-wrap: break-word;
+    border: 1px;
+    width: 120px;
+    height: 80px;
+    font-size: 12px;
+    color: white;
+    /*background-color: white;*/
+}
+.input_text_warning_login{
+    text-align: right;
+    word-wrap: break-word;
+    border: 1px;
+    width: 120px;
+    height: 80px;
+    font-size: 15px;
+    color: white;
+}
+.input_text_head {
+    text-align: center;
+    word-wrap: break-word;
+    border: 1px;
+    width: 150px;
+    height: 80px;
+    font-size: 22px;
+    color: white;
+    /*background-color: white;*/
+}
+
+.input_text_head_small{
+    text-align: center;
+    word-wrap: break-word;
+    border: 1px;
+    width: 150px;
+    height: 80px;
+    font-size: 18px;
+    color: white;
+}
+
+.download_table {
+    width: 150px;
+    height: 80px;
+}
+
+.form-select {
+    margin-left: 10px;
+    border: 1px;
+    border-radius: 5px;
+    width: 150px;
+    height: 25px;
+    /*font-size: 20px;*/
+    color: #000000;
+}
+
+.form-label {
+    width: 350px;
+}
+
+.form-table {
+    border: 1px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.td-span {
+    width: 350px;
+    text-align: right;
+}
+
+.td-input {
+    width: 300px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.form-number {
+    font-size: 12px;
+    margin-left: 10px;
+    border: 1px;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    /*font-size: 20px;*/
+    color: #000000;
+}
+
+.form-textarea {
+    font-size: 12px;
+    margin: 10px;
+    border: 1px;
+    border-radius: 5px;
+    /*font-size: 20px;*/
+    height: 80px;
+    color: #000000;
+    resize: none;
+    /*overflow-x:hidden;*/
+    /*overflow-y:hidden;*/
+    overflow: scroll;
+}
+
+.form-textarea-term {
+    font-size: 12px;
+    margin: 10px;
+    border: 1px;
+    border-radius: 5px;
+    /*font-size: 20px;*/
+    height: 80px;
+    color: #000000;
+    resize: none;
+    /*overflow-x:hidden;*/
+    /*overflow-y:hidden;*/
+    overflow: scroll;
+}
+
+.add_teacher_label {
+    color: honeydew;
+    float: right;
+    font-size: 12px;
+}
+
+input[type=text] .add_teacher_input {
+    height: 15px;
+}
+
+.form-button {
+    width: 120px;
+    height: 25px;
+    margin-left: 2px;
+    margin-right: 10px;
+    border: 2px;
+    border-radius: 5px;
+    /*font-size: 20px;*/
+    color: #000000;
+}
+
+.province_update {
+    width: 60px;
+}
+
+.city_update {
+    width: 60px;
+}
+
+.county_update {
+    width: 60px;
+}
+
+.form-button-add {
+    width: 80px;
+    height: 20px;
+    margin-left: 2px;
+    margin-right: 10px;
+    border: 2px;
+    border-radius: 5px;
+    /*font-size: 20px;*/
+    color: #000000;
+}
+
+.work-label {
+    font-size: 18px;
+    color: #000000;
+    text-decoration: underline
+}
+
+.condition_index span:active:hover {
+    color: #00FF00;
+}
+
+.condition_index span:active:after {
+    color: red;
+}
+
+.message-label {
+    font-size: 12px;
+}
+.td-input-message-title {
+        width: 400px;
+    }
+@media (max-width: 1350px) {
+    .input_text_head {
+        text-align: center;
+        word-wrap: break-word;
+        border: 1px;
+        width: 50px;
+        height: 30px;
+        font-size: 15px;
+        color: white;
+        /*background-color: white;*/
+    }
+
+    .input_text {
+        text-align: right;
+        word-wrap: break-word;
+        border: 1px;
+        width: 50px;
+        height: 30px;
+        font-size: 5px;
+        color: white;
+        /*background-color: white;*/
+    }
+
+    .ipt {
+        height: 20px;
+        font-size: 14px;
+    }
+
+    .td-span {
+        width: 20%;
+        font-size: 0.1em;
+    }
+
+    input[type=text], input[type=password], input[type=number], input[type=email], input[type=date] input[type=button] input[type=file] {
+        padding: 0 5px;
+        margin-left: 5px;
+        width: 150px;
+        height: 25px;
+        color: black;
+        /*text-shadow: 1px 1px 1px black;*/
+        background: rgb(255, 253, 253);
+        border: 1px;
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.96), 0 1px rgba(255, 255, 255, 0.06);
+        box-shadow: inset 0 1px 4px rgba(250, 250, 250, 0.2), 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    input[type=button] {
+        width: 120px;
+        font-size: 14px;
+    }
+
+    input[type=date] {
+        font-size: 14px;
+    }
+
+    input[type=file] {
+        font-size: 14px;
+    }
+
+    .form-select {
+        margin-left: 5px;
+        border: 1px;
+        border-radius: 5px;
+        width: 150px;
+        height: 20px;
+        font-size: 14px;
+        color: #000000;
+    }
+
+    .condition_selected label {
+        font-size: 10px;
+    }
+
+    .form-button {
+        width: 100px;
+        height: 25px;
+        margin-left: 2px;
+        margin-right: 10px;
+        border: 2px;
+        border-radius: 5px;
+        /*font-size: 20px;*/
+        color: #000000;
+    }
+
+    .form-textarea-term {
+        font-size: 10px;
+        margin: 10px;
+        border: 1px;
+        border-radius: 5px;
+        /*font-size: 20px;*/
+        height: 80px;
+        color: #000000;
+        resize: none;
+        /*overflow-x:hidden;*/
+        /*overflow-y:hidden;*/
+        overflow: scroll;
+    }
+
+    .form-textarea-message {
+        font-size: 10px;
+        margin: 10px;
+        border: 1px;
+        border-radius: 5px;
+        /*font-size: 20px;*/
+        height: 80px;
+        color: #000000;
+        resize: none;
+        /*overflow-x:hidden;*/
+        /*overflow-y:hidden;*/
+        overflow: scroll;
+    }
+    .td-input-message-title {
+        width: 300px;
+        font-size: 8px;
+        margin: 10px;
+    }
+}
+
+
+@media (max-width: 764px) {
+    .input_text_head {
+        text-align: center;
+        word-wrap: break-word;
+        border: 1px;
+        width: 50px;
+        height: 20px;
+        font-size: 8px;
+        color: white;
+        /*background-color: white;*/
+    }
+
+    .input_text {
+        text-align: right;
+        word-wrap: break-word;
+        border: 1px;
+        width: 50px;
+        height: 20px;
+        font-size: 5px;
+        color: white;
+        /*background-color: white;*/
+    }
+
+    .ipt {
+        height: 20px;
+        font-size: 6px;
+    }
+
+    .td-span {
+        width: 20%;
+        font-size: 0.1em;
+    }
+
+    input[type=text], input[type=password], input[type=number], input[type=email], input[type=date] input[type=button] input[type=file] {
+        padding: 0 5px;
+        margin-left: 5px;
+        width: 120px;
+        height: 20px;
+        color: black;
+        /*text-shadow: 1px 1px 1px black;*/
+        background: rgb(255, 253, 253);
+        border: 1px;
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.96), 0 1px rgba(255, 255, 255, 0.06);
+        box-shadow: inset 0 1px 4px rgba(250, 250, 250, 0.2), 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+
+    input[type=button] {
+        font-size: 10px;
+        width: 100px;
+    }
+
+    input[type=file] {
+        font-size: 10px;
+    }
+
+    .form-select {
+        margin-left: 5px;
+        border: 1px;
+        border-radius: 5px;
+        width: 80px;
+        height: 20px;
+        /* font-size: 20px; */
+        color: #000000;
+    }
+
+    .condition_selected label {
+        font-size: 8px;
+    }
+
+    .form-button {
+        width: 100px;
+        height: 25px;
+        margin-left: 2px;
+        margin-right: 10px;
+        border: 2px;
+        border-radius: 5px;
+        /*font-size: 20px;*/
+        color: #000000;
+    }
+
+    .form-textarea-term {
+        font-size: 8px;
+        margin: 10px;
+        border: 1px;
+        border-radius: 5px;
+        /*font-size: 20px;*/
+        height: 50px;
+        color: #000000;
+        resize: none;
+        /*overflow-x:hidden;*/
+        /*overflow-y:hidden;*/
+        overflow: scroll;
+    }
+
+    .form-textarea-message {
+        font-size: 8px;
+        margin: 10px;
+        border: 1px;
+        border-radius: 5px;
+        /*font-size: 20px;*/
+        height: 50px;
+        color: #000000;
+        resize: none;
+        /*overflow-x:hidden;*/
+        /*overflow-y:hidden;*/
+        overflow: scroll;
+    }
+
+    .td-input-message-title {
+        width: 300px;
+        font-size: 8px;
+        margin: 10px;
+    }
+}

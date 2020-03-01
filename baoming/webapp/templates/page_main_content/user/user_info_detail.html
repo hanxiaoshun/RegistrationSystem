@@ -1,0 +1,251 @@
+<!--电工、焊工、钳工、劳动员、育婴员、保育员 填报页面-->
+{% load filter_model %}
+{% load condition_selected %}
+<div class="like_form">
+    <label class="input_text_head">用户基本信息表</label>
+    <table class='form-table' border="1">
+        <tbody>
+
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head" style="color: red">注册信息</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">用户名：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.register_user_info.username }}</label>
+            </td>
+
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">昵称：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.register_user_info.nickname }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">系统角色：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.register_user_info.role.role_alias }}</label>
+            </td>
+        </tr>
+
+        <!--            第 1 行-->
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head" style="color: red">基本信息</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">姓名：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.real_name }}</label>
+            </td>
+
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">性别：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.sex|get_sex }}</label>
+                <label style='color:red'></label>
+                <font color='#ff0000'>* </font>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="input_text">年龄：</span>
+                <label style='color:white' class="input_text">{{ user_info.age }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">二寸照片：</span>
+            </td>
+            <td class="form-label td-input" rowspan="4" style="text-align: center">
+                <img src="{{image_url}}" id='two-inch-photo' width="120px" height="150px" alt="二寸照片">
+            </td>
+
+        </tr>
+        <!--            第 2 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">身份证号：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.id_number }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text" >文化程度：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.education_degree.education_name }}</label>
+            </td>
+        </tr>
+        <!--            第 3 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">工作单位：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.work_unit }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">单位性质：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.unit_nature.unit_nature }}</label>
+            </td>
+            <td class="form-label td-span" style="width: 150px;">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">民族：</span>
+                <label style='color:white' class="input_text">{{ user_info.nation_info.nation_name }}</label>
+            </td>
+        </tr>
+        <!--            第 4 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">联系电话：</label>
+            </td>
+            <td class="form-label td-input">
+                <!--                    <label style='color:white'>{{ user_info.contact_number }}</label>-->
+                <label style='color:white' class="input_text">{{ user_info.contact_number }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label for='' class="input_text">联系电话(区号)：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.fixed_telephone }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label for='' class="input_text" style="font-size: 12px">单位负责人：</label>
+                <label style='color:white' class="input_text">{{ teacher_info.user_info.real_name }}</label>
+            </td>
+
+        </tr>
+        <!--            第 5 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">参加工作时间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.start_working_date|date:"Y-m-d" }}</label>
+            </td>
+
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">户口所在地：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.hukou_province.region_name }}</label>
+                <label style='color:white' class="input_text">{{ user_info.hukou_city.region_name }}</label>
+                <label style='color:white' class="input_text">{{ user_info.hukou_county.region_name }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">邮箱：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.email }}</label>
+            </td>
+        </tr>
+        <!--            第 6行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">常住住址：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white'>{{ user_info.address }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">出生日期：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.birthday|date:"Y-m-d" }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">邮政编码：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.postal_code }}</label>
+            </td>
+
+        </tr>
+
+        <!--            第 7 行-->
+        <tr>
+            <td class="form-label td-span" style="width: 150px;">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">身份证住址：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ user_info.id_card_address }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">政治面貌：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{ user_info.political_status|get_political_status}}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">原职业（工种）：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{ user_info.former_occupation|get_none}}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">单位地址：</span>
+            </td>
+            <td class="form-label td-input" colspan="3">
+                <label style='color:white' class="input_text">{{user_info.unit_address}}</label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <a href='/report/to_user_info_update?uid={{user_info.id}}' readonly="readonly">
+            <input type='button'
+                   style="color: deeppink"
+                   value='修改资料'
+                   class='form-button'/>
+    </a>
+
+    <a href='/report/reset_password' readonly="readonly" target="_blank">
+            <input type='button'
+                   style="color: deeppink"
+                   value='修改密码'
+                   class='form-button'/>
+    </a>
+</div>

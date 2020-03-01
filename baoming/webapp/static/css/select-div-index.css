@@ -1,0 +1,79 @@
+.dropbtn-index {
+    width: 100px;
+    background-color: #f8f3fa;;
+    color: blue;
+    padding: 5px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn-index-level {
+    width: 120px;
+    background-color: #7f7caf;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown-index {
+    /*position: relative;*/
+    display: inline-block;
+}
+
+.dropdown-index-level {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-index-content {
+    display: none;
+    /*position: absolute;*/
+    background-color: #94c9f9;
+    min-width: auto;
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+}
+
+.dropdown-index-content-level {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: auto;
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+}
+
+.dropdown-index-content a {
+    color: black;
+    font-size: 14px;
+    padding: 4px 4px;
+    text-decoration: none;
+    border: 1px;
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    display: block;
+}
+
+.dropdown-index-content a button {
+    border: 1px;
+    border-radius: 5px;
+    background: #e3fffc;
+    font-size: 10px;
+}
+
+.dropdown-index-content a:hover {
+    background-color: #806bff;
+    color: ghostwhite;
+}
+
+.dropdown-index:hover .dropdown-index-content {
+    display: block;
+}
+
+/*.dropdown-index:hover .dropbtn-index {*/
+/*    background-color: #e42feb;*/
+/*}*/

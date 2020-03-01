@@ -1,0 +1,362 @@
+{% load filter_model %}
+{% load filter_status %}
+<div class="teacher_ordinary">
+    <label class="input_text_head">信息填报确认表</label>
+    {%if no_term%}
+    {% else %}
+    <p style="text-align: center"><label style="color: red">报名尚未开始，请不要继续操作</label></p>
+    {%endif%}
+    <p style="text-align: center">
+        <label style="color: lawngreen" class="school_term_name">
+            {% if school_term == 0%}
+                {{last_school_term.school_term_name}}
+            {% else %}
+                {{student_info.school_term.school_term_name}}
+            {% endif %}
+        </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label style="color: whitesmoke">开始日期：</label><label style="color: red" class="school_term_start">
+            {% if school_term == 0%}
+                {{last_school_term.school_term_start|date:"Y-m-d"}}
+            {% else %}
+                {{student_info.school_term.school_term_start|date:"Y-m-d"}}
+            {% endif %}
+        </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label style="color: whitesmoke">结束日期：</label><label style="color: red" class="school_term_end">
+        {% if school_term == 0%}
+                {{last_school_term.school_term_end|date:"Y-m-d"}}
+            {% else %}
+                {{student_info.school_term.school_term_end|date:"Y-m-d"}}
+            {% endif %}
+        </label>
+    </p>
+    <p style="text-align: right" class="p-search">
+        <!--        <a href="/report/all_student_base_info/" target="_blank">-->
+        <!--            <input type='button' style="color: midnightblue" value='下载全部' class='form-button'/>-->
+        <!--        </a>-->
+        <a href="javascript:void(0);">
+            <input type='button' style="color: hotpink" value='<<查询' onclick="recover_search();"
+                   class='form-button'/>
+        </a>
+
+<!--        <a href="javascript:void(0);" target="_blank">-->
+<!--            <input type='button' style="color: hotpink;width: 10%" value='展示全部' onclick="show_all(1);"-->
+<!--                   class='form-button'/>-->
+<!--        </a>-->
+    </p>
+
+    <hr class="hr-search">
+    <form action="/report/administrator_search_wait_confirm/" method="post" id="form-search-all-student">
+        {% csrf_token %}
+        {{ form }}
+        <table class='form-table form-table-search'>
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label for='' class="input_text">报考学期：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" id='search_school_term' class="search_school_term"
+                           name="school_term"
+                           value="{{ school_term }}">
+                    <select class='form-select school_term_search' id="school_term_search"
+                            onchange="school_term_a_search(this.options[this.options.selectedIndex].value,'{{tmp_list}}');">
+                        <option value="0">--请选择--</option>
+                        {% for term in school_terms%}
+                        {% if term.id == school_term %}
+                        <option value="{{term.id}}" selected="selected">{{term.school_term_name}}</option>
+                        {% else%}
+                        <option value="{{term.id}}">{{term.school_term_name}}</option>
+                        {% endif%}
+                        {% endfor%}
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">申报鉴定职业：</span>
+                    <br>
+                    <span class="input_text">(申报职业)：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='declaration_of_occupation'
+                           value='{{student_info.declaration_of_occupation}}'
+                           onchange="declaration_of_occupation_clear_search(this.value);"
+                           id="declaration_of_occupation_search" class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">申报鉴定级别：</span>
+                    <br>
+                    <span class="input_text">(鉴定级别)：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" value="{{ identification_level}}"
+                           name="identification_level"
+                           class="identification_level_search"
+                           id="search_identification_level">
+                    <select class='form-select'
+                            onchange="identification_level_search_f(this.options[this.options.selectedIndex].value);"
+                            id='identification_level_search' title="高级（三级）、中级（四级）、初级（五级）">
+                        <option value="0">--请选择--</option>
+                        <!--                        <option value="1">高级技师</option>-->
+                        <!--                        <option value="2">技师</option>-->
+                        <option value="5">初级（五级）</option>
+                        <option value="4">中级（四级）</option>
+                        <option value="3">高级（三级）</option>
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+            </tr>
+            <tr>
+
+
+                <!--                <td class="form-label td-span education_degree_form">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text">文化程度：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input education_degree_form">-->
+                <!--                    <input type="hidden" id='update_education_degree' name="education_degree"-->
+                <!--                           class="education_degree_search"-->
+                <!--                           value="{{student_info.user_info.education_degree.id}}">-->
+                <!--                    <select class='form-select education-degree'-->
+                <!--                            id="education_degree_search"-->
+                <!--                            onchange="education_degree_search(this.options[this.options.selectedIndex].value);"-->
+                <!--                            style="width: 150px">-->
+                <!--                    </select>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+            </tr>
+
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label for='' class="input_text">单位负责报名的负责人：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" id='search_teacher_info' class="teacher_info_search"
+                           name="teacher_info"
+                           value="{{ teacher_info }}">
+                    <select class='form-select teacher-info-search' id="teacher_info_search"
+                            onchange="teacher_info_a_search(this.options[this.options.selectedIndex].value);">
+                        <option value="0">--请选择--</option>
+                        {% for teacher in teacher_infos%}
+                        {% if teacher.id == teacher_info %}
+                        <option value="{{teacher.id}}" selected="selected">{{teacher.user_info.real_name}}</option>
+                        {% else%}
+                        <option value="{{teacher.id}}">{{teacher.user_info.real_name}}</option>
+                        {% endif%}
+                        {% endfor%}
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+                <!--                <td class="form-label td-span">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text">工作单位：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input">-->
+                <!--                    <input type='text' name='work_unit' maxlength="50"-->
+                <!--                           value='{{ student_info.user_info.work_unit }}'-->
+                <!--                           class='ipt' style="width: 250px"/>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">学员姓名：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='real_name' value='{{ student_info.user_info.real_name }}'
+                           maxlength="15" class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                </td>
+                <td class="form-label td-input">
+                </td>
+            </tr>
+            <tr></tr>
+            </tbody>
+        </table>
+        <a href="javascript:void(0);" class="a-search">
+            <input type='submit' style="color: deeppink" value='查询' class='form-button'
+                   id="submit-reporter-all-student-search"/>
+        </a>
+        <!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
+        <!--            <input type='reset' style="color: green" value='清空条件' class='submitBtn form-button'/>-->
+        <!--        </a>-->
+        <!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
+        <!--            <input type='button' style="color: blueviolet;width: 10%" value='下载本次查询结果'-->
+        <!--                   class='form-button' onclick="reporter_all_student_search();"/>-->
+        <!--        </a>-->
+        <!--        <a href="/report/all_student_base_info/" target="_blank" class="a-search">-->
+        <!--            <input type='button' style="color: midnightblue" value='下载全部' class='form-button'/>-->
+        <!--        </a>-->
+        <a href="javascript:void(0);" class="a-search-cancel">
+            <input type='button' style="color: magenta" value='>>收起查询' onclick="cancel_search();"
+                   class='form-button'/>
+        </a>
+    </form>
+    <hr>
+    <div class="table-wrapper">
+
+        <table class="fl-table" border="1.5">
+<!--               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">-->
+            <thead>
+            <tr class="table-head">
+                <th class="fix_small">序号</th>
+                <th class="term_head">学期</th>
+                <th class="name_head">姓名</th>
+                <th class="fix_small">性别</th>
+                <th class="id_number_list_head">身份证号码</th>
+                <th class="fix_width">申报职业</th>
+                <th class="fix_width_small"><label>鉴定</label><br><label>级别</label></th>
+                <th class="fix_width_small"><label>审核</label><br><label>状态</label></th>
+                <th class="fix_width_small"><label>报名</label><br><label>结果</label></th>
+                <th class="fix_width"><label  class="long_head_more">电话号码</label></th>
+<!--                <th>缴费状态</th>-->
+                <th class="fix_width_middle"><label>已缴费</label><br><label>金额</label></th>
+                <th class="fix_width_middle"><label>欠缴费</label><br><label>金额</label></th>
+<!--                <th>考核结果</th>-->
+                <th class="fix_width_middle"><label>理论</label><br><label>成绩</label></th>
+                <th class="fix_width_middle"><label>实际</label><br><label>操作</label></th>
+                <th class="fix_width_middle"><label>报名</label><br><label>负责人</label></th>
+                <th class="date_head">填报时间</th>
+                <th class="fix_width">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in contacts %}
+            <tr class="table-tr">
+                <td>{{forloop.counter}}</td>
+                <td>{{ student.school_term.school_term_name }}</td>
+                <td>{{ student.user_info.real_name }}</td>
+                <td>{{ student.user_info.sex|get_sex }}</td>
+                <td class="id_number_list">{{ student.user_info.id_number }}</td>
+                {% if student.declaration_of_occupation != "无机化学反应生产工"%}
+                    {% if student.declaration_of_occupation != "起重装卸机械操作工"%}
+                        {% if student.declaration_of_occupation != "工业固体废物处理处置工"%}
+                            <td>{{student.declaration_of_occupation}}</td>
+                        {% else %}
+                        <td><label>工业固体废物</label><br><label>处理处置工</label></td>
+                        {%endif%}
+                    {% else %}
+                    <td><label>起重装卸</label><br><label>机械操作工</label></td>
+                    {%endif%}
+                {% else %}
+                <td><label>无机化学</label><br><label>反应生产工</label></td>
+                {%endif%}
+                <td>{{ student.identification_level|get_identification_level }}</td>
+
+                {% if student.review_status == "1"%}
+                <td style="color: #00FF00">{{ student.review_status|get_review_status }}</td>
+                {% else %}
+                <td style="color: yellow">{{ student.review_status|get_review_status }}</td>
+                {% endif %}
+                {% if student.confirm_status == "1"%}
+                <td style="color: #00FF00">{{ student.confirm_status|get_confirm_status }}</td>
+                {% else %}
+                <td style="color: yellow">{{ student.confirm_status|get_confirm_status }}</td>
+                {% endif %}
+
+                <td>{{ student.user_info.contact_number|get_contact_number }}</td>
+<!--                <td>{{ student.pay_status|get_pay_status }}</td>-->
+                <td>{{student.payment_amount|get_zero}}</td>
+                <td>{{student.unpaid_amount|get_zero}}</td>
+<!--                <td>{{ student.examination_status|get_examination_status }}</td>-->
+                <td>{{student.theoretical_achievements|get_zero}}</td>
+                <td>{{student.practical_operation|get_zero}}</td>
+                <td>{{ student.teacher_info.user_info.real_name }}</td>
+                <td>{{ student.create_time|date:"Y-m-d" }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="dropbtn">操作</button>
+                        <div class="dropdown-content action-content">
+                            {% if student.confirm_status == "2"%}
+                            <a href='javascript:void(0);'
+                               onclick="report_confirm('/report/report_do_confirm/','{{student.pk}}')">
+                                <button>确认</button>
+                            </a>
+                            <a href='/report/message_to_receiver?record_id={{student.id}}' title="向负责人发送最终审查意见">
+                                <button>审查意见</button>
+                            </a>
+                            <a href='/report/to_student_info_update?studentId={{student.pk}}' readonly="readonly">
+                                <button>修改</button>
+                            </a>
+                            <a href='javascript:void(0);' onclick="admin_del_student('{{student.pk}}')">
+                                <button>删除</button>
+                            </a>
+                            {% elif student.confirm_status == "1" %}
+                            <a href='javascript:void(0);'
+                               onclick="report_confirm('/report/report_cancel_confirm/','{{student.pk}}')">
+                                <button>取消确认</button>
+                            </a>
+                            {%else%}
+                            {%endif%}
+                            <a href='/report/student_info_detail?studentId={{student.pk}}'>
+                                <button>详情</button>
+                            </a>
+                            <a href='/report/download_apply?studentId={{student.pk}}'>
+                                <button>下载</button>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination" style="color: ghostwhite">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a style="color: #00FF00" href="?page=1">&laquo; 首页</a>
+            <a style="color: yellow" href="?page={{ contacts.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ contacts.number }} 页 ,总共 {{ contacts.paginator.num_pages }} 页.
+        </span>
+
+        {% if contacts.has_next %}
+            <a style="color: yellow" href="?page={{ contacts.next_page_number }}">下一页</a>
+            <a style="color: red" href="?page={{ contacts.paginator.num_pages }}">尾页 &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+</div>

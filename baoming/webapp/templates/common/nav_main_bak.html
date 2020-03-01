@@ -1,0 +1,198 @@
+<nav>
+    <div>
+        <a href="/report/to_index"><img src="/static/image/index/aic.png" class="main_pic" title="返回首页"/></a>
+    </div>
+
+    <div class='sub_main_nav'>
+        <ul class='navbar_nav' data-in='fadeInDown' data-out='fadeOutUp'>
+            <li class='active'>
+                <a href='/report/to_index'>首页</a></li>
+            <!--        <li class='dropdown'>-->
+            <!--            <a href='javascript:void(0)'>信息填报 </a>-->
+            <!--            <div class='dropdown_menu'>-->
+            <!--                <a href='#'>Custom Menu</a>-->
+            <!--                <a href='#'>Custom Menu</a>-->
+            <!--                <a href='#'>Custom Menu</a></div>-->
+            <!--        </li>-->
+            <!--        <li class='dropdown'>-->
+            <!--            <a href='javascript:void(0)'>信息查询</a>-->
+            <!--            <div class='dropdown_menu'>-->
+            <!--                <a href='#'>Custom Menu</a>-->
+            <!--                <a href='#'>Custom Menu</a>-->
+            <!--                <a href='#'>Custom Menu</a></div>-->
+            <!--        </li>-->
+
+            <!-- {% if is_report %}
+             <li>
+                 <a href='/report/worker_history/'>工作经验</a></li>
+             <li>
+                 <a href='/report/report_detail/'>信息查询</a></li>
+             {% else %}
+             <li class='dropdown'>
+                 <a href='javascript:void(0)'>信息填报</a>
+                 <div class='dropdown_menu'>
+                     <a href='/report/worker?type=1'>电工</a>
+                     <a href='/report/worker?type=2'>焊工</a>
+                     <a href='/report/worker?type=3'>钳工</a>
+                     <a href='/report/worker?type=4' style="font-size: 13px">劳动关系协调员</a>
+                     <a href='/report/worker?type=5'>育婴员</a>
+                     <a href='/report/worker?type=6'>保育员</a>
+                     <a href='/report/worker?type=7'>化工</a>
+                 </div>
+             </li>
+             {% endif %}-->
+            <li class='dropdown'>
+                <a href='javascript:void(0)'>信息填报</a>
+                <div class='dropdown_menu'>
+                    <a href='/report/worker?type=1' title="（机电）电工">电工</a>
+                    <a href='/report/worker?type=2' title="（机电）焊工">焊工</a>
+                    <a href='/report/worker?type=3' title="（机电）钳工">钳工</a>
+                    <a href='/report/worker?type=4'>育婴员</a>
+                    <a href='/report/worker?type=5'>保育员</a>
+                    <a href='/report/worker?type=6' style="font-size: 12px" title="劳动关系协调员">劳动关系协调员</a>
+                    <a href='/report/worker?type=7' style="font-size: 12px" title="（化工）防腐蚀工">防腐蚀工</a>
+                    <a href='/report/worker?type=8' style="font-size: 12px" title="（化工）有机合成工">有机合成工</a>
+                    <a href='/report/worker?type=9' style="font-size: 11px" title="（化工）工业废水处理工">工业废水处理工</a>
+                    <a href='/report/worker?type=10' style="font-size: 10px" title="（化工）无机化学反应生产工">无机化学反应生产工</a>
+                    <a href='/report/worker?type=11' style="font-size: 11px" title="（化工）工业固体废物处理处置工">工业固体废物处理处置工</a>
+                </div>
+            </li>
+            <li>
+                <a href='/report/worker_history/'>工作经验</a></li>
+<!--            <li>-->
+<!--                <a href='/report/report_detail?type=0'>信息查询</a></li>-->
+             <li>
+                <a href='/report/report_student_info_list/'>信息查询</a></li>
+        </ul>
+    </div>
+    <div id="sideMenu">
+        {% if request.session.nickname %}
+        <span class="fa" title="欢迎:{{ request.session.nickname }}">欢迎:</span>
+        <a href="/report/user_setting">
+            <font color="#7fff00">{{ request.session.nickname }}</font>
+        </a>|
+        <a href="/report/sign_out">
+            <span class="fa" title="退出">退出</span>
+        </a>|
+        {% else %}
+        <a href="/report/to_login">
+            <span class="fa" title="您好！请登录">登录</span>
+        </a>|
+        <a href="javascript:void(0);">
+            <span class="btn">注册</span>
+        </a>|
+        {% endif %}
+        <a href="javascript:void(0);" title="导航菜单"><span class="fa fa-navicon" id="sideMenuClosed"
+                                                         style="color: red">更多</span></a>
+    </div>
+</nav>
+
+
+<div class="box">
+    <div class="regiest">
+        <form action="/report/register/" id='register-form' method="post">
+            {% csrf_token %}
+            {{ form }}
+            <table style="margin-top: 10%;margin-left: auto;margin-right: auto;">
+                <tbody>
+                <tr>
+                    <td><label style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;用户名:</label></td>
+                    <td><input type="text" name="username" id="username" value="" required="required" placeholder="用户名"
+                               onblur="check_username();" onchange="check_username();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left;"></span></td>
+                </tr>
+                <tr>
+                    <td><label
+                            style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昵称:</label>
+                    </td>
+                    <td><input type="text" name="nickname" id="nickname" placeholder="昵称" required="required"
+                               onblur="check_nickname();" onchange="check_nickname();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                <tr>
+                    <td><label
+                            style="color: honeydew; float: right; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:</label>
+                    </td>
+                    <td><input type="password" name="password" id="passwordReg" placeholder="密码" required="required"
+                               onblur="check_password();" onchange="check_password();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                <tr>
+                    <td><label style="color: honeydew; float: right;">确认密码:</label></td>
+                    <td><input type="password" id="finalPWD" placeholder="确认密码" required="required"
+                               onblur="check_equal();" onchange="check_equal();"></td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--            <p>-->
+            <!--                <label style="color: honeydew">&nbsp;&nbsp;&nbsp;&nbsp;用户名:</label>-->
+            <!--                <input type="text" name="username" id="username" value="" required="required" placeholder="用户名"-->
+            <!--                       onblur="check_username();" onchange="check_username();">-->
+            <!--                <span class="message-label" style="color:red;width: 30%"></span>-->
+            <!--            </p>-->
+            <!--            <p><label style="color: honeydew">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昵称:</label>-->
+            <!--                <input type="text" name="nickname" id="nickname" placeholder="昵称" required="required"-->
+            <!--                       onblur="check_nickname();" onchange="check_nickname();">-->
+            <!--                <span class="message-label" style="color:red;width: 30%"></span>-->
+            <!--            </p>-->
+            <!--            <p><label style="color: honeydew">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:</label>-->
+            <!--                <input type="password" name="password" id="passwordReg" placeholder="密码" required="required"-->
+            <!--                       onblur="check_password();" onchange="check_password();">-->
+            <!--                <span class="message-label" style="color:red;width: 30%"></span>-->
+            <!--            </p>-->
+            <!--            <p><label style="color: honeydew">确认密码:</label>-->
+            <!--                <input type="password" id="finalPWD" placeholder="确认密码" required="required" onblur="check_equal();"-->
+            <!--                       onchange="check_equal();">-->
+            <!--                <span class="message-label" style="color:red;width: 30%"></span>-->
+            <!--            </p>-->
+            <p>
+            <div id="btn2" style="margin-left: 20%;">
+                <ul>
+                    <li><input type="submit" value="提交" class="submit" style="color: white"/></li>
+                    <li><input type="button" value="关闭" class="close" style="color: white"/></li>
+                </ul>
+            </div>
+            </p>
+        </form>
+    </div>
+</div>
+
+<!--<div id="timeArea"><script type="text/javascript">LoadBlogParts();</script></div>-->
+
+<script type="text/javascript">
+    $(function () {
+        $(".btn").click(function () {
+            let username = $("#username");
+            username.empty();
+            let passwordReg = $("#passwordReg");
+            passwordReg.empty();
+            let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+            let height = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box").addClass("animated bounceIn").show().css({left: left, top: top});
+            $(".opacity_bg").css("opacity", "0.3").show();
+        });
+
+
+        $(".close").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;
+            let top = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box").show().animate({
+                width: "-$(window).width()*0.35",
+                height: "-$(window).height()*0.5",
+                left: "-" + left + "px",
+                top: "-" + top + "px"
+            }, 1000, function () {
+                let width1 = $(window).width() * 0.35;
+                let height1 = $(window).height() * 0.5;
+                console.log(width1);
+                $(this).css({width: width1, height: height1}).hide();
+            });
+
+        });
+    });
+</script>

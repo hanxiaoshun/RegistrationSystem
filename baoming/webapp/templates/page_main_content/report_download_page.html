@@ -1,0 +1,39 @@
+<div class="like_form">
+    {% if need_login %}
+    <div style="background-color: #0d7796">
+        <span style="background-color: #d5ff10;border: 1px;border-radius: 3px; margin-top: 10px">请在右侧进行登录或注册，以便更好地为您服务</span>
+    </div>
+    <br>
+    <br>
+    {% else %}
+    {% endif %}
+    <label class="input_text_head">欢迎进入学员信息填报下载系统</label>
+    <hr>
+    <font color='#ff0000'>* </font>
+
+    {% if not_exist %}
+    <span class="input_text" style="width: 20%; height: 15%">{{message}}</span>
+    {% else %}
+    <span class="input_text" style="width: 20%; height: 15%">{{message}}</span>
+    <br>
+    <div class="dropdown-index">
+        <a href='/report/start_download?file_uuid={{file_uuid}}' target="_self">
+            <button class="dropbtn-index" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                下载{{file_message_one}}
+            </button>
+        </a>
+        {% if chemical%}
+        {%else%}
+        <a href='/report/start_download?file_uuid={{file_uuid2}}' target="_self">
+            <button class="dropbtn-index" title="{{message}}"
+                    style="background-color: honeydew;color: #0b2e13;border: 1px;border-radius: 5px;width: 100%">
+                下载{{file_message_two}}
+            </button>
+        </a>
+        {%endif%}
+
+
+    </div>
+    {% endif %}
+</div>

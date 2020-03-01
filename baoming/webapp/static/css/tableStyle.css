@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+/*html, body{
+	padding:0;
+	margin:0;
+	position:relative;
+	background:url(/static/image/table/body.jpg);
+	background-repeat:repeat;
+	color:#fff;
+	letter-spacing:1px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+}*/
+.zebra operationClass {
+    font-size: 15px;
+    font-weight: normal;
+    background: url(../image/table/zebratable.png);
+    background-repeat: no-repeat;
+    background-position: 130px center;
+    padding-top: 10px;
+    height: 100px;
+}
+
+/*
+.maindiv{
+    margin:10px;
+ 	width:1200px;
+	padding:10px;
+	overflow:hidden; *//*关键*//*
+	border:1px solid black;
+}*/
+#container {
+    padding-top: 5px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    -webkit-box-shadow: 1px 2px 1px 2px #2a6496;
+    box-shadow: 1px 1px 1px 1px #fcfcfc;
+
+}
+
+.zebra {
+    border: 1px solid #00ff007d;
+}
+
+.zebra td {
+    border-left: 1px solid #00bfff69;
+    border-top: 1px solid #f356265c;
+    padding: 3px;
+    text-align: center;
+
+}
+
+.zebra th, .zebra th:hover {
+    border-left: 1px solid rgba(255, 0, 0, 0);
+    border-bottom: 1px solid #8282828a;
+    padding: 10px;
+    background-color: rgba(242, 242, 242, 0.1) !important;
+    background-image: -webkit-gradient(ease-in, left top, left bottom, from(#87CEFA), to(#00BFFF)) !important;
+    background-image: -webkit-linear-gradient(top, #87CEFA, #00BFFF) !important;
+    background-image: -moz-linear-gradient(top, #87CEFA, #00BFFF) !important;
+    background-image: -ms-linear-gradient(top, #87CEFA, #00BFFF) !important;
+    background-image: -o-linear-gradient(top, #87CEFA, #00BFFF) !important;
+    background-image: linear-gradient(top, #87CEFA, #00BFFF) !important;
+    color: #fff !important;
+    font-weight: normal;
+}
+
+.zebra tbody tr:nth-child(even) {
+    background: #00bfff73 !important;
+    color: #2a6496;
+
+}
+
+.zebra tr:hover * {
+    background: #fcfcfc;
+    color: #494a5f;
+}
+
+.zebra tr {
+    background: #87cefa4d;
+    color: #191970;
+}
+
+.btop {
+    background-color: #9999991c;
+    font-size: 13px;
+    border-radius: 5px;
+}

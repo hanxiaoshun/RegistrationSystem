@@ -1,0 +1,152 @@
+{% load filter_model %}
+{% load filter_status %}
+{% load filter_system_message %}
+<div class="teacher_ordinary" style="text-align: center">
+    <p style="text-align: center">
+        <label class="input_text_head">{{system_message_type}}消息列表&nbsp;&nbsp;</label>
+        <a href="/report/receive/"><label style="color: yellow">未读消息(<span
+                style="color: deeppink;text-decoration: black">{{message_not_confirm}}</span>)|</label></a>
+        <a href="/report/send/"><label style="color: #00FF00">已发送消息(<span
+                style="color: deeppink;text-decoration: black">{{message_already_sent}}</span>)|</label></a>
+        <a href="/report/admin_message/"><label style="color: red">系统公告(<span
+                style="color: deeppink;text-decoration: black">{{system_announcement}}</span>)</label></a>
+    </p>
+    <p style="text-align: right" class="p-search">
+        <a href="/report/message_add/" target="_blank">
+            <input type='button' style="color: midnightblue" value='发送信息' class='form-button'/>
+        </a>
+<!--        <a href="javascript:void(0);" target="_blank">-->
+<!--            <input type='button' style="color: hotpink" value='<<展示查询条件' onclick="recover_search();"-->
+<!--                   class='form-button'/>-->
+<!--        </a>-->
+    </p>
+    <div class="system_message_send" style="text-align: center;width: auto">
+        <form action="/report/reply_system_message/" id='register-form-teacher' method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="hidden" value="" name='update_id' id="update-id">
+            <table style="width:100%;margin-top: 5%;margin-left: auto;margin-right: auto;">
+                <tbody>
+                <tr>
+                    <td class="form-label td-span">
+                        <label class="input_text">发信人:</label>
+                    </td>
+                    <td class="form-label td-input">
+                        <label style="color: red;">{{receiver_message.sender.register_user_info.username}}@{{receiver_message.sender.real_name}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <label class="input_text">历史信息_级别：</label>
+                    </td>
+                    <td class="form-label td-input">
+                        <label style="color: red;">{{receiver_message.message_level|get_message_level}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span">
+                        <label class="input_text">历史信息_标题:</label>
+                    </td>
+                    <td class="form-label td-input" colspan="2">
+                        <label style="color: honeydew;">{{receiver_message.message_title}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span">
+                        <label class="input_text">历史信息_内容:</label>
+                    </td>
+                    <td class="form-label td-input" colspan="2">
+                        <label style="color: honeydew;">{{receiver_message.message_content}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <hr>
+                    </td>
+                </tr>
+                {% if replay_status == "true"%}
+                <tr>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <label class="input_text">回复级别：</label>
+                    </td>
+                    <td class="form-label td-input">
+                        <label style="color: red;">{{replay_message.message_level|get_message_level}}</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <label class="input_text">回复标题：</label>
+                    </td>
+                    <td class="form-label td-input" colspan="2">
+                        <label style="color: honeydew;">{{replay_message.message_title}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span">
+                        <label class="input_text">回复内容：</label>
+                    </td>
+                    <td class="form-label td-input" colspan="2">
+                        <label style="color: honeydew;">{{replay_message.message_content}}</label>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <label class="input_text">回复级别：</label>
+                    </td>
+                    <td class="form-label td-input">
+                        <select class='form-select' style="width: 150px" name="message_level"
+                                onchange="message_level_f(this.options[this.options.selectedIndex].value);"
+                                id='message_level_id' title="常规、预警、紧急">
+                            <!--                            <option value="0">&#45;&#45;请选择&#45;&#45;</option>-->
+                            <option value="1">常规</option>
+                            <option value="2">预警</option>
+                            <option value="3">紧急</option>
+                        </select>
+                    <td style="width: auto;"><span class="message-label" id="message_level_label"
+                                                   style="color:red;margin-left: 1%; float: right;"></span></td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <label class="input_text">回复标题：</label>
+                    </td>
+                    <td class="form-label td-input" colspan="2">
+                        <input type="text" name="message_title" id="message-title"
+                               placeholder="消息标题"
+                               required="required"
+                               maxlength="50"
+                               minlength="2" style="width: 300px">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span">
+                        <label class="input_text">回复内容：</label>
+                    </td>
+                    <td class="form-label td-input">
+                        <textarea name='message_content' class='ipt form-textarea form-textarea-message' rows="4"
+                                  maxlength="500"
+                                  id="message-content"
+                                  cols="60">
+                        </textarea>
+                    </td>
+                </tr>
+                {% endif %}
+
+                </tbody>
+            </table>
+            {% if replay_status == "true"%}
+            {%else%}
+            <input type='hidden' value='{{receiver_message.id}}' name='feedback_message' id="feedback_message"/>
+            <input type='submit' style="color: green" value='确认回复' class='form-button more_info'/>
+            {%endif%}
+        </form>
+    </div>
+</div>

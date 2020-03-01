@@ -1,0 +1,397 @@
+{% load filter_model %}
+{% load filter_status %}
+{% load filter_system_message %}
+<div class="teacher_ordinary">
+    <p style="text-align: center">
+        <label class="input_text_head">{{system_message_type}}消息列表&nbsp;&nbsp;</label>
+        <a href="/report/receive/"><label style="color: yellow">未读消息(<span
+                style="color: deeppink;text-decoration: black">{{message_not_confirm}}</span>)|</label></a>
+        <a href="/report/send/"><label style="color: #00FF00">已发送消息(<span
+                style="color: deeppink;text-decoration: black">{{message_already_sent}}</span>)|</label></a>
+        <a href="/report/admin_message/"><label style="color: red">系统公告(<span
+                style="color: deeppink;text-decoration: black">{{system_announcement}}</span>)</label></a>
+    </p>
+    <p style="text-align: right" class="p-search">
+        <a href="/report/message_add/" target="_blank">
+            <input type='button' style="color: midnightblue" value='发送信息' class='form-button'/>
+        </a>
+<!--        <a href="javascript:void(0);" target="_blank">-->
+<!--            <input type='button' style="color: hotpink" value='<<展示查询条件' onclick="recover_search();"-->
+<!--                   class='form-button'/>-->
+<!--        </a>-->
+    </p>
+
+    <hr class="hr-search">
+    <form action="/report/administrator_search_chemical_not/" method="post" id="form-search-chemical-not">
+        {% csrf_token %}
+        {{ form }}
+        <table class='form-table form-table-search'>
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label for='' class="input_text" style="font-size: 12px">报考学期：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" id='search_school_term' class="search_school_term"
+                           name="school_term"
+                           value="{{ school_term }}">
+                    <select class='form-select school_term_search' id="school_term_search"
+                            style="width: 100px"
+                            onchange="school_term_a_search(this.options[this.options.selectedIndex].value);">
+                        <option value="0">--请选择--</option>
+                        {% for term in school_terms%}
+                        {% if term.id == school_term %}
+                        <option value="{{term.id}}" selected="selected">{{term.school_term_name}}</option>
+                        {% else%}
+                        <option value="{{term.id}}">{{term.school_term_name}}</option>
+                        {% endif%}
+                        {% endfor%}
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text" style="font-size: 12px">申报鉴定职业(申报职业)：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='declaration_of_occupation'
+                           value='{{student_info.declaration_of_occupation}}'
+                           id="declaration_of_occupation_search" class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text" style="font-size: 12px">申报鉴定级别(鉴定级别)：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" value="{{ identification_level}}"
+                           name="identification_level"
+                           class="identification_level_search"
+                           id="search_identification_level">
+                    <select class='form-select' style="width: 150px"
+                            onchange="identification_level_search_f(this.options[this.options.selectedIndex].value);"
+                            id='identification_level_search' title="高级（三级）、中级（四级）、初级（五级）">
+                        <option value="0">--请选择--</option>
+                        <!--                        <option value="1">高级技师</option>-->
+                        <!--                        <option value="2">技师</option>-->
+                        <option value="5">初级（五级）</option>
+                        <option value="4">中级（四级）</option>
+                        <option value="3">高级（三级）</option>
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+            </tr>
+            <tr>
+
+
+                <!--                <td class="form-label td-span education_degree_form">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text">文化程度：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input education_degree_form">-->
+                <!--                    <input type="hidden" id='update_education_degree' name="education_degree"-->
+                <!--                           class="education_degree_search"-->
+                <!--                           value="{{student_info.user_info.education_degree.id}}">-->
+                <!--                    <select class='form-select education-degree'-->
+                <!--                            id="education_degree_search"-->
+                <!--                            onchange="education_degree_search(this.options[this.options.selectedIndex].value);"-->
+                <!--                            style="width: 150px">-->
+                <!--                    </select>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+            </tr>
+
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label for='' class="input_text" style="font-size: 12px">单位负责报名的负责人：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" id='search_teacher_info' class="teacher_info_search"
+                           name="teacher_info"
+                           value="{{ teacher_info }}">
+                    <select class='form-select teacher-info-search' id="teacher_info_search"
+                            style="width: 100px"
+                            onchange="teacher_info_a_search(this.options[this.options.selectedIndex].value);">
+                        <option value="0">--请选择--</option>
+                        {% for teacher in teacher_infos%}
+                        {% if teacher.id == teacher_info %}
+                        <option value="{{teacher.id}}" selected="selected">{{teacher.user_info.real_name}}</option>
+                        {% else%}
+                        <option value="{{teacher.id}}">{{teacher.user_info.real_name}}</option>
+                        {% endif%}
+                        {% endfor%}
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+                <!--                <td class="form-label td-span">-->
+                <!--                    <font color='#ff0000'>* </font>-->
+                <!--                    <span class="input_text">工作单位：</span>-->
+                <!--                </td>-->
+                <!--                <td class="form-label td-input">-->
+                <!--                    <input type='text' name='work_unit' maxlength="50"-->
+                <!--                           value='{{ student_info.user_info.work_unit }}'-->
+                <!--                           class='ipt' style="width: 250px"/>-->
+                <!--                    <label style='color:red'></label>-->
+                <!--                </td>-->
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+
+                </td>
+                <td class="form-label td-input">
+
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">姓名：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='real_name' value='{{ student_info.user_info.real_name }}'
+                           maxlength="15" class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                </td>
+                <td class="form-label td-input">
+                </td>
+            </tr>
+            <tr></tr>
+            </tbody>
+        </table>
+        <a href="javascript:void(0);" target="_blank" class="a-search">
+            <input type='submit' style="color: deeppink;width: 10%" value='查询' class='form-button'
+                   id="submit-reporter-chemical-not-search"/>
+        </a>
+        <!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
+        <!--            <input type='reset' style="color: green" value='清空条件' class='submitBtn form-button'/>-->
+        <!--        </a>-->
+        <a href="javascript:void(0);" target="_blank" class="a-search">
+            <input type='button' style="color: blueviolet;width: 10%" value='下载本次查询结果'
+                   class='form-button' onclick="reporter_chemical_not_search();"/>
+        </a>
+        <a href="/report/reporter_chemical_not/" target="_blank" class="a-search">
+            <input type='button' style="color: midnightblue" value='下载全部' class='form-button'/>
+        </a>
+        <a href="javascript:void(0);" target="_blank" class="a-search-cancel">
+            <input type='button' style="color: magenta;width: 10%" value='>>收起查询条件' onclick="cancel_search();"
+                   class='form-button'/>
+        </a>
+    </form>
+    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+    <div class="table-wrapper">
+        <table class="fl-table" border="1"
+               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">
+            <thead>
+            <tr class="table-head">
+                <th>序号</th>
+                {%if message_type == "receive"%}
+                <th>发信人账户</th>
+                <th>发信人姓名</th>
+                <th>信息确认</th>
+                {% elif message_type == "send"%}
+                <th>收信人账户</th>
+                <th>收信人姓名</th>
+                {% else %}
+                {%endif%}
+                <!--                <th>发信人角色</th>-->
+                <th>消息级别</th>
+                <th>消息标题</th>
+                <!--                <th>类型</th>-->
+                <th>消息发送时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for system_message in contacts %}
+            <tr class="table-tr">
+                <td>{{forloop.counter}}</td>
+
+                {%if message_type == "receive"%}
+                <td>{{ system_message.sender.register_user_info.username }}</td>
+                <td>{{ system_message.sender.real_name }}</td>
+                {% if system_message.feedback_status == "1"%}
+                <td style="color: #00FF00">{{ system_message.feedback_status|get_feedback_status }}</td>
+                {% else %}
+                <td style="color: red">{{ system_message.feedback_status|get_feedback_status }}</td>
+                {% endif %}
+
+                {%elif message_type == "send"%}
+                <td>{{ system_message.receiver.register_user_info.username }}</td>
+                <td>{{ system_message.receiver.real_name }}</td>
+                {% else %}
+                {%endif%}
+                <!--                <td> {{system_message.receiver.register_user_info.role.alias}}</td>-->
+                {% if system_message.message_level == "2"%}
+                <td style="color: yellow">{{ system_message.message_level|get_message_level }}</td>
+                {% elif system_message.message_level == "3" %}
+                <td style="color: red">{{ system_message.message_level|get_message_level }}</td>
+                {% else %}
+                <td>{{ system_message.message_level|get_message_level }}</td>
+                {% endif %}
+                <td>{{ system_message.message_title}}</td>
+                <!--                <td>{{ system_message.message_range|get_message_range}}</td>-->
+                <td>{{ system_message.create_time|date:"Y-m-d H:m:s" }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="dropbtn">操作</button>
+                        <div class="dropdown-content action-content">
+                            {% if message_type == "receive"%}
+                            <a href='/report/system_message_detail?record_id={{system_message.pk}}&message_type=receive'>
+                                <button>查看消息详细</button>
+                            </a>
+                            {% if system_message.feedback_status == "2"%}
+                            <a href='javascript:void(0);'
+                               onclick="system_message_confirm('{{system_message.pk}}')">
+                                <button>确认消息</button>
+                            </a>
+                            {% else%}
+                            {% endif %}
+                            {% if system_message.reply_status == "2"%}
+                            <a href='/report/system_message_confirm_send?record_id={{system_message.pk}}'>
+                                <button>确认并回复消息</button>
+                            </a>
+                            {% else%}
+                            {% endif %}
+                            <a href='javascript:void(0);'
+                               onclick="system_message_hidden('{{system_message.pk}}','receiver')">
+                                <button>不再显示本消息</button>
+                            </a>
+                            {% else %}
+                            <a href='/report/system_message_detail?record_id={{system_message.pk}}'>
+                                <button>查看消息详细</button>
+                            </a>
+                            <a href='javascript:void(0);'
+                               onclick="system_message_hidden('{{system_message.pk}}','sender')">
+                                <button>不再显示本消息</button>
+                            </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination" style="color: ghostwhite;text-align: center">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a style="color: #00FF00" href="?page=1">&laquo; 首页</a>
+            <a style="color: yellow" href="?page={{ contacts.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ contacts.number }} 页 ,总共 {{ contacts.paginator.num_pages }} 页.
+        </span>
+
+        {% if contacts.has_next %}
+            <a style="color: yellow" href="?page={{ contacts.next_page_number }}">下一页</a>
+            <a style="color: red" href="?page={{ contacts.paginator.num_pages }}">尾页 &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+</div>
+
+
+<div class="box box_register">
+    <div class="regiest">
+        <form action="" id='form-register' method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="hidden" value="" name='update_id' id="update-id">
+            <table style="margin-top: 10%;margin-left: auto;margin-right: auto;">
+                <tbody>
+                <tr>
+                    <td><label style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;角色名:</label></td>
+                    <td><input type="text" name="register_name" id="register-name" value="" required="required"
+                               title="英文单词" placeholder="角色名的英译"/></td>
+                    <td style="width: auto;"><label class="message-label" id="register-name-label" for="register-name"
+                                                    style="color:red;margin-left: 1%; float: left;"></label></td>
+                </tr>
+                <tr>
+                    <td><label
+                            style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色说明:</label>
+                    </td>
+                    <td>
+                        <textarea name='explain' class='ipt form-textarea' rows="1"
+                                  maxlength="60"
+                                  id="register_explain"
+                                  cols="20">
+                        </textarea>
+                        <label for="register_explain"></label>
+                    </td>
+                    <td style="width: auto;"><span class="message-label"
+                                                   style="color:red;margin-left: 1%; float: left"></span></td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+            <div id="btn2" style="margin-left: 20%;">
+                <ul>
+                    <li><input type="button" value="提交" class="submit-register" style="color: white"
+                               id='register_button'
+                               onclick="add_register();"/></li>
+                    <li><input type="button" value="关闭" class="close close_register" style="color: white"/></li>
+                </ul>
+            </div>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}'}});
+    $(function () {
+        $(".form-button-add-register").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+            let height = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box_register").addClass("animated bounceIn").show().css({left: left, top: top});
+            $(".opacity_bg").css("opacity", "0.3").show();
+            let form_button = $('#register_button');
+            form_button.attr('onclick', "add_register();");
+        });
+        $(".close_register").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;
+            let top = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box_register").show().animate({
+                width: "-$(window).width()*0.35",
+                height: "-$(window).height()*0.5",
+                left: "-" + left + "px",
+                top: "-" + top + "px"
+            }, 1000, function () {
+                let width1 = $(window).width() * 0.35;
+                let height1 = $(window).height() * 0.5;
+                $(this).css({width: width1, height: height1}).hide();
+            });
+
+        });
+    });
+</script>
