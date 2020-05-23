@@ -1,58 +1,148 @@
 /*.body_main {*/
+
+
 /*    height: 100%;*/
+
+
 /*    !*display: block;*!*/
+
+
 /*    !*background: url(../image/main/main_22.png) repeat;*!*/
+
+
 /*    !*background-color: rgba(125, 123, 247, 0.99);*!*/
 
+
 /*    !*background: -webkit-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Safari 5.1 - 6.0 *!*!*/
+
+
 /*    !*background: -o-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Opera 11.1 - 12.0 *!*!*/
+
+
 /*    !*background: -moz-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Firefox 3.6 - 15 *!*!*/
+
+
 /*    !*background: linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* 标准的语法（必须放在最后） *!*!*/
+
+
 /*    -moz-background-size: 100% 100%;*/
+
+
 /*    background-color: transparent;*/
+
+
 /*    background-size: 100% 100%;*/
 
+
 /*    !*!*background: #202020;*!*!*/
+
+
 /*    box-shadow: 1px 1px 2px #5c4b51;*/
+
+
 /*    display: flex;*/
+
+
 /*    align-items: center;*/
+
+
 /*    justify-content: space-between;*/
+
+
 /*    !*background: #fff;*!*/
+
+
 /*    font-size: 12px;*/
+
+
 /*    !*max-width: 1500px;*!*/
+
+
 /*    font-family: Tahoma, "宋体";*/
+
+
 /*    color: #333;*/
+
+
 /*    margin: 0;*/
+
+
 /*    padding: 0;*/
+
+
 /*    position: relative;*/
+
+
 /*}*/
+
 
 /*html {*/
+
+
 /*    height: auto;*/
+
+
 /*    margin: 0;*/
+
+
 /*    padding: 0;*/
+
+
 /*    !*background: -webkit-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Safari 5.1 - 6.0 *!*!*/
+
+
 /*    !*background: -o-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Opera 11.1 - 12.0 *!*!*/
+
+
 /*    !*background: -moz-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Firefox 3.6 - 15 *!*!*/
+
+
 /*    !*background: linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* 标准的语法（必须放在最后） *!*!*/
+
+
 /*    !*-moz-background-size: auto auto;*!*/
+
+
 /*    !*background-color: transparent;*!*/
+
+
 /*    !*background-size: auto auto;*!*/
+
+
 /*    overflow-y: auto*/
+
+
 /*}*/
+
 
 /** {*/
+
+
 /*    box-sizing: border-box;*/
+
+
 /*    -webkit-box-sizing: border-box;*/
+
+
 /*    -moz-box-sizing: border-box;*/
+
+
 /*}*/
+
 
 /*body {*/
-/*    font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
-/*    color: #404040;*/
-/*    line-height: 1;*/
-/*}*/
 
+
+/*    font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+
+
+/*    color: #404040;*/
+
+
+/*    line-height: 1;*/
+
+
+/*}*/
 
 body {
     background-color: #0d70ff;
@@ -74,27 +164,63 @@ body {
     /*background-size: 100% 100%;*/
 }
 
+
 /** {*/
+
+
 /*    box-sizing: border-box;*/
+
+
 /*}*/
+
 
 /*body {*/
+
+
 /*    background: #fcfcfc;*/
+
+
 /*    font: 18px 'PT Sans', Helvetica, Arial, sans-serif;*/
+
+
 /*}*/
+
+
 /*.body_main {*/
 
+
 /*    font: 12px arial;*/
+
+
 /*    text-align: center;*/
+
+
 /*    !*background: -webkit-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Safari 5.1 - 6.0 *!*!*/
+
+
 /*    !*background: -o-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Opera 11.1 - 12.0 *!*!*/
+
+
 /*    !*background: -moz-linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* Firefox 3.6 - 15 *!*!*/
+
+
 /*    !*background: linear-gradient(rgba(88, 111, 212, 0.92), rgba(51, 69, 116, 0.96)); !* 标准的语法（必须放在最后） *!*!*/
+
+
 /*    !*-moz-background-size: auto auto;*!*/
+
+
 /*    !*background-color: transparent;*!*/
+
+
 /*    !*background-size: auto auto;*!*/
+
+
 /*    !*background: #fff*!*/
+
+
 /*}*/
+
 .nav_header {
     margin-bottom: 70px;
 }
@@ -130,7 +256,6 @@ nav {
     /*!*margin-top: 50px;*!*/
     background-color: transparent;
     /*background-size: 100% 100%;*/
-
     /*background: #202020;*/
     box-shadow: 1px 1px 2px #5c4b51;
     display: flex;
@@ -247,13 +372,25 @@ nav {
     margin-left: auto;
     margin-bottom: 0;
     /*border: 1px solid #000;*/
-    max-width: 1300px;
+    max-width: 80%;
     position: relative;
     padding-bottom: 0;
     height: 100%;
     z-index: 0;
 }
 
+.skill_button {
+    text-align: center;
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-bottom: 2%;
+    /*border: 1px solid #000;*/
+    max-width: 80%;
+    position: relative;
+    padding-bottom: 0;
+    height: 100%;
+    z-index: 0;
+}
 
 .main_pic {
     height: 50px;
@@ -345,17 +482,18 @@ nav {
     /* filter:alpha(Opacity=80); ͸������
     -moz-opacity:0.5;
     opacity: 0.5; */
-
 }
 
-#sideMenuContainer > a::after {
-    color: #FF0000;
+#sideMenuContainer>a::after {
+    color: #ff0000;
     font-size: 120%;
 }
+
 
 /**
 往下是主页导航的兼容
  */
+
 .sub_main_img {
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
@@ -363,7 +501,6 @@ nav {
     transition: 0.5s;
     height: 200%;
     width: 95%;
-
     line-height: 50px;
     display: flex;
     margin-top: auto;
@@ -372,7 +509,6 @@ nav {
     text-align: center;
     /*margin: 0 auto;*/
 }
-
 
 nav .sub_main_nav {
     -webkit-transition: 0.5s;
@@ -387,12 +523,25 @@ nav .sub_main_nav {
     margin-left: auto;
 }
 
+
 /*.sub_main_nav .navbar_nav {*/
+
+
 /*    margin-right: auto;*/
+
+
 /*    margin-top: auto;*/
+
+
 /*    margin-left: 45%;*/
+
+
 /*    width: 65%;*/
+
+
 /*    padding-inline-start: 5px;*/
+
+
 /*}*/
 
 .sub_main_nav .navbar_nav {
@@ -489,6 +638,7 @@ nav .sub_main_nav .navbar_nav li.dropdown .dropdown_menu a {
     margin-bottom: 1px;
 }
 
+
 /*覆盖下拉选项影响到的div*/
 
 nav .sub_main_nav .navbar_nav li.dropdown:hover .dropdown_menu {
@@ -562,7 +712,6 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     margin: 0 auto 90% auto;
 }
 
-
 .work_type_a {
     text-align: center;
 }
@@ -574,11 +723,21 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     background-color: white;
 }
 
+
 /*.work_type_a a {*/
+
+
 /*    color: #f8fff9;*/
+
+
 /*    text-align: center;*/
+
+
 /*    font-size: 13px;*/
+
+
 /*}*/
+
 .worker_size {
     color: #1b1b1b;
     font-size: 13px;
@@ -595,7 +754,7 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
 }
 
 .bor {
-    border: 0.05em dashed #F00;
+    border: 0.05em dashed #f00;
     max-width: 600px;
     /*height: 60px;*/
     /*margin-top: 10px*/
@@ -646,7 +805,6 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     font-size: 12px;
 }
 
-
 .check_session {
     top: 50px;
 }
@@ -688,7 +846,6 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     margin-right: auto;
     margin-top: 5%;
     margin-bottom: 5%;
-
 }
 
 .desc-dev_content .p_content {
@@ -739,7 +896,7 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     height: 25px;
     color: black;
     text-align: center;
-    margin-right: 20%
+    margin-right: 20%;
 }
 
 .button_index_top_baomingshouye {
@@ -748,7 +905,7 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     height: 25px;
     color: black;
     margin-top: 20%;
-    text-align: left
+    text-align: left;
 }
 
 .button_index_top_huanying {
@@ -763,12 +920,12 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
 .td_main_picture {
     padding-left: 4%;
     height: 120px;
-    width: 600px
+    width: 600px;
 }
 
 .td_main_picture_detail {
     height: 120px;
-    width: 500px
+    width: 500px;
 }
 
 .button_index_top_large {
@@ -778,7 +935,7 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     color: black;
     font-size: 2%;
     margin-left: 5%;
-    text-align: center
+    text-align: center;
 }
 
 .button_index_top_middle {
@@ -788,16 +945,30 @@ nav .sub_main_nav .navbar_nav li.dropdown:hover .special_div a:hover {
     color: black;
     font-size: 8px;
     margin-left: 1%;
-    text-align: center
+    text-align: center;
 }
 
+
 /*.button_index_top_worker{*/
+
+
 /*    background-image: url("../image/index/index_button.png");*/
+
+
 /*    width: 110px;*/
+
+
 /*    height: 25px;*/
+
+
 /*    color: whitesmoke;*/
+
+
 /*    font-size: 12px;*/
+
+
 /*}*/
+
 .worker_table_sub_td {
     /*padding-left: 4%;*/
     width: 550px;

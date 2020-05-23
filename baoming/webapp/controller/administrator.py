@@ -24,6 +24,18 @@ result = {'status': True, 'message': ''}
 
 
 def administrator_all_student_base_info(request):
+    role_name = request.session.get('role_name', None)  # 用户名
+    print(role_name)
+    if role_name in 'teacher':
+        username = request.session.get('username', None)  # 用户名
+        if username:
+            register_user_info = RegisterUserInfo.objects.get(username=username)
+            user_info_tmp = UserInfo.objects.get(register_user_info=register_user_info)
+            teacher_tmp = TeacherInfo.objects.get(user_info=user_info_tmp)
+            print(teacher_tmp)
+            
+    else:
+        pass
     teacher_infos = TeacherInfo.objects.all()
     school_terms = SchoolTerm.objects.filter().order_by('-id')
     # 消息

@@ -745,6 +745,110 @@ function condition_controller(condition_string, status) {
                 alert("没有相关的信息填报条件！，请查证后重新选择。");
             }
         }
+    } else if (condition_string.indexOf('hxjyy') > -1) {
+        // 化工
+        if (condition_string.indexOf("hxjyy05") > -1) {
+            //五级（初级）
+            //         （1）累计从事本职业或相关职业工作1年（含）以上。',
+            // '（2）本职业或相关职业学徒期满。'
+            if (condition_string.indexOf("hxjyy05_1") > -1) {
+                //第1个条件
+
+                career_life_time(1);
+                apprentice_check(false);
+                check_has_qualification(2);
+                check_graduation_status(2);
+
+            } else if (condition_string.indexOf("hxjyy05_2") > -1) {
+
+                career_life_time();
+                apprentice_check(true);
+                check_has_qualification(2);
+                check_graduation_status(2);
+
+            } else {
+                console.log("获取失败！");
+            }
+
+        } else if (condition_string.indexOf("hxjyy04") > -1) {
+
+            //四级（中级）
+
+            //         hg04 = ['（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
+            // '（2）累计从事本职业或相关职业工作6年（含）以上。',
+            // '（3__1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
+            // '（3__2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。'
+            if (condition_string.indexOf("hxjyy04_1") > -1) {
+                //第1个条件
+
+                career_life_time();
+                apprentice_check(false);
+                check_has_qualification(1, 5, 4);
+                check_graduation_status(2);
+
+            } else if (condition_string.indexOf("hxjyy04_2") > -1) {
+
+                career_life_time(6);
+                apprentice_check(false);
+                check_has_qualification(2);
+                check_graduation_status(2,);
+            } else if (condition_string.indexOf("hxjyy04_3__1") > -1) {
+
+                career_life_time();
+                apprentice_check(false);
+                check_has_qualification(2);
+                check_graduation_status(1, 2, false, false); //==============================
+
+            } else if (condition_string.indexOf("hxjyy04_4__2") > -1) {
+
+                career_life_time();
+                apprentice_check(false);
+                apprentice_check(false);
+                check_has_qualification(2);
+                check_graduation_status(1, 3, true, false); //==============================
+
+            } else {
+                alert("没有相关的信息填报条件！，请查证后重新选择。");
+            }
+        } else if (condition_string.indexOf("hxjyy03") > -1) {
+            //高级（三级）
+
+            //         hg03 = ['（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作5年（含）以上。',
+            // '（2__1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
+            // '（2__2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
+            // '（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作2年（含）以上。',
+            if (condition_string.indexOf("hxjyy03_1") > -1) {
+                //第1个条件
+
+                career_life_time();
+                apprentice_check(false);
+                check_has_qualification(1, 4, 5);
+                check_graduation_status(2);
+
+            } else if (condition_string.indexOf("hxjyy03_2") > -1) {
+
+                career_life_time();
+                apprentice_check(false);
+                check_has_qualification(1, 4);
+                check_graduation_status(1, 2, false, false, 4);
+
+            } else if (condition_string.indexOf("hxjyy03_3") > -1) {
+
+                career_life_time();
+                apprentice_check(false);
+                check_has_qualification(1, 4);
+                check_graduation_status(1, 5, false, false);
+
+            } else if (condition_string.indexOf("hxjyy03_4") > -1) {
+                career_life_time();
+                apprentice_check(false);
+                check_has_qualification(1, 4, 2);
+                check_graduation_status(1, 6, true, true);
+
+            } else {
+                alert("没有相关的信息填报条件！，请查证后重新选择。");
+            }
+        }
     } else if (condition_string.indexOf('ffsg') > -1) {
         // 化工
         if (condition_string.indexOf("ffsg05") > -1) {

@@ -6,6 +6,8 @@ from django.shortcuts import HttpResponseRedirect
 from webapp.controller.renderUtil import render_result
 from webapp.controller.search.search_common import *
 from webapp.utils.all_student_base_info_list import *
+from webapp.utils.electronic_communication import *
+from webapp.utils.electronic_communication_format import *
 from webapp.utils.apply_chemical import *
 from webapp.utils.apply_not import *
 from webapp.utils.reporter_chemical_list import *
@@ -282,3 +284,34 @@ def start_download(request):
         message = '未正确获取到您的填报信息，或者系统异常，请稍后重新下载或者联系管理员。错误提示：' + str(e)
         return render_result(request, "page_main_controller/student/report_download_page.html",
                              {'title_msg': title_msg, 'not_exist': True, 'message': message})
+
+
+def electronic_communication_download(request):
+    """
+    生成所有电子通信导入模板的学生信息
+    :param request:
+    :return:
+    """
+    title_msg = "电子通信导入模板所有学生信息"
+    student_infos = get_student_by_conditions_status_skill_main_class(request, 0)
+    file_uuid = electronic_communication_format(student_infos)
+    file_message_one = '&file_message_one=电子通信导入模板'
+    if file_uuid:
+        return HttpResponseRedirect('/report/report_download_page?file_uuid=' + file_uuid + file_message_one)
+    else:
+        return HttpResponseRedirect('/report/report_download_page/')
+    
+def spin_download(request):
+    """
+    生成所有电子通信导入模板的学生信息
+    :param request:
+    :return:
+    """
+    title_msg = "纺织导入模板所有学生信息"
+    student_infos = get_student_by_conditions_status_skill_main_class(request, 0)
+    file_uuid = spin_format(student_infos)
+    file_message_one = '&file_message_one=纺织类导入模板'
+    if file_uuid:
+        return HttpResponseRedirect('/report/report_download_page?file_uuid=' + file_uuid + file_message_one)
+    else:
+        return HttpResponseRedirect('/report/report_download_page/')   

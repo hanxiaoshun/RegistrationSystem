@@ -79,11 +79,20 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
-        'USER': '******',  # 用户名
-        'PASSWORD': '************',
+        # 'NAME': '',
+        # 'USER': '******',  # 用户名
+        # 'PASSWORD': '************',
+        # 'HOST': 'localhost',
+        # 'PORT': '****',
+        # 'NAME': 'aic_user',   #数据库名
+        # 'NAME': 'reportdb',
+        # 'NAME': 'reportdb_aliyun_data',
+        'NAME': 'report_data',
+        'USER': 'root',  # 用户名
+        'PASSWORD': 'nO!Ib!000Nj0Ro',
+        # 'PASSWORD': '123@QAZwsxedc',
         'HOST': 'localhost',
-        'PORT': '****',
+        'PORT': '3306',
         'CHARSET': 'utf8',  # 设置字符集，不然会出现中文乱码
     }
 }
@@ -109,7 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
+# LANGUAGE_CODE = 'zh-cn' 可能会不成功
+# LANGUAGE_CODE = 'zh-Hant' 繁体字
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Shanghai'

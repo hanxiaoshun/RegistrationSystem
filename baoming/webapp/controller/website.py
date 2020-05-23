@@ -336,15 +336,22 @@ def to_index(request):
                 if status == '1':
                     if len(school_terms) <= 0:
                         return render_result(request, "index.html",
-                                             {'title_msg': title_msg, 'need_login': False,
-                                              'no_term': False, 'is_report': False, 'not_confirm': not_confirm,
+                                             {'title_msg': title_msg,
+                                              'need_login': False,
+                                              'no_term': False,
+                                              'is_report': False,
+                                              'not_confirm': not_confirm,
                                               'index_page': True})
                     else:
                         school_term = SchoolTerm.objects.last()
                         return render_result(request, "index.html",
-                                             {'title_msg': title_msg, 'need_login': False,
-                                              'school_term': school_term, 'no_term': True,
-                                              'is_report': True, 'not_confirm': not_confirm, 'index_page': True})
+                                             {'title_msg': title_msg,
+                                              'need_login': False,
+                                              'school_term': school_term,
+                                              'no_term': True,
+                                              'is_report': True,
+                                              'not_confirm': not_confirm,
+                                              'index_page': True})
                 elif status == '2':
                     # 用户信息注销，无法正常登陆
                     sign_in_msg = '您当前处于被注销状态，请联系报名负责人或系统管理员核实再行登陆。'

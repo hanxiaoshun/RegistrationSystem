@@ -61,3 +61,10 @@ def get_operation_log(request, operation, operation_content, operation_result):
         operation_result['status'] = False
         operation_result['error'] = log_msg
     return JsonResponse(json.dumps(operation_result), safe=False)
+
+
+def date_encoder(obj):
+    if isinstance(obj, (datetime.date)):
+        return obj.strftime('%Y-%m-%d')
+    if isinstance(obj, (datetime.datetime)):
+        return obj.strftime('%Y-%m-%d %H:%M:%S')

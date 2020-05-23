@@ -3,14 +3,13 @@ import django.utils.timezone as timezone
 from django.db import models
 import uuid
 
-
 # class models.Model(models.Model):
 #     """
 #     公共字段信息，操作人，操作时间、修改时间
 #     """
 #     explain = models.TextField('说明', default='', max_length=200, blank=True)
 #     user_operator = models.ForeignKey('self', to_field='id',
-#                                       related_name="%(app_label)s_%(class)s_Operator",
+#                                       related_name="%(app_label)s_%(class)s_操作用户",
 #                                       verbose_name='操作人',
 #                                       blank=True,
 #                                       null=True,
@@ -25,10 +24,12 @@ import uuid
 
 class ProvinceCityCountry(models.Model):
     """
-    省市县信息汇总
+    省市县信息汇总表，新增编码
     """
-    id = models.AutoField('用户ID', primary_key=True)
+    id = models.AutoField('区域ID', primary_key=True)
     region_name = models.CharField('区域名称', max_length=50, help_text='区域名称', default='', blank=False)
+    region_ID = models.CharField('区域ID(手动)', max_length=50, help_text='区域名称', default='', blank=False)
+    region_code = models.CharField('区域编码', max_length=50, help_text='区域名称', default='', blank=False)
     parent = models.ForeignKey('self', to_field='id', on_delete=models.SET_NULL, null=True, blank=True)
     zipcode = models.CharField('邮编', max_length=50, help_text='邮编', default="", blank=False)
     region_level = models.CharField('区域等级', max_length=10, help_text='0~5,省市县镇乡村', default=99,
@@ -44,7 +45,7 @@ class ProvinceCityCountry(models.Model):
                                               ('1', '未正常使用')])
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -56,7 +57,8 @@ class ProvinceCityCountry(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '省市县信息汇总表'
+        verbose_name_plural = '省市县信息汇总表'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -73,7 +75,7 @@ class EducationDegree(models.Model):
     education_name = models.CharField('学历名称', max_length=50, unique=True, null=False, help_text='学历级别的分类')
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -85,7 +87,8 @@ class EducationDegree(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '学历信息管理'
+        verbose_name_plural = '学历信息管理'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -102,7 +105,7 @@ class UnitNature(models.Model):
     unit_nature = models.CharField('单位性质名称', max_length=50, unique=True, null=False, help_text='学历级别的分类')
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -114,7 +117,8 @@ class UnitNature(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '单位性质管理'
+        verbose_name_plural = '单位性质管理'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -125,7 +129,7 @@ class UnitNature(models.Model):
 
 class Picture(models.Model):
     """
-    人物图片
+    系统图片管理表
     """
     id = models.AutoField(primary_key=True, blank=False, verbose_name='图片ID')
     picture_uuid = models.UUIDField(verbose_name="图片UUID", default=uuid.uuid4, null=False, help_text="图片的唯一标识")
@@ -134,7 +138,7 @@ class Picture(models.Model):
     main_picture = models.BooleanField(default=False, verbose_name='是否为代表性图片')
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -143,7 +147,10 @@ class Picture(models.Model):
     create_time = models.DateTimeField('生成时间', default=timezone.now)
     modify_time = models.DateTimeField('修改时间', auto_now=True)  # 使用Model.save()来更新才会更新注意
     objects = models.Manager()
-
+    class Meta:
+        ordering = ['id']
+        verbose_name = '系统图片管理表'
+        verbose_name_plural = '系统图片管理表'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -151,10 +158,41 @@ class Picture(models.Model):
         else:
             return self.picture_name
 
-
+class IDCardPicture(models.Model):
+    """
+    系统(身份证件)图片管理表
+    """
+    id = models.AutoField(primary_key=True, blank=False, verbose_name='图片ID')
+    picture_uuid = models.UUIDField(verbose_name="图片UUID", default=uuid.uuid4, null=False, help_text="图片的唯一标识")
+    picture_name = models.CharField(verbose_name="图片名称", default='未说明', max_length=50, null=True, blank=True)
+    picture_path = models.ImageField("图片路径", upload_to='images/%Y/%m', max_length=200)
+    main_picture = models.BooleanField(default=False, verbose_name='是否为代表性图片')
+    explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    modify_time = models.DateTimeField('修改时间', auto_now=True)  # 使用Model.save()来更新才会更新注意
+    objects = models.Manager()
+    class Meta:
+        ordering = ['id']
+        verbose_name = '系统(身份证件)图片管理表'
+        verbose_name_plural = '系统(身份证件)图片管理表'
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.picture_name
+        
+        
 class FileManage(models.Model):
     """
-    文件信息管理
+    文件管理表
     """
     id = models.AutoField(primary_key=True, blank=False, verbose_name='图片ID')
     file_uuid = models.UUIDField(verbose_name="文件UUID", default=uuid.uuid4, null=False, help_text="文件的唯一标识")
@@ -163,7 +201,7 @@ class FileManage(models.Model):
     file_status = models.BooleanField(default=True, verbose_name='文件是否存在')
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -172,7 +210,10 @@ class FileManage(models.Model):
     create_time = models.DateTimeField('生成时间', default=timezone.now)
     modify_time = models.DateTimeField('修改时间', auto_now=True)  # 使用Model.save()来更新才会更新注意
     objects = models.Manager()
-
+    class Meta:
+        ordering = ['id']
+        verbose_name = '文件管理表'
+        verbose_name_plural = '文件管理表'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -202,7 +243,7 @@ class WorkingHistory(models.Model):
                                    help_text='从事何种岗位工作')
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -211,7 +252,10 @@ class WorkingHistory(models.Model):
     create_time = models.DateTimeField('生成时间', default=timezone.now)
     modify_time = models.DateTimeField('修改时间', auto_now=True)  # 使用Model.save()来更新才会更新注意
     objects = models.Manager()
-
+    class Meta:
+        ordering = ['id']
+        verbose_name = '工作年限证明'
+        verbose_name_plural = '工作年限证明'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -227,7 +271,7 @@ class AuthorityMenu(models.Model):
     parent = models.ForeignKey('self', to_field='id', on_delete=models.SET_NULL, null=True, blank=True)
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -239,7 +283,8 @@ class AuthorityMenu(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '权限菜单'
+        verbose_name_plural = '权限菜单'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -257,7 +302,7 @@ class RoleInfo(models.Model):
     authorities = models.ManyToManyField(AuthorityMenu, through='RoleAuthority', through_fields=('role', 'authority'))
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -269,7 +314,8 @@ class RoleInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '角色设置'
+        verbose_name_plural = '角色设置'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -285,7 +331,7 @@ class UserRole(models.Model):
     user = models.ForeignKey('RegisterUserInfo', to_field='id', on_delete=models.CASCADE, default=None)
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -298,7 +344,8 @@ class UserRole(models.Model):
     class Meta:
         ordering = ['id']
         unique_together = ("user", "role")
-
+        verbose_name = '用户角色外特权'
+        verbose_name_plural = '用户角色外特权'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -314,7 +361,7 @@ class UserAuthority(models.Model):
     user = models.ForeignKey('UserInfo', to_field='id', on_delete=models.CASCADE, default=None)
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -328,7 +375,8 @@ class UserAuthority(models.Model):
     class Meta:
         ordering = ['id']
         unique_together = ("user", "authority")
-
+        verbose_name = '用户特定权限'
+        verbose_name_plural = '用户特定权限'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -345,7 +393,7 @@ class NationInfo(models.Model):
     nation_name = models.CharField("民族类别名称", help_text="民族类别名称", max_length=30, default="", blank=False)
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -357,7 +405,8 @@ class NationInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '民族类别管理'
+        verbose_name_plural = '民族类别管理'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -373,7 +422,7 @@ class RoleAuthority(models.Model):
     authority = models.ForeignKey('AuthorityMenu', to_field='id', on_delete=models.CASCADE, default=None)
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -386,7 +435,8 @@ class RoleAuthority(models.Model):
     class Meta:
         ordering = ['id']
         unique_together = ("role", "authority")
-
+        verbose_name = '角色对应限定以外的特殊权限'
+        verbose_name_plural = '角色对应限定以外的特殊权限'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -397,7 +447,7 @@ class RoleAuthority(models.Model):
 
 class RegisterUserInfo(models.Model):
     """
-    注册用户信息
+    系统注册用户基础信息
     """
     id = models.AutoField('用户ID', primary_key=True)
     username = models.CharField(verbose_name='用户名', default='', max_length=50, unique=True, blank=False,
@@ -418,7 +468,8 @@ class RegisterUserInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '系统注册用户基础信息'
+        verbose_name_plural = '系统注册用户基础信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -543,7 +594,7 @@ class UserInfo(models.Model):
                                                  ('12', '群众(普通居民)')])
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -556,7 +607,8 @@ class UserInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '注册用户详细信息'
+        verbose_name_plural = '注册用户详细信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -599,7 +651,7 @@ class SchoolTerm(models.Model):
                                   help_text='学员基本信息')
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -611,7 +663,8 @@ class SchoolTerm(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '学期设置管理类'
+        verbose_name_plural = '学期设置管理类'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -622,7 +675,7 @@ class SchoolTerm(models.Model):
 
 class TeacherInfo(models.Model):
     """
-    老师的基本信息
+    老师(负责人)基本信息
     """
     id = models.AutoField('用户ID', primary_key=True, default=None)
     number = models.CharField('教师编号', max_length=50, null=True, blank=True, default='', help_text='教师编号')
@@ -635,7 +688,7 @@ class TeacherInfo(models.Model):
                                   help_text='学员基本信息')
     explain = models.TextField('说明', default='', max_length=200, blank=True, null=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -651,7 +704,8 @@ class TeacherInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '老师(负责人)基本信息'
+        verbose_name_plural = '老师(负责人)基本信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -662,7 +716,7 @@ class TeacherInfo(models.Model):
 
 class StudentInfo(models.Model):
     """
-    注册学生详细信息扩展
+    学生填报详细信息
     """
     id = models.AutoField('用户ID', primary_key=True, default=None)
     user_info = models.ForeignKey('UserInfo', to_field='id',
@@ -709,7 +763,8 @@ class StudentInfo(models.Model):
 
     profession = models.CharField('从事职业(专业工种)', max_length=50, blank=True, null=True, help_text='从事职业(专业工种，单一种类)')
 
-    former_occupation = models.CharField('证书本职业（工种）或相关职业（工种）', max_length=20, null=True, blank=True, help_text='证书本职业（工种）或相关职业（工种）')
+    former_occupation = models.CharField('证书本职业（工种）或相关职业（工种）', max_length=20, null=True, blank=True,
+                                         help_text='证书本职业（工种）或相关职业（工种）')
     primary_level = models.CharField('原级别', max_length=20, null=True, blank=True, help_text='原级别', default=99,
                                      choices=[('1', '高级技工'),
                                               ('2', '技工'),
@@ -726,7 +781,7 @@ class StudentInfo(models.Model):
     current_certificate_number = models.CharField('本次考核证书编号', max_length=20, null=True, blank=True,
                                                   help_text='本次考核证书编号')
     current_issue_unit = models.CharField("本次考核职业资格证书发行单位", max_length=100, default='', help_text='职业资格证书发行单位',
-                                          blank=True, null=True, )
+                                          blank=True, null=True,)
     current_issuance_time = models.DateField('本次考核职业资格证书发行时间', blank=True, null=True)
     declaration_of_occupation = models.CharField('申报职业', max_length=20, null=False, blank=False, help_text='申报职业')
     career_life = models.SmallIntegerField('本次申报职业年限', default=0, blank=True, null=True, help_text='本次申报职业年限')
@@ -804,7 +859,7 @@ class StudentInfo(models.Model):
     chemical_worker = models.CharField('化工', max_length=50, default=2,
                                        choices=[('1', '化工'),
                                                 ('2', '非化工')],
-                                       help_text='1 已支付 2 未支付,一旦支付,学员信息将进入学习状态')
+                                       help_text='1 化工 2 非化工')
 
     payment_amount = models.IntegerField('已缴费金额', help_text='已缴费金额', default=0, null=True)
     unpaid_amount = models.IntegerField('未缴费金额', help_text='未缴费金额', default=0, null=True)
@@ -821,10 +876,71 @@ class StudentInfo(models.Model):
     theoretical_achievements = models.SmallIntegerField('考核理论成绩', default=0, null=True, help_text='考核理论成绩', blank=True)
     practical_operation = models.SmallIntegerField('考核实际操作成绩', default=0, null=True, help_text='考核实际操作成绩', blank=True)
     # 后加考核部分
+    
+    # 新增属性20200518
+    student_source_class = models.ForeignKey('StudentSourceClass', to_field='id',
+                                    related_name="%(app_label)s_%(class)s_StudentSourceClass",
+                                    verbose_name='学生来源',
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.CASCADE,
+                                    help_text='学生来源')
+    identify_subject = models.ForeignKey('IdentifySubject', to_field='id',
+                                    related_name="%(app_label)s_%(class)s_IdentifySubject",
+                                    verbose_name='鉴定科目',
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.CASCADE,
+                                    help_text='鉴定科目')
+    identify_class = models.ForeignKey('IdentifyClass', to_field='id',
+                                    related_name="%(app_label)s_%(class)s_IdentifyClass",
+                                    verbose_name='鉴定类别',
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.CASCADE,
+                                    help_text='鉴定类别')
+    subside_class = models.ForeignKey('SubsideClass', to_field='id',
+                                    related_name="%(app_label)s_%(class)s_SubsideClass",
+                                    verbose_name='补贴类别',
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.CASCADE,
+                                    help_text='补贴类别')
+    subside_certificate_class = models.ForeignKey('SubsideCertificateClass', to_field='id',
+                                    related_name="%(app_label)s_%(class)s_SubsideCertificateClass",
+                                    verbose_name='补贴证件类别',
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.CASCADE,
+                                    help_text='补贴证件类别')
+    subside_certificate_number = models.CharField('补贴证书编号', max_length=20, default='', null=True, blank=True,
+                                                   help_text='补贴证书编号')
+    # examinee_type = models.ForeignKey('ExamineeType', to_field='id',
+    #                                 related_name="%(app_label)s_%(class)s_ExamineeType",
+    #                                 verbose_name='考生类别',
+    #                                 blank=True,
+    #                                 null=True,
+    #                                 on_delete=models.CASCADE,
+    #                                 help_text='考生类别')
 
+    examinee_identity = models.ForeignKey('ExamineeIdentity', to_field='id',
+                                    related_name="%(app_label)s_%(class)s_ExamineeType",
+                                    verbose_name='考生身份',
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.CASCADE,
+                                    help_text='考生身份')
+
+    place_sign_up = models.ForeignKey('PlaceSignUp', to_field='id',
+                                    related_name="%(app_label)s_%(class)s_PlaceSignUp",
+                                    verbose_name='预报名点',
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.CASCADE,
+                                    help_text='预报名点')
     explain = models.TextField('说明', default='', max_length=200, null=True, blank=True)
     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
-                                      related_name="%(app_label)s_%(class)s_Operator",
+                                      related_name="%(app_label)s_%(class)s_操作用户",
                                       verbose_name='操作用户',
                                       blank=True,
                                       null=True,
@@ -836,14 +952,14 @@ class StudentInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '学生填报详细信息'
+        verbose_name_plural = '学生填报详细信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
             return str(self.__dict__)
         else:
             return str(self.id)
-
 
 # class WorkingHistoryStudentRLS(models.Model):
 #     """
@@ -903,7 +1019,8 @@ class InterviewAudit(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '操作审计(不需要修改，只是查看或者删除)'
+        verbose_name_plural = '操作审计(不需要修改，只是查看或者删除)'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -987,10 +1104,776 @@ class SystemMessage(models.Model):
 
     class Meta:
         ordering = ['id']
-
+        verbose_name = '站内系统信息管理类'
+        verbose_name_plural = '站内系统信息管理类'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
             return str(self.__dict__)
         else:
             return str(self.id)
+
+class ReportSkillMainClass(models.Model):
+    """
+    报名工种大类
+    """
+    id = models.AutoField('技能大类ID', primary_key=True)
+    skill_main_class_code = models.CharField('技能大类编号',default='empty',
+                                  max_length=50,
+                                #   unique=True,
+                                #   null=False,
+                                  help_text='技能大类编号')
+    skill_main_class_name = models.CharField('技能大类名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='技能大类名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '报名工种大类表'
+        verbose_name_plural = '报名工种大类表'
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.skill_main_class_name
+# from .models_report import ReportBase
+class ReportSkill(models.Model):
+    """
+    报名工种
+    """
+    skill_id = models.AutoField('技能ID', primary_key=True)
+    skill_main_class = models.ForeignKey('ReportSkillMainClass', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_技能工种大类ID",
+                                      verbose_name='技能工种大类ID',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='技能工种大类ID')
+    skill_main_class_name = models.ForeignKey('ReportSkillMainClass', to_field='skill_main_class_name',
+                                      related_name="%(app_label)s_%(class)s_技能工种大类名称",
+                                      verbose_name='技能工种大类名称',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='技能工种大类名称')
+    skill_code = models.CharField('技能编号',default='empty',
+                                  max_length=50,
+                                #   unique=True,
+                                #   null=False,
+                                  help_text='技能编号')
+    skill_name = models.CharField('技能名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='技能名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['skill_id']
+        verbose_name = '报名工种表'
+        verbose_name_plural = '报名工种表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.skill_name
+
+
+class ReportCondition(models.Model):
+    """
+    报名条件
+    """
+    condition_id = models.AutoField('条件ID', primary_key=True)
+    condition_name = models.CharField('条件名称',
+                                      max_length=50,
+                                      unique=True,
+                                      null=False,
+                                      help_text='技能名称')
+    condition_level = models.CharField('条件等级', max_length=50, default=1, null=True, help_text='条件等级',
+                                       choices=[('5', '初级(五级)'),
+                                                ('4', '中级(四级)'),
+                                                ('3', '高级(三级)')])
+    record_status = models.CharField('状态', max_length=50, default=2,
+                                    choices=[('1', '启用'),
+                                            ('2', '停用')],
+                                    help_text='1-启用/2-停用')
+    # 技能条件
+    condition_for_skill = models.ForeignKey(ReportSkill, to_field='skill_id',
+                                            on_delete=models.SET_NULL,
+                                            related_name='Diploma_Condition_skill_所属技能ID',
+                                            null=True,
+                                            verbose_name='所属技能ID',
+                                            help_text='所属技能ID')
+    
+    condition_for_skill_name = models.ForeignKey(ReportSkill, to_field='skill_name',
+                                            on_delete=models.SET_NULL,
+                                            related_name='Diploma_Condition_skill_name_所属技能名称',
+                                            null=True,
+                                            verbose_name='所属技能名称',
+                                            help_text='所属技能名称')
+    
+    apprentice_status = models.CharField('学徒信息', max_length=50, default=2,
+                                    choices=[('1', '填写'),
+                                            ('2', '不填写')],
+                                    help_text='1-填写/2-填写')
+    work_of_this_occupation_status = models.CharField('从事本工作时间', max_length=50, default=2,
+                                    choices=[('1', '填写'),
+                                             ('2', '不停用')],
+                                    help_text='1-填写/2-填写')
+    
+    work_of_this_occupation_requirement = models.SmallIntegerField('从事本工作时间要求', default=0, null=True, help_text='获得现有资格证书后工作年限要求', blank=True)
+
+    primary_level_status = models.CharField('填写原证书级别', max_length=50, default=2,
+                                    choices=[('1', '填写'),
+                                             ('2', '不填写')],
+                                    help_text='1-填写/2-不填写')
+    
+    primary_level_requirement = models.CharField('原证书级别', max_length=50, default=0,
+                                    choices=[('0', '不填写'),
+                                             ('5', '初级(五级)'),
+                                             ('4', '中级(四级)'),
+                                             ('3', '高级(三级)')],
+                                    help_text='1-**/0-不填写')
+    original_certificate_info_status = models.CharField('原证书详细信息', max_length=50, default=2,
+                                    choices=[('1', '填写'),
+                                             ('2', '不填写')],
+                                    help_text='1-填写/2-不填写')
+    
+    original_certificate_worker_time_status = models.CharField('获得现有资格证书后工作年限', max_length=50, default=2,
+                                    choices=[('1', '填写'),
+                                             ('2', '不填写')],
+                                    help_text='1-填写/2-不填写')
+    
+    original_certificate_worker_time_requirement = models.SmallIntegerField('获得现有资格证书后工作年限要求', default=0, null=True, help_text='获得现有资格证书后工作年限要求', blank=True)
+    school_info_status = models.CharField('学校及专业信息', max_length=50, default=2,
+                                    choices=[('1', '填写'),
+                                             ('2', '不填写')],
+                                    help_text='1-填写/2-不填写')
+    
+    graduation_time_status = models.CharField('毕业(结业)信息', max_length=50, default=2,
+                                    choices=[('1', '填写'),
+                                             ('2', '不填写')],
+                                    help_text='1-填写/2-不填写')
+    graduation_low_requirement = models.CharField('学历要求或最低学历要求', max_length=50, default=1,
+                                    choices=[('1', '-初级中学-'),
+                                             ('2', '-技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('3', '-中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('4', '-高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('5', '-高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('6', '-大专及以上本专业或相关专业毕业证书-'),
+                                             ('7', '-大学本科本专业或相关专业毕业证书-'),
+                                             ('8', '-硕士研究生及以上本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('9', '-本职业初级正规培训-'),
+                                             ('10', '-本职业中级正规培训结业证书-'),
+                                             ('11', '-本职业高级正规培训结业证书-')],
+                                    help_text='1-填写/2-不填写')
+    
+    graduation_lowest = models.CharField('是否是最低学历', max_length=50, default=2,
+                                    choices=[('1', '是'),
+                                             ('2', '不是')],
+                                    help_text='1-填写/2-不填写')
+    graduation_is_Fresh = models.CharField('是否在校应届生', max_length=50, default=2,
+                                    choices=[('1', '是'),
+                                             ('2', '不是')],
+                                    help_text='1-是/2-不是')
+    graduation_extra_two = models.CharField('学历要求(2)', max_length=50, default=0,
+                                    choices=[('0', '-不填写-'),
+                                             ('1', '-初级中学-'),
+                                             ('2', '-技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('3', '-中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('4', '-高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('5', '-高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('6', '-大专及以上本专业或相关专业毕业证书-'),
+                                             ('7', '-大学本科本专业或相关专业毕业证书-'),
+                                             ('8', '-硕士研究生及以上本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('9', '-本职业初级正规培训-'),
+                                             ('10', '-本职业中级正规培训结业证书-'),
+                                             ('11', '-本职业高级正规培训结业证书-')],
+                                    help_text='1-填写/2-不填写')
+    graduation_extra_three = models.CharField('学历要求(3)', max_length=50, default=0,
+                                    choices=[('0', '-不填写-'),
+                                             ('1', '-初级中学-'),
+                                             ('2', '-技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('3', '-中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('4', '-高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('5', '-高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('6', '-大专及以上本专业或相关专业毕业证书-'),
+                                             ('7', '-大学本科本专业或相关专业毕业证书-'),
+                                             ('8', '-硕士研究生及以上本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-'),
+                                             ('9', '-本职业初级正规培训-'),
+                                             ('10', '-本职业中级正规培训结业证书-'),
+                                             ('11', '-本职业高级正规培训结业证书-')],
+                                    help_text='1-填写/2-不填写')
+    
+    certificate_photos_status = models.CharField('资格证件照片', max_length=50, default=2,
+                                    choices=[('1', '上传'),
+                                             ('2', '不上传')],
+                                    help_text='1-上传/2-不上传')
+
+    diploma_certificate_photos_status = models.CharField('毕业证件照片', max_length=50, default=2,
+                                    choices=[('1', '上传'),
+                                             ('2', '不上传')],
+                                    help_text='1-上传/2-不上传')
+    
+    explain_condition = models.TextField('备注（条件项说明）',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['condition_id']
+        verbose_name = '报名条件设置表'
+        verbose_name_plural = '报名条件设置表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.condition_name
+
+
+class LevelCodeClass(models.Model):
+    """
+    级别编码表
+    """
+    id = models.AutoField('自动编码ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '级别编码表'
+        verbose_name_plural = '级别编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+        
+class SexClass(models.Model):
+    """
+    性别编码表
+    """
+    id = models.AutoField('自动编码ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '性别编码表'
+        verbose_name_plural = '性别编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+        
+        
+class StudentSourceClass(models.Model):
+    """
+    考生来源编码表
+    """
+    id = models.AutoField('考生来源编码ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '考生来源编码表'
+        verbose_name_plural = '考生来源编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+        
+class IdentifySubject(models.Model):
+    """
+    鉴定科目编码表
+    """
+    id = models.AutoField('考生来源编码ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '鉴定科目编码表'
+        verbose_name_plural = '鉴定科目编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+        
+
+class IdentifyClass(models.Model):
+    """
+    鉴定类别编码表
+    """
+    id = models.AutoField('鉴定类别ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '鉴定类别编码表'
+        verbose_name_plural = '鉴定类别编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+        
+class SubsideClass(models.Model):
+    """
+    补贴类别编码表
+    """
+    id = models.AutoField('补贴类别ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '补贴类别编码表'
+        verbose_name_plural = '补贴类别编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+        
+class SubsideCertificateClass(models.Model):
+    """
+    补贴证件类别编码表
+    """
+    id = models.AutoField('补贴证件类别ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '补贴证件类别编码表'
+        verbose_name_plural = '补贴证件类别编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+        
+
+# class ExamineeType(models.Model):
+#     """
+#     考生类别编码表
+#     """
+#     id = models.AutoField('考生类别ID', primary_key=True)
+#     code = models.CharField('手动ID',default='empty',
+#                                   max_length=50,
+#                                   unique=True,
+#                                   null=False,
+#                                   help_text='手动ID')
+#     name = models.CharField('名称',
+#                                   max_length=50,
+#                                   unique=True,
+#                                   null=False,
+#                                   help_text='名称')
+#     record_status = models.CharField('状态', max_length=50, default=1,
+#                                   choices=[('1', '启用'),
+#                                            ('2', '停用')],
+#                                   help_text='1-启用/2-停用')
+#     explain = models.TextField('说明',
+#                                default='',
+#                                max_length=200,
+#                                blank=True,
+#                                null=True)
+#     user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+#                                       related_name="%(app_label)s_%(class)s_操作用户",
+#                                       verbose_name='操作用户',
+#                                       blank=True,
+#                                       null=True,
+#                                       on_delete=models.SET_NULL,
+#                                       help_text='操作用户记录')
+#     create_time = models.DateTimeField('生成时间', default=timezone.now)
+#     # 使用Model.save()来更新才会更新注意
+#     modify_time = models.DateTimeField('修改时间', auto_now=True)
+#     objects = models.Manager()
+
+#     class Meta:
+#         ordering = ['id']
+#         verbose_name = '考生类别编码表'
+#         verbose_name_plural = '考生类别编码表'
+
+#     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+#         if print_all:
+#             # return ' '.join(('%s' % item for item in self.__dict__.values()))
+#             return str(self.__dict__)
+#         else:
+#             return self.name
+
+class ExamineeIdentity(models.Model):
+    """
+    考生身份编码表
+    """
+    id = models.AutoField('考生身份ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '考生身份编码表'
+        verbose_name_plural = '考生身份编码表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name
+
+class PlaceSignUp(models.Model):
+    """
+    预报名地点表
+    """
+    id = models.AutoField('ID', primary_key=True)
+    code = models.CharField('手动ID',default='empty',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='手动ID')
+    name = models.CharField('名称',
+                                  max_length=50,
+                                  unique=True,
+                                  null=False,
+                                  help_text='名称')
+    record_status = models.CharField('状态', max_length=50, default=1,
+                                  choices=[('1', '启用'),
+                                           ('2', '停用')],
+                                  help_text='1-启用/2-停用')
+    explain = models.TextField('说明',
+                               default='',
+                               max_length=200,
+                               blank=True,
+                               null=True)
+    user_operator = models.ForeignKey('RegisterUserInfo', to_field='id',
+                                      related_name="%(app_label)s_%(class)s_操作用户",
+                                      verbose_name='操作用户',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.SET_NULL,
+                                      help_text='操作用户记录')
+    create_time = models.DateTimeField('生成时间', default=timezone.now)
+    # 使用Model.save()来更新才会更新注意
+    modify_time = models.DateTimeField('修改时间', auto_now=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = '预报名地点表'
+        verbose_name_plural = '预报名地点表'
+
+    def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
+        if print_all:
+            # return ' '.join(('%s' % item for item in self.__dict__.values()))
+            return str(self.__dict__)
+        else:
+            return self.name

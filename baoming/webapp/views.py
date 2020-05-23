@@ -1,5 +1,15 @@
-from webapp.controller import role, report, teacher, administrator, download, student, user, website, system_message, \
-    love as love_m
+from webapp.controller import role, \
+                            report, \
+                            report_skill, \
+                            teacher, \
+                            administrator, \
+                            download, \
+                            student, \
+                            student_extra,\
+                            user, \
+                            website, \
+                            system_message, \
+                            love as love_m
 from webapp.controller.search import administrator as administrator_search, user as user_search, \
     teacher as teacher_search
 
@@ -117,7 +127,8 @@ def report_info_review(request):
     负责人审核学生信息
     :return:
     """
-    return teacher.report_info_review(request)
+    # return teacher.report_info_review(request)
+    return teacher_search.teacher_search_wait_review(request)
 
 
 def report_do_review(request):
@@ -168,7 +179,8 @@ def administrator_all_student_base_info(request):
     :param request:
     :return:
     """
-    return administrator.administrator_all_student_base_info(request)
+    # return administrator.administrator_all_student_base_info(request)
+    return administrator_search.administrator_search_all_student(request)
 
 
 def administrator_reporter_chemical_not(request):
@@ -177,7 +189,8 @@ def administrator_reporter_chemical_not(request):
     :param request:
     :return:
     """
-    return administrator.administrator_reporter_chemical_not(request)
+    # return administrator.administrator_reporter_chemical_not(request)
+    return administrator_search.administrator_search_chemical_not(request)
 
 
 def administrator_reporter_chemical(request):
@@ -186,8 +199,26 @@ def administrator_reporter_chemical(request):
     :param request:
     :return:
     """
-    return administrator.administrator_reporter_chemical(request)
+    # return administrator.administrator_reporter_chemical(request)
+    return administrator_search.administrator_search_chemical(request)
 
+def administrator_reporter_electronic_communication(request):
+    """
+    学员报名表
+    :param request:
+    :return:
+    """
+    # return administrator.administrator_reporter_chemical(request)
+    return administrator_search.administrator_reporter_electronic_communication(request)
+
+def administrator_reporter_spin(request):
+    """
+    学员报名表
+    :param request:
+    :return:
+    """
+    # return administrator.administrator_reporter_chemical(request)
+    return administrator_search.administrator_reporter_spin(request)
 
 def administrator_search_chemical(request):
     """
@@ -233,6 +264,21 @@ def all_student_base_info_download(request):
     """
     return download.all_student_base_info_download(request)
 
+def electronic_communication_download(request):
+    """
+    电子通信带条件查询，然后下载对应结果文件
+    :param request:
+    :return:
+    """
+    return download.electronic_communication_download(request)
+
+def spin_download(request):
+    """
+    纺织类通信带条件查询，然后下载对应结果文件
+    :param request:
+    :return:
+    """
+    return download.spin_download(request)
 
 def administrator_search_chemical_not(request):
     """
@@ -257,7 +303,8 @@ def report_info_confirm(request):
     确认填报的信息
     :return:
     """
-    return administrator.report_info_confirm(request)
+    # return administrator.report_info_confirm(request)
+    return administrator_search.administrator_search_wait_confirm(request)
 
 
 def admin_term_picture_data(request):
@@ -426,8 +473,8 @@ def register_teacher(request):
     """
     return administrator.register_teacher(request)
 
-
 # start business
+
 
 def worker(request):
     """
@@ -481,6 +528,15 @@ def add_student_info(request):
     :return:
     """
     return student.add_student_info(request)
+
+
+def get_student_info_extra(request):
+    """
+    保存学生的信息
+    :param request:
+    :return:
+    """
+    return student_extra.get_student_info_extra(request)
 
 
 def report_student_info_list(request):
@@ -559,7 +615,6 @@ def report_student_cancel_return(request):
     :return:
     """
     return student.report_student_cancel_return(request)
-
 
 # ====================================================================================
 
@@ -884,9 +939,9 @@ def get_like_user_info(request):
     """
     return user_search.get_like_user_info(request)
 
-
 # ===========================================================================
 # teacher search
+
 
 def teacher_search_wait_review(request):
     """
@@ -895,6 +950,20 @@ def teacher_search_wait_review(request):
     :return:
     """
     return teacher_search.teacher_search_wait_review(request)
+
+
+def report_skill_info(request):
+    """
+    技能列表
+    """
+    return report_skill.report_skill_info(request)
+
+
+def report_condition_info(request):
+    """
+    获取技能申报条件
+    """
+    return report_skill.report_condition_info(request)
 
 
 def love(request):

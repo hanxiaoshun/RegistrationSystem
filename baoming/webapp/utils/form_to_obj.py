@@ -7,12 +7,18 @@ def form_to_obj(form, obj):
     :return:
     """
     obj_dict = obj.__dict__
+    print(form)
+    print(obj_dict)
     if type(form) is dict:
         # 判断form的类型是否是dict
         if type(obj_dict) is dict:
             for k, v in form.items():
+                print(v)
                 for key, value in obj_dict.items():
-                    if k == key:
+                    # 外键形式会被自动加上_id
+                    if key in (k, k+'_id',):
+                        k_tmp = k+'_id'
+                        print(f'{k},{k_tmp},{key},{v}')
                         obj_dict[key] = v
                     else:
                         pass

@@ -1,10 +1,10 @@
-$(document).ready(function () {
-
+$(document).ready(function() {
     getEducationDegree(0, null);
     getUnitNature(0, null);
     province(0, null);
     update_report();
     cancel_search();
+
 
     $('.update_status_ok').hide();
     $('.update_status_fail').hide();
@@ -40,10 +40,12 @@ function update_report() {
         $("#graduation_status").val(graduation_status);
     }
 
-    let condition_selected = $("#condition_selected").val();
-    if (typeof condition_selected !== "undefined" && condition_selected.length > 0) {
+    let condition_selected_update = $("#condition_selected_update").val();
+    if (typeof condition_selected_update !== "undefined" && condition_selected_update.length > 0) {
         // 如果时修改的话不需要清空数据
-        condition_controller(condition_selected, "update");
+        // condition_controller(condition_selected, "update");
+        condition_controller_update(condition_selected_update, "update");
+
     }
 
     let graduation_result = $('#update_graduation_result').val();
@@ -82,9 +84,9 @@ function delete_history(obj) {
         url: url,
         type: 'POST',
         data: form_data,
-        processData: false,  // tell jquery not to process the data
+        processData: false, // tell jquery not to process the data
         contentType: false, // tell jquery not to set contentType
-        success: function (data) {
+        success: function(data) {
             if (data.status) {
                 alert("删除成功！");
                 window.location.reload();
@@ -254,14 +256,14 @@ function add_work() {
         url: url,
         type: 'POST',
         data: form_data,
-        processData: false,  // tell jquery not to process the data
+        processData: false, // tell jquery not to process the data
         contentType: false, // tell jquery not to set contentType
-        success: function (data) {
+        success: function(data) {
             if (data.status) {
                 alert("添加成功！");
                 let data_list = JSON.parse(data.data);
                 $("#worker_tbody").empty("");
-                $.each(data_list, function (i, n) {
+                $.each(data_list, function(i, n) {
                     let tr_str = "<tr>\n" +
                         "            <td class=\"form-label\">\n" +
                         "                <label style='color:white'>" + n.start_year + "</label>\n" +
@@ -352,7 +354,7 @@ function school_term_a_search(obj, school_terms) {
     let array_school_terms = JSON.parse(school_terms);
     if (parseInt(obj) > 0) {
         $('#search_school_term').val(parseInt(obj));
-        $.each(array_school_terms, function (i, n) {
+        $.each(array_school_terms, function(i, n) {
             if (n.id_str == parseInt(obj)) {
                 console.log(n.school_term_name);
                 console.log(n.school_term_start);

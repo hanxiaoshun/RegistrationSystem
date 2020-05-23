@@ -44,3 +44,6 @@ class StudentSearchForm(forms.Form):
     course_hours = forms.IntegerField(required=False)
     teacher_info = forms.IntegerField(help_text='单位报名的负责人信息', required=False)
     school_term = forms.IntegerField(help_text='报考学期信息', required=False)
+    skill_main_class = forms.IntegerField(help_text='技能大类id',required=False)
+    condition_for_skill = forms.IntegerField(help_text='技能id',required=False)
+    condition_name = forms.IntegerField(help_text='技能条件名称', required=False)

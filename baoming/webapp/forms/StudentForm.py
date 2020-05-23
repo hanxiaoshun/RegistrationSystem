@@ -44,3 +44,13 @@ class StudentForm(forms.Form):
     course_hours = forms.IntegerField(required=False)
     primary_level = forms.CharField(max_length=20, help_text='原级别', required=False)
     former_occupation=forms.CharField(max_length=50, help_text='证书本职业（工种）或相关职业（工种）', required=False)
+    student_source_class = forms.IntegerField(required=False)
+    identify_subject = forms.IntegerField(required=False)
+    identify_class = forms.IntegerField(required=False)
+    subside_class = forms.IntegerField(required=False)
+    subside_certificate_class = forms.IntegerField(required=False)
+    subside_certificate_number = forms.CharField(max_length=20, help_text='证书编号', required=False)
+    examinee_identity = forms.IntegerField(required=False)
+    place_sign_up = forms.IntegerField(required=False)
+
+    

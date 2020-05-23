@@ -1,9 +1,12 @@
 from django.contrib import admin
 from .models import *
 
-
+admin.site.site_title = "报名平台"
+admin.site.site_header = "山东省德州市乐陵县杏林学校-后台管理系统"
+# admin.site. = "山东省德州市乐陵县杏林学校"
 # Register your models here.
 class MyModelAdmin(admin.ModelAdmin):
+
     def get_queryset(self, request):
         qs = super(MyModelAdmin, self).get_queryset(request)
         if request.user.is_superuser:
@@ -114,16 +117,26 @@ class UserInfoAdmin(admin.ModelAdmin):
     list_display = tuple(obj.__dir__()[1:33])
     readonly_fields = ('create_time', 'modify_time',)
     list_display_links = ('id', 'real_name',)
-    search_fields = ('id', 'real_name', 'status', 'work_unit')
+    search_fields = ('id', 'real_name', 'work_unit')
 
 
 admin.site.register(UserInfo, UserInfoAdmin)
 
+# 用户基本信息
+class TeacherInfoAdmin(admin.ModelAdmin):
+    obj = TeacherInfo()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ('id', 'number',)
+    search_fields = ('id', 'number',)
+
+
+admin.site.register(TeacherInfo, TeacherInfoAdmin)
 
 # 学生信息
 class StudentInfoAdmin(admin.ModelAdmin):
     obj = StudentInfo()
-    list_display = tuple(obj.__dir__()[1:16])
+    list_display = tuple(obj.__dir__()[1:63])
     readonly_fields = ('create_time', 'modify_time',)
     list_display_links = ('id',)
     search_fields = (
@@ -208,3 +221,137 @@ class SystemMessageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SystemMessage, SystemMessageAdmin)
+
+class ReportSkillMainClassAdmin(admin.ModelAdmin):
+    obj = ReportSkillMainClass()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'skill_main_class_name',)
+
+
+admin.site.register(ReportSkillMainClass, ReportSkillMainClassAdmin)
+
+class ReportSkillAdmin(admin.ModelAdmin):
+    obj = ReportSkill()
+    list_display = tuple(obj.__dir__()[1:10])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('skill_id', 'skill_name',)
+
+
+admin.site.register(ReportSkill, ReportSkillAdmin)
+
+
+class ReportConditionAdmin(admin.ModelAdmin):
+    obj = ReportCondition()
+    list_display = tuple(obj.__dir__()[1:28])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('condition_id', 'condition_name',)
+
+
+admin.site.register(ReportCondition, ReportConditionAdmin)
+
+
+class LevelCodeClassAdmin(admin.ModelAdmin):
+    obj = LevelCodeClass()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(LevelCodeClass, LevelCodeClassAdmin)
+
+class SexClassAdmin(admin.ModelAdmin):
+    obj = SexClass()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(SexClass, SexClassAdmin)
+
+class StudentSourceClassAdmin(admin.ModelAdmin):
+    obj = StudentSourceClass()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(StudentSourceClass, StudentSourceClassAdmin)
+
+class IdentifySubjectAdmin(admin.ModelAdmin):
+    obj = IdentifySubject()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(IdentifySubject, IdentifySubjectAdmin)
+
+class IdentifyClassAdmin(admin.ModelAdmin):
+    obj = IdentifyClass()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(IdentifyClass, IdentifyClassAdmin)
+
+class SubsideClassAdmin(admin.ModelAdmin):
+    obj = SubsideClass()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(SubsideClass, SubsideClassAdmin)
+
+class SubsideCertificateClassAdmin(admin.ModelAdmin):
+    obj = SubsideCertificateClass()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(SubsideCertificateClass, SubsideCertificateClassAdmin)
+
+# class ExamineeTypeAdmin(admin.ModelAdmin):
+#     obj = ExamineeType()
+#     list_display = tuple(obj.__dir__()[1:8])
+#     readonly_fields = ('create_time', 'modify_time',)
+#     list_display_links = ()
+#     search_fields = ('id', 'name',)
+
+
+# admin.site.register(ExamineeType, ExamineeTypeAdmin)
+
+
+class ExamineeIdentityAdmin(admin.ModelAdmin):
+    obj = ExamineeIdentity()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(ExamineeIdentity, ExamineeIdentityAdmin)
+
+
+class PlaceSignUpAdmin(admin.ModelAdmin):
+    obj = PlaceSignUp()
+    list_display = tuple(obj.__dir__()[1:8])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ()
+    search_fields = ('id', 'name',)
+
+
+admin.site.register(PlaceSignUp, PlaceSignUpAdmin)

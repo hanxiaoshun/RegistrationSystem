@@ -9,8 +9,9 @@ result = {'status': True, 'message': ''}
 
 
 def teacher_search_wait_review(request):
-    student_search = StudentSearchForm(request.POST)
-    user_search = UserInfoSearchForm(request.POST)
+    student_search = StudentSearchForm(request.GET)
+    user_search = UserInfoSearchForm(request.GET)
+    page_search = PageSearchForm(request.GET)
     school_terms = SchoolTerm.objects.filter().order_by('-id')
 
     school_terms_values = school_terms.values()
@@ -27,6 +28,14 @@ def teacher_search_wait_review(request):
     teacher_info = TeacherInfo.objects.get(
         user_info__register_user_info__username=request.session.get('username', None))
     last_school_term = SchoolTerm.objects.last()
+    per_page = 10
+    page = 1
+    if page_search.is_valid():
+        if page_search.cleaned_data.get('per_page', None):
+            per_page = page_search.cleaned_data.get('per_page', None)
+        if page_search.cleaned_data.get('page', None):
+            page = page_search.cleaned_data.get('page', None)
+
     if student_search.is_valid():
         if user_search.is_valid():
             # 用户信息
@@ -51,6 +60,7 @@ def teacher_search_wait_review(request):
             identification_level = student_search.cleaned_data.get('identification_level', None)
             declaration_of_occupation = student_search.cleaned_data.get('declaration_of_occupation', None)
             school_term = student_search.cleaned_data.get('school_term', None)
+
             if identification_level:
                 student_info.identification_level = identification_level
                 if type(identification_level) == str:
@@ -58,6 +68,9 @@ def teacher_search_wait_review(request):
                         kwargs['identification_level'] = int(identification_level)
                 else:
                     kwargs['identification_level'] = identification_level
+            else:
+                identification_level = 0
+
             if declaration_of_occupation:
                 student_info.declaration_of_occupation = declaration_of_occupation
                 kwargs['declaration_of_occupation__icontains'] = declaration_of_occupation
@@ -71,16 +84,19 @@ def teacher_search_wait_review(request):
                     kwargs['school_term'] = school_term
                     student_info.school_term = SchoolTerm.objects.get(id=school_term)
             else:
-                pass
-            student_info.user_info = user_info
-            print(kwargs)
+                school_term = last_school_term.id
+                kwargs['school_term'] = school_term
+                student_info.school_term = SchoolTerm.objects.get(id=school_term)
 
+            student_info.user_info = user_info
             student_infos = StudentInfo.objects.filter(teacher_info=teacher_info,
                                                        **kwargs).order_by('-id')
-
-            paginator = Paginator(student_infos, 10)
-            page = request.GET.get('page')
+            # current_term_student_len = StudentInfo.objects.filter(teacher_info=teacher_info,term_).count()
+            student_infos_all_term_count = StudentInfo.objects.filter(teacher_info=teacher_info).count()
+            paginator = Paginator(student_infos, per_page)
             contacts = paginator.get_page(page)
+            print(contacts)
+            print(school_term)
             title_msg = "学员报名资料(非化工)"
             if len(school_terms) <= 0:
                 return render_result(request, "index.html",
@@ -96,11 +112,18 @@ def teacher_search_wait_review(request):
                                      {'title_msg': title_msg, 'need_login': False,
                                       'tmp_list': json.dumps(tmp_list, ensure_ascii=False),
                                       'last_school_term': last_school_term, 'student_info': student_info,
-                                      'no_term': True, 'contacts': contacts,
+                                      'no_term': True, 'contacts': contacts,'student_infos_all_term_count':student_infos_all_term_count,
+                                      'current_term_student_len': len(student_infos),
                                       'school_terms': school_terms, 'school_term': school_term,
                                       'identification_level': identification_level})
 
         else:
             print(user_search.error_class, user_search.errors)
+            message = '系统提示：获取当前用户失败，请重新登陆后尝试，或联系管理员.'
+
     else:
         print(student_search.error_class, student_search.errors)
+        message = '系统提示：参数传输错误.' + str(student_search.errors)
+
+    return render_result(request, "page_main_controller/message.html",
+                         {'title_msg': title_msg, 'message': message})

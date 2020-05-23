@@ -15,9 +15,12 @@ try:
 except ImportError:
     MiddlewareMixin = object  # Django 1.4.x - Django 1.9.x
 
-allow_urls = ['/love/', '/', '/report/to_login/', '/report/sign_in/', '/report/sign_out/',
-              '/report/to_index/',
-              '/report/check_username/', '/report/check_nickname/', '/report/system_guide/', '/report/introduction/']
+allow_urls = [
+    '/love/', '/', '/report/to_login/', '/report/sign_in/',
+    '/report/sign_out/', '/report/report_kill_info/', '/report/to_index/',
+    '/report/check_username/', '/report/check_nickname/',
+    '/report/system_guide/', '/report/introduction/'
+]
 
 sys_msg = '报名系统'
 
@@ -47,13 +50,21 @@ class SimpleMiddleware(MiddlewareMixin):
                             print("go>>>>>website index >>>>>>")
 
                             if school_terms.count() == 0:
-                                return render(request, "index.html",
-                                              {'title_msg': title_msg, 'need_login': True, 'no_term': False})
+                                return render(
+                                    request, "index.html", {
+                                        'title_msg': title_msg,
+                                        'need_login': True,
+                                        'no_term': False
+                                    })
                             else:
                                 school_term = SchoolTerm.objects.last()
-                                return render(request, "index.html",
-                                              {'title_msg': title_msg, 'need_login': True, 'school_term': school_term,
-                                               'no_term': True})
+                                return render(
+                                    request, "index.html", {
+                                        'title_msg': title_msg,
+                                        'need_login': True,
+                                        'school_term': school_term,
+                                        'no_term': True
+                                    })
                         else:
                             pass
                     else:

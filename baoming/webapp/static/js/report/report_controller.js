@@ -128,7 +128,14 @@ function check_has_qualification(obj, primary_level, need_year, relevant_occupat
 }
 
 /**
- * 是否毕业
+ *毕业状态
+ *
+ * @param {*} obj 是否需要填写毕业信息
+ * @param {*} graduation_status 是否是培训类型的学校
+ * @param {*} more_status是否包含学历范围，
+ * @param {*} strict是否应届在校false表示应届在校生
+ * @param {*} two第一个学历
+ * @param {*} thrid第二个学历
  */
 function check_graduation_status(obj, graduation_status, more_status, strict, two, thrid) {
 
@@ -174,7 +181,8 @@ function check_graduation_status(obj, graduation_status, more_status, strict, tw
         '-硕士研究生及以上本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）-',
         '-本职业初级正规培训-',
         '-本职业中级正规培训结业证书-',
-        '-本职业高级正规培训结业证书-'];
+        '-本职业高级正规培训结业证书-'
+    ];
     /**
      * 1,毕业
      * 2,应届生
@@ -211,7 +219,7 @@ function check_graduation_status(obj, graduation_status, more_status, strict, tw
         graduation_status_id.empty("");
         let px = [9, 10, 11];
         if (px.indexOf(graduation_status) > -1) {
-            $.each(options, function (i, n) {
+            $.each(options, function(i, n) {
                 if (i === graduation_status) {
                     graduation_status_id.append("<option value=" + i.toString() + ">" + n + "</option>");
                 } else if (i >= graduation_status) {
@@ -233,7 +241,7 @@ function check_graduation_status(obj, graduation_status, more_status, strict, tw
             $("#val3").val("上传毕业证件照");
             if (more_status) {
                 graduation_status_id.empty("");
-                $.each(options, function (i, n) {
+                $.each(options, function(i, n) {
                     if (i >= graduation_status && i < 9) {
                         graduation_status_id.append("<option value=" + i.toString() + ">" + n + "</option>");
                     } else {
@@ -242,14 +250,14 @@ function check_graduation_status(obj, graduation_status, more_status, strict, tw
                 });
             } else {
                 graduation_status_id.empty("");
-                $.each(options, function (i, n) {
+                $.each(options, function(i, n) {
                     if (i === graduation_status) {
                         graduation_status_id.append("<option value=" + i.toString() + ">" + n + "</option>");
                     }
-                    if (typeof two !== "undefined" && i === two) {
+                    if (typeof two !== "undefined" && 0 === two && i === two) {
                         graduation_status_id.append("<option value=" + i.toString() + ">" + n + "</option>");
                     }
-                    if (typeof thrid !== "undefined" && i === thrid) {
+                    if (typeof thrid !== "undefined" && 0 === two && i === thrid) {
                         graduation_status_id.append("<option value=" + i.toString() + ">" + n + "</option>");
                     } else {
                         console.log("未匹配！");
@@ -348,4 +356,8 @@ function apprentice_check(status) {
 function condition_label_style() {
     this.css('color', 'green');
 }
+$("#apprentice_month").val("");
 
+function condition_label_style() {
+    this.css('color', 'green');
+}

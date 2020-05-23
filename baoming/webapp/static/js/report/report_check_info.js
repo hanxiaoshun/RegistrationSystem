@@ -1,1053 +1,542 @@
-let title_switch = {
-    '1': "电工",
-    '2': "焊工",
-    '3': "钳工",
-    '4': "育婴员",
-    '5': "保育员",
-    '6': "劳动关系协调员",
-    '7': '防腐蚀工',
-    '8': '有机合成工',
-    '9': '工业废水处理工',
-    '10': '无机化学反应生产工',
-    '11': '工业固体废物处理处置工',
-};
-
-
 /**
- * 检测申报资格名称以及职级
- * @param obj
+ *   检测申报资格名称以及职级
+ * @param condition_level
  */
-function check_identification_level(obj) {
-
-    // 获取申报的职业信息
-    let worker = $("#declaration_of_occupation").val();
-// 级别按钮
+function check_identification_level(condition_level) {
+    // 级别按钮
     let identification_level = $("#identification_level");
     let worker_level = $(".worker_level_desc");
     let worker_level_desc_label = $(".worker_level_desc_label");
     let worker_level_content = $(".worker_level_desc_content");
-    let worker_level_desc_content_textarea = $(".worker_level_desc_content_textarea");
-    let course_hours_class = $('.course_hours');
+    let worker_level_desc_content_textarea = $(
+        ".worker_level_desc_content_textarea"
+    );
+    let course_hours_class = $(".course_hours");
     course_hours_class.hide();
-//是否需要
-    let has_qualification_class = $('.has_qualification');
-    let graduation_status_class = $('.graduation_status');
-    let condition_selected_class = $('.condition_selected');
+    //是否需要
+    let has_qualification_class = $(".has_qualification");
+    let graduation_status_class = $(".graduation_status");
+    let condition_selected_class = $(".condition_selected");
     let profession_class = $(".profession");
-//职业年限
+    //职业年限
     let career_life_class = $(".career_life");
-//术等级（原级别）
+    //术等级（原级别）
     let primary_level_class = $(".primary_level");
-// 现持有职业资格证书编号(原证书编号)
+    // 现持有职业资格证书编号(原证书编号)
     let original_certificate_number_class = $(".original_certificate_number");
-// 现有证件发证单位
+    // 现有证件发证单位
     let issue_unit_class = $(".issue_unit");
-//现有职业资格证发证时间
+    //现有职业资格证发证时间
     let issuance_time_class = $(".issuance_time");
-//从事本职业工作开始时间
-    let start_the_work_of_this_occupation_class = $(".start_the_work_of_this_occupation");
-// 职业资格证图片上传
-    let certificate_photos_class = $('.certificate_photos');
-//=========================================================================================
+    //从事本职业工作开始时间
+    let start_the_work_of_this_occupation_class = $(
+        ".start_the_work_of_this_occupation"
+    );
+    // 职业资格证图片上传
+    let certificate_photos_class = $(".certificate_photos");
+    //=========================================================================================
 
-// 学历程度
+    // 学历程度
     let education_degree_class = $(".education_degree");
-//毕业（应届）院校名称
+    //毕业（应届）院校名称
     let school_name_class = $(".school_name");
-// 毕业时间(或即将毕业时间)
+    // 毕业时间(或即将毕业时间)
     let graduation_time_class = $(".graduation_time");
-//专业工种(或相关专业工种)
+    //专业工种(或相关专业工种)
 
-
-    let major = $('.major');
-//被授予毕业资格证书名称
+    let major = $(".major");
+    //被授予毕业资格证书名称
     let diploma_granted_class = $(".diploma_granted");
-// 报名单位负责人
+    // 报名单位负责人
     let person_in_charge_class = $(".person_in_charge");
-// 毕业证图片上传
-    let diploma_certificate_photos_class = $('.diploma_certificate_photos');
+    // 毕业证图片上传
+    let diploma_certificate_photos_class = $(".diploma_certificate_photos");
     let title_level = {
-        '3': "高级（三级）",
-        '4': "中级（四级）",
-        '5': "初级（五级）"
+        "3": "高级（三级）",
+        "4": "中级（四级）",
+        "5": "初级（五级）",
     };
-
-    if (parseInt(obj) === 0) {
-        alert("请您选择申报-" + worker + "的等级");
+    // 获取申报的职业信息
+    let skill_name = $("#declaration_of_occupation").val();
+    let skill_id = $("#id_skill_id").val();
+    console.log(skill_id, condition_level);
+    if (parseInt(condition_level) === 0) {
+        alert("请您选择申报-" + skill_name + "的等级");
     } else {
         let form_inputs = $("#add-student-info-id input");
         for (let i = 0; i < form_inputs.length; i++) {
             form_inputs[i].required = false;
             console.log(form_inputs[i].required);
         }
-
-        $("#identification-level").val(obj);
-        $("#identification-level-label").html(title_level[obj]);
-        if (worker === "电工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "dg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "dg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "dg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "焊工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "dhg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "dhg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "dhg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "钳工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "qg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "qg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "qg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "育婴员") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "yyy03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "yyy04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "yyy05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "保育员") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "byy03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "byy04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "byy05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "劳动关系协调员") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "ld03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = 'ld04';
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                alert("劳动关系协调员，没有申报初级资格证的相关信息！请选择其他级别。");
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "防腐蚀工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "ffsg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "ffsg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "ffsg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "有机合成工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "hg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "hg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "hg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "工业废水处理工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "hg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "hg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "hg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "无机化学反应生产工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "wjhxfyscg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "wjhxfyscg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "wjhxfyscg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else if (worker === "工业固体废物处理处置工") {
-            if (parseInt(obj) === 3) {
-                // 高级工
-                let work_level_tag = "hg03";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 4) {
-                // 中级工
-                let work_level_tag = "hg04";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else if (parseInt(obj) === 5) {
-                // 初级工
-                let work_level_tag = "hg05";
-                put_select(work_level_tag, parseInt(obj));
-
-            } else {
-                put_select('null', 0);
-            }
-        } else {
-            report_add_new(worker, obj);
-            // worker_level.hide();
-            // worker_level_content.hide();
-        }
-
+        $("#identification-level").val(condition_level);
+        $("#identification-level-label").html(title_level[condition_level]);
+        skill_condition(skill_id, condition_level);
     }
     //原级别
-
-
 }
 
-function put_select(work_level_tag, index) {
+/**
+ * 生成条件选项
+ * @param {*} skill_id
+ * @param {*} condition_level
+ */
+function skill_condition(skill_id, condition_level) {
+    console.log(skill_id, condition_level);
+    let url = "/report/report_condition_info/";
+    // let form = document.querySelector("#report-condition-info-id");
+    let form_data = new FormData();
+    // form_data.append("csrfmiddlewaretoken", document.getElementsByName('csrfmiddlewaretoken')[0].value);
+    form_data.append("condition_level", condition_level.toString());
+    form_data.append("skill_id", skill_id.toString());
+    console.log(form_data);
+    $.ajax({
+        url: url,
+        dataType: "json",
+        type: "get",
+        data: {
+            skill_id: skill_id,
+            condition_level: condition_level,
+        },
+        success: function(res) {
+            // conditionlist = JSON.parse(res.data);
+            let condition_selected = "";
+            var data_json = JSON.parse(res.data);
+            conditionlist = data_json;
+            $.each(data_json, function(i, n) {
+                var id_condition_radio = n.condition_id.toString() + "_condition_radio";
+                var id_str = n.condition_id.toString();
+                condition_selected =
+                    condition_selected +
+                    "<input type='radio' required='required' name='condition_selected'" +
+                    " value=" +
+                    id_str +
+                    " id=" +
+                    id_condition_radio +
+                    " onclick='condition_controller_enhance(this.value, \"add\");'/>" +
+                    "<label for='" +
+                    id_condition_radio +
+                    "' style='color:white'><span>" +
+                    n.condition_name +
+                    "</span></label>" +
+                    "<hr>";
+            });
+            let condition_selected_class = $(".condition_selected");
+            condition_selected_class.empty("");
+            condition_selected_class.append(condition_selected);
+            console.log(res); //在console中查看数据
+        },
+        error: function() {
+            alert("failed!");
+        },
+    });
+}
 
-    // 获取申报的职业信息
-    let worker = $("#declaration_of_occupation").val();
-
-// 级别按钮
-    let identification_level = $("#identification_level");
-    let worker_level = $(".worker_level_desc");
-    let worker_level_desc_label = $(".worker_level_desc_label");
-    let worker_level_content = $(".worker_level_desc_content");
-    let worker_level_desc_content_textarea = $(".worker_level_desc_content_textarea");
-
-//学徒期满
-    let apprentice_class = $(".apprentice");
-//是否需要
-    let has_qualification_class = $('.has_qualification');
-    let graduation_status_class = $('.graduation_status');
-    let condition_selected_class = $('.condition_selected');
-//职业年限
-    let career_life_class = $(".career_life");
-//术等级（原级别）
-    let primary_level_class = $(".primary_level");
-// 现持有职业资格证书编号(原证书编号)
-    let original_certificate_number_class = $(".original_certificate_number");
-// 现有证件发证单位
-    let issue_unit_class = $(".issue_unit");
-//现有职业资格证发证时间
-    let issuance_time_class = $(".issuance_time");
-//从事本职业工作开始时间
-    let start_the_work_of_this_occupation_class = $(".start_the_work_of_this_occupation");
-// 职业资格证图片上传
-    let certificate_photos_class = $('.certificate_photos');
-//=========================================================================================
-
-// 学历程度
-    let education_degree_class = $(".education_degree");
-//毕业（应届）院校名称
-    let school_name_class = $(".school_name");
-//文化程度
-    let education_degree_form_class = $(".education_degree_form");
-// 毕业时间(或即将毕业时间)
-    let graduation_time_class = $(".graduation_time");
-//专业工种(或相关专业工种)
-    let profession_class = $(".profession");
-//被授予毕业资格证书名称
-    let diploma_granted_class = $(".diploma_granted");
-// 报名单位负责人
-    let person_in_charge_class = $(".person_in_charge");
-    let major_class = $(".major");
-
-// 毕业证图片上传
-    let diploma_certificate_photos_class = $('.diploma_certificate_photos');
-    let title_level = {
-        '3': "高级工",
-        '4': "中级工",
-        '5': "初级工"
-    };
-
-
-    worker_level.show();
-    worker_level_content.show();
-    if (work_level_tag === 'null') {
-        let worker_level_desc = '申报-' + worker + '-' + "未分级" + "条件说明";
-        worker_level_desc_label.text(worker_level_desc);
-        worker_level_desc_content_textarea.val("暂无相关介绍信息，您可能未选择申报职业资格级别，请选择申报职业资格级别在尝试！");
-        identification_level.focus();
+/**
+ * 按照条件显示输入框
+ * @param condition_id_str 填报选项
+ * @param status 条件生成状态
+ */
+function condition_controller_enhance(condition_id_str, status) {
+    if (status === "add") {
+        clear_input_label();
     } else {
-        //隐藏掉所有的条件输入框
-        apprentice_class.hide();
-        graduation_status_class.hide();
-        has_qualification_class.hide();
+        // 重新获取一下条列表
+        console.log("修改不需要清空数据");
+    }
 
-        certificate_photos_class.hide();
-        career_life_class.hide();
-        start_the_work_of_this_occupation_class.hide();
-        primary_level_class.hide();
-        original_certificate_number_class.hide();
-        issue_unit_class.hide();
-        issuance_time_class.hide();
+    let form_inputs = $("#add-student-info-id input");
+    for (let i = 0; i < form_inputs.length; i++) {
+        form_inputs[i].required = false;
+        // form_inputs[i].value = "";
+    }
 
-        education_degree_form_class.hide();
-        school_name_class.hide();
-        graduation_time_class.hide();
-        profession_class.hide();
-        major_class.hide();
-        diploma_granted_class.hide(); //毕业证书名字
-        diploma_certificate_photos_class.hide();
-        $('.graduation_worker_time').hide();
-        $('.original_certificate_worker_time').hide();
-        $('.from_certificate_need_year').hide();
-        //隐藏掉所有的条件输入框
+    $("#condition_selected_value").val(condition_id_str);
+    let apprentice_class = $(".apprentice");
 
-        // let worker_level_desc = '申报-' + worker + '-' + title_level[index.toString()] + "条件说明";
-        // let worker_level_desc_content = get_worker_level_info(work_level_tag);
-        // worker_level_desc_label.text(worker_level_desc);
-        // worker_level_desc_content_textarea.val(worker_level_desc_content);
-        $("#work_training").text("    ");
-        let condition_selected = "";
-        let has_or = 0;
-        $.each(get_worker_level_condition_selected(work_level_tag), function (i, n) {
+    let apprentice_start_class = $(".apprentice_start").hide();
+    $(".apprentice_end").hide();
+    //========================================================================================
+    //是否需要
+    let qualification_class = $(".has_qualification");
+    let graduation_status_class = $(".graduation_status");
+    let condition_selected_class = $(".condition_selected");
+    //职业年限
+    let career_life_class = $(".career_life");
+    //从事本职业工作开始时间
+    let start_the_work_of_this_occupation_class = $(
+        ".start_the_work_of_this_occupation"
+    );
+    //术等级（原级别）
+    let primary_level_class = $(".primary_level");
+    // 现持有职业资格证书编号(原证书编号)
+    let original_certificate_number_class = $(".original_certificate_number");
+    // 现有证件发证单位
+    let issue_unit_class = $(".issue_unit");
+    //现有职业资格证发证时间
+    let issuance_time_class = $(".issuance_time");
 
-            if (n.indexOf("注：") > -1) {
-                condition_selected = condition_selected +
-                    "<label style='color:honeydew' title=" + n + ">" + n +
-                    "</label>" +
-                    "<br>"
+    // 职业资格证图片上传
+    let certificate_photos_class = $(".certificate_photos");
+    //=========================================================================================
+
+    // // 学历程度
+    //     let education_degree_class = $(".education_degree");
+    //毕业（应届）院校名称
+    let school_name_class = $(".school_name");
+    // 毕业时间(或即将毕业时间)
+    let graduation_time_class = $(".graduation_time");
+    //专业工种(或相关专业工种)
+    let profession_class = $(".profession");
+
+    //被授予毕业资格证书名称
+    let diploma_granted_class = $(".diploma_granted");
+    // 毕业证图片上传
+    let diploma_certificate_photos_class = $(".diploma_certificate_photos");
+
+    apprentice_class.hide();
+    career_life_class.hide();
+    start_the_work_of_this_occupation_class.hide();
+
+    graduation_status_class.hide();
+    // 职业年限情况
+    career_life_class.hide();
+    profession_class.hide();
+    start_the_work_of_this_occupation_class.hide();
+    $(".career_life_time").hide();
+    $(".course_hours").hide();
+    //有关证书情况
+    primary_level_class.hide();
+    original_certificate_number_class.hide();
+    issue_unit_class.hide();
+    issuance_time_class.hide();
+    $(".from_certificate_need_year").hide();
+    $(".original_certificate_worker_time").hide();
+
+    certificate_photos_class.hide();
+    // 院校毕业证书情况
+    $(".education_degree_form").hide();
+    school_name_class.hide();
+    graduation_time_class.hide();
+    $(".graduation_worker_time").hide();
+    $(".strict_status").hide();
+    $(".major").hide();
+
+    diploma_certificate_photos_class.hide();
+
+    console.log(condition_id_str);
+    console.log(conditionlist);
+    // apprentice_status: "1" 学徒信息
+    // certificate_photos_status: "1"资格证件照片
+    // condition_for_skill_id: 3
+    // condition_id: 8
+    // condition_level: "4"
+    // condition_name: "(3) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；或取得经评估论"
+    // create_time: "2020-04-14"
+    // diploma_certificate_photos_status: "1"毕业证件照片
+    // explain: "(3) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；"
+    // graduation_time_status: "1"毕业(结业)信息
+    // original_certificate_info_status: "1"原证书详细信息
+    // original_certificate_worker_time_requirement: 0 获得现有资格证书后工作年限要求
+    // original_certificate_worker_time_status: "1"获得现有资格证书后工作年限
+    // primary_level_status: "1"原证书级别
+    // record_status: "1"
+    // school_info_status: "1"
+    // user_operator_id: 1
+    // work_of_this_occupation_requirement: 0 从事本工作时间要求
+    // work_of_this_occupation_status: "1" 从事本工作时间
+    $.each(conditionlist, function(i, n) {
+        if (n.condition_id === parseInt(condition_id_str)) {
+            if (status == "update") {
+                let condition_selected_class = $(".condition_selected_update_class");
+                var condition_selected =
+                    "<label style='color:red'>备注：<label><br> <label style='color:yellow'>" +
+                    n.explain_condition +
+                    "</label>";
+                condition_selected_class.append(condition_selected);
             } else {
-                if (n.indexOf('__') > -1) {
-                    has_or = has_or + 1;
-                    if (has_or === 1) {
-                        let work_level_tag_index = work_level_tag + "_" + (i + 1).toString() + "__" + has_or.toString();
-
-                        condition_selected = condition_selected +
-                            "<input type='radio' required='required' name='condition_selected'" +
-                            " value=" + work_level_tag_index +
-                            " id=" + work_level_tag_index +
-                            " onclick='condition_controller(this.value,\"add\");'/>" +
-                            "<label for='" + work_level_tag_index +
-                            "' style='color:white'><span>" + n +
-                            "</span></label>" +
-                            "<br>";
-                        console.log("'" + work_level_tag_index + "'" + ":" + "'" + n + "',");
-                    } else {
-                        let work_level_tag_index = work_level_tag + "_" + (i + 1).toString() + "__" + has_or.toString();
-                        condition_selected = condition_selected +
-                            "<input type='radio' required='required' name='condition_selected'" +
-                            " value=" + work_level_tag_index +
-                            " id=" + work_level_tag_index +
-                            " onclick='condition_controller(this.value,\"add\");'/>" +
-                            "<label for='" + work_level_tag_index +
-                            "' style='color:white'><span>" + n +
-                            "</span></label>" +
-                            "<br>";
-                        console.log("'" + work_level_tag_index + "'" + ":" + "'" + n + "',");
-                    }
-
+                let condition_selected_class = $(".condition_selected_explain");
+                var condition_selected =
+                    "<label style='color:yellow'>" +
+                    n.explain_condition +
+                    "</label>";
+                if (n.explain_condition.length > 0) {
+                    condition_selected_class.html(condition_selected);
                 } else {
-                    let work_level_tag_index = work_level_tag + "_" + (i + 1).toString();
-                    condition_selected = condition_selected +
-                        "<input type='radio' required='required' name='condition_selected'" +
-                        " value=" + work_level_tag_index +
-                        " id=" + work_level_tag_index +
-                        " onclick='condition_controller(this.value,\"add\");'/>" +
-                        "<label for='" + work_level_tag_index +
-                        "' style='color:white'><span>" + n +
-                        "</span></label>" +
-                        "<br>";
-                    console.log("'" + work_level_tag_index + "'" + ":" + "'" + n + "',");
+                    condition_selected_class.html('无');
                 }
 
             }
-        });
 
-        condition_selected_class.empty("");
-        condition_selected_class.append(condition_selected);
+            // 从事本工作时间
+            if (n.work_of_this_occupation_status === "1") {
+                career_life_time(n.work_of_this_occupation_requirement);
+            } else {
+                career_life_time();
+            }
+            // 学徒期
+            if (n.apprentice_status === "1") {
+                apprentice_check(true);
+            } else {
+                apprentice_check(false);
+            }
+            // 证书级及信息
+            if (n.primary_level_status === "1") {
+                alert(n.primary_level_requirement);
+                check_has_qualification(
+                    1,
+                    parseInt(n.primary_level_requirement),
+                    n.original_certificate_worker_time_requirement
+                );
+            } else {
+                check_has_qualification(2);
+            }
+            // 毕业信息
+            if (n.graduation_time_status === "1") {
+                if (n.graduation_lowest === "1") {
+                    if (n.graduation_is_Fresh === "1") {
+                        check_graduation_status(
+                            1,
+                            parseInt(n.graduation_low_requirement),
+                            true,
+                            true,
+                            parseInt(n.graduation_extra_two),
+                            parseInt(n.graduation_extra_three)
+                        );
+                    } else {
+                        check_graduation_status(
+                            1,
+                            parseInt(n.graduation_low_requirement),
+                            true,
+                            false,
+                            parseInt(n.graduation_extra_two),
+                            parseInt(n.graduation_extra_three)
+                        );
+                    }
+                } else {
+                    if (n.graduation_is_Fresh === "1") {
+                        check_graduation_status(
+                            1,
+                            parseInt(n.graduation_low_requirement),
+                            false,
+                            true,
+                            parseInt(n.graduation_extra_two),
+                            parseInt(n.graduation_extra_three)
+                        );
+                    } else {
+                        check_graduation_status(
+                            1,
+                            parseInt(n.graduation_low_requirement),
+                            false,
+                            false,
+                            parseInt(n.graduation_extra_two),
+                            parseInt(n.graduation_extra_three)
+                        );
+                    }
+                }
+            } else {
+                check_graduation_status(2);
+            }
+        }
+    });
+
+    // check_graduation_status(1, 3, true, false); //===============================
+
+    // career_life_time(1);
+    // apprentice_check(false);
+    // check_has_qualification(1);
+    // check_graduation_status(1, 3, true, false); //===============================
+}
+
+
+/**
+ * 按照条件显示输入框
+ * @param condition_id_str 填报选项
+ * @param status 条件生成状态
+ */
+function condition_controller_update(condition_id_str, status) {
+
+    let form_inputs = $("#add-student-info-id input");
+    for (let i = 0; i < form_inputs.length; i++) {
+        form_inputs[i].required = false;
+        // form_inputs[i].value = "";
     }
 
-}
+    $("#condition_selected_value").val(condition_id_str);
+    let apprentice_class = $(".apprentice");
 
-function get_worker_level_info(obj) {
-    let m = new Map();
-    m.set('dhg05', '五级/初级工 ( 具备以下条件之一者 )\n' +
-        '(1) 累计从事本职业工作１年( 含)以上。\n' +
-        '(2) 本职业学徒期满。');
-    m.set('dhg04', '四级/中级工( 具备以下条件之一者 )\n' +
-        '(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。\n' +
-        '(2) 累计从事本职业工作６年(含)以上。\n' +
-        '(3) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；' +
-        '或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ' +
-        '( 含尚未取得毕业证书的在校应届毕业生)。注：相关专业：' +
-        '焊接加工、焊接技术应用、金属热加工（焊接）、焊接技术与自动化、焊接技术与工程。');
-    m.set('dhg03', '三级/高级工( 具备以下条件之一者 )\n' +
-        '(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。\n' +
-        '(2) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；' +
-        '或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。 \n' +
-        '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。');
-    m.set('dg05', '五级/初级工 ( 具备以下条件之一者 )\n' +
-        '(1) 累计从事本职业工作１年( 含)以上。\n' +
-        '(2) 本职业学徒期满。');
-    m.set('dg04', '四级/中级工( 具备以下条件之一者 )\n' +
-        '(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。\n' +
-        '(2) 累计从事本职业工作６年(含)以上。\n' +
-        '(3) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；' +
-        '或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。');
-    m.set('dg03', '三级/高级工( 具备以下条件之一者 )\n' +
-        '(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。\n' +
-        '(2) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；' +
-        '或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。 \n' +
-        '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。注：本专业或相关专业: ' +
-        '数控机床装配与维修、机械设备装配与自动控制、制冷设备运用与维修、机电设备安装与维修、机电一体化、电气自动化设备安装与维修 、电梯工程技术、城市轨道交通车辆运用与检修 、煤矿电气设备维修、' +
-        '工业机器人应用与维护、工业网络技术、机电技术应用、电气运行与控制、电气技术应用、纺织机电技术、铁道供电技术、农业电气化技术等专业。');
-    m.set('qg05', '初级 ( 具备以下条件之一者 )\n' +
-        '(1) 经本职业初级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '(2) 在本职业连续见习工作 2 年以上。\n' +
-        '(3) 本职业学徒期满。');
-    m.set('qg04', '中级 ( 具备下列条件之一者 )\n' +
-        '(1) 取得本职业初级职业资格证书后，连续从事本职业工作 3 年以上，经本职业中级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '(2) 取得本职业初级职业资格证书后，连续从事本职业工作 5 年以上。\n' +
-        '(3) 连续从事本职业工作 7 年以上。\n' +
-        '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。');
-    m.set('qg03', '高级 ( 具备下列条件之一者〉\n' +
-        '(1) 取得本职业中级职业资格证书后，连续从事本职业工作 4 年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '(2) 取得本职业中级职业资格证书后，连续从事本职业工作 7 年以上。\n' +
-        '(3) 取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校或高级技工学校本职业 ( 专业 ) 毕业证书。\n' +
-        '(4) 大专以上本专业或相关专业毕业生取得本职业中级职业资格证书后, 连续从事本职业工作 2 年以上。');
-    m.set('yyy05', '初级(具备以下条件之一者)\n' +
-        '(1)经本职业初级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '（2）在本职业连续见习工作2年以上。\n' +
-        '（3）本职业学徒期满。');
-    m.set('yyy04', '中级(具备以下条件之一者)\n' +
-        '(1)取得本职业初级职业资格证书后，连续从事本职业工作3年以上，经本职业中级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '（2）取得本职业初级职业资格证书后，连续从事本职业工作5年以上。\n' +
-        '（3）连续从事本职业工作7年以上。\n' +
-        '（4）取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业(专业)毕业证书。');
-    m.set('yyy03', '高级(具备以下条件之一者)\n' +
-        '(1)取得本职业中级职业资格证书后，连续从事本职业工作4年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '（2）取得本职业中级职业资格证书后，连续从事本职业工作6年以上。\n' +
-        '（3）取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业(专业)毕业证书。\n' +
-        '（4）取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。');
-    m.set('byy05', '初级 ( 具备以下条件之一者 )\n' +
-        '(1) 经本职业初级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '(2) 在本职业连续见习工作2年以上。\n' +
-        '(3) 本职业学徒期满。');
-    m.set('byy04', '中级 ( 具备以下条件之一者 )\n' +
-        '(1) 取得本职业初级职业资格证书后，连续从事本职业工作 3 年以上，经本职业中级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '(2) 取得本职业初级职业资格证书后，连续从事本职业工作 5 年以上。\n' +
-        '(3) 连续从事本职业工作 7 年以上。\n' +
-        '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。');
-    m.set('byy03', '高级 ( 具备以下条件之一者 )\n' +
-        '(1) 取得本职业中级职业资格证书后，连续从事本职业工作 4 年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。\n' +
-        '(2) 取得本职业中级职业资格证书后，连续从事本职业工作 6 年以上。\n' +
-        '(3) 取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。\n' +
-        '(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作 2 年以上。');
-    m.set('ldgxxty04', '四级/中级工（具备以下条件之一者） \n' +
-        '（1） 累计从事本职业或相关职业工作 4 年（含）以上。 \n' +
-        '（2） 取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。 \n' +
-        '（3）高等院校本专业或相关专业在校生。 ');
-    m.set('ldgxxty03', '三级/高级工（ 具备以下条件之一者 ） \n' +
-        '（1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。 \n' +
-        '（2）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。 \n' +
-        '（3）具有大学专科本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书） 后，累计从事本职业或相关职业工作２年（含）以上。 \n' +
-        '（4）具有大学本科本专业或相关专业学历证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 1 年（含）以上。 \n' +
-        '（5）具有硕士研究生及以上本专业或相关专业学历证书（含尚未取得毕业证书的在校应届研究生毕业生）。');
-    m.set('hg05', '1、具备以下条件之一者，可申报五级/初级工：\n' +
-        '（1）累计从事本职业或相关职业工作1年（含）以上。\n' +
-        '（2）本职业或相关职业学徒期满。');
-    m.set('hg04', '2、具备以下条件之一者，可申报四级/中级工：\n' +
-        '（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。\n' +
-        '（2）累计从事本职业或相关职业工作6年（含）以上。\n' +
-        '（3）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。');
-    m.set('hg03', '3、具备以下条件之一者，可申报三级/高级工：\n' +
-        '（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作5年（含）以上。\n' +
-        '（2）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。\n' +
-        '（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作2年（含）以上。');
-    return m.get(obj);
-}
+    let apprentice_start_class = $(".apprentice_start").hide();
+    $(".apprentice_end").hide();
+    //========================================================================================
+    //是否需要
+    let qualification_class = $(".has_qualification");
+    let graduation_status_class = $(".graduation_status");
+    let condition_selected_class = $(".condition_selected");
+    //职业年限
+    let career_life_class = $(".career_life");
+    //从事本职业工作开始时间
+    let start_the_work_of_this_occupation_class = $(
+        ".start_the_work_of_this_occupation"
+    );
+    //术等级（原级别）
+    let primary_level_class = $(".primary_level");
+    // 现持有职业资格证书编号(原证书编号)
+    let original_certificate_number_class = $(".original_certificate_number");
+    // 现有证件发证单位
+    let issue_unit_class = $(".issue_unit");
+    //现有职业资格证发证时间
+    let issuance_time_class = $(".issuance_time");
 
-let dhg05 = [
-    '(1) 累计从事本职业工作１年( 含)以上。',
-    '(2) 本职业学徒期满。'];
-let dhg04 = [
-    '(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。',
-    '(2) 累计从事本职业工作６年(含)以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ' +
-    '( 含尚未取得毕业证书的在校应届毕业生)。', '注：相关专业：焊接加工、焊接技术应用、金属热加工（焊接）、焊接技术与自动化、焊接技术与工程。'];
-let dhg03 = [
-    '(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。',
-    '(2__1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2)或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。',
-    '注：相关专业：焊接加工、焊接技术应用、金属热加工（焊接）、焊接技术与自动化、焊接技术与工程。'];
+    // 职业资格证图片上传
+    let certificate_photos_class = $(".certificate_photos");
+    //=========================================================================================
 
-let dg05 = [
-    '(1) 累计从事本职业工作１年( 含)以上。',
-    '(2) 本职业学徒期满。'];
-let dg04 = [
-    '(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。',
-    '(2) 累计从事本职业工作６年(含)以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2)或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。',
-    '注：本专业或相关专业: 数控机床装配与维修、机械设备装配与自动控制、制冷设备运用与维修、机电设备安装与维修、机电一体化、电气自动化设备安装与维修 、电梯工程技术、城市轨道交通车辆运用与检修 、煤矿电气设备维修、' +
-    ' 工业机器人应用与维护、工业网络技术、机电技术应用、电气运行与控制、电气技术应用、纺织机电技术、铁道供电技术、农业电气化技术等专业。'];
-let dg03 = [
-    '(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上',
-    '(2__1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2)或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。',
-    '注：本专业或相关专业: 数控机床装配与维修、机械设备装配与自动控制、制冷设备运用与维修、机电设备安装与维修、机电一体化、电气自动化设备安装与维修 、电梯工程技术、城市轨道交通车辆运用与检修 、煤矿电气设备维修、' +
-    ' 工业机器人应用与维护、工业网络技术、机电技术应用、电气运行与控制、电气技术应用、纺织机电技术、铁道供电技术、农业电气化技术等专业。'];
+    // // 学历程度
+    //     let education_degree_class = $(".education_degree");
+    //毕业（应届）院校名称
+    let school_name_class = $(".school_name");
+    // 毕业时间(或即将毕业时间)
+    let graduation_time_class = $(".graduation_time");
+    //专业工种(或相关专业工种)
+    let profession_class = $(".profession");
 
-let qg05 = [
-    '(1) 经本职业初级正规培训达规定标准学时数，并取得结业证书。',
-    '(2) 在本职业连续见习工作 2 年以上。',
-    '(3) 本职业学徒期满。'];
-let qg04 = [
-    '(1) 取得本职业初级职业资格证书后，连续从事本职业工作 3 年以上，经本职业中级正规培训达规定标准学时数，并取得结业证书。',
-    '(2) 取得本职业初级职业资格证书后，连续从事本职业工作 5 年以上。',
-    '(3) 连续从事本职业工作 7 年以上。',
-    '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
-let qg03 = [
-    '(1) 取得本职业中级职业资格证书后，连续从事本职业工作 4 年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。',
-    '(2) 取得本职业中级职业资格证书后，连续从事本职业工作 7 年以上。',
-    '(3）取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校或高级技工学校本职业 ( 专业 ) 毕业证书。',
-    '(4) 大专以上本专业或相关专业毕业生取得本职业中级职业资格证书后, 连续从事本职业工作 2 年以上。'];
-// let yyy05 = [
-//     '(1)经本职业初级正规培训达规定标准学时数，并取得结业证书。',
-//     '（2）在本职业连续见习工作2年以上。',
-//     '（3）本职业学徒期满。'];
+    //被授予毕业资格证书名称
+    let diploma_granted_class = $(".diploma_granted");
+    // 毕业证图片上传
+    let diploma_certificate_photos_class = $(".diploma_certificate_photos");
 
-// 2019 0903 修改
-let yyy05 = [
-    '（1）累计从事本职业或相关职业工作１年（含）以上。',
-    '（2）本职业或相关职业学徒期满。'];
+    apprentice_class.hide();
+    career_life_class.hide();
+    start_the_work_of_this_occupation_class.hide();
 
-//2019-0903 修订
-//——四级/中级工（具备以下条件之一者）
-// （1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。
-// （2）累计从事本职业或相关职业工作 6 年（含）以上。
-// （3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-// （3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
-let yyy04 = [
-    '（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。',
-    '（2）累计从事本职业或相关职业工作 6 年（含）以上。',
-    '（3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）',
-    '（3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）'];
+    graduation_status_class.hide();
+    // 职业年限情况
+    career_life_class.hide();
+    profession_class.hide();
+    start_the_work_of_this_occupation_class.hide();
+    $(".career_life_time").hide();
+    $(".course_hours").hide();
+    //有关证书情况
+    primary_level_class.hide();
+    original_certificate_number_class.hide();
+    issue_unit_class.hide();
+    issuance_time_class.hide();
+    $(".from_certificate_need_year").hide();
+    $(".original_certificate_worker_time").hide();
 
-//——三级/高级工（具备以下条件之一者）
-// （1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。
-// （2-1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-// （2-2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
-// （3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作２年（含）以上。
-// 注：
-// 1、相关职业：婴幼儿发展引导员、幼儿教育教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健调理师、健康管理师、保育员、家政服务员。
-// 2、本专业：学前教育、早期教育。
-// 3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健；高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、营养配餐、特殊教育、心理健康教育、幼儿发展与健康管理、中医康复技术；普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、针灸推拿、教育学、小学教育。
-let yyy03 = [
-    '（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。',
-    '（2-1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（2-2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作２年（含）以上。',
-'注：\n' +
-'1、相关职业：婴幼儿发展引导员、幼儿教育教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健调理师、健康管理师、保育员、家政服务员。 \n' +
-'2、本专业：学前教育、早期教育。 \n' +
-'3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健；高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、' +
-'医学营养、心理咨询、营养配餐、特殊教育、心理健康教育、幼儿发展与健康管理、中医康复技术；普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、针灸推拿、教育学、小学教育。 '];
+    certificate_photos_class.hide();
+    // 院校毕业证书情况
+    $(".education_degree_form").hide();
+    school_name_class.hide();
+    graduation_time_class.hide();
+    $(".graduation_worker_time").hide();
+    $(".strict_status").hide();
+    $(".major").hide();
+    diploma_certificate_photos_class.hide();
+    let url = "/report/report_condition_info/";
+    $.ajax({
+        url: url,
+        dataType: "json",
+        type: "get",
+        data: {
+            condition_id: condition_id_str,
+        },
+        success: function(res) {
+            var data_json = JSON.parse(res.data);
+            $.each(data_json, function(i, n) {
+                if (n.condition_id === parseInt(condition_id_str)) {
+
+                    let condition_selected_class = $(".condition_selected_explain_update");
+                    var condition_selected =
+                        "<label style='color:yellow'>" +
+                        n.explain_condition +
+                        "</label>";
+                    if (n.explain_condition.length > 0) {
+                        condition_selected_class.html(condition_selected);
+                    } else {
+                        condition_selected_class.html('无');
+                    }
 
 
-//（1）累计从事本职业或相关职业工作１年（含）以上。
-// （2）本职业或相关职业学徒期满。
-let byy05 = [
-    '（1）累计从事本职业或相关职业工作１年（含）以上。',
-    '（2）本职业或相关职业学徒期满。 '];
+                    // 从事本工作时间
+                    if (n.work_of_this_occupation_status === "1") {
+                        career_life_time(n.work_of_this_occupation_requirement);
+                    } else {
+                        career_life_time();
+                    }
+                    // 学徒期
+                    if (n.apprentice_status === "1") {
+                        apprentice_check(true);
+                    } else {
+                        apprentice_check(false);
+                    }
+                    // 证书级及信息
+                    if (n.primary_level_status === "1") {
+                        alert(n.primary_level_requirement);
+                        check_has_qualification(
+                            1,
+                            parseInt(n.primary_level_requirement),
+                            n.original_certificate_worker_time_requirement
+                        );
+                    } else {
+                        check_has_qualification(2);
+                    }
+                    // 毕业信息
+                    if (n.graduation_time_status === "1") {
+                        if (n.graduation_lowest === "1") {
+                            if (n.graduation_is_Fresh === "1") {
+                                check_graduation_status(
+                                    1,
+                                    parseInt(n.graduation_low_requirement),
+                                    true,
+                                    true,
+                                    parseInt(n.graduation_extra_two),
+                                    parseInt(n.graduation_extra_three)
+                                );
+                            } else {
+                                check_graduation_status(
+                                    1,
+                                    parseInt(n.graduation_low_requirement),
+                                    true,
+                                    false,
+                                    parseInt(n.graduation_extra_two),
+                                    parseInt(n.graduation_extra_three)
+                                );
+                            }
+                        } else {
+                            if (n.graduation_is_Fresh === "1") {
+                                check_graduation_status(
+                                    1,
+                                    parseInt(n.graduation_low_requirement),
+                                    false,
+                                    true,
+                                    parseInt(n.graduation_extra_two),
+                                    parseInt(n.graduation_extra_three)
+                                );
+                            } else {
+                                check_graduation_status(
+                                    1,
+                                    parseInt(n.graduation_low_requirement),
+                                    false,
+                                    false,
+                                    parseInt(n.graduation_extra_two),
+                                    parseInt(n.graduation_extra_three)
+                                );
+                            }
+                        }
+                    } else {
+                        check_graduation_status(2);
+                    }
+                }
+            });
+        },
+        error: function() {
+            alert("failed!");
+        },
+    });
+    // check_graduation_status(1, 3, true, false); //===============================
 
-//——四级/中级工（具备以下条件之一者）
-// （1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。
-// （2）累计从事本职业或相关职业工作 6 年（含）以上。
-// （3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-// （3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（ 含尚未取得毕业证书的在校应届毕业生）。
-let byy04 = [
-    '(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上',
-    '(2) 累计从事本职业或相关职业工作 6 年（含）以上。',
-    '（3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（ 含尚未取得毕业证书的在校应届毕业生）。'];
-
-//——三级/高级工（具备以下条件之一者 ）
-// （1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。
-// （2-1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有高级技工学校、 技师学院毕业证书 （含尚未取得毕业证书的在校应届毕业生）；
-// （2-2）或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 （ 含尚未取得毕业证书的在校应届毕业生）。
-// （3） 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 （ 技能等级证书）后，累计从事本职业或相关职业工作２年（ 含） 以上。
-// 注：
-// 1、相关职业：婴幼儿发展引导员、幼儿教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健护理师、健康管理师、育婴员、家政服务员等。
-// 2、本专业：学前教育、早期教育。
-// 3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健、助产；高职高专：护理、预防医学、公共卫生管理、
-// 人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、特殊教育、心理健康教育、幼儿发展与健康管理；
-// 普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、教育学。
-let byy03 = [
-    '（1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。',
-    '（2-1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有高级技工学校、 技师学院毕业证书 （含尚未取得毕业证书的在校应届毕业生）；',
-    '（2-2）或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 （ 含尚未取得毕业证书的在校应届毕业生）。',
-    '（3） 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 （ 技能等级证书）后，累计从事本职业或相关职业工作２年（ 含） 以上。 ',
-    '注：\n' +
-    '1、相关职业：婴幼儿发展引导员、幼儿教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健护理师、健康管理师、育婴员、家政服务员等。 \n' +
-    '2、本专业：学前教育、早期教育。 \n' +
-    '3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健、助产；' +
-    '高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、特殊教育、心理健康教育、幼儿发展与健康管理；' +
-    '普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、教育学。 '];
-
-let ld04 = [
-    '（1） 累计从事本职业或相关职业工作 4 年（含）以上。 ',
-    '（2__1） 取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（2__2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '（3）高等院校本专业或相关专业在校生。 ', '注：\n' +
-    '1、相关职业：人力资源管理、劳动保障事务处理、社会工作等职业。 \n' +
-    '2、相关专业：劳动与社会保障、劳动经济学、人力资源管理、工商企业管理、法学、社会学等专业。 \n' +
-    '3、相关职业资格证书（技能等级证书）:企业人力资源管理师、劳动保障协理员、劳动保障专理员、社会工作者等与劳动关系协调员职业功能具有关联性的职业资格证书。'];
-let ld03 = [
-    '（1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。 ',
-    '（2__1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（2__2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '（3）具有大学专科本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书） 后，累计从事本职业或相关职业工作２年（含）以上。',
-    '（4）具有大学本科本专业或相关专业学历证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 1 年（含）以上。 ',
-    '（5）具有硕士研究生及以上本专业或相关专业学历证书（含尚未取得毕业证书的在校应届研究生毕业生）。', '注：\n' +
-    '1、相关职业：人力资源管理、劳动保障事务处理、社会工作等职业。 \n' +
-    '2、相关专业：劳动与社会保障、劳动经济学、人力资源管理、工商企业管理、法学、社会学等专业。 \n' +
-    '3、相关职业资格证书（技能等级证书）:企业人力资源管理师、劳动保障协理员、劳动保障专理员、社会工作者等与劳动关系协调员职业功能具有关联性的职业资格证书。'];
-let hg05 = [
-    '（1）累计从事本职业或相关职业工作1年（含）以上。',
-    '（2）本职业或相关职业学徒期满。'];
-let hg04 = [
-    '（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '（2）累计从事本职业或相关职业工作6年（含）以上。',
-    '（3__1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（3__2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。'];
-let hg03 = ['（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作5年（含）以上。',
-    '（2__1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（2__2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作2年（含）以上。'];
-
-//===============================================
-//化工增强,防腐蚀工
-let ffsg05 = ['（1）累计从事本职业或相关职业工作1年（含）以上。',
-    '（2）本职业或相关职业学徒期满。',
-    '注：防腐蚀工的本职业包含但不限于下列工种：' +
-    '耐蚀衬胶工、耐蚀喷涂工、耐蚀砖板衬里工、耐蚀塑料工、耐蚀纤维增强塑料工耐蚀混凝土工'];
-let ffsg04 = ['（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '（2）累计从事本职业或相关职业工作6年（含）以上。',
-    '（3__1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（3__2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '注：防腐蚀工的本职业包含但不限于下列工种：' +
-    '耐蚀衬胶工、耐蚀喷涂工、耐蚀砖板衬里工、耐蚀塑料工、耐蚀纤维增强塑料工耐蚀混凝土工'];
-let ffsg03 = ['（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作5年（含）以上。',
-    '（2__1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（2__2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作2年（含）以上。',
-    '注：防腐蚀工的本职业包含但不限于下列工种：' +
-    '耐蚀衬胶工、耐蚀喷涂工、耐蚀砖板衬里工、耐蚀塑料工、耐蚀纤维增强塑料工耐蚀混凝土工'];
-
-//化工增强,无机化学反应生产工
-let wjhxfyscg05 = ['（1）累计从事本职业或相关职业工作1年（含）以上。',
-    '（2）本职业或相关职业学徒期满。',
-    '注：无机化学反应生产工的本职业包含但不限于下列工种：' +
-    '电化学反应工、窑炉反应工、黄磷生产工、电石生产工、钛白粉生产工、高频等离子工、二硫化碳生产工、炭黑生产工'];
-let wjhxfyscg04 = ['（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '（2）累计从事本职业或相关职业工作6年（含）以上。',
-    '（3__1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（3__2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '注：无机化学反应生产工的本职业包含但不限于下列工种：' +
-    '电化学反应工、窑炉反应工、黄磷生产工、电石生产工、钛白粉生产工、高频等离子工、二硫化碳生产工、炭黑生产工'];
-let wjhxfyscg03 = ['（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作5年（含）以上。',
-    '（2__1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；',
-    '（2__2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。',
-    '（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作2年（含）以上。',
-    '注：无机化学反应生产工的本职业包含但不限于下列工种：' +
-    '电化学反应工、窑炉反应工、黄磷生产工、电石生产工、钛白粉生产工、高频等离子工、二硫化碳生产工、炭黑生产工'];
-
-// 后加 2019 07 28
-// 车工
-let cg05 = ['(1) 累计从事本职业工作１年( 含)以上。',
-    '(2) 本职业学徒期满。'];
-let cg04 = ['(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。',
-    '(2) 累计从事本职业工作６年(含)以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let cg03 = ['(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。',
-    '(2__1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2)或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。 ',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书  ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。'];
-// 机床装调维修工
-// let jcztwxg05 = ['', '', '', ''];
-let jcztwxg04 = ['(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '(2) 累计从事本职业或相关职业工作6年（含）以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2) 取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let jcztwxg03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-    '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2)或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。'];
-//==================================
-// 电梯安装维修工
-let dtanwxg05 = ['(1) 累计从事本职业或相关职业工作１年( 含)以上。',
-    '(2) 本职业或相关职业学徒期满。'];
-let dtanwxg04 = ['(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '(2) 累计从事本职业或相关职业工作6年（含）以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2)或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let dtanwxg03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-    '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2)或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。', '注：电梯安装维修工 1、相关职业：电梯装配调试工、特种设备检验检测工程技术人员（电梯）。2、本专业：电梯工程技术专业。\n' +
-    '3、相关专业: 理工科专业。起重装卸机械操作工 本专业或相关专业: 机械、电气类专业 。'];
-// 起重装卸机械操作工
-let qzzxjxczg05 = ['(1) 累计从事本职业或相关职业工作１年( 含)以上。',
-    '(2) 本职业或相关职业学徒期满。'];
-let qzzxjxczg04 = ['(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '(2) 累计从事本职业或相关职业工作6年（含）以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2)或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let qzzxjxczg03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-    '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2)或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。',
-    '注：电梯安装维修工 1、相关职业：电梯装配调试工、特种设备检验检测工程技术人员（电梯）。2、本专业：电梯工程技术专业。3、相关专业: 理工科专业。起重装卸机械操作工 本专业或相关专业: 机械、电气类专业 。'];
-//====================================
-// 架子工'
-let jzg05 = ['（1）经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。',
-    '(2) 在本职业连续见习工作 2 年以上。',
-    '(3) 本职业学徒期满。'];
-let jzg04 = ['(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作 3 年以上 , 经本职业中级正规培训达规定标准学时数 ,并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。',
-    '(3) 连续从事本职业工作7年以上。',
-    '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
-let jzg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 ,经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作6年以上。',
-    '(3__1) 取得高级技工学校审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(3__2)或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生 , 连续从事本职业工作2年以上。'];
-// 防水工
-let fsg05 = ['（1）经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。',
-    '(2) 在本职业连续见习工作 2 年以上。',
-    '(3) 本职业学徒期满。'];
-let fsg04 = ['(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作 3 年以上 , 经本职业中级正规培训达规定标准学时数 ,并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。',
-    '(3) 连续从事本职业工作7年以上。',
-    '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
-let fsg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 ,经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作6年以上。',
-    '(3__1) 取得高级技工学校审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(3__2)或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生 , 连续从事本职业工作2年以上。'];
-// 手工木工
-let sgmg05 = ['（1）经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。',
-    '(2) 在本职业连续见习工作 2 年以上。',
-    '(3) 本职业学徒期满。'];
-let sgmg04 = ['(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作 3 年以上 , 经本职业中级正规培训达规定标准学时数 ,并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。',
-    '(3) 连续从事本职业工作7年以上。',
-    '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
-let sgmg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 ,经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作6年以上。',
-    '(3__1) 取得高级技工学校审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(3__2)或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生 , 连续从事本职业工作2年以上。'];
-//====================================
-// 砌筑工
-let qzg05 = ['（1）经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。',
-    '(2) 在本职业连续见习工作 2 年以上。'];
-let qzg04 = ['(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作 3 年以上 , 经本职业中级正规培训达规定标准学时数 ,并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。',
-    '(3) 连续从事本职业工作8年以上。',
-    '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
-let qzg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 , 经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作6年以上。',
-    '(3__1) 取得高级技工学校本职业 ( 专业 ) 毕业证书。',
-    '(3__2)或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。'];
-// 钢筋工
-let gjg05 = ['（1）经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。',
-    '(2) 在本职业连续见习工作 2 年以上。'];
-let gjg04 = ['(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作 3 年以上 , 经本职业中级正规培训达规定标准学时数 ,并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。',
-    '(3) 连续从事本职业工作8年以上。',
-    '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
-let gjg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 , 经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作6年以上。',
-    '(3__1) 取得高级技工学校本职业 ( 专业 ) 毕业证书。',
-    '(3__2)或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。'];
-//====================================
-// 混凝土工
-let hntg05 = ['（1）经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。',
-    '(2) 在本职业连续见习工作 2 年以上。'];
-let hntg04 = ['(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作3年以上 , 经本职业中级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。',
-    '(3) 连续从事本职业工作 6 年以上。',
-    '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
-let hntg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 , 经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-    '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作 6 年以上。',
-    '(3) 取得经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-    '(4)取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。'];
-// 智能楼宇管理员
-// let znlugly05 = ['','','',''];
-let znlugly04 = ['(1) 累计从事本职业或相关职业工作6年（含）以上。',
-    '(2__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__1)取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let znlugly03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-    '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。',
-    '(2__2)取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。'
-];
-
-//新加 2019-08-13
-// 中式面点师
-let zsmds05 = ['(1) 累计从事本职业或相关职业工作１年( 含)以上。',
-    '(2) 本职业或相关职业学徒期满'];
-let zsmds04 = ['(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '(2) 累计从事本职业或相关职业工作6年（含）以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let zsmds03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-    '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2) 或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级 / 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作２年(含)以上。',
-    '注：中式面点师' +
-    '1、相关职业：中式烹调师、西式烹调师、西式面点师、糕点面包烘焙工、米面主食制作工。' +
-    '2、相关专业: 中餐烹饪、西餐烹饪、中西面点工艺、烹调工艺与营养（烹饪工艺与营养）、烹饪与营养教育。' +
-    '中式烹调师' +
-    '1、相关职业：中式面点师、西式烹调师、西式面点师。' +
-    '2、相关专业: 中餐烹饪、西餐烹饪、烹调工艺与营养（烹饪工艺与营养）、烹饪与营养教育。'];
-// 中式烹调师
-let zspts05 = ['(1) 累计从事本职业或相关职业工作１年( 含)以上。',
-    '(2) 本职业或相关职业学徒期满'];
-let zspts04 = ['(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。',
-    '(2) 累计从事本职业或相关职业工作6年（含）以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let zspts03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-    '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2) 或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级 / 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作２年(含)以上。',
-    '注：中式面点师' +
-    '1、相关职业：中式烹调师、西式烹调师、西式面点师、糕点面包烘焙工、米面主食制作工。' +
-    '2、相关专业: 中餐烹饪、西餐烹饪、中西面点工艺、烹调工艺与营养（烹饪工艺与营养）、烹饪与营养教育。' +
-    '中式烹调师' +
-    '1、相关职业：中式面点师、西式烹调师、西式面点师。' +
-    '2、相关专业: 中餐烹饪、西餐烹饪、烹调工艺与营养（烹饪工艺与营养）、烹饪与营养教育。'];
-//美容师
-let mrs05 = ['(1) 累计从事本职业工作１年( 含)以上。',
-    '(2) 本职业学徒期满。'];
-let mrs04 = ['(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。',
-    '(2) 累计从事本职业工作６年(含)以上。',
-    '(3__1) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(3__2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。'];
-let mrs03 = ['(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。',
-    '(2__1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-    '(2__2) 或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。',
-    '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书  ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。',
-    '注：本专业和相关专业: 美容美体、服装与化妆造型、舞美、美容护理、美容养生、医疗美容、人物形象设计、美容美发形象设计等。'];
-
-function get_worker_level_condition_selected(obj) {
-    let m = new Map();
-    m.set('dhg05', dhg05);
-    m.set('dhg04', dhg04);
-    m.set('dhg03', dhg03);
-
-    m.set('dg05', dg05);
-    m.set('dg04', dg04);
-    m.set('dg03', dg03);
-    m.set('qg05', qg05);
-    m.set('qg04', qg04);
-    m.set('qg03', qg03);
-    m.set('yyy05', yyy05);
-    m.set('yyy04', yyy04);
-    m.set('yyy03', yyy03);
-    m.set('byy05', byy05);
-    m.set('byy04', byy04);
-    m.set('byy03', byy03);
-    m.set('ld04', ld04);
-    m.set('ld03', ld03);
-    m.set('hg05', hg05);
-    m.set('hg04', hg04);
-    m.set('hg03', hg03);
-    m.set('ffsg05', ffsg05);
-    m.set('ffsg04', ffsg04);
-    m.set('ffsg03', ffsg03);
-    m.set('wjhxfyscg05', wjhxfyscg05);
-    m.set('wjhxfyscg04', wjhxfyscg04);
-    m.set('wjhxfyscg03', wjhxfyscg03);
-    //=================================-==-=---------------------------------------
-    //后加 2019 07 28
-    // 车工
-    m.set('cg05', cg05);
-    m.set('cg04', cg04);
-    m.set('cg03', cg03);
-// 机床装调维修工
-    m.set('jcztwxg04', jcztwxg04);
-    m.set('jcztwxg03', jcztwxg03);
-//==================================
-// 电梯安装维修工
-    m.set('dtanwxg05', dtanwxg05);
-    m.set('dtanwxg04', dtanwxg04);
-    m.set('dtanwxg03', dtanwxg03);
-// 起重装卸机械操作工
-    m.set('qzzxjxczg05', qzzxjxczg05);
-    m.set('qzzxjxczg04', qzzxjxczg04);
-    m.set('qzzxjxczg03', qzzxjxczg03);
-//====================================
-// 架子工'
-    m.set('jzg05', jzg05);
-    m.set('jzg04', jzg04);
-    m.set('jzg03', jzg03);
-// 防水工
-    m.set('fsg05', fsg05);
-    m.set('fsg04', fsg04);
-    m.set('fsg03', fsg03);
-// 手工木工
-    m.set('sgmg05', sgmg05);
-    m.set('sgmg04', sgmg04);
-    m.set('sgmg03', sgmg03);
-//====================================
-// 砌筑工
-    m.set('qzg05', qzg05);
-    m.set('qzg04', qzg04);
-    m.set('qzg03', qzg03);
-// 钢筋工
-    m.set('gjg05', gjg05);
-    m.set('gjg04', gjg04);
-    m.set('gjg03', gjg03);
-//====================================
-// 混凝土工
-    m.set('hntg05', hntg05);
-    m.set('hntg04', hntg04);
-    m.set('hntg03', hntg03);
-// 智能楼宇管理员
-// let znlugly05 = ['','','',''];
-    m.set('znlugly04', znlugly04);
-    m.set('znlugly03', znlugly03);
-
-// 新加 2019-08-03
-
-// 中式面点师
-    m.set('zsmds05', zsmds05);
-    m.set('zsmds04', zsmds04);
-    m.set('zsmds03', zsmds03);
-
-// 中式烹调师
-    m.set('zspts05', zspts05);
-    m.set('zspts04', zspts04);
-    m.set('zspts03', zspts03);
-
-//美容师
-    m.set('mrs05', mrs05);
-    m.set('mrs04', mrs04);
-    m.set('mrs03', mrs03);
-    return m.get(obj);
-
-
-}
-
-function apprentice_select(obj) {
-    if (obj === 0) {
-        $(".apprentice_start").show();
-        $(".apprentice_end").show();
-    } else {
-        $(".apprentice_start").hide();
-        $(".apprentice_end").hide();
-    }
+    // career_life_time(1);
+    // apprentice_check(false);
+    // check_has_qualification(1);
+    // check_graduation_status(1, 3, true, false); //===============================
 }

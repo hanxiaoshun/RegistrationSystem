@@ -107,40 +107,11 @@ def worker(request):
             return render_result(request, "page_main_controller/message.html",
                                  {'title_msg': title_msg, 'message': message})
         else:
-            worker_type = request.GET.get('type', None)
-            if worker_type:
-                title_switch = {
-                    '1': "电工",
-                    '2': "焊工",
-                    '3': "钳工",
-                    '4': "育婴员",
-                    '5': "保育员",
-                    '6': "劳动关系协调员",
-                    '7': '防腐蚀工',
-                    '8': '有机合成工',
-                    '9': '工业废水处理工',
-                    '10': '无机化学反应生产工',
-                    '11': '工业固体废物处理处置工',
-                    #     后加的
-                    '12': "车工",
-                    '13': "机床装调维修工",
-                    '14': "电梯安装维修工",
-                    '15': "起重装卸机械操作工",
-                    '16': "架子工",
-                    '17': "防水工",
-                    '18': '手工木工',
-                    '19': '砌筑工',
-                    '20': '钢筋工',
-                    '21': '混凝土工',
-                    '22': '智能楼宇管理员',
-                    #     后加的 2019 -08 -13
-                    '23': "中式面点师",
-                    '24': "中式烹调师",
-                    '25': "美容师"
-                }
-
+            skill_id = request.GET.get('skill_id', None)
+            skill_name = request.GET.get('skill_name', None)
+            if skill_name:
                 username = request.session.get('username', None)  # 用户名
-                title_msg = sys_msg + '-' + title_switch[worker_type]
+                title_msg = sys_msg + '-' + skill_name
                 if username:
                     register_user_info = RegisterUserInfo.objects.get(username=username)
                     user_infos = UserInfo.objects.filter(register_user_info=register_user_info.id).order_by('-id')
@@ -151,17 +122,17 @@ def worker(request):
                         else:
                             image_url = ''
                         return render_result(request, "page_main_controller/student/report_student_info.html",
-                                             {'title_msg': title_msg, 'worker': title_switch[worker_type],
+                                             {'title_msg': title_msg, 'skill_name': skill_name, 'skill_id': skill_id,
                                               'need_list': True,
                                               'user_info': user_info,
                                               'image_url': image_url})
                     else:
                         return render_result(request, "page_main_controller/student/report_student_info.html",
-                                             {'title_msg': title_msg, 'worker': title_switch[worker_type],
+                                             {'title_msg': title_msg, 'skill_name': skill_name, 'skill_id': skill_id,
                                               'image_url': "/media/images/2019/06/other_time.jpeg"})
                 else:
                     return render_result(request, "page_main_controller/report_student_info.html",
-                                         {'title_msg': title_msg, 'worker': title_switch[worker_type],
+                                         {'title_msg': title_msg, 'skill_name': skill_name, 'skill_id': skill_id,
                                           'image_url': "/media/images/2019/06/other_time.jpeg"})
             else:
                 message = "系统访问格式异常，请稍后尝试，或者联系管理员！"
@@ -553,6 +524,9 @@ def delete_history(request):
 
 
 def teacher_info(request):
+    """
+    获取负责人信息
+    """
     query_set = TeacherInfo.objects.all.order_by('-id')
     try:
         if len(query_set) > 0:

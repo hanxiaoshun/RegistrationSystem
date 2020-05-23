@@ -170,7 +170,47 @@
             </tbody>
         </table>
     </div>
-    <div class="pagination" style="color: ghostwhite">
+	<div class="pagination" style="color: ghostwhite">
+		<span class="step-links">
+			每页展示：<select onchange="getPageResizeWithSearch(this.options[this.options.selectedIndex].value, 'pagesize_teacher_search','submit-reporter-all-student-search');">
+				{% if contacts.paginator.per_page == 10 %}
+				<option value="{{contacts.paginator.per_page}}" selected>{{contacts.paginator.per_page}}</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				{% elif contacts.paginator.per_page == 20 %}
+				<option value="10">10</option>
+				<option value="{{per_page}}" selected>{{contacts.paginator.per_page}}</option>
+				<option value="30">30</option>
+				{% elif contacts.paginator.per_page == 30 %}
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="{{contacts.paginator.per_page}}" selected>{{contacts.paginator.per_page}}</option>
+				{%else%} {%endif%}
+			</select>&nbsp;条&nbsp;
+			{% if contacts.has_previous %}
+			<a href="javascript:void(0)" onclick="gotoPageWithSearch(1,'page_teacher_search','submit-reporter-all-student-search');">&laquo; 首页</a>
+			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.previous_page_number }}, 'page_teacher_search', 'submit-reporter-all-student-search');">上一页</a>
+			{% endif %}
+	
+			<span class="current">
+				第 {{ contacts.number }} 页 ,总共 {{ contacts.paginator.num_pages }} 页.
+			</span>
+			
+			{% if contacts.has_next %}
+			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.next_page_number }},'page_teacher_search','submit-reporter-all-student-search');">下一页</a>
+			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.paginator.num_pages }},'page_teacher_search','submit-reporter-all-student-search');">尾页 &raquo;</a> 
+			{%endif %}
+			<span class="current">
+				总 <label>{{ contacts.paginator.count }}</label> 条记录数据.
+			</span>
+			
+			<span class="current">
+				跳转至:<input type="text" placeholder="{{contacts.number}}" style="width: 50px;height: 20px;" value="" class="goto_page_appoint" id="goto_page_teacher_search"/>&nbsp;页
+				<a href="javascript:void(0)" onclick="gotoWithSearchToPage('goto_page_teacher_search','page_teacher_search','submit-reporter-all-student-search');">Go</a>
+			</span>
+		</span>
+	</div>
+<!--    <div class="pagination" style="color: ghostwhite">
     <span class="step-links">
         {% if contacts.has_previous %}
             <a style="color: #00FF00" href="?page=1">&laquo; 首页</a>
@@ -186,7 +226,7 @@
             <a style="color: red" href="?page={{ contacts.paginator.num_pages }}">尾页 &raquo;</a>
         {% endif %}
     </span>
-    </div>
+    </div> -->
 </div>
 
 

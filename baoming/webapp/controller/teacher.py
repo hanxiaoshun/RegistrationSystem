@@ -87,8 +87,9 @@ def report_info_review(request):
                 if len(teacher_infos) > 0:
                     student_infos = StudentInfo.objects.filter(record_status='1',
                                                                teacher_info=teacher_infos[0]).order_by('-id')
-                    paginator = Paginator(student_infos, 20)
-                    page = request.GET.get('page')
+                    paginator = Paginator(student_infos, 10)
+                    # page = request.GET.get('page')
+                    page = 1
                     contacts = paginator.get_page(page)
                     if len(school_terms) <= 0:
                         return render_result(request, "index.html",
