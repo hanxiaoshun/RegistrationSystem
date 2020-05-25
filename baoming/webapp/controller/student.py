@@ -282,15 +282,16 @@ def student_info_detail(request):
                         student_info.certificate_photos.picture_path)
                 condition_selected_str = ''
                 if student_info.condition_selected:
-                    condition_query_set = ReportCondition.objects.\
-                        filter(condition_id=int(student_info.condition_selected)).\
-                            values('condition_id',
-                                   'condition_name',
-                                   'condition_level',
-                                   'record_status')
-                    print(condition_query_set)
-                    if len(condition_query_set) > 0:
-                        condition_selected_str = condition_query_set[0]['condition_name']
+                    condition_selected_str = student_info.condition_selected.condition_name
+                    # condition_query_set = ReportCondition.objects.\
+                    #     filter(condition_id=student_info.condition_selected).\
+                    #         values('condition_id',
+                    #                'condition_name',
+                    #                'condition_level',
+                    #                'record_status')
+                    # print(condition_query_set)
+                    # if len(condition_query_set) > 0:
+                    #     condition_selected_str = condition_query_set[0]['condition_name']
                 print(condition_selected_str)
                 diploma_certificate_photos_url = ''
                 if student_info.diploma_certificate_photos:
@@ -323,8 +324,7 @@ def student_info_update(request):
             if object_form.is_valid():
                 student_info_id = object_form.cleaned_data.get('obj_id', None)
                 if student_info_id:
-                    student_infos = StudentInfo.objects.filter(
-                        id=student_info_id).order_by('-id')
+                    student_infos = StudentInfo.objects.filter(id=student_info_id).order_by('-id')
                     if len(student_infos) > 0:
                         student_info = student_infos[0]
 
