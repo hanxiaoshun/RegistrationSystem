@@ -45,3 +45,11 @@ class StudentUpdateForm(forms.Form):
 
     person_in_charge = forms.CharField(max_length=50, help_text='单位负责报名的负责人', required=False)
     course_hours = forms.IntegerField(required=False)
+    student_source_class = forms.IntegerField(required=False)
+    identify_subject = forms.IntegerField(required=False)
+    identify_class = forms.IntegerField(required=False)
+    subside_class = forms.IntegerField(required=False)
+    subside_certificate_class = forms.IntegerField(required=False)
+    subside_certificate_number = forms.CharField(max_length=20, help_text='证书编号', required=False)
+    examinee_identity = forms.IntegerField(required=False)
+    place_sign_up = forms.IntegerField(required=False)
