@@ -107,6 +107,7 @@ def worker(request):
             return render_result(request, "page_main_controller/message.html",
                                  {'title_msg': title_msg, 'message': message})
         else:
+            skill_main_class = request.GET.get('skill_main_class', None)
             skill_id = request.GET.get('skill_id', None)
             skill_name = request.GET.get('skill_name', None)
             if skill_name:
@@ -124,6 +125,7 @@ def worker(request):
                         return render_result(request, "page_main_controller/student/report_student_info.html",
                                              {'title_msg': title_msg, 'skill_name': skill_name, 'skill_id': skill_id,
                                               'need_list': True,
+                                              'skill_main_class': skill_main_class,
                                               'user_info': user_info,
                                               'image_url': image_url})
                     else:
