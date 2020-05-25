@@ -69,10 +69,22 @@
                         <label style='color:red'></label>
                     </td>
                     <td class="form-label td-span">
-
+                        <font color='#ff0000'>* </font>
+                        <label for='' class="input_text">技能大类：</label>
                     </td>
                     <td class="form-label td-input">
-
+                        <input type="hidden" id='search_school_term' class="search_school_term" name="skill_main_class" value="{{ skill_main_class }}">
+                        <select class='form-select school_term_search' id="school_term_search" onchange="school_term_a_search(this.options[this.options.selectedIndex].value,'{{tmp_list}}');">
+                            <option value="0">--请选择--</option>
+                            {% for term in skill_main_classes%}
+                            {% if term.id == skill_main_class %}
+                            <option value="{{term.id}}" selected="selected">{{term.skill_main_class_name}}</option>
+                            {% else%}
+                            <option value="{{term.id}}">{{term.skill_main_class_name}}</option>
+                            {% endif%}
+                            {% endfor%}
+                        </select>
+                        <label style='color:red'></label>
                     </td>
                     <td class="form-label td-span">
 
