@@ -733,6 +733,30 @@ class StudentInfo(models.Model):
                                      null=True,
                                      on_delete=models.CASCADE,
                                      help_text='负责人基本信息')
+    
+    skill_main_class = models.ForeignKey('ReportSkillMainClass', to_field='id',
+                                     related_name="%(app_label)s_%(class)s_ReportSkillMainClass",
+                                     verbose_name='技能大类ID',
+                                     blank=True,
+                                     null=True,
+                                     on_delete=models.CASCADE,
+                                     help_text='技能大类ID')
+    
+    report_skill = models.ForeignKey('ReportSkill', to_field='skill_id',
+                                     related_name="%(app_label)s_%(class)s_ReportSkill",
+                                     verbose_name='技能名称',
+                                     blank=True,
+                                     null=True,
+                                     on_delete=models.CASCADE,
+                                     help_text='技能名称')
+    condition_selected = models.ForeignKey('ReportCondition', to_field='condition_id',
+                                     related_name="%(app_label)s_%(class)s_ReportCondition",
+                                     verbose_name='申报条件代码',
+                                     blank=True,
+                                     null=True,
+                                     on_delete=models.CASCADE,
+                                     help_text='申报条件代码')
+    # condition_selected = models.CharField('申报条件代码', max_length=50, null=True, blank=True, help_text='申报条件代码')
 
     school_term = models.ForeignKey('SchoolTerm', to_field='id',
                                     related_name="%(app_label)s_%(class)s_TeacherInfo",
@@ -797,7 +821,6 @@ class StudentInfo(models.Model):
 
     work_training = models.TextField('个人工作及职业培训简历', max_length=500, null=True, blank=True, help_text='个人工作及职业培训简历')
 
-    condition_selected = models.CharField('申报条件代码', max_length=50, null=True, blank=True, help_text='申报条件代码')
     # working_record = models.ManyToManyField(WorkingHistory, through='WorkingHistoryStudentRLS',
     #                                         through_fields=('working_history', 'student_info'))
 
@@ -1118,7 +1141,7 @@ class ReportSkillMainClass(models.Model):
     报名工种大类
     """
     id = models.AutoField('技能大类ID', primary_key=True)
-    skill_main_class_code = models.CharField('技能大类编号',default='empty',
+    skill_main_class_code = models.CharField('技能大类编号',default='',
                                   max_length=50,
                                 #   unique=True,
                                 #   null=False,
@@ -1179,7 +1202,7 @@ class ReportSkill(models.Model):
                                       null=True,
                                       on_delete=models.SET_NULL,
                                       help_text='技能工种大类名称')
-    skill_code = models.CharField('技能编号',default='empty',
+    skill_code = models.CharField('技能编号',default='',
                                   max_length=50,
                                 #   unique=True,
                                 #   null=False,
@@ -1228,15 +1251,15 @@ class ReportCondition(models.Model):
     报名条件
     """
     condition_id = models.AutoField('条件ID', primary_key=True)
-    condition_name = models.CharField('条件名称',
-                                      max_length=50,
-                                      unique=True,
-                                      null=False,
-                                      help_text='技能名称')
     condition_level = models.CharField('条件等级', max_length=50, default=1, null=True, help_text='条件等级',
                                        choices=[('5', '初级(五级)'),
                                                 ('4', '中级(四级)'),
                                                 ('3', '高级(三级)')])
+    condition_name = models.CharField('条件名称',
+                                      max_length=50,
+                                      unique=False,
+                                      null=False,
+                                      help_text='技能名称')
     record_status = models.CharField('状态', max_length=50, default=2,
                                     choices=[('1', '启用'),
                                             ('2', '停用')],
@@ -1400,7 +1423,7 @@ class LevelCodeClass(models.Model):
     级别编码表
     """
     id = models.AutoField('自动编码ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1448,7 +1471,7 @@ class SexClass(models.Model):
     性别编码表
     """
     id = models.AutoField('自动编码ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1497,7 +1520,7 @@ class StudentSourceClass(models.Model):
     考生来源编码表
     """
     id = models.AutoField('考生来源编码ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1545,7 +1568,7 @@ class IdentifySubject(models.Model):
     鉴定科目编码表
     """
     id = models.AutoField('考生来源编码ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1594,7 +1617,7 @@ class IdentifyClass(models.Model):
     鉴定类别编码表
     """
     id = models.AutoField('鉴定类别ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1642,7 +1665,7 @@ class SubsideClass(models.Model):
     补贴类别编码表
     """
     id = models.AutoField('补贴类别ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1690,7 +1713,7 @@ class SubsideCertificateClass(models.Model):
     补贴证件类别编码表
     """
     id = models.AutoField('补贴证件类别ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1739,7 +1762,7 @@ class SubsideCertificateClass(models.Model):
 #     考生类别编码表
 #     """
 #     id = models.AutoField('考生类别ID', primary_key=True)
-#     code = models.CharField('手动ID',default='empty',
+#     code = models.CharField('手动ID',default='',
 #                                   max_length=50,
 #                                   unique=True,
 #                                   null=False,
@@ -1787,7 +1810,7 @@ class ExamineeIdentity(models.Model):
     考生身份编码表
     """
     id = models.AutoField('考生身份ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
@@ -1835,7 +1858,7 @@ class PlaceSignUp(models.Model):
     预报名地点表
     """
     id = models.AutoField('ID', primary_key=True)
-    code = models.CharField('手动ID',default='empty',
+    code = models.CharField('手动ID',default='',
                                   max_length=50,
                                   unique=True,
                                   null=False,
