@@ -77,6 +77,7 @@
                     <td class="form-label td-input">
                         <input type='text' hidden name='declaration_of_occupation' required='required' value='{{skill_name}}' id="declaration_of_occupation" readonly="readonly" class='ipt' />
                         <input type='text' hidden name='skill_id' required='required' value='{{skill_id}}' id="id_skill_id" readonly="readonly" class='ipt' />
+                        <input type='text' hidden name='skill_main_class' required='required' value='{{skill_main_class}}' id="id_skill_main_class" readonly="readonly" class='ipt' />
                         <label style='color:aqua' class='ipt'>-- {{skill_name}} --</label>
                         <label style='color:red'></label>
                     </td>
@@ -326,37 +327,6 @@
                         <label style='color:red'></label>
                     </td>
                 </tr>
-
-                <tr>
-                    <td class="form-label td-span" hidden="hidden">
-                        <font color='#ff0000'>* </font>
-                        <span class="input_text">个人工作及职业培训简历：</span>
-                    </td>
-                    <td class="form-label td-input" style="text-align: center" hidden="hidden">
-                        <textarea name='work_training' class='ipt form-textarea' rows="2" maxlength="80" id="work_training" required="required" cols="30">
-                        </textarea>
-                        <label style='color:red'></label>
-                    </td>
-                    <td class="form-label td-span certificate_photos" id="certificate_photos_td01">
-                        <font color='#ff0000'>* </font>
-                        <input type="button" value="上传资格证件照" id='val2' class="form-button image-btn-certificate" style="color: purple;" />
-                        <input type="hidden" name="certificate_photos_form" value="" id="certificate_photos">
-                    </td>
-                    <td class="form-label td-input certificate_photos" rowspan="2" style="text-align: center" id="certificate_photos_td02">
-                        <img src="" id='certificate-photos' width="70px" height="80px" alt="资格证件照">
-                    </td>
-
-                    <td class="form-label td-span diploma_certificate_photos" id="diploma_certificate_photos_td01">
-                        <font color='#ff0000'>* </font>
-                        <input type="button" value="上传毕业证件照" id='val3' class="form-button diploma-image-btn-certificate" style="color: purple;" />
-                        <input type="hidden" name="diploma_certificate_photos_form" value="" id="diploma_certificate_photos">
-                    </td>
-                    <td class="form-label td-input diploma_certificate_photos" rowspan="2" style="text-align: center" id="diploma_certificate_photos_td02">
-                        <img src="" id='diploma-certificate-photos' width="70px" height="80px" alt="毕业证件照">
-                    </td>
-                </tr>
-
-
                 <tr>
                     <td class="form-label td-span student_source">
                         <font color='#ff0000'>* </font>
@@ -446,7 +416,7 @@
                     </td>
                     <td class="form-label td-span identify_class">
                         <font color='#ff0000'>* </font>
-                        <span class="input_text" id="span_identify_subject">鉴定类型：</span>
+                        <span class="input_text" id="span_identify_subject">鉴定科目：</span>
                     </td>
                     <td class="form-label td-input identify_subject">
                         <select name="identify_subject" id="id_identify_subject">
@@ -455,6 +425,34 @@
                             <option></option>
                         </select>
                         <label style='color:red'></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span" hidden="hidden">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text">个人工作及职业培训简历：</span>
+                    </td>
+                    <td class="form-label td-input" style="text-align: center" hidden="hidden">
+                        <textarea name='work_training' class='ipt form-textarea' rows="2" maxlength="80" id="work_training" required="required" cols="30">
+                        </textarea>
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span certificate_photos" id="certificate_photos_td01">
+                        <font color='#ff0000'>* </font>
+                        <input type="button" value="上传资格证件照" id='val2' class="form-button image-btn-certificate" style="color: purple;" />
+                        <input type="hidden" name="certificate_photos_form" value="" id="certificate_photos">
+                    </td>
+                    <td class="form-label td-input certificate_photos" rowspan="2" style="text-align: center" id="certificate_photos_td02">
+                        <img src="" id='certificate-photos' width="70px" height="80px" alt="资格证件照">
+                    </td>
+
+                    <td class="form-label td-span diploma_certificate_photos" id="diploma_certificate_photos_td01">
+                        <font color='#ff0000'>* </font>
+                        <input type="button" value="上传毕业证件照" id='val3' class="form-button diploma-image-btn-certificate" style="color: purple;" />
+                        <input type="hidden" name="diploma_certificate_photos_form" value="" id="diploma_certificate_photos">
+                    </td>
+                    <td class="form-label td-input diploma_certificate_photos" rowspan="2" style="text-align: center" id="diploma_certificate_photos_td02">
+                        <img src="" id='diploma-certificate-photos' width="70px" height="80px" alt="毕业证件照">
                     </td>
                 </tr>
         </table>

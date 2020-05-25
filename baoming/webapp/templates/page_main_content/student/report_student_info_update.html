@@ -300,7 +300,113 @@
                         <label style='color:red'></label>
                     </td>
                 </tr>
-
+                <tr>
+                    <td class="form-label td-span student_source">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="student_source_value">考生来源：</span>
+                    </td>
+                    <td class="form-label td-input student_source">
+                        <input id='update_student_source_class' hidden value="{{ student_info.student_source.id}}">
+                        <select name="student_source_class" id="id_student_source_class">
+                            <option selected>退役人员</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span subside_class">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="span_subside_class">补贴类型：</span>
+                    </td>
+                    <td class="form-label td-input subside_class">
+                        <input id='update_subside_class' hidden value="{{ student_info.subside_class.id}}">
+                        <select name="subside_class" id="id_subside_class">
+                            <option selected>不申请补贴</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                        <label style='color:red'></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span subside_certificate_class">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="span_subside_certificate_class">补贴证件类型：</span>
+                    </td>
+                    <td class="form-label td-input subside_certificate_class">
+                        <input id='update_subside_certificate_class' hidden value="{{ student_info.subside_certificate_class.id}}">
+                        <select name="subside_certificate_class" id="id_subside_certificate_class">
+                            <option selected>没有证件</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span subside_certificate_number">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="span_subside_certificate_number">补贴证件编号：</span>
+                    </td>
+                    <td class="form-label td-input subside_certificate_number">
+                        <input type='text' name='subside_certificate_number' id='id_subside_certificate_number' value='{{ student_info.subside_certificate_number}}' class='ipt' maxlength="20" />
+                        <label style='color:red'></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span examinee_identity">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="span_examinee_identity">考生身份：</span>
+                    </td>
+                    <td class="form-label td-input examinee_identity">
+                        <input id='update_examinee_identity' hidden value="{{ student_info.examinee_identity.id}}">
+                        <select name="examinee_identity" id="id_examinee_identity">
+                            <option selected>是</option>
+                            <option>不是</option>
+                            <option></option>
+                        </select>
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span place_sign_up">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="span_place_sign_up">预报名点：</span>
+                    </td>
+                    <td class="form-label td-input place_sign_up">
+                        <input id='update_place_sign_up' hidden value="{{ student_info.place_sign_up.id}}">
+                        <select name="place_sign_up" id="id_place_sign_up">
+                            <option selected>报名点A</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                        <label style='color:red'></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span identify_class">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="span_identify_class">鉴定类型：</span>
+                    </td>
+                    <td class="form-label td-input identify_class">
+                        <input id='update_identify_class' hidden value="{{ student_info.identify_class.id}}">
+                        <select name="identify_class" id="id_identify_class">
+                            <option selected>正常鉴定</option>
+                            <option value=""></option>
+                            <option></option>
+                        </select>
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span identify_class">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text" id="span_identify_subject">鉴定科目：</span>
+                    </td>
+                    <td class="form-label td-input identify_subject">
+                        <input id='update_identify_subject' hidden value="{{ student_info.identify_subject.id}}">
+                        <select name="identify_subject" id="id_identify_subject">
+                        <option selected>正常鉴定</option>
+                        <option value=""></option>
+                        <option></option>
+                        </select>
+                        <label style='color:red'></label>
+                    </td>
+                </tr>
                 <tr>
                     <td class="form-label td-span certificate_photos" style="width: 150px;" id="certificate_photos_td01">
                         <font color='#ff0000'>* </font>
@@ -436,5 +542,97 @@
                 console.log("检测图片已上传程序！")
             }
         });
+        get_student_info_extra();
     });
+
+    function get_student_info_extra() {
+        var update_student_source_class = $("#update_student_source_class").val();
+        var update_examinee_identity = $("#update_examinee_identity").val();
+        var update_subside_class = $("#update_subside_class").val();
+        var update_subside_certificate_class = $("#update_subside_certificate_class").val();
+        var update_place_sign_up = $("#update_place_sign_up").val();
+        var update_identify_subject = $("#update_identify_subject").val();
+        var update_identify_class = $("#update_identify_class").val();
+        let url = '/report/get_student_info_extra/';
+        // let form_data = new FormData();
+        // form_data.append("csrfmiddlewaretoken", document.getElementsByName('csrfmiddlewaretoken')[0].value);
+        // form_data.append("uid", obj.id);
+        $.ajax({
+            url: url,
+            type: 'GET',
+            // data: form_data,
+            data: {},
+            processData: false, // tell jquery not to process the data
+            contentType: false, // tell jquery not to set contentType
+            success: function(data) {
+                if (data.status) {
+                    var identifyClass = JSON.parse(data.data.identifyClass);
+                    var identifySubject = JSON.parse(data.data.identifySubject);
+                    var placeSignUp = JSON.parse(data.data.placeSignUp);
+                    var studentSourceClass = JSON.parse(data.data.studentSourceClass);
+                    var subsideCertificateClass = JSON.parse(data.data.subsideCertificateClass);
+                    var subsideClass = JSON.parse(data.data.subsideClass);
+                    var examineeIdentity = JSON.parse(data.data.examineeIdentity);
+                    $("#id_identify_class").empty();
+                    $.each(identifyClass, function(i, n) {
+                        if (n.pk === update_identify_class) {
+                            $("#id_identify_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
+                        } else {
+                            $("#id_identify_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
+                        }
+                    });
+                    $("#id_identify_subject").empty();
+                    $.each(identifySubject, function(i, n) {
+                        if (n.pk === update_identify_subject) {
+                            $("#id_identify_subject").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
+                        } else {
+                            $("#id_identify_subject").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
+                        }
+                    });
+                    $("#id_place_sign_up").empty();
+                    $.each(placeSignUp, function(i, n) {
+                        if (n.pk === update_place_sign_up) {
+                            $("#id_place_sign_up").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
+                        } else {
+                            $("#id_place_sign_up").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
+                        }
+                    });
+                    $("#id_student_source_class").empty();
+                    $.each(studentSourceClass, function(i, n) {
+                        if (n.pk === update_student_source_class) {
+                            $("#id_student_source_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
+                        } else {
+                            $("#id_student_source_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
+                        }
+                    });
+                    $("#id_subside_certificate_class").empty();
+                    $.each(subsideCertificateClass, function(i, n) {
+                        if (n.pk === update_subside_certificate_class) {
+                            $("#id_subside_certificate_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
+                        } else {
+                            $("#id_subside_certificate_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
+                        }
+                    });
+                    $("#id_subside_class").empty();
+                    $.each(subsideClass, function(i, n) {
+                        if (n.pk === update_subside_class) {
+                            $("#id_subside_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
+                        } else {
+                            $("#id_subside_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
+                        }
+                    });
+                    $("#id_examinee_identity").empty();
+                    $.each(examineeIdentity, function(i, n) {
+                        if (n.pk === update_examinee_identity) {
+                            $("#id_examinee_identity").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
+                        } else {
+                            $("#id_examinee_identity").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
+                        }
+                    });
+                } else {
+                    alert("");
+                }
+            }
+        });
+    }
 </script>

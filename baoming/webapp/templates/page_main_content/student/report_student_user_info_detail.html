@@ -369,16 +369,6 @@
                 </td>
             </tr>
             <tr>
-                <!--            <td class="form-label td-span">-->
-                <!--                <font color='#ff0000'>* </font>-->
-                <!--                <span class="input_text" style="font-size: 12px;">个人工作及职业培训简历：</span>-->
-                <!--            </td>-->
-                <!--            <td class="form-label td-input" colspan="3">-->
-                <!--                <label style='color:white' title="填写现持有证书发证日期,格式:1990-01-20">-->
-                <!--                    {{ student_info.work_training }}-->
-                <!--                </label>-->
-                <!--                <label style='color:red'></label>-->
-                <!--            </td>-->
                 <td class="form-label td-span course_hours">
                     <font color='#ff0000'>* </font>
                     <span class="input_text">培训课时：</span>
@@ -386,6 +376,82 @@
                 <td class="form-label td-input course_hours">
                     <label style='color:white' title="培训课时">
                     {{ student_info.course_hours|get_zero}}
+                </label>
+                </td>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">预报名点：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <label style='color:white' title="预报名点">
+                    {{ student_info.place_sign_up.name}}
+                </label>
+                </td>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">考生身份：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <label style='color:white' title="考生身份">
+                    {{ student_info.examinee_identity.name}}
+                </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">补贴类型：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <label style='color:white' title="补贴类型">
+                    {{ student_info.subside_class.name}}
+                </label>
+                </td>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">补贴证件类型：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <label style='color:white' title="补贴证件类型">
+                    {{ student_info.subside_certificate_class.name}}
+                </label>
+                </td>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">补贴证件编号：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <label style='color:white' title="补贴证件编号">
+                    {{ student_info.subside_certificate_number}}
+                </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">考生来源：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <label style='color:white' title="考生来源">
+                    {{ student_info.student_source_class.name}}
+                </label>
+                </td>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">鉴定类型：</span>
+                </td>
+                <td class="form-label td-input identify_class">
+                    <label style='color:white' title="鉴定类型">
+                    {{ student_info.identify_class.name}}
+                </label>
+                </td>
+                <td class="form-label td-span course_hours">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">鉴定科目：</span>
+                </td>
+                <td class="form-label td-input course_hours">
+                    <label style='color:white' title="鉴定科目">
+                    {{ student_info.identify_subject.name}}
                 </label>
                 </td>
             </tr>
