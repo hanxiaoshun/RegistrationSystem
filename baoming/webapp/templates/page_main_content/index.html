@@ -344,6 +344,7 @@
                     if (n.skill_main_class !== tmp_skill_main_class) {
                         var tmp_json = {};
                         tmp_json['skill_main_class_name'] = n.skill_main_class_name;
+                        tmp_json['skill_main_class'] = n.skill_main_class;
                         tmp_json['skills'] = [];
                         tmp_list.push(tmp_json);
                         tmp_skill_main_class = n.tmp_skill_main_class;
@@ -366,7 +367,7 @@
                     $.each(data_json, function(j, m) {
                         if (n.skill_main_class_name === m.skill_main_class_name) {
                             n.skills.push(m);
-                            skill_str = "<button class='skill_button '> <a class ='worker_size' href='/report/worker?skill_id=" + m.skill_id + "&skill_name=" + m.skill_name +
+                            skill_str = "<button class='skill_button '> <a class ='worker_size' href='/report/worker?skill_main_class=" + m.skill_main_class + "&skill_id=" + m.skill_id + "&skill_name=" + m.skill_name +
                                 "' title='" + m.skill_name + "'>" + m.skill_name + "</a></button >";
                             skill = skill + skill_str;
                         }
