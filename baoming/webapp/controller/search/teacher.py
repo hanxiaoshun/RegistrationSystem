@@ -1,6 +1,6 @@
 from webapp.controller.renderUtil import render_result
 from webapp.controller.search.search_common import *
-from webapp.controller.search.search_param_deal_teacher import search_parameter
+from webapp.controller.search.search_param_deal import search_parameter
 
 from webapp.utils.date_encoder import *
 from django.core.paginator import Paginator

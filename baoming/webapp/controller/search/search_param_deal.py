@@ -28,7 +28,20 @@ if len(report_skill_result) > 0:
 
 
 def search_parameter(request, search_type=None):
-    
+    teacher_tmp = None
+    role_name = request.session.get('role_name', None)  # 用户名
+    if role_name is not None:
+        if role_name in 'teacher':
+            username = request.session.get('username', None)  # 用户名
+            if username:
+                register_user_info = RegisterUserInfo.objects.get(username=username)
+                user_info_tmp = UserInfo.objects.get(register_user_info=register_user_info)
+                teacher_tmp = TeacherInfo.objects.get(user_info=user_info_tmp)
+        else:
+            pass
+    print('role')
+    print(role_name)
+    print(teacher_tmp)
     title_msg = "所有学员的条件查询"
     student_search = StudentSearchForm(request.GET)
     user_search = UserInfoSearchForm(request.GET)
@@ -97,18 +110,23 @@ def search_parameter(request, search_type=None):
             if declaration_of_occupation:
                 student_info.declaration_of_occupation = declaration_of_occupation
                 kwargs['declaration_of_occupation__icontains'] = declaration_of_occupation
-
+            student_infos_all_term_count = 0
             if teacher_info:
-                if type(teacher_info) == str:
-                    if int(teacher_info) > 0:
-                        kwargs['teacher_info'] = int(teacher_info)
-                        student_info.teacher_info = TeacherInfo.objects.get(id=int(teacher_info))
-                else:
-                    kwargs['teacher_info'] = teacher_info
-                    student_info.teacher_info = TeacherInfo.objects.get(id=teacher_info)
+                if teacher_info != 0:
+                    if type(teacher_info) == str:
+                        if int(teacher_info) > 0:
+                            kwargs['teacher_info'] = int(teacher_info)
+                            student_info.teacher_info = TeacherInfo.objects.get(id=int(teacher_info))
+                    else:
+                        kwargs['teacher_info'] = teacher_info
+                        student_info.teacher_info = TeacherInfo.objects.get(id=teacher_info)
+                    student_infos_all_term_count = StudentInfo.objects.filter(teacher_info=teacher_info).count()
             else:
-                teacher_info = 0
-                
+                if teacher_tmp:
+                    teacher_info = teacher_tmp
+                else:
+                    teacher_info = 0
+                    
             last_school_term = SchoolTerm.objects.last()
             if school_term:
                 if type(school_term) == str:
@@ -168,11 +186,16 @@ def search_parameter(request, search_type=None):
                 student_infos = StudentInfo.objects.filter(review_status=1,
                                                            cancel_status=2,
                                                            **kwargs).order_by('-id')
-                print(student_infos)
-
             elif search_type == 'electronic_communication':
-                student_infos = StudentInfo.objects.filter(review_status=1,
+                student_infos = StudentInfo.objects.filter(confirm_status=1,
                                                            cancel_status=2,
+                                                           **kwargs).order_by('-id')
+            elif search_type == 'all_student':
+                student_infos = StudentInfo.objects.filter(confirm_status=1,
+                                                           cancel_status=2,
+                                                           **kwargs).order_by('-id')
+            elif search_type == 'teacher_search_wait_review':
+                student_infos = StudentInfo.objects.filter(teacher_info=teacher_info,
                                                            **kwargs).order_by('-id')
             else:
                 student_infos = StudentInfo.objects.filter(confirm_status=1,
@@ -204,7 +227,9 @@ def search_parameter(request, search_type=None):
                 'identification_level':identification_level,
                 'report_skill_main':report_skill_main,
                 'no_term': True,
-                'report_skill':report_skill}
+                'report_skill':report_skill,
+                'student_infos_all_term_count':student_infos_all_term_count,
+                'current_term_student_len': len(student_infos)}
                 return param_result
         else:
             print(user_search.error_class, user_search.errors)

@@ -108,17 +108,22 @@ def search_parameter(request, search_type=None):
             if declaration_of_occupation:
                 student_info.declaration_of_occupation = declaration_of_occupation
                 kwargs['declaration_of_occupation__icontains'] = declaration_of_occupation
-
+            student_infos_all_term_count = 0
             if teacher_info:
-                if type(teacher_info) == str:
-                    if int(teacher_info) > 0:
-                        kwargs['teacher_info'] = int(teacher_info)
-                        student_info.teacher_info = TeacherInfo.objects.get(id=int(teacher_info))
-                else:
-                    kwargs['teacher_info'] = teacher_info
-                    student_info.teacher_info = TeacherInfo.objects.get(id=teacher_info)
+                if teacher_info != 0:
+                    if type(teacher_info) == str:
+                        if int(teacher_info) > 0:
+                            kwargs['teacher_info'] = int(teacher_info)
+                            student_info.teacher_info = TeacherInfo.objects.get(id=int(teacher_info))
+                    else:
+                        kwargs['teacher_info'] = teacher_info
+                        student_info.teacher_info = TeacherInfo.objects.get(id=teacher_info)
+                    student_infos_all_term_count = StudentInfo.objects.filter(teacher_info=teacher_info).count()
             else:
-                teacher_info = teacher_tmp
+                if teacher_tmp:
+                    teacher_info = teacher_tmp
+                else:
+                    teacher_info = 0
                 
             last_school_term = SchoolTerm.objects.last()
             if school_term:

@@ -93,7 +93,7 @@ def administrator_search_all_student(request):
     :return:
     """
     title_msg = '查询所有学员'
-    param_result = search_parameter(request)
+    param_result = search_parameter(request, 'all_student')
     report_skill_main_list = param_result['report_skill_main_list']
     report_skill_list = param_result['report_skill_list']
     tmp_list = param_result['tmp_list']
