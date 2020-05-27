@@ -28,17 +28,6 @@ if len(report_skill_result) > 0:
 
 
 def search_parameter(request, search_type=None):
-    teacher_tmp = None
-    role_name = request.session.get('role_name', None)  # 用户名
-    if role_name is not None:
-        if role_name in 'teacher':
-            username = request.session.get('username', None)  # 用户名
-            if username:
-                register_user_info = RegisterUserInfo.objects.get(username=username)
-                user_info_tmp = UserInfo.objects.get(register_user_info=register_user_info)
-                teacher_tmp = TeacherInfo.objects.get(user_info=user_info_tmp)
-        else:
-            pass
     
     title_msg = "所有学员的条件查询"
     student_search = StudentSearchForm(request.GET)
@@ -93,6 +82,8 @@ def search_parameter(request, search_type=None):
             identification_level = student_search.cleaned_data.get('identification_level', None)
             declaration_of_occupation = student_search.cleaned_data.get('declaration_of_occupation', None)
             teacher_info = student_search.cleaned_data.get('teacher_info', None)
+            print('teacher_info')
+            print(teacher_info)
             school_term = student_search.cleaned_data.get('school_term', None)
             if identification_level:
                 student_info.identification_level = identification_level
@@ -169,9 +160,17 @@ def search_parameter(request, search_type=None):
                 report_skill = 0
                 
             student_info.user_info = user_info
+            print(search_type)
             print(kwargs)
             print(school_term)
+            print(StudentInfo.objects.filter(review_status=1,cancel_status=2,**kwargs))
             if search_type == 'wait_confirm':
+                student_infos = StudentInfo.objects.filter(review_status=1,
+                                                           cancel_status=2,
+                                                           **kwargs).order_by('-id')
+                print(student_infos)
+
+            elif search_type == 'electronic_communication':
                 student_infos = StudentInfo.objects.filter(review_status=1,
                                                            cancel_status=2,
                                                            **kwargs).order_by('-id')
@@ -179,14 +178,15 @@ def search_parameter(request, search_type=None):
                 student_infos = StudentInfo.objects.filter(confirm_status=1,
                                                            cancel_status=2,
                                                            **kwargs).order_by('-id')
+            print('student_infos')
+            print(student_infos)
             paginator = Paginator(student_infos, per_page)
             contacts = paginator.get_page(page)
             # return render_result(request, "page_main_controller/administrator/all_student_base_info.html",
             #               {'title_msg': title_msg, "contacts": contacts, 'student_info': student_info,
             #                'teacher_infos': teacher_infos, 'teacher_info': teacher_info, 'school_terms': school_terms,
             #                'school_term': school_term, 'identification_level': identification_level})
-            if teacher_tmp:
-                teacher_info = teacher_tmp
+
             if len(school_terms) <= 0:
                 return render_result(request, "index.html",
                                      {'title_msg': title_msg, 'need_login': False, 'no_term': False})
@@ -203,6 +203,7 @@ def search_parameter(request, search_type=None):
                 'teacher_info':teacher_info,
                 'identification_level':identification_level,
                 'report_skill_main':report_skill_main,
+                'no_term': True,
                 'report_skill':report_skill}
                 return param_result
         else:

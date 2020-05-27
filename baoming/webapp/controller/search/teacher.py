@@ -28,7 +28,8 @@ def teacher_search_wait_review(request):
     report_skill = param_result['report_skill']
     student_infos_all_term_count = param_result['student_infos_all_term_count']
     current_term_student_len = param_result['current_term_student_len']
-    
+    print("ssss")
+    print(f"{ param_result['contacts'].object_list }")
     page_result = {'title_msg': title_msg, 
                    'need_login': False,
                    'report_skill_main_list':report_skill_main_list,

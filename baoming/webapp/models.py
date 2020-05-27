@@ -711,7 +711,7 @@ class TeacherInfo(models.Model):
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
             return str(self.__dict__)
         else:
-            return str(self.id)
+            return str(self.user_info.real_name)
 
 
 class StudentInfo(models.Model):
@@ -1134,7 +1134,7 @@ class SystemMessage(models.Model):
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
             return str(self.__dict__)
         else:
-            return str(self.id)
+            return str(self.message_title)
 
 class ReportSkillMainClass(models.Model):
     """

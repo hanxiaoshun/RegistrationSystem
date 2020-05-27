@@ -118,7 +118,7 @@ def administrator_search_all_student(request):
                    'school_terms': school_terms, 'school_term': school_term,
                    'teacher_info': teacher_info,
                    'identification_level': identification_level,
-                   'report_skill_main':report_skill_main,'report_skill':report_skill}
+                   'report_skill_main':report_skill_main,'report_skill':report_skill,'no_term': True}
 
     if param_result:       
             return render_result(request,
@@ -159,7 +159,9 @@ def administrator_search_wait_confirm(request):
                    'school_terms': school_terms, 'school_term': school_term,
                    'teacher_info': teacher_info,
                    'identification_level': identification_level,
-                   'report_skill_main':report_skill_main,'report_skill':report_skill}
+                   'report_skill_main':report_skill_main,
+                   'report_skill':report_skill,
+                   'no_term': True}
 
     if param_result:
             return render_result(request,

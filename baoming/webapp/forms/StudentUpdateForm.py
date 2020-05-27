@@ -53,3 +53,5 @@ class StudentUpdateForm(forms.Form):
     subside_certificate_number = forms.CharField(max_length=20, help_text='证书编号', required=False)
     examinee_identity = forms.IntegerField(required=False)
     place_sign_up = forms.IntegerField(required=False)
+    skill_main_class = forms.IntegerField(required=False)
+    report_skill = forms.IntegerField(required=False)

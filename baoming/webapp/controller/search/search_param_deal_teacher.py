@@ -39,7 +39,9 @@ def search_parameter(request, search_type=None):
                 teacher_tmp = TeacherInfo.objects.get(user_info=user_info_tmp)
         else:
             pass
-    
+    print('role')
+    print(role_name)
+    print(teacher_tmp)
     title_msg = "所有学员的条件查询"
     student_search = StudentSearchForm(request.GET)
     user_search = UserInfoSearchForm(request.GET)
@@ -116,7 +118,7 @@ def search_parameter(request, search_type=None):
                     kwargs['teacher_info'] = teacher_info
                     student_info.teacher_info = TeacherInfo.objects.get(id=teacher_info)
             else:
-                teacher_info = 0
+                teacher_info = teacher_tmp
                 
             last_school_term = SchoolTerm.objects.last()
             if school_term:
@@ -169,8 +171,10 @@ def search_parameter(request, search_type=None):
                 report_skill = 0
                 
             student_info.user_info = user_info
+            print('rrrrrrrrrrrrrrrrrrr')
             print(kwargs)
             print(school_term)
+            print(teacher_info)
             if search_type == 'teacher_search_wait_review':
                 student_infos = StudentInfo.objects.filter(teacher_info=teacher_info,
                                                            **kwargs).order_by('-id')
@@ -179,10 +183,6 @@ def search_parameter(request, search_type=None):
             student_infos_all_term_count = StudentInfo.objects.filter(teacher_info=teacher_info).count()
             paginator = Paginator(student_infos, per_page)
             contacts = paginator.get_page(page)
-            # return render_result(request, "page_main_controller/administrator/all_student_base_info.html",
-            #               {'title_msg': title_msg, "contacts": contacts, 'student_info': student_info,
-            #                'teacher_infos': teacher_infos, 'teacher_info': teacher_info, 'school_terms': school_terms,
-            #                'school_term': school_term, 'identification_level': identification_level})
             if teacher_tmp:
                 teacher_info = teacher_tmp
             if len(school_terms) <= 0:
