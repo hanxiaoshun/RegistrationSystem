@@ -30,7 +30,7 @@
         <!--            <input type='button' style="color: midnightblue" value='下载本期' class='form-button'/>-->
         <!--        </a>-->
         <a href="javascript:void(0);">
-            <input type='button' style="color: blueviolet;width: 10%" value='下载' class='form-button' onclick="reporter_chemical_not_search();" />
+            <input type='button' style="color: blueviolet;width: 10%" value='下载' class='form-button' onclick="reporter_spin();" />
         </a>
         <a href="javascript:void(0);">
             <input type="button" style="color: hotpink" value='<<查询' onclick="recover_search();" class='form-button' />
@@ -38,7 +38,7 @@
     </p>
 
     <hr class="hr-search">
-    <form action="/report/administrator_search_chemical_not/" method="get" id="form-search-chemical-not">
+    <form action="/report/administrator_reporter_spin/" method="get" id="form-search-spin">
         {% csrf_token %} {{ form }}
         <table class='form-table form-table-search'>
             <tr>
@@ -110,23 +110,6 @@
                 </td>
             </tr>
             <tr>
-
-
-                <!--                <td class="form-label td-span education_degree_form">-->
-                <!--                    <font color='#ff0000'>* </font>-->
-                <!--                    <span class="input_text">文化程度：</span>-->
-                <!--                </td>-->
-                <!--                <td class="form-label td-input education_degree_form">-->
-                <!--                    <input type="hidden" id='update_education_degree' name="education_degree"-->
-                <!--                           class="education_degree_search"-->
-                <!--                           value="{{student_info.user_info.education_degree.id}}">-->
-                <!--                    <select class='form-select education-degree'-->
-                <!--                            id="education_degree_search"-->
-                <!--                            onchange="education_degree_search(this.options[this.options.selectedIndex].value);"-->
-                <!--                            style="width: 150px">-->
-                <!--                    </select>-->
-                <!--                    <label style='color:red'></label>-->
-                <!--                </td>-->
             </tr>
 
             <tr>
@@ -180,16 +163,6 @@
                     <label style='color:red'></label>
                 </td> {% endif %}
 
-                <!--                <td class="form-label td-span">-->
-                <!--                    <font color='#ff0000'>* </font>-->
-                <!--                    <span class="input_text">工作单位：</span>-->
-                <!--                </td>-->
-                <!--                <td class="form-label td-input">-->
-                <!--                    <input type='text' name='work_unit' maxlength="50"-->
-                <!--                           value='{{ student_info.user_info.work_unit }}'-->
-                <!--                           class='ipt' style="width: 250px"/>-->
-                <!--                    <label style='color:red'></label>-->
-                <!--                </td>-->
             </tr>
             <tr>
                 <td class="form-label td-span">
@@ -217,13 +190,13 @@
         <a href="javascript:void(0);" class="a-search">
             <input type="hidden" name="page" id="page_chemical_info_list_not" value="{{contacts.page}}" />
             <input type="hidden" name="per_page" id="pagesize_chemical_info_list_not" value="{{contacts.paginator.per_page}}" />
-            <input type='submit' style="color: deeppink;width: 10%" value='查询' class='form-button' id="submit-reporter-chemical-not-search" />
+            <input type='submit' style="color: deeppink;width: 10%" value='查询' class='form-button' id="submit-reporter-spin-search" />
         </a>
         <!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
         <!--            <input type='reset' style="color: green" value='清空条件' class='submitBtn form-button'/>-->
         <!--        </a>-->
         <a href="javascript:void(0);" class="a-search">
-            <input type='button' style="color: blueviolet;width: 10%" value='下载查询结果' class='form-button' onclick="reporter_chemical_not_search();" />
+            <input type='button' style="color: blueviolet;width: 10%" value='下载查询结果' class='form-button' onclick="reporter_spin();" />
         </a>
         <a href="javascript:void(0);" class="a-search-cancel">
             <input type='button' style="color: magenta;width: 10%" value='>>收起查询' onclick="cancel_search();"

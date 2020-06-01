@@ -37,6 +37,7 @@ def search_parameter(request, search_type=None):
                 register_user_info = RegisterUserInfo.objects.get(username=username)
                 user_info_tmp = UserInfo.objects.get(register_user_info=register_user_info)
                 teacher_tmp = TeacherInfo.objects.get(user_info=user_info_tmp)
+                teacher_tmp = teacher_tmp.id
         else:
             pass
     print('role')

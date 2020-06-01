@@ -8,7 +8,9 @@ from webapp.controller.search.search_common import *
 from webapp.utils.all_student_base_info_list import *
 from webapp.utils.electronic_communication import *
 from webapp.utils.electronic_communication_format import *
+from webapp.utils.spin_format import *
 from webapp.utils.apply_chemical import *
+from webapp.utils.apply_electronic_communiction import *
 from webapp.utils.apply_not import *
 from webapp.utils.reporter_chemical_list import *
 from webapp.utils.reporter_chemical_not_list_format import *
@@ -31,8 +33,26 @@ def download_apply(request):
             student = StudentInfo.objects.get(id=student_id)
             if student:
                 print(student.declaration_of_occupation)
-                if student.declaration_of_occupation not in chemical_industry:
-                    # 非化工类的
+                if '化工' in student.skill_main_class.skill_main_class_name:
+                    file_uuid = apply_chemical(student)
+                    print(str(file_uuid))
+                    if file_uuid:
+                        file_message_one = '&file_message_one=《化工行业特有工种职业技能鉴定申请表》'
+                        return HttpResponseRedirect(
+                            '/report/report_download_page?file_uuid=' + file_uuid + file_message_one)
+                    else:
+                        return HttpResponseRedirect('/report/report_download_page/')
+                elif '电子' in student.skill_main_class.skill_main_class_name:
+                    file_uuid = apply_electronic_communiction(student)
+                    print(str(file_uuid))
+                    if file_uuid:
+                        file_message_one = '&file_message_one=《电子行业职业技能鉴定申报表》'
+                        return HttpResponseRedirect(
+                            '/report/report_download_page?file_uuid=' + file_uuid + file_message_one)
+                    else:
+                        return HttpResponseRedirect('/report/report_download_page/')
+                else:
+                    # 除了化工、电子
                     file_uuid, file_uuid2 = apply_not(student)
                     print(str(file_uuid))
                     if file_uuid:
@@ -48,28 +68,6 @@ def download_apply(request):
                         message = '获取申请表出现系统异常，请稍后重新下载或者联系管理员'
                         return render_result(request, "page_main_controller/student/report_download_page.html",
                                              {'title_msg': title_msg, 'not_exist': True, 'message': message})
-                elif student.declaration_of_occupation in chemical_industry:
-                    file_uuid = apply_chemical(student)
-                    print(str(file_uuid))
-                    if file_uuid:
-                        file_message_one = '&file_message_one=《化工行业特有工种职业技能鉴定申请表》'
-                        return HttpResponseRedirect(
-                            '/report/report_download_page?file_uuid=' + file_uuid + file_message_one)
-                    else:
-                        return HttpResponseRedirect('/report/report_download_page/')
-                    # if file_uuid:
-                    #     message = "文件获取成功，请点击下载查看"
-                    #     return render_result(request, "page_main_controller/student/report_download_page.html",
-                    #                   {'title_msg': title_msg, 'not_exist': False, 'message': message,
-                    #                    'file_uuid': file_uuid, 'chemical': True})
-                    # else:
-                    #     message = '获取申请表出现系统异常，请稍后重新下载或者联系管理员'
-                    #     return render_result(request, "page_main_controller/student/report_download_page.html",
-                    #                   {'title_msg': title_msg, 'not_exist': True, 'message': message})
-                else:
-                    message = '未获取到您的填报申报行业信息与申请表不匹配，请稍后重新下载或者联系管理员'
-                    return render_result(request, "page_main_controller/student/report_download_page.html",
-                                         {'title_msg': title_msg, 'not_exist': True, 'message': message})
             else:
                 message = '未正确获取到您的填报信息，或者系统异常，请稍后重新下载或者联系管理员'
                 return render_result(request, "page_main_controller/student/report_download_page.html",

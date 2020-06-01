@@ -176,6 +176,7 @@ def administrator_reporter_electronic_communication(request):
     :return:
     """ 
     param_result = search_parameter(request, 'electronic_communication')
+    print(param_result)
     report_skill_main_list = param_result['report_skill_main_list']
     report_skill_list = param_result['report_skill_list']
     tmp_list = param_result['tmp_list']

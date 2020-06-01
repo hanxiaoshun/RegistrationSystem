@@ -1,7 +1,8 @@
 import os
 import platform
 import time
-
+from docxtpl import DocxTemplate, InlineImage, RichText
+from docx.shared import Mm, Inches, Pt
 import jinja2
 import pandas as pd
 from docxtpl import DocxTemplate
@@ -17,12 +18,12 @@ from webapp.utils.date_encoder import *
 
 def spin_format(student_infos=None, skill_main_class_name=None, skill_main_class_code=None):
     """
-    纺织通信类
+    电子通信类
     :return:
     """
     try:
         document_root = os.path.join(BASE_DIR, 'document')
-        filepath = document_root + "/spin_format.xlsx"
+        filepath = document_root + "/spin_format_se.xlsx"
 
         # system_type = platform.system()
         # if 'indows' in system_type:
@@ -37,12 +38,14 @@ def spin_format(student_infos=None, skill_main_class_name=None, skill_main_class
         if not student_infos:
             skill_main_classies = ReportSkillMainClass.objects.filter(skill_main_class_name__icontains='电子').\
                 filter(skill_main_class_name__icontains='通信').values('id')
-            
             if len(skill_main_classies) > 0:
-                report_skills = ReportSkill.objects.filter(skill_main_class=skill_main_classies[0]).values('skill_id') 
-                if len(report_skills) > 0:
-                    report_conditions = ReportCondition.objects.filter(condition_for_skill__in=report_skills).values('condition_id')
-                    student_infos = StudentInfo.objects.filter(confirm_status=1, condition_selected__in=report_conditions)
+                print(skill_main_classies[0])
+                print(skill_main_classies[0]['id'])
+                student_infos = StudentInfo.objects.filter(confirm_status=1, skill_main_class=skill_main_classies[0]['id'])
+                # report_skills = ReportSkill.objects.filter(skill_main_class=skill_main_classies[0]).values('skill_id') 
+                # if len(report_skills) > 0:
+                #     report_conditions = ReportCondition.objects.filter(condition_for_skill__in=report_skills).values('condition_id')
+                #     student_infos = StudentInfo.objects.filter(confirm_status=1, condition_selected__in=report_conditions)
                     # equipments = Equipment.objects.filter(rack__in = skill_main_classies)  
                     # student_infos = StudentInfo.objects.filter(confirm_status=1, chemical_worker=2)
         tmp_array = []
@@ -163,12 +166,19 @@ def spin_format(student_infos=None, skill_main_class_name=None, skill_main_class
                                   student.original_certificate_number,#原职业工种
                                   primary_level,#原职业等级
                                   ''#符合申报条件第多少项
-                                  ])
+                                ])
             num = 0
-            print('len:::' + str(len(original_data)))
-            for row in range(0, len(original_data)):
-                if row > 3:
+            if len(original_data) == 0:
+                row_data = len(tmp_array)
+            else:
+                row_data = len(original_data)
+            row_data += 3
+            for row in range(0, row_data):
+                print(row)
+                print('第几行.....')
+                if row > 2:
                     out_sheet = wb.get_sheet(0)
+                    # row = row + 3
                     if num < len(tmp_array):
                         set_out_cell(out_sheet, 0, row, tmp_array[num][0])
                         set_out_cell(out_sheet, 1, row, tmp_array[num][1])
@@ -188,17 +198,19 @@ def spin_format(student_infos=None, skill_main_class_name=None, skill_main_class
 
             day_string = str(time.strftime('%Y/%m/%d', time.localtime(time.time())))
             file_root = MEDIA_ROOT + "/files/"
-            day_files_path = file_root + 'spin' + "/files/" + day_string
+            day_files_path = file_root + 'electronic_communication' + "/files/" + day_string
             if os.path.exists(day_files_path):
                 pass
             else:
                 os.makedirs(day_files_path)
             uuid_string = str(uuid.uuid4())
             file_day_files_path = day_files_path + "/" + uuid_string + ".xlsx"
-            wb.save(file_day_files_path)
+            wb.save(file_day_files_path)            # 保存数据
+            print("系统：：" + file_day_files_path)
+
             if os.path.exists(file_day_files_path):
                 file_manage = FileManage()
-                file_manage.file_name = "纺织类模板-" + day_string
+                file_manage.file_name = "电子通信模板-" + day_string
                 file_manage.file_uuid = uuid_string
                 file_manage.file_path = file_day_files_path
                 file_manage.save()
@@ -230,6 +242,8 @@ def get_sex(value):
 
 
 def set_out_cell(out_sheet, col, row, value):
+    print(type(value))
+    print(f'{out_sheet},{col},{row},{value}')
     """Change cell value without changing formatting."""
 
     def _getOutCell(out_sheet, colIndex, rowIndex):

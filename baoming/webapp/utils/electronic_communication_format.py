@@ -1,7 +1,8 @@
 import os
 import platform
 import time
-
+from docxtpl import DocxTemplate, InlineImage, RichText
+from docx.shared import Mm, Inches, Pt
 import jinja2
 import pandas as pd
 from docxtpl import DocxTemplate
@@ -37,12 +38,14 @@ def electronic_communication_format(student_infos=None, skill_main_class_name=No
         if not student_infos:
             skill_main_classies = ReportSkillMainClass.objects.filter(skill_main_class_name__icontains='电子').\
                 filter(skill_main_class_name__icontains='通信').values('id')
-            
             if len(skill_main_classies) > 0:
-                report_skills = ReportSkill.objects.filter(skill_main_class=skill_main_classies[0]).values('skill_id') 
-                if len(report_skills) > 0:
-                    report_conditions = ReportCondition.objects.filter(condition_for_skill__in=report_skills).values('condition_id')
-                    student_infos = StudentInfo.objects.filter(confirm_status=1, condition_selected__in=report_conditions)
+                print(skill_main_classies[0])
+                print(skill_main_classies[0]['id'])
+                student_infos = StudentInfo.objects.filter(confirm_status=1, skill_main_class=skill_main_classies[0]['id'])
+                # report_skills = ReportSkill.objects.filter(skill_main_class=skill_main_classies[0]).values('skill_id') 
+                # if len(report_skills) > 0:
+                #     report_conditions = ReportCondition.objects.filter(condition_for_skill__in=report_skills).values('condition_id')
+                #     student_infos = StudentInfo.objects.filter(confirm_status=1, condition_selected__in=report_conditions)
                     # equipments = Equipment.objects.filter(rack__in = skill_main_classies)  
                     # student_infos = StudentInfo.objects.filter(confirm_status=1, chemical_worker=2)
         tmp_array = []
@@ -154,6 +157,7 @@ def electronic_communication_format(student_infos=None, skill_main_class_name=No
                 tmp_array.append([student.declaration_of_occupation,#职业工种
                                      identification_level,#级别
                                      '',#身份类型
+                                     '',#证件号码
                                      student.user_info.real_name,#中文名
                                      '',#英文名
                                      get_sex(student.user_info.sex),#性别
@@ -161,10 +165,12 @@ def electronic_communication_format(student_infos=None, skill_main_class_name=No
                                      student.user_info.work_unit,#工作单位
                                      '',#从事职业
                                      student.user_info.nation_info.nation_name,#民族
-                                     working_year,#工作年限
+                                     str(working_year)+'年',#工作年限
                                      education_name,#文化程度
                                      student.user_info.start_working_date,#参加工作日期
                                      '',#考生来源
+                                     '',#来源省份
+                                     '',#来源地区
                                      '',#现役军人
                                      '',#下岗人员
                                      '',#失业人员
@@ -175,7 +181,7 @@ def electronic_communication_format(student_infos=None, skill_main_class_name=No
                                      '',#在校学生
                                      student.user_info.contact_number,#联系电话
                                      student.user_info.fixed_telephone,#手机
-                                     rt_id_addr,#身份地址
+                                     student.user_info.id_card_address,#身份地址
                                      student.user_info.address,#常驻地址
                                      '',#邮政编码
                                      '',#政治面貌
@@ -191,10 +197,16 @@ def electronic_communication_format(student_infos=None, skill_main_class_name=No
                                      ''#预报考点
                                      ])
             num = 0
-            print('len:::' + str(len(original_data)))
-            for row in range(0, len(original_data)):
-                if row > 3:
+            if len(original_data) == 0:
+                row_data = len(tmp_array)
+            else:
+                row_data = len(original_data)
+            for row in range(0, row_data):
+                    print(row)
+                    print('第几行.....')
+                    # if row > 0:
                     out_sheet = wb.get_sheet(0)
+                    row = row + 1
                     if num < len(tmp_array):
                         set_out_cell(out_sheet, 0, row, tmp_array[num][0])
                         set_out_cell(out_sheet, 1, row, tmp_array[num][1])
@@ -235,6 +247,7 @@ def electronic_communication_format(student_infos=None, skill_main_class_name=No
                         set_out_cell(out_sheet, 36, row, tmp_array[num][36])
                         set_out_cell(out_sheet, 37, row, tmp_array[num][37])
                         set_out_cell(out_sheet, 38, row, tmp_array[num][38])
+                        set_out_cell(out_sheet, 39, row, tmp_array[num][39])
                     else:
                         set_out_cell(out_sheet, 0, row, num + 1)
                     num = num + 1
@@ -248,7 +261,9 @@ def electronic_communication_format(student_infos=None, skill_main_class_name=No
                 os.makedirs(day_files_path)
             uuid_string = str(uuid.uuid4())
             file_day_files_path = day_files_path + "/" + uuid_string + ".xlsx"
-            wb.save(file_day_files_path)
+            wb.save(file_day_files_path)            # 保存数据
+            print("系统：：" + file_day_files_path)
+
             if os.path.exists(file_day_files_path):
                 file_manage = FileManage()
                 file_manage.file_name = "电子通信模板-" + day_string
@@ -283,6 +298,8 @@ def get_sex(value):
 
 
 def set_out_cell(out_sheet, col, row, value):
+    print(type(value))
+    print(f'{out_sheet},{col},{row},{value}')
     """Change cell value without changing formatting."""
 
     def _getOutCell(out_sheet, colIndex, rowIndex):
