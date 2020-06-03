@@ -2,9 +2,9 @@ import json
 
 from django.core.paginator import Paginator
 
-from webapp.controller.renderUtil import render_result
-from webapp.controller.search.search_common import *
-from webapp.controller.search.search_param_deal import search_parameter
+from ..renderUtil import render_result
+from .search_common import *
+from .search_param_deal import search_parameter
 
 from webapp.utils.date_encoder import *
 
@@ -248,4 +248,45 @@ def administrator_reporter_spin(request):
     if param_result:
             return render_result(request,
                                  "page_main_controller/administrator/reporter_spin.html",
+                                 page_result)
+            
+
+def administrator_worker_years_6(request):
+    """
+    工作满6年（含）以上人员名单
+    :param request:
+    :return:
+    """
+    title_msg = '工作满6年（含）以上人员名单'
+    param_result = search_parameter(request, '')
+    report_skill_main_list = param_result['report_skill_main_list']
+    report_skill_list = param_result['report_skill_list']
+    tmp_list = param_result['tmp_list']
+    last_school_term = param_result['last_school_term']
+    student_info = param_result['student_info']
+    contacts = param_result['contacts']
+    teacher_infos = param_result['teacher_infos']
+    school_terms = param_result['school_terms']
+    school_term = param_result['school_term']
+    teacher_info = param_result['teacher_info']
+    identification_level = param_result['identification_level']
+    report_skill_main = param_result['report_skill_main']
+    report_skill = param_result['report_skill']
+    
+    
+    page_result = {'title_msg': title_msg, 
+                   'need_login': False,
+                   'report_skill_main_list':report_skill_main_list,
+                   'report_skill_list':report_skill_list,
+                   'tmp_list': json.dumps(tmp_list, ensure_ascii=False),
+                   'last_school_term': last_school_term, 'student_info': student_info,
+                   'contacts': contacts, 'teacher_infos': teacher_infos,
+                   'school_terms': school_terms, 'school_term': school_term,
+                   'teacher_info': teacher_info,
+                   'identification_level': identification_level,
+                   'report_skill_main':report_skill_main,'report_skill':report_skill}
+
+    if param_result:
+            return render_result(request,
+                                 "page_main_controller/administrator/reporter_worker_years_6.html",
                                  page_result)

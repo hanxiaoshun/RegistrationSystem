@@ -224,7 +224,7 @@ class FileManage(models.Model):
 
 class WorkingHistory(models.Model):
     """
-    工作年限证明
+    工作年限承诺书
     """
     id = models.AutoField('用户ID', primary_key=True)
     start_year = models.SmallIntegerField('起始年')
@@ -254,8 +254,8 @@ class WorkingHistory(models.Model):
     objects = models.Manager()
     class Meta:
         ordering = ['id']
-        verbose_name = '工作年限证明'
-        verbose_name_plural = '工作年限证明'
+        verbose_name = '工作年限承诺书'
+        verbose_name_plural = '工作年限承诺书'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))

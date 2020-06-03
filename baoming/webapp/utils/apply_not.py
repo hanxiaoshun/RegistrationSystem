@@ -22,7 +22,7 @@ def apply_not(student):
 
         document_root = os.path.join(BASE_DIR, 'document')
         tpl = DocxTemplate(document_root + '/fujian01.docx')
-        tpl2 = DocxTemplate(document_root + '/fujian02.docx')
+        tpl2 = DocxTemplate(document_root + '/worker_years_prov_book.docx')
         # system_type = platform.system()
         # if 'indows' in system_type:
         #     tpl = DocxTemplate('D:/PycharmProjects/lelingzdy/baoming/webapp/utils/fujian01.docx')
@@ -30,9 +30,9 @@ def apply_not(student):
         #     tpl = DocxTemplate('/opt/python3_space/lelingzdy/baoming/webapp/utils/fujian01.docx')
         #
         # if 'indows' in system_type:
-        #     tpl2 = DocxTemplate('D:/PycharmProjects/lelingzdy/baoming/webapp/utils/fujian02.docx')
+        #     tpl2 = DocxTemplate('D:/PycharmProjects/lelingzdy/baoming/webapp/utils/worker_years_prov_book.docx')
         # else:
-        #     tpl2 = DocxTemplate('/opt/python3_space/lelingzdy/baoming/webapp/utils/fujian02.docx')
+        #     tpl2 = DocxTemplate('/opt/python3_space/lelingzdy/baoming/webapp/utils/worker_years_prov_book.docx')
         #
         # print(user_info.hukou_province.region_name)
         file_root = MEDIA_ROOT + '/' + str(user_info.two_inch_photo.picture_path)
@@ -254,7 +254,7 @@ def apply_not(student):
         tpl2.render(context, jinja_env)
         tpl2.save(file_day_files_path2)
         if os.path.exists(file_day_files_path2):
-            file_manage2.file_name = "工作年限证明-" + declaration_of_occupation
+            file_manage2.file_name = "工作年限承诺书-" + declaration_of_occupation
             file_manage2.file_uuid = uuid_string2
             file_manage2.file_path = file_day_files_path2
             file_manage2.save()

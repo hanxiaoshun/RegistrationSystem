@@ -51,3 +51,11 @@ function reporter_all_student_search() {
     $('#submit-reporter-all-student-search').click();
     formElement.setAttribute('action', '/report/all_student_base_info/');
 }
+
+function reporter_worker_years_6() {
+    //关闭弹窗
+    let formElement = document.querySelector('#form-search-worker-years-6');
+    formElement.setAttribute('action', '/report/worker_years_6_download/');
+    $('#submit-reporter-worker-years-6').click();
+    formElement.setAttribute('action', '/report/administrator_worker_years_6/');
+}

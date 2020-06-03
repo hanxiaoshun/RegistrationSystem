@@ -1,141 +1,124 @@
 <!--电工、焊工、钳工、劳动员、育婴员、保育员 填报页面-->
 {% load filter_model %}
 <div class="like_form">
-    <label class="input_text_head">工作年限证明</label>
-    <hr>
-    {% if not_report %}
-    <label style='color:white'>暂无此职业方向填报记录</label>
-    {% else %}
+    <label class="input_text_head">工作年限承诺书</label>
+    <hr> {% if not_report %}
+    <label style='color:white'>暂无此职业方向填报记录</label> {% else %}
 
 
     <div>
         <p style="color: whitesmoke">
             姓名：&nbsp;<label class='work-label' id="worker-name" style="color: floralwhite">
             {{student_info.user_info.real_name }}</label> ，身份证号：&nbsp;
-            <label class='work-label' style="color: floralwhite"
-                   id="id-card-number">{{ student_info.user_info.id_number }}</label>
-            ，现申请参加&nbsp;<label class='work-label' style="color: floralwhite">
-            {{student_info.declaration_of_occupation}}</label>&nbsp;职业
-            职业方向/工种&nbsp;<label class='work-label' style="color: floralwhite">
-            {{student_info.identification_level|get_identification_level}}</label>&nbsp;级职业资格考试，从事本职业工作共&nbsp;<label
-                class='work-label' style="color: floralwhite">{{ student_info.user_info.career_life }}</label>&nbsp;年，工作简历如下：
+            <label class='work-label' style="color: floralwhite" id="id-card-number">{{ student_info.user_info.id_number }}</label> ，现申请参加&nbsp;
+            <label class='work-label' style="color: floralwhite">
+            {{student_info.declaration_of_occupation}}</label>&nbsp;职业 职业方向/工种&nbsp;
+            <label class='work-label' style="color: floralwhite">
+            {{student_info.identification_level|get_identification_level}}</label>&nbsp;级职业资格考试，从事本职业工作共&nbsp;<label class='work-label' style="color: floralwhite">{{ student_info.user_info.career_life }}</label>&nbsp;年，工作简历如下：
         </p>
     </div>
 
     <form action="/report/add_work_history/" method="POST" id="add_work_history">
-        {% csrf_token %}
-        {{ form }}
+        {% csrf_token %} {{ form }}
         <input type="hidden" name="obj_id" value="{{student_info.user_info.id}}">
         <div class="table-wrapper">
 
-            <table class="fl-table" border="1.5"
-                   style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">
+            <table class="fl-table" border="1.5" style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">
                 <thead>
-                <thead>
-                <th colspan="2"><label style="color: snow">起止年月</label></th>
-                <th><label style="color: snow;">单位名称</label></th>
-                <th><label style="color: snow">单位所在市（或县）</label></th>
-                <th><label style="color: snow;">从事何种岗位工作</label></th>
-                <th style="color: snow"><h3>操作</h3></th>
-                </thead>
-                <tbody>
-                <!--            第 1 行-->
-                <tr>
-                    <td class="form-label">
-                        <input type='number' style="display: inline-block" name='start_year'
-                               required='required'
-                               value='' class='ipt'/>
-                        <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
-                        <input type='number' style="display: inline-block" name='start_month'
-                               required='required' value=''
-                               class='ipt'/>
-                        <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
-                    </td>
-                    <td class="form-label">
-                        <input type='number' style="display: inline-block" name='end_year'
-                               required='required'
-                               value='' class='ipt'/>
-                        <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
-                        <input type='number' style="display: inline-block" name='end_month'
-                               required='required'
-                               value=''
-                               class='ipt'/>
-                        <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
-                    </td>
-                    <td class="form-label">
-                        <input type='text' name='unit_name' required='required' value='' class='ipt'/>
-                        <label style='color:red'></label>
-                    </td>
-                    <td class="form-label td-input">
-                        <select class='form-select province'  name="hukou_province_form"
-                                onchange="city(this.options[this.options.selectedIndex].value);">
+                    <thead>
+                        <th colspan="2"><label style="color: snow">起止年月</label></th>
+                        <th><label style="color: snow;">单位名称</label></th>
+                        <th><label style="color: snow">单位所在市（或县）</label></th>
+                        <th><label style="color: snow;">从事何种岗位工作</label></th>
+                        <th style="color: snow">
+                            <h3>操作</h3>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <!--            第 1 行-->
+                        <tr>
+                            <td class="form-label">
+                                <input type='number' style="display: inline-block" name='start_year' required='required' value='' class='ipt' />
+                                <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
+                                <input type='number' style="display: inline-block" name='start_month' required='required' value='' class='ipt' />
+                                <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
+                            </td>
+                            <td class="form-label">
+                                <input type='number' style="display: inline-block" name='end_year' required='required' value='' class='ipt' />
+                                <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
+                                <input type='number' style="display: inline-block" name='end_month' required='required' value='' class='ipt' />
+                                <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
+                            </td>
+                            <td class="form-label">
+                                <input type='text' name='unit_name' required='required' value='' class='ipt' />
+                                <label style='color:red'></label>
+                            </td>
+                            <td class="form-label td-input">
+                                <select class='form-select province' name="hukou_province_form" onchange="city(this.options[this.options.selectedIndex].value);">
                             <option>---省---</option>
                         </select>
-                        <select class='form-select city' name="hukou_city_form"
-                                onchange="county(this.options[this.options.selectedIndex].value);">
+                                <select class='form-select city' name="hukou_city_form" onchange="county(this.options[this.options.selectedIndex].value);">
                             <option>---市---</option>
                         </select>
-                        <select class='form-select county' name="hukou_county_form">
+                                <select class='form-select county' name="hukou_county_form">
                             <option value="-1">---县---</option>
                         </select>
-                        <label style='color:red'></label>
-                    </td>
-                    <td class="form-label">
-                        <input type='text' name='job_content' required='required' value='' class='ipt'/>
-                        <label style='color:red'></label>
-                    </td>
-                    <td>
-                        <input type='submit' style="color: green;width: 30px;height: 25px; font-size: 10px" value='添加'
-                               class='submitBtn form-button'/>
-                    </td>
-                </tr>
-                </tbody>
+                                <label style='color:red'></label>
+                            </td>
+                            <td class="form-label">
+                                <input type='text' name='job_content' required='required' value='' class='ipt' />
+                                <label style='color:red'></label>
+                            </td>
+                            <td>
+                                <input type='submit' style="color: green;width: 30px;height: 25px; font-size: 10px" value='添加' class='submitBtn form-button' />
+                            </td>
+                        </tr>
+                    </tbody>
             </table>
         </div>
     </form>
     <hr>
     <table class='form-table' border="1">
         <thead hidden="hidden">
-        <th colspan="2"><label style="color: snow">起止年月</label></th>
-        <th><label style="color: snow">单位名称</label></th>
-        <th><label style="color: snow">单位所在市（或县）</label></th>
-        <th><label style="color: snow">从事何种岗位工作</label></th>
-        <th style="color: snow"><h3>操作</h3></th>
+            <th colspan="2"><label style="color: snow">起止年月</label></th>
+            <th><label style="color: snow">单位名称</label></th>
+            <th><label style="color: snow">单位所在市（或县）</label></th>
+            <th><label style="color: snow">从事何种岗位工作</label></th>
+            <th style="color: snow">
+                <h3>操作</h3>
+            </th>
         </thead>
         <tbody id="worker_tbody">
-        <!--            第 1 行-->
-        {% for n in working_history_list %}
-        <tr>
-            <td class="form-label">
-                <label style='color:white'>{{n.start_year}}</label>
-                <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
-                <label style='color:white'>{{n.start_month}}</label>
-                <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
-            </td>
-            <td class="form-label">
-                <label style='color:white'>{{n.end_year}}</label>
-                <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
-                <label style='color:white'>{{n.end_month}}</label>
-                <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
-            </td>
-            <td class="form-label">
-                <label style='color:white'>{{n.unit_name}}</label>
-            </td>
-            <td class="form-label td-input">
-                <label style='color:white'>{{n.city_or_county.region_name}}</label>
-            </td>
-            <td class="form-label">
-                <label style='color:white'>{{n.job_content}}</label>
-            </td>
-            <td>
-                <input type='button' id="{{n.id}}" style="color: #ff0000;width: 30px;height: 25px; font-size: 10px"
-                       value='删除'
-                       onclick="delete_history(this);"
-                       class='submitBtn form-button'/>
-            </td>
-            {% endfor %}
+            <!--            第 1 行-->
+            {% for n in working_history_list %}
+            <tr>
+                <td class="form-label">
+                    <label style='color:white'>{{n.start_year}}</label>
+                    <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
+                    <label style='color:white'>{{n.start_month}}</label>
+                    <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
+                </td>
+                <td class="form-label">
+                    <label style='color:white'>{{n.end_year}}</label>
+                    <span style='display: inline-block;color:black'>&nbsp;年&nbsp;</span>
+                    <label style='color:white'>{{n.end_month}}</label>
+                    <span style='display: inline-block;color:black'>&nbsp;月&nbsp;</span>
+                </td>
+                <td class="form-label">
+                    <label style='color:white'>{{n.unit_name}}</label>
+                </td>
+                <td class="form-label td-input">
+                    <label style='color:white'>{{n.city_or_county.region_name}}</label>
+                </td>
+                <td class="form-label">
+                    <label style='color:white'>{{n.job_content}}</label>
+                </td>
+                <td>
+                    <input type='button' id="{{n.id}}" style="color: #ff0000;width: 30px;height: 25px; font-size: 10px" value='删除' onclick="delete_history(this);" class='submitBtn form-button' />
+                </td>
+                {% endfor %}
 
-        </tr>
+            </tr>
         </tbody>
     </table>
     {% endif %}

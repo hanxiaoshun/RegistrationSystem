@@ -220,6 +220,14 @@ def administrator_reporter_spin(request):
     # return administrator.administrator_reporter_chemical(request)
     return administrator_search.administrator_reporter_spin(request)
 
+def administrator_worker_years_6(request):
+    """
+    工作满6年（含）以上人员名单
+    :param request:
+    :return:
+    """
+    return administrator_search.administrator_worker_years_6(request)
+
 def administrator_search_chemical(request):
     """
     附带条件查询化工类学生花名册
@@ -279,6 +287,15 @@ def spin_download(request):
     :return:
     """
     return download.spin_download(request)
+
+def worker_years_6_download(request):
+    """
+    纺织类通信带条件查询，然后下载对应结果文件
+    :param request:
+    :return:
+    """
+    return download.worker_years_6_download(request)
+
 
 def administrator_search_chemical_not(request):
     """

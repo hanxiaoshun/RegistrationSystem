@@ -75,7 +75,7 @@ class FileManageAdmin(admin.ModelAdmin):
 admin.site.register(FileManage, FileManageAdmin)
 
 
-# 工作年限证明
+# 工作年限承诺书
 class WorkingHistoryAdmin(admin.ModelAdmin):
     obj = WorkingHistory()
     list_display = tuple(obj.__dir__()[1:11])

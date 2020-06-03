@@ -2,7 +2,7 @@ import inspect
 import json
 from django.http import FileResponse
 from django.shortcuts import HttpResponseRedirect
-
+from webapp.controller.search.search_param_deal_down import search_parameter
 from webapp.controller.renderUtil import render_result
 from webapp.controller.search.search_common import *
 from webapp.utils.all_student_base_info_list import *
@@ -14,6 +14,7 @@ from webapp.utils.apply_electronic_communiction import *
 from webapp.utils.apply_not import *
 from webapp.utils.reporter_chemical_list import *
 from webapp.utils.reporter_chemical_not_list_format import *
+from webapp.utils.worker_year_6 import *
 from webapp.utils.save_operation_log import save_operation_log
 
 sys_msg = '报名系统'
@@ -58,7 +59,7 @@ def download_apply(request):
                     if file_uuid:
                         message = "文件获取成功，请点击下载查看"
                         file_message_one = '《山东省职业技能鉴定考评表》'
-                        file_message_two = '《工作年限证明》'
+                        file_message_two = '《工作年限承诺书》'
                         return render_result(request, "page_main_controller/student/report_download_page.html",
                                              {'title_msg': title_msg, 'not_exist': False, 'message': message,
                                               'file_uuid': file_uuid, 'file_uuid2': file_uuid2, 'chemical': False,
@@ -313,3 +314,31 @@ def spin_download(request):
         return HttpResponseRedirect('/report/report_download_page?file_uuid=' + file_uuid + file_message_one)
     else:
         return HttpResponseRedirect('/report/report_download_page/')   
+    
+
+
+def worker_years_6_download(request):
+    """
+    工作满6年（含）以上人员名单
+    :param request:
+    :return:
+    """
+    title_msg = '工作满6年（含）以上人员名单'
+    try:
+            student_infos, kwargs = search_parameter(request, '')
+            file_uuid, file_uuid2 = worker_year_6(student_infos, kwargs)
+            if file_uuid and file_uuid2:
+                        message = "文件获取成功，请点击下载查看"
+                        file_message_one = '工作满6年（含）以上人员名单'
+                        file_message_two = '证    明（工作满6年）'
+                        return render_result(request, "page_main_controller/student/report_download_page.html",
+                                             {'title_msg': title_msg, 'not_exist': False, 'message': message,
+                                              'file_uuid': file_uuid, 'file_uuid2': file_uuid2, 'chemical': False,
+                                              'file_message_one': file_message_one,
+                                              'file_message_two': file_message_two})
+            else:
+                message = '未正确获取到您的填报信息，或者系统异常，请稍后重新下载或者联系管理员'
+                return render_result(request, "page_main_controller/student/report_download_page.html",
+                                     {'title_msg': title_msg, 'not_exist': True, 'message': message})
+    except Exception as e:
+        raise e
