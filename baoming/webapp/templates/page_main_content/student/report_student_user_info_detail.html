@@ -225,7 +225,7 @@
                     <span class="input_text">申报鉴定级别：</span>
                 </td>
                 <td class="form-label td-input">
-                    <label style='color:white'>{{ student_info.identification_level|get_identification_level }}</label>
+                    <label style='color:white'>{{ student_info.condition_selected.condition_level|get_identification_level }}</label>
                 </td>
             </tr>
             <tr>
@@ -235,7 +235,7 @@
                     <label class="input_text" style="color: yellow ">(请查看对应条件的详细信息，其他条件可忽略)：</label>
                 </td>
                 <td class="form-label td-input condition_selected" colspan="4">
-                    <label style='color:white'>{{ condition_selected }}</label>
+                    <label style='color:white'>{{ student_info.condition_selected.condition_name }}</label>
                 </td>
             </tr>
             <tr class="apprentice">
@@ -459,14 +459,31 @@
                 <td class="form-label td-span">
                     <span class="input_text">原级别资格证件照：</span>
                 </td>
-                <td class="form-label td-input" rowspan="4" style="text-align: center" colspan="2">
+                <td class="form-label td-input" rowspan="2" style="text-align: center" colspan="2">
                     <img src="{{certificate_photos_url}}" width="200px" height="120px" alt="原级别资格证件照" style="margin: 10px">
                 </td>
                 <td class="form-label td-span">
                     <span class="input_text">毕业证件照：</span>
                 </td>
-                <td class="form-label td-input" rowspan="4" style="text-align: center" colspan="2">
+                <td class="form-label td-input" rowspan="2" style="text-align: center" colspan="2">
                     <img src="{{diploma_certificate_photos_url}}" width="200px" height="120px" alt="毕业证件照" style="margin: 10px">
+                </td>
+            </tr>
+            <tr>
+
+            </tr>
+            <tr>
+                <td class="form-label td-span">
+                    <span class="input_text">身份证件正面照：</span>
+                </td>
+                <td class="form-label td-input" rowspan="2" style="text-align: center" colspan="2">
+                    <img src="{{id_card_heads_photo_url}}" width="200px" height="120px" alt="身份证件正面照" style="margin: 10px">
+                </td>
+                <td class="form-label td-span">
+                    <span class="input_text">身份证件反面照：</span>
+                </td>
+                <td class="form-label td-input" rowspan="2" style="text-align: center" colspan="2">
+                    <img src="{{id_card_tails_photo_url}}" width="200px" height="120px" alt="身份证件反面照" style="margin: 10px">
                 </td>
             </tr>
         </tbody>
@@ -477,6 +494,12 @@
     <!--                                                                                                     value='修改信息'-->
     <!--                                                                                                     class='form-button'/></a>-->
     <a href="/report/download_apply?studentId={{student_info.id}}" target="_blank"><input type='button' style="color: deeppink" value='下载申请表' class='form-button' /></a>
+    <a href="/report/start_download_picture?file_uuid={{student_info.user_info.id_card_heads_photo.picture_uuid}}" target="_self">
+        <input type='button' style="color: deeppink" value='下载身份证正面' class='form-button' />
+    </a>
+    <a href="/report/start_download_picture?file_uuid={{student_info.user_info.id_card_tails_photo.picture_uuid}}" target="_self">
+        <input type='button' style="color: deeppink" value='下载身份证反面' class='form-button' />
+    </a>
     {% if request.session.role_name == 'administrator' %} {% if student_info.confirm_status == "2"%}
     <a href='javascript:void(0);' onclick="report_confirm('/report/report_do_confirm/','{{student_info.id}}')">
         <input type='button' style="color: deeppink" value='确认' class='form-button' />

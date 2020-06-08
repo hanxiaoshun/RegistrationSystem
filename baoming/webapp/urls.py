@@ -167,9 +167,13 @@ urlpatterns = [
 
     # 文件工具
     path('image_upload/', v.image_upload, name='image_upload'),
+    path('image_upload_id_card/', v.image_upload_id_card, name='image_upload_id_card'),
     # 下载工具
     path('download_apply/', v.download_apply, name='download_apply'),
     path('start_download/', v.start_download, name='start_download'),
+    path('start_download_picture/', v.start_download_picture, name='start_download_picture'),
+
+    
     path('all_student_base_info/',
          v.all_student_base_info,
          name='all_student_base_info'),

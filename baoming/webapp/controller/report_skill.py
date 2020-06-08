@@ -64,7 +64,7 @@ def report_condition_info(request):
         print('更新的查询')
         print(condition_id)
         query_set = ReportCondition.objects.\
-            filter(condition_id=int(condition_id)).values(
+            filter(condition_id=condition_id).values(
             'condition_id', 'condition_name', 'condition_level', 'record_status',
             'condition_for_skill_id', 'apprentice_status',
             'work_of_this_occupation_status',

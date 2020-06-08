@@ -24,6 +24,15 @@ import time
 
 
 def term_worker_picture(term_name, worker, username, picture_type, picture_path):
+    """[summary]
+    拷贝指定文件
+    Args:
+        term_name ([type]): [description]
+        worker ([type]): [description]
+        username ([type]): [description]
+        picture_type ([type]): [description]
+        picture_path ([type]): [description]
+    """
     # images/2019/07/72739cf9-b27c-45.jpg
     term_picture_root = MEDIA_ROOT + "/" + term_name + '/' + worker
     if os.path.exists(term_picture_root):
@@ -55,6 +64,11 @@ def term_worker_picture(term_name, worker, username, picture_type, picture_path)
 
 
 def term_make_archive(term_name):
+    """[summary]
+    打包一个学期的图片
+    Args:
+        term_name ([type]): [description]
+    """
     term_picture_root = MEDIA_ROOT + "/" + term_name
     if os.path.exists(term_picture_root):
         term_picture_root_new = MEDIA_ROOT + "/" + str(time.time()).replace('.', '_')

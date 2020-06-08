@@ -1,0 +1,521 @@
+<!--电工、焊工、钳工、劳动员、育婴员、保育员 填报页面-->
+{% load filter_model %}
+{% load condition_selected %}
+<div class="like_form">
+    <label class="input_text_head">山东省职业技能考评资料详细</label>
+    <hr>
+    {% if not_exist %}
+    <label style='color:white'>暂无此职业方向填报记录</label>
+    {% else %}
+    <table class='form-table' border="1">
+        <tbody>
+        <!--            第 1 行-->
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head" style="color: red">基本信息</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">姓名：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.real_name }}</label>
+            </td>
+
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">性别：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.sex|get_sex }}</label>
+                <label style='color:red'></label>
+                <font color='#ff0000'>* </font>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="input_text">年龄：</span>
+                <label style='color:white' class="input_text">{{ student_info.user_info.age }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">二寸照片：</span>
+            </td>
+            <td class="form-label td-input" rowspan="4" style="text-align: center">
+                <img src="{{image_url}}" id='two-inch-photo' width="120px" height="150px" alt="二寸照片">
+            </td>
+
+        </tr>
+        <!--            第 2 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">身份证号：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.id_number }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">文化程度：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{ student_info.user_info.education_degree.education_name}}</label>
+            </td>
+        </tr>
+        <!--            第 3 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">工作单位：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.work_unit }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">单位性质：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{student_info.user_info.unit_nature.unit_nature}}</label>
+            </td>
+            <td class="form-label td-span" style="width: 150px;">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">民族：</span>
+                <label style='color:white' class="input_text">
+                    {{ student_info.user_info.nation_info.nation_name}}</label>
+            </td>
+        </tr>
+        <!--            第 4 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">联系电话：</label>
+            </td>
+            <td class="form-label td-input">
+                <!--                    <label style='color:white'>{{ student_info.user_info.contact_number }}</label>-->
+                <label style='color:white' class="input_text">{{ student_info.user_info.contact_number }}</label>
+            </td>
+            <td class="form-label td-span">
+                <label for='' class="input_text">联系电话(区号)：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.fixed_telephone }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label for='' class="input_text" style="font-size: 12px">单位负责人：</label>
+                <label style='color:white' class="input_text">
+                    {{ student_info.teacher_info.user_info.real_name}}</label>
+            </td>
+
+        </tr>
+        <!--            第 5 行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">参加工作时间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{ student_info.user_info.start_working_date|date:"Y-m-d"}}</label>
+            </td>
+
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">户口所在地：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{ student_info.user_info.hukou_province.region_name}}</label>
+                <label style='color:white' class="input_text">
+                    {{ student_info.user_info.hukou_city.region_name}}</label>
+                <label style='color:white' class="input_text">
+                    {{ student_info.user_info.hukou_county.region_name}}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">邮箱：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.email }}</label>
+            </td>
+        </tr>
+        <!--            第 6行-->
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">常住住址：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white'>{{ student_info.user_info.address }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">出生日期：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.birthday|date:"Y-m-d" }}</label>
+            </td>
+            <td class="form-label td-span">
+                <span class="input_text">邮政编码：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.postal_code }}</label>
+            </td>
+
+        </tr>
+
+        <!--            第 7 行-->
+        <tr>
+            <td class="form-label td-span" style="width: 150px;">
+                <font color='#ff0000'>* </font>
+                <label class="input_text">身份证住址：</label>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">{{ student_info.user_info.id_card_address }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">政治面貌：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{ student_info.user_info.political_status|get_political_status}}</label>
+            </td>
+
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <span class="input_text">单位地址：</span>
+            </td>
+            <td class="form-label td-input" colspan="2">
+                <label style='color:white' class="input_text">{{student_info.user_info.unit_address}}</label>
+            </td>
+            <!--            <td class="form-label td-span">-->
+            <!--                <span class="input_text">初级中学：</span>-->
+            <!--            </td>-->
+            <!--            <td class="form-label td-input" colspan="2">-->
+            <!--                <label style='color:white' class="input_text">{{ user_info.middle_school }}</label>-->
+            <!--            </td>-->
+        </tr>
+
+        <!--            第 8 行-->
+        <tr>
+            <td class="form-label td-span" colspan="2"></td>
+            <td class="form-label td-span" colspan="2" style="text-align: center">
+                <font color='#ff0000'>* </font>
+                <span class="input_text_head" style="color: deeppink">申报信息</span>
+                <font color='#ff0000'>* </font>
+            </td>
+            <td class="form-label td-span" colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">申报鉴定职业：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white'>{{ student_info.declaration_of_occupation }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">申报鉴定级别：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white'>{{ student_info.identification_level|get_identification_level }}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-label td-span" colspan="2">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">申报条件</span>
+                <label class="input_text" style="color: yellow ">(请查看对应条件的详细信息，其他条件可忽略)：</label>
+            </td>
+            <td class="form-label td-input condition_selected" colspan="4">
+                <label style='color:white'>{{ student_info.condition_selected|get_condition_selected }}</label>
+            </td>
+        </tr>
+        <tr class="apprentice">
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">本职业学徒期开始时间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' title="本职业学徒开始时间">
+                    {{ student_info.apprentice_start|date:"Y-m-d" }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">本职业学徒期结束时间：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' title="本职业学徒开始时间">
+                    {{ student_info.apprentice_end|date:"Y-m-d" }}</label>
+            </td>
+            <td class="form-label td-span">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">本职业学徒期：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white'>{{ student_info.apprentice_year|get_apprentice_year}}</label>
+                <label style='color:white'>：年&nbsp;&nbsp;</label>
+                <label style='color:white'>{{ student_info.apprentice_month|get_apprentice_month}}</label>
+                <label style='color:white'>：月</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-label td-span start_the_work_of_this_occupation">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">从事本职业工作开始时间：</span>
+            </td>
+            <td class="form-label td-input start_the_work_of_this_occupation">
+                <label style='color:white'>{{ student_info.start_the_work_of_this_occupation|date:"Y-m-d" }}</label>
+            </td>
+            <td class="form-label td-span career_life">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">累计从事本职业时间</span>
+                <br>
+                <span class="input_text">或从事本工种工龄（职业年限）：</span>
+            </td>
+            <td class="form-label td-input career_life">
+                <label style='color:white'>{{ student_info.career_life|get_zero}}</label><label
+                    style='color:white'>：年</label>
+        </tr>
+        <tr>
+            <td class="form-label td-span primary_level">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">原证书级别</span>
+                <br>
+                <span class="input_text">或证书级别</span>
+                <br>
+                <span class="input_text">或技术等级：</span>
+            </td>
+            <td class="form-label td-input primary_level">
+                <label style='color:white'>{{ student_info.primary_level|get_primary_level}}</label>
+            </td>
+            <td class="form-label td-span original_certificate_number">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">现持有职业资格</span>
+                <br>
+                <span class="input_text">证书编号(原证书编号)：</span>
+            </td>
+            <td class="form-label td-input original_certificate_number">
+                <label style='color:white'>{{ student_info.original_certificate_number}}</label>
+            </td>
+            <td class="form-label td-span issue_unit">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">现有资格证书发证单位：</span>
+            </td>
+            <td class="form-label td-input issue_unit">
+                <label style='color:white'>{{ student_info.issue_unit}}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-label td-span issuance_time">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">现有职业资格证发证时间：</span>
+            </td>
+            <td class="form-label td-input issuance_time">
+                <label style='color:white'>{{ student_info.issuance_time|date:"Y-m-d" }}</label>
+            </td>
+            {%if student_info.identification_level == "3" %}
+            {% else %}
+            <td class="form-label td-span original_certificate_worker_time">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">获得现有资格证书后</span>
+                <br>
+                <span class="input_text">工作年限：</span>
+            </td>
+            <td class="form-label td-input original_certificate_worker_time">
+                <label style='color:white'>{{student_info.original_certificate_worker_year|get_zero}}</label>
+                <label style='color:white'>：年</label>
+            </td>
+            {% endif %}
+
+            <td class="form-label td-span">
+                <span class="input_text">证书本职业（工种）</span>
+                <br>
+                <span class="input_text">或相关职业（工种）：</span>
+            </td>
+            <td class="form-label td-input">
+                <label style='color:white' class="input_text">
+                    {{ student_info.former_occupation|get_none}}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-label td-span school_name">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">院校名称：</span>
+            </td>
+            <td class="form-label td-input school_name">
+                <label style='color:white'>{{ student_info.school_name}}</label>
+            </td>
+            <td class="form-label td-span major">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">本专业或相关专业：</span>
+            </td>
+            <td class="form-label td-input major">
+                <label style='color:white'>{{ student_info.major}}</label>
+            </td>
+
+
+            <td class="form-label td-span graduation_time">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">毕业时间(结业时间)：</span>
+            </td>
+            <td class="form-label td-input graduation_time">
+                <label style='color:white'>{{ student_info.graduation_time|date:"Y-m-d" }}</label>
+            </td>
+        </tr>
+        <tr>
+            <!--            <td class="form-label td-span">-->
+            <!--                <font color='#ff0000'>* </font>-->
+            <!--                <span class="input_text" style="font-size: 12px;">个人工作及职业培训简历：</span>-->
+            <!--            </td>-->
+            <!--            <td class="form-label td-input" colspan="3">-->
+            <!--                <label style='color:white' title="填写现持有证书发证日期,格式:1990-01-20">-->
+            <!--                    {{ student_info.work_training }}-->
+            <!--                </label>-->
+            <!--                <label style='color:red'></label>-->
+            <!--            </td>-->
+            <td class="form-label td-span course_hours">
+                <font color='#ff0000'>* </font>
+                <span class="input_text">培训课时：</span>
+            </td>
+            <td class="form-label td-input course_hours">
+                <label style='color:white' title="培训课时">
+                    {{ student_info.course_hours|get_zero}}
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-label td-span">
+                <span class="input_text">原级别资格证件照：</span>
+            </td>
+            <td class="form-label td-input" rowspan="4" style="text-align: center" colspan="2">
+                <img src="{{certificate_photos_url}}" width="200px" height="120px"
+                     alt="原级别资格证件照" style="margin: 10px">
+            </td>
+            <td class="form-label td-span">
+                <span class="input_text">毕业证件照：</span>
+            </td>
+            <td class="form-label td-input" rowspan="4" style="text-align: center" colspan="2">
+                <img src="{{diploma_certificate_photos_url}}" width="200px" height="120px"
+                     alt="毕业证件照" style="margin: 10px">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <!--        <a href='/report/to_student_info_update?studentId={{student_info.id}}' target="_self"><input type='button'-->
+    <!--                                                                                                     style="color: green"-->
+    <!--                                                                                                     value='修改信息'-->
+    <!--                                                                                                     class='form-button'/></a>-->
+    <a href="/report/download_apply?studentId={{student_info.id}}" target="_blank"><input type='button'
+                                                                                          style="color: deeppink"
+                                                                                          value='下载申请表'
+                                                                                          class='form-button'/></a>
+    {% if request.session.role_name == 'administrator' %}
+    {% if student_info.confirm_status == "2"%}
+    <a href='javascript:void(0);'
+       onclick="report_confirm('/report/report_do_confirm/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='确认'
+               class='form-button'/>
+    </a>
+    <a href='/report/to_student_info_update?studentId={{student_info.id}}' readonly="readonly">
+        <input type='button'
+               style="color: deeppink"
+               value='修改'
+               class='form-button'/>
+    </a>
+    <a href='javascript:void(0);' onclick="admin_del_student('{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='删除'
+               class='form-button'/>
+    </a>
+    {% elif student_info.confirm_status == "1" %}
+    <a href='javascript:void(0);'
+       onclick="report_confirm('/report/report_cancel_confirm/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='取消确认'
+               class='form-button'/>
+    </a>
+    {%else%}
+    {%endif%}
+    {% elif request.session.role_name == 'teacher'%}
+    {% if student_info.review_status == "2"%}
+    <a href='javascript:void(0);'
+       onclick="review('/report/report_do_review/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='确认审核'
+               class='form-button'/>
+    </a>
+    <a href='/report/to_student_info_update?studentId={{student_info.id}}' readonly="readonly">
+        <input type='button'
+               style="color: deeppink"
+               value='修改资料'
+               class='form-button'/>
+    </a>
+    <a href='javascript:void(0);' onclick="del('/report/report_student_del/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='删除资料'
+               class='form-button'/>
+    </a>
+    {% elif student_info.review_status == "1"%}
+    <a href='javascript:void(0);'
+       onclick="cancel('/report/report_student_cancel/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='注销提交'
+               class='form-button'/>
+    </a>
+    {%else%}
+    {%endif%}
+
+    {% elif request.session.role_name == 'student'%}
+    {% if student_info.submit_status == "2"%}
+    <a href='javascript:void(0);'
+       onclick="submit('/report/report_student_submit/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='提交信息'
+               class='form-button'/>
+    </a>
+    <a href='javascript:void(0);' onclick="del('/report/report_student_del/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='删除信息'
+               class='form-button'/>
+    </a>
+    <a href='/report/to_student_info_update?studentId={{student_info.id}}'>
+        <input type='button'
+               style="color: deeppink"
+               value='修改信息'
+               class='form-button'/>
+    </a>
+    {% elif student_info.submit_status == "1"%}
+    <a href='javascript:void(0);'
+       onclick="cancel('/report/report_student_cancel/','{{student_info.id}}')">
+        <input type='button'
+               style="color: deeppink"
+               value='注销提交'
+               class='form-button'/>
+    </a>
+    {% else%}
+    {% endif %}
+    {% else%}
+    {%endif%}
+    {%endif%}
+</div>

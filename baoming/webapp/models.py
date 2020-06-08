@@ -524,6 +524,22 @@ class UserInfo(models.Model):
                                        blank=True,
                                        verbose_name='二寸证件照片信息',
                                        help_text='二寸证件照片信息')
+    # 身份证正面照片
+    id_card_heads_photo = models.ForeignKey(IDCardPicture,
+                                       on_delete=models.SET_NULL,
+                                       related_name='身份证正面照图片路径',
+                                       null=True,
+                                       blank=True,
+                                       verbose_name='身份证正面照片',
+                                       help_text='身份证正面照片')
+    # 身份证反面照片
+    id_card_tails_photo = models.ForeignKey(IDCardPicture,
+                                       on_delete=models.SET_NULL,
+                                       related_name='身份证反面照图片路径',
+                                       null=True,
+                                       blank=True,
+                                       verbose_name='身份证反面照片',
+                                       help_text='身份证反面照片')
     id_number = models.CharField('身份证件号码', max_length=20, null=True, blank=True, default='', help_text='身份证件号码信息')
     work_unit = models.CharField('工作单位', max_length=100, null=True, blank=True, default='', help_text='工作单位信息,可为空！')
     unit_nature = models.ForeignKey(UnitNature,
@@ -1264,6 +1280,14 @@ class ReportCondition(models.Model):
                                     choices=[('1', '启用'),
                                             ('2', '停用')],
                                     help_text='1-启用/2-停用')
+    
+    skill_main_class = models.ForeignKey('ReportSkillMainClass', to_field='id',
+                                     related_name="%(app_label)s_%(class)s_ReportSkillMainClass",
+                                     verbose_name='技能大类',
+                                     blank=True,
+                                     null=True,
+                                     on_delete=models.CASCADE,
+                                     help_text='技能大类')
     # 技能条件
     condition_for_skill = models.ForeignKey(ReportSkill, to_field='skill_id',
                                             on_delete=models.SET_NULL,

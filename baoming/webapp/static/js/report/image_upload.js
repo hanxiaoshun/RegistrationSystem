@@ -29,13 +29,19 @@ function image_upload(type) {
             form_data.append("file_type", "1");
         }
         let url = '/report/image_upload/';
+        if (photo_type === 'val4') {
+            url = '/report/image_upload_id_card/';
+
+        } else if (photo_type === 'val5') {
+            url = '/report/image_upload_id_card/';
+        }
         $.ajax({
             url: url,
             type: 'POST',
             data: form_data,
-            processData: false,  // tell jquery not to process the data
+            processData: false, // tell jquery not to process the data
             contentType: false, // tell jquery not to set contentType
-            success: function (data) {
+            success: function(data) {
                 if (data.status) {
                     if (photo_type === 'val1') {
                         let two_inch_photo = $("#two-inch-photo");
@@ -124,6 +130,20 @@ function image_upload(type) {
                         // $(".more_info").show();
                         $("#val3").val("更换毕业证件照");
                         //关闭模态框
+                    } else if (photo_type === 'val4') {
+                        alert("图片上传成功");
+                        $("#id-card-heads-photo").attr('src', data.data);
+                        $("#id_card_heads_photo").val(data.picture);
+                        // $(".more_info").show();
+                        $("#val4").val("更换身份证正面照");
+                        //关闭模态框
+                    } else if (photo_type === 'val5') {
+                        alert("图片上传成功");
+                        $("#id-card-tails-photo").attr('src', data.data);
+                        $("#id_card_tails_photo").val(data.picture);
+                        // $(".more_info").show();
+                        $("#val5").val("更换身份证反面照");
+                        //关闭模态框
                     }
                     let left = ($(window).width() * (1 - 0.35)) / 2;
                     let top = ($(window).height() * (1 - 0.5)) / 2;
@@ -132,11 +152,11 @@ function image_upload(type) {
                         height: "-$(window).height()*0.5",
                         left: "-" + left + "px",
                         top: "-" + top + "px"
-                    }, 1000, function () {
+                    }, 1000, function() {
                         let width1 = $(window).width() * 0.35;
                         let height1 = $(window).height() * 0.5;
                         console.log(width1);
-                        $(this).css({width: width1, height: height1}).hide();
+                        $(this).css({ width: width1, height: height1 }).hide();
                     });
                 } else {
                     alert(data.message);
@@ -145,4 +165,3 @@ function image_upload(type) {
         });
     }
 }
-

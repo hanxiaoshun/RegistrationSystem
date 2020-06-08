@@ -24,6 +24,10 @@ class UserInfoForm(forms.Form):
 
     # 外键信息
     two_inch_photo_form = forms.IntegerField(required=False)
+    # 身份证正面照片
+    id_card_heads_photo = forms.IntegerField(required=False)
+    # 身份证反面照片
+    id_card_tails_photo = forms.IntegerField(required=False)
     # 后加的
     person_in_charge = forms.CharField(max_length=20, help_text='单位报名负责人')
     nation_info_form = forms.IntegerField(help_text="民族信息", required=False)

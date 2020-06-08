@@ -245,6 +245,23 @@ def update_user_info(request):
                     two_inch_photo_obj = Picture.objects.get(id=two_inch_photo)
                     form_object_user_info.two_inch_photo = two_inch_photo_obj
                 # 关联二寸照片
+                id_card_heads_photo = object_form.cleaned_data.get('id_card_heads_photo', None)
+                id_card_tails_photo = object_form.cleaned_data.get('id_card_tails_photo', None)
+                print('id_card_heads_photo')
+                print('id_card_tails_photo')
+
+                print(id_card_heads_photo)
+                print(id_card_tails_photo)
+
+
+                # 关联身份证正面照片
+                if id_card_heads_photo:
+                    id_card_heads_photo_obj = IDCardPicture.objects.get(id=id_card_heads_photo)
+                    form_object_user_info.id_card_heads_photo = id_card_heads_photo_obj
+                # 关联身份证反面照片
+                if id_card_tails_photo:
+                    id_card_tails_photo_obj = IDCardPicture.objects.get(id=id_card_tails_photo)
+                    form_object_user_info.id_card_tails_photo = id_card_tails_photo_obj
 
                 id_number = form_object_user_info.id_number
                 if len(id_number) > 17:
@@ -303,6 +320,16 @@ def update_user_info(request):
                                                 student_username,
                                                 "二寸证件照",
                                                 form_object_user_info.two_inch_photo.picture_path)
+                            term_worker_picture(student_info.school_term.school_term_name,
+                                                student_info.declaration_of_occupation,
+                                                student_username,
+                                                "SFZ证件ZFM照",
+                                                form_object_user_info.id_card_heads_photo.picture_path)
+                            term_worker_picture(student_info.school_term.school_term_name,
+                                                student_info.declaration_of_occupation,
+                                                student_username,
+                                                "SFZ证件ZFM照",
+                                                form_object_user_info.id_card_tails_photo.picture_path)
                             return HttpResponseRedirect("/report/student_info_detail?studentId=" + str(student_id))
                         # title_msg = sys_msg + '-填报详情'
                         # image_url = MEDIA_URL + str(student_info.user_info.two_inch_photo.picture_path)
@@ -344,7 +371,7 @@ def update_user_info(request):
         message = '系统提示：系统异常请稍后重试' + str(e)
         return render_result(request, "page_main_controller/message.html",
                              {'title_msg': title_msg, 'message': message})
-        # raise e
+        raise e
 
 
 def update_user_base_info(request):

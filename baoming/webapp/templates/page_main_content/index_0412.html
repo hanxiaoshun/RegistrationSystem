@@ -1,0 +1,535 @@
+{% load filter_model %}
+<div class="index_like_form" style="margin-top: 2%">
+    {% if request.session.role_name == 'administrator' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉信息汇总系统</label>
+    <hr> {% elif request.session.role_name == 'teacher' %}
+    <label class="input_text_head">欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉负责人审核系统</label>
+    <hr> {% else %}
+    <table class="system_index_table">
+        {% if need_login%}
+        <tr style="text-align: center">
+            <td colspan="2">
+                <label class="input_text_warning_login" style="color: #d5ff10">您尚未登录或登录超时！请
+                    <a href="/report/to_login" title="您好！请登录" style="color: red">登录</a>|
+                    <a href="javascript:void(0);">
+                        <span class="input_text_warning_login" style="color: red" onclick="register_button();">注册</span>
+                    </a>
+                </label>
+            </td>
+        </tr>
+        {% else %} {% endif %}
+        <tr>
+            <td style="width: 19%">
+                <img src="/static/image/index/baomingshouye.png" height="18%" width="100%" style="margin-top:20%;text-align: left" />
+            </td>
+            <td rowspan="4" style="width: 75%">
+                <div class="baomingxitong" style="text-align: left;height: 50%">
+                    &nbsp;
+                    <br> &nbsp;
+                    <br> &nbsp;
+                    <br> &nbsp;
+                    <br> &nbsp;
+                    <br>
+                    <!--                    <img src="/static/image/index/baomingxitong.png" height="5%" width="50%"-->
+                    <!--                         title="欢迎进入◉国家资格证职业技能提升补贴乐陵杏林学校考点报名系统◉学员信息填报系统"/>-->
+                </div>
+                <div style="width: 80%;text-align: center;margin-left: 10%;margin-right: 10%">
+                    <table>
+                        <tr style="height: 20%">
+                            {% if request.session.nickname %}
+                            <td style="width: 20%">
+                                <a href='/report/report_student_info_list/'>
+                                    <img src="/static/image/index/guanliyitianbao.png" height="18%" width="100%" title="管理已填报消息" style="margin-left:5%;text-align: left" />
+                                </a>
+                            </td>
+
+                            <td style="width: 18%;padding-left:3%;">
+                                <table border="0" cellspacing="0" cellpadding="0" style="width: 100%">
+                                    <tr>
+                                        <td style="width: 56%">
+                                            <img src="/static/image/index/xiaoxi01.png" height="18%" width="100%" title="消息" style="margin-right: -1%" />
+                                        </td>
+                                        <td style="" class="index_img_a">
+                                            <a href='/report/receive/' style="margin-left: -1%;height: 30%">
+                                                <span style="color: red;margin-right: auto;margin-left: auto;height: 50%">{{not_confirm}}</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                            <td class='' style="width: 18%;padding-left:3%;">
+                                <a href='/report/reset_password/' title="修改密码">
+                                    <img src="/static/image/index/xiugaimima.png" height="18%" width="100%" title="修改密码" style="text-align: left" />
+                                </a>
+                            </td>
+                            <td style="width: 18%;;padding-left:3%;">
+                                <a href="/report/message_add/" title="发送信息">
+                                    <img src="/static/image/index/fasongxiaoxi.png" height="18%" width="100%" title="发送消息" style="margin-left:1%;text-align: left" />
+                                </a>
+                            </td>
+                            {%else%} {%endif%}
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 60%">
+                <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 25%;text-align: left;width: 100%;height: 100%;margin-right: auto;margin-left: auto">
+                    <tr style="height: 50%">
+                        <td class="index_img_span_huanying2" style="width: 30%;height:50%;margin-right: -1%">
+                            <a href='/report/receive/'>
+                                <!--                                <img src="/static/image/index/huanying2.png" height="20%"-->
+                                <!--                                     width="100%"-->
+                                <!--                                     title="欢迎{{ request.session.nickname }}" style="margin-right: -1%"/>-->
+                            </a>
+                        </td>
+                        <td class="index_img_span" style="width: 70%;padding-left: 20%;">
+                            <a href='/report/user_setting/'>
+                                <span style="color: red;margin:auto;">{{ request.session.nickname|get_nickname }}</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        {%if no_term%} {% else %}
+        <!--        <tr style="text-align: center">-->
+        <!--            <td colspan="2">-->
+        <!--                <label class="last_term_info_warning">报名尚未开始或未登录，请不要继续操作</label>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+        {%endif%}
+    </table>
+    <!--    <table class="term_table">-->
+    <!--        <tbody>-->
+    <!--        <tr style="margin-left: 20%">-->
+    <!--            <td><label class="last_term_info_name_index">{{school_term.school_term_name}}(</label></td>-->
+    <!--            <td style="float: left">-->
+    <!--                <div style="color: whitesmoke">起：{{school_term.school_term_start|date:"Y-m-d"}}</div>-->
+    <!--                <div style="color: whitesmoke">止：{{school_term.school_term_end|date:"Y-m-d"}}</div>-->
+    <!--                &lt;!&ndash;                <label class="last_term_info_start_date_index">起：{{school_term.school_term_start|date:"Y-m-d"}}</label>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                <label class="last_term_info_end_date_index">止：{{school_term.school_term_end|date:"Y-m-d"}}</label>&ndash;&gt;-->
+    <!--            </td>-->
+    <!--            <td><label class="last_term_info_name_index">)</label></td>-->
+    <!--        </tr>-->
+    <!--        </tbody>-->
+    <!--    </table>-->
+    <table class="worker_table">
+        <tbody>
+            <tr>
+                <td style="text-align: left">
+                    <a href="/report/system_guide/">
+                        <img src="/static/image/index/xitongcaozuozhinan.png" height="18%" width="100%" style="margin-top: 10%;text-align: left" />
+                    </a>
+                </td>
+                <td class="worker_table_sub_td">
+                    <table class="term_table">
+                        <tbody>
+                            <tr style="margin-left: 15%">
+                                <td><label class="last_term_info_name_index">{{school_term.school_term_name}}(</label></td>
+                                <td style="float: left">
+                                    <div style="color: whitesmoke">起：{{school_term.school_term_start|date:"Y-m-d"}}</div>
+                                    <div style="color: whitesmoke">止：{{school_term.school_term_end|date:"Y-m-d"}}</div>
+                                    <!--                <label class="last_term_info_start_date_index">起：{{school_term.school_term_start|date:"Y-m-d"}}</label>-->
+                                    <!--                <label class="last_term_info_end_date_index">止：{{school_term.school_term_end|date:"Y-m-d"}}</label>-->
+                                </td>
+                                <td><label class="last_term_info_name_index">)</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left">
+                    <a href="/report/introduction/">
+                        <img class="" src="/static/image/index/baomingtiaojian.png" height="18%" width="100%" />
+                    </a>
+                </td>
+                <td class="worker_table_sub_td">
+
+                </td>
+            </tr>
+            <tr>
+                <td class="index_img_span_xuanzebaokaozhiye">
+                    <img src="/static/image/index/xuanzebaokaozhiye.png" height="18%" width="100%" />
+                </td>
+                <td class="worker_table_sub_td">
+                    <a class="worker_size" href='/report/worker?type=1' title="（机电）电工">
+                        <!-- <img src="/static/image/worker_type/diangong.png" height="10%" width="15%"
+                         title="电工" style="text-align: left"/> -->
+                        电工
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=2' title="（机电）焊工">
+                        <!--                    <img src="/static/image/worker_type/hangong.png" height="10%" width="15%"
+                         title="焊工" style="margin-left:2%;text-align: left"/> -->
+                        焊工
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=3' title="（机电）钳工">
+                        <!--                    <img src="/static/image/worker_type/qiangong.png" height="10%" width="15%"
+                         title="钳工" style="margin-left:2%;text-align: left"/> -->
+                        钳工
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=4'>
+                        <!-- <img src="/static/image/worker_type/yuyingyuan.png" height="10%" width="15%"
+                         title="育婴员" style="margin-left:2%;text-align: left"/> -->
+                        育婴员
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=5'>
+                        <!--                    <img src="/static/image/worker_type/baoyuyuan.png" height="10%" width="15%"
+                         title="保育员" style="margin-left:2%;text-align: left"/> -->
+                        保育员
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <!--                <img class="button_index_top" src="/static/image/index/xuanzebaokaozhiye.png" height="18%"-->
+                    <!--                     width="100%"/>-->
+                </td>
+                <td class="worker_table_sub_td">
+                    <a class="worker_size" href='/report/worker?type=25' title="美容师">
+                        <!--                    <img src="/static/image/worker_type/meirongshi.png" height="10%" width="15%"
+                         title="美容师" style="text-align: left"/> -->
+                        美容师
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=23' title="中式面点师">
+                        <!--                    <img src="/static/image/worker_type/miandianshi.png" height="10%" width="15%"
+                         title="面点师" style="margin-left:2%;text-align: left"/> -->
+                        面点师
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=24' title="中式烹调师">
+                        <!--                    <img src="/static/image/worker_type/pengtiaoshi.png" height="10%" width="15%"
+                         title="烹调师" style="margin-left:2%;text-align: left"/> -->
+                        烹调师
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=6'>
+                        <!--                    <img src="/static/image/worker_type/laodongguanxixietiaoyuan.png" height="10%" width="15%"
+                         title="劳动关系协调员" style="margin-left:2%;text-align: left"/> -->
+                        劳动关系协调员
+                    </a>
+                    <!--                <a class="worker_size" href='/report/worker?type=13' title="机床装调维修工">
+                    <img src="/static/image/worker_type/jichuangzhuangtiaoweixiugong.png" height="10%" width="15%"
+                         title="机床装调维修工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="worker_table_sub_td">
+                    <!--                <a class="worker_size" href='/report/worker?type=16' title="架子工">
+                    <img src="/static/image/worker_type/jiazigong.png" height="10%" width="15%"
+                         title="架子工" style="text-align: left"/>
+                </a> -->
+                    <a class="worker_size" href='/report/worker?type=22' title="智能楼宇管理员">
+                        <!--                    <img src="/static/image/worker_type/zhinenglouyuguanliyuan.png" height="10%" width="15%"
+                         title="智能楼宇管理员" style="margin-left:2%;text-align: left"/> -->
+                        智能楼宇管理员
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=15' title="起重装卸机械操作工">
+                        <!--                    <img src="/static/image/worker_type/qizhongzhuangxiejixiecaozuogong.png" height="10%" width="15%"
+                         title="起重装卸机械操作工" style="margin-left:2%;text-align: left"/> -->
+                        起重装卸机械操作工
+                    </a>
+                    <!--                <a class="worker_size" href='/report/worker?type=12' title="车工">
+                    <img src="/static/image/worker_type/chegong.png" height="10%" width="15%"
+                         title="车工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                    <a class="worker_size" href='/report/worker?type=14' title="电梯安装维修工">
+                        <!--                    <img src="/static/image/worker_type/diantianzhuangweixiugong.png" height="10%" width="15%"
+                         title="电梯安装维修工" style="margin-left:2%;text-align: left"/> -->
+                        电梯安装维修工
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+                    <!--                <a class="worker_size" href='/report/worker?type=17' title="防水工">
+                    <img src="/static/image/worker_type/fangshuigong.png" height="10%" width="15%"
+                         title="防水工" style="text-align: left"/>
+                </a> -->
+                    <!--                <a class="worker_size" href='/report/worker?type=18' title="手工木工">
+                    <img src="/static/image/worker_type/shougongmugong.png" height="10%" width="15%"
+                         title="手工木工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                    <!--           <a class="worker_size" href='/report/worker?type=19' title="砌筑工">
+                    <img src="/static/image/worker_type/qizhugong.png" height="10%" width="15%"
+                         title="砌筑工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                    <!--                <a class="worker_size" href='/report/worker?type=20' title="钢筋工">
+                    <img src="/static/image/worker_type/gangjingong.png" height="10%" width="15%"
+                         title="钢筋工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                    <!--                <a class="worker_size" href='/report/worker?type=21' title="混凝土工">
+                    <img src="/static/image/worker_type/hunningtugong.png" height="10%" width="15%"
+                         title="混凝土工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+                    <!--                <a class="worker_size" href='/report/worker?type=8' title="（化工）有机合成工">
+                    <img src="/static/image/worker_type/youjihechenggong.png" height="10%" width="15%"
+                         title="有机合成工" style="text-align: left"/>
+                </a> -->
+                    <a class="worker_size" href='/report/worker?type=10' title="（化工）无机化学反应生产工">
+                        <!--                    <img src="/static/image/worker_type/wujihuaxuefanyingshengchangong.png" height="10%" width="15%"
+                         title="无机化学反应生产工" style="margin-left:2%;text-align: left"/> -->
+                        无机化学反应生产工
+                    </a>
+                    <a class="worker_size" href='/report/worker?type=7' title="（化工）防腐蚀工">
+                        <!--                  <img src="/static/image/worker_type/fangfushigong.png" height="10%" width="15%"
+                         title="防腐蚀工" style="margin-left:2%;text-align: left"/> -->
+                        防腐蚀工
+                    </a>
+                    <!--                <a class="worker_size" href='/report/worker?type=9' title="（化工）工业废水处理工">
+                    <img src="/static/image/worker_type/gongyefeishuichuligong.png" height="10%" width="15%"
+                         title="工业废水处理工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                    <!--                <a class="worker_size" href='/report/worker?type=11' title="（化工）工业固体废物处理处置工">
+                    <img src="/static/image/worker_type/gongyegutifeiwuchulichuzhigong.png" height="10%" width="15%"
+                         title="工业固体废物处理处置工" style="margin-left:2%;text-align: left"/>
+                </a> -->
+                </td>
+            </tr>
+            <!-- 0407新增 -->
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+                    <a class="worker_size" href='/report/worker?type=51' title="工业气体生产工">
+							工业气体生产工
+						 </a>
+                    <a class="worker_size" href='/report/worker?type=52' title="压缩机操作工">
+						   压缩机操作工
+		                </a>
+                    <a class="worker_size" href='/report/worker?type=53' title="仪器仪表维修工">
+												   仪器仪表维修工
+						 </a>
+                    <a class="worker_size" href='/report/worker?type=54' title="尿素生产工">
+						 						   尿素生产工
+						  </a>
+                    <a class="worker_size" href='/report/worker?type=55' title="合成氨生产工">
+						  						   合成氨生产工
+						   </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+                    <a class="worker_size" href='/report/worker?type=56' title="硝酸生产工">
+						   硝酸生产工
+		                </a>
+                    <a class="worker_size" href='/report/worker?type=57' title="硫酸生产工">
+												   硫酸生产工
+						 </a>
+                    <a class="worker_size" href='/report/worker?type=58' title="化学检验员">
+						 						   化学检验员
+						  </a>
+                    <a class="worker_size" href='/report/worker?type=61' title="广电和通信设备电子装接工">
+						  						   广电和通信设备电子装接工
+						   </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+                    <a class="worker_size" href='/report/worker?type=62' title="计算机及外部设备装配调试员">
+						   计算机及外部设备装配调试员
+		                </a>
+                    <a class="worker_size" href='/report/worker?type=63' title="电子产品制版工">
+												   电子产品制版工
+						 </a>
+                    <a class="worker_size" href='/report/worker?type=64' title="广电和通信设备调试工">
+						 						   广电和通信设备调试工
+						  </a>
+                    <a class="worker_size" href='/report/worker?type=71' title="纺纱工">
+						  						   纺纱工
+						   </a>
+                    <a class="worker_size" href='/report/worker?type=72' title="并条工">
+						   					   并条工
+						    </a>
+                    <a class="worker_size" href='/report/worker?type=73' title="缫丝工">
+						   											   缫丝工
+						   					 </a>
+                    <a class="worker_size" href='/report/worker?type=74' title="整经工">
+						   					 						   整经工
+						   					  </a>
+                    <a class="worker_size" href='/report/worker?type=75' title="纺织纤维梳理工">
+						   					  						   纺织纤维梳理工
+						   					   </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+                    <a class="worker_size" href='/report/worker?type=76' title="织布工">
+					   织布工
+	                </a>
+                    <a class="worker_size" href='/report/worker?type=77' title="印染前处理工">
+						印染前处理工
+					 </a>
+                    <a class="worker_size" href='/report/worker?type=78' title="印染后整理工">
+					 						   印染后整理工
+					  </a>
+                    <a class="worker_size" href='/report/worker?type=79' title="印花工">
+					  						   印花工
+					   </a>
+                    <a class="worker_size" href='/report/worker?type=80' title="纺织染色工">
+					   					   纺织染色工
+					    </a>
+                    <a class="worker_size" href='/report/worker?type=81' title="服装制版师">
+					   						服装制版师
+					   					 </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+
+
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                </td>
+                <td class="worker_table_sub_td">
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="worker_table_quit">
+        <tbody>
+            {% if request.session.username %}
+            <tr>
+                <td class="index_img_span_quit">
+                    <!--                <img class="button_index_top" src="/static/image/index/xuanzebaokaozhiye.png" height="18%"-->
+                    <!--                     width="100%"/>-->
+                </td>
+                <td class="worker_table_sub_td_quit_01" style="text-align: right">
+                    <a href="/report/sign_out" style="width:15%;">
+                        <img class="" src="/static/image/index/tuichu.png" height="15%" width="15%" />
+                        <!--                    <button class="button_index_top" style="text-align: center;width: 65px"><b>退出</b></button>-->
+                    </a>
+                </td>
+                <!--            <td class="worker_table_sub_td" style="text-align: left">-->
+                <!--                <a href="/report/sign_out" style="width:15%;">-->
+                <!--                    <img class="" src="/static/image/index/tuichu.png" height="15%" width="15%"/>-->
+                <!--                    &lt;!&ndash;                    <button class="button_index_top" style="text-align: center;width: 65px"><b>退出</b></button>&ndash;&gt;-->
+                <!--                </a>-->
+                <!--            </td>-->
+            </tr>
+            {% else %} {% endif %}
+        </tbody>
+    </table>
+
+</div>
+{% endif%}
+
+<div class="box box_index">
+    <div class="regiest">
+        <form action="/report/register/" id='register-form-index' method="post">
+            {% csrf_token %} {{ form }}
+            <table style="margin-top: 10%;margin-left: auto;margin-right: auto;">
+                <tbody>
+                    <tr>
+                        <td><label style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;用户名:</label></td>
+                        <td><input type="text" name="username" id="username_index" value="{{username}}" required="required" placeholder="用户名" onblur="check_username_index();" onchange="check_username_index();"></td>
+                        <td style="width: auto;"><span class="message-label" style="color:red;margin-left: 1%; float: left;"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label style="color: honeydew; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昵称:</label>
+                        </td>
+                        <td><input type="text" name="nickname" id="nickname_index" placeholder="昵称" required="required" onblur="check_nickname_index();" onchange="check_nickname_index();"></td>
+                        <td style="width: auto;"><span class="message-label" style="color:red;margin-left: 1%; float: left"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label style="color: honeydew; float: right; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:</label>
+                        </td>
+                        <td><input type="password" name="password" id="passwordReg_index" placeholder="密码" required="required" onblur="check_password_index();" onchange="check_password_index();"></td>
+                        <td style="width: auto;"><span class="message-label" style="color:red;margin-left: 1%; float: left"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label style="color: honeydew; float: right;">确认密码:</label></td>
+                        <td><input type="password" id="finalPWD_index" placeholder="确认密码" required="required" onblur="check_equal_index();" onchange="check_equal_index();"></td>
+                        <td style="width: auto;"><span class="message-label" style="color:red;margin-left: 1%; float: left"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type='submit' style="color: hotpink;width: 15%" value='提交' class='submit_index form-button submit-teacher' />
+
+            <input type='button' style="color: hotpink;width: 15%" value="关闭" onclick="close_button();" class='form-button close_school_term' />
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function register_button() {
+        let username = $("#username");
+        username.empty();
+        let passwordReg = $("#passwordReg");
+        passwordReg.empty();
+        let left = ($(window).width() * (1 - 0.35)) / 2; //box弹出框距离左边的额距离
+        let top = ($(window).height() * (1 - 0.7)) / 2;
+
+        if ($(window).width() < 1350) {
+            if ($(window).width() < 750) {
+                $(".box_nav").addClass("animated bounceIn").show().css({
+                    left: left,
+                    top: top,
+                    width: $(window).width() * 0.75,
+                    height: $(window).height() * 0.35
+                });
+                $(".opacity_bg").css("opacity", "0.3").show();
+            } else {
+                $(".box_index").addClass("animated bounceIn").show().css({
+                    left: left,
+                    top: top,
+                    width: $(window).width() * 0.50,
+                    height: $(window).height() * 0.35
+                });
+                $(".opacity_bg").css("opacity", "0.3").show();
+            }
+        } else {
+            $(".box_index").addClass("animated bounceIn").show().css({
+                left: left,
+                top: top,
+                width: $(window).width() * 0.35,
+                height: $(window).height() * 0.3
+            });
+            $(".opacity_bg").css("opacity", "0.3").show();
+        }
+
+    }
+
+
+    function close_button() {
+        let left = ($(window).width() * (1 - 0.35)) / 2;
+        let top = ($(window).height() * (1 - 0.7)) / 2;
+        $(".box_index").show().animate({
+            width: "-$(window).width()*0.35",
+            height: "-$(window).height()*0.3",
+            left: "-" + left + "px",
+            top: "-" + top + "px"
+        }, 500, function() {
+            let width1 = $(window).width() * 0.35;
+            let height1 = $(window).height() * 0.3;
+            console.log(width1);
+            $(this).css({
+                width: width1,
+                height: height1
+            }).hide();
+        });
+    }
+</script>

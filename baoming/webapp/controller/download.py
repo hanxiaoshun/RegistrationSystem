@@ -16,6 +16,7 @@ from webapp.utils.reporter_chemical_list import *
 from webapp.utils.reporter_chemical_not_list_format import *
 from webapp.utils.worker_year_6 import *
 from webapp.utils.save_operation_log import save_operation_log
+from baoming.settings import MEDIA_URL, MEDIA_ROOT, BASE_DIR
 
 sys_msg = '报名系统'
 result = {'status': True, 'message': ''}
@@ -268,6 +269,48 @@ def start_download(request):
                 message = '未正确获取到您的填报信息，或者系统异常，请稍后重新下载或者联系管理员'
                 return render_result(request, "page_main_controller/report_download_page.html",
                                      {'title_msg': title_msg, 'not_exist': True, 'message': message})
+        else:
+            title_msg = '下载文件异常'
+            message = '未正确获取到您的填报信息，或者系统异常，请稍后重新下载或者联系管理员'
+            return render_result(request, "page_main_controller/student/report_download_page.html",
+                                 {'title_msg': title_msg, 'not_exist': True, 'message': message})
+    except Exception as e:
+        result['status'] = False
+        result['message'] = '下载异常！错误提示：' + str(e)
+        result['data'] = json.dumps({}, ensure_ascii=False)
+        result["level"] = log_level_download
+        save_operation_log(request, inspect.stack()[0][3], "", result)
+        title_msg = '下载文件异常'
+        message = '未正确获取到您的填报信息，或者系统异常，请稍后重新下载或者联系管理员。错误提示：' + str(e)
+        return render_result(request, "page_main_controller/student/report_download_page.html",
+                             {'title_msg': title_msg, 'not_exist': True, 'message': message})
+
+def start_download_picture(request):
+    """
+    开始下载
+    :param request:
+    :return:
+    """
+    try:
+        file_uuid = request.GET.get('file_uuid', None)
+        if file_uuid:
+                file_obj = IDCardPicture.objects.get(picture_uuid=file_uuid)
+                file_root = MEDIA_ROOT + '/' + str(file_obj.picture_path)
+                file_root = file_root.replace("\\", "/")
+                operation_object = file_obj.id
+                file_names = str(file_obj.picture_path).split("/")
+                file_name = file_names[len(file_names) - 1]
+                print("file_name::" + file_name)
+                ready_file = open(file_root, 'rb')
+                response = FileResponse(ready_file)
+                response['Content-Type'] = 'application/octet-stream'
+                response['Content-Disposition'] = 'attachment;filename=' + file_name
+                result['status'] = True
+                result['message'] = '下载成功！'
+                result['data'] = json.dumps({}, ensure_ascii=False)
+                result["level"] = log_level_download
+                save_operation_log(request, inspect.stack()[0][3], str(operation_object), result)
+                return response
         else:
             title_msg = '下载文件异常'
             message = '未正确获取到您的填报信息，或者系统异常，请稍后重新下载或者联系管理员'

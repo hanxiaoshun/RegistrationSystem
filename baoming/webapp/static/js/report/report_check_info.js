@@ -354,7 +354,6 @@ function condition_controller_enhance(condition_id_str, status) {
  * @param status 条件生成状态
  */
 function condition_controller_update(condition_id_str, status) {
-
     let form_inputs = $("#add-student-info-id input");
     for (let i = 0; i < form_inputs.length; i++) {
         form_inputs[i].required = false;

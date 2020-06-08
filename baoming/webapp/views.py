@@ -672,6 +672,15 @@ def image_upload(request):
     return report.image_upload(request)
 
 
+def image_upload_id_card(request):
+    """
+    图片上传
+    :param request:
+    :return:
+    """
+    return report.image_upload_id_card(request)
+
+
 def worker_history(request):
     """
     跳转到工作经验证明的页面
@@ -715,6 +724,15 @@ def start_download(request):
     :return:
     """
     return download.start_download(request)
+
+
+def start_download_picture(request):
+    """
+    开始下载文件(图片)
+    :param request:
+    :return:
+    """
+    return download.start_download_picture(request)
 
 
 def all_student_base_info(request):

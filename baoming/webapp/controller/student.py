@@ -297,6 +297,17 @@ def student_info_detail(request):
                 if student_info.diploma_certificate_photos:
                     diploma_certificate_photos_url = MEDIA_URL + str(
                         student_info.diploma_certificate_photos.picture_path)
+
+                id_card_heads_photo_url = ''
+                if student_info.user_info.id_card_heads_photo:
+                    id_card_heads_photo_url = MEDIA_URL + str(
+                        student_info.user_info.id_card_heads_photo.picture_path)
+
+                id_card_tails_photo_url = ''
+                if student_info.user_info.id_card_tails_photo:
+                    id_card_tails_photo_url = MEDIA_URL + str(
+                        student_info.user_info.id_card_tails_photo.picture_path)
+                    
                 return render_result(
                     request,
                     "page_main_controller/student/report_student_user_info_detail.html",
@@ -307,6 +318,10 @@ def student_info_detail(request):
                         'certificate_photos_url': certificate_photos_url,
                         'diploma_certificate_photos_url':
                         diploma_certificate_photos_url,
+                        'id_card_heads_photo_url':
+                        id_card_heads_photo_url,
+                        'id_card_tails_photo_url':
+                        id_card_tails_photo_url,
                         'not_exist': False,
                         'condition_selected': condition_selected_str
                     })
@@ -424,7 +439,7 @@ def student_info_update(request):
                         # user_info = UserInfo.objects.get(register_user_info=register_user_info.id)
                         # working_history_list = user_info.user_Info_working_history.all()
                         # print("user_Info_working_history::" + str(working_history_list))
-                        title_msg = sys_msg + '-工作用户信息'
+                        title_msg = sys_msg + '-用户信息'
                         teacher_infos = TeacherInfo.objects.all()
                         teacher_info_id = form_object_student_info.teacher_info
                         if form_object_student_info.user_info:
@@ -451,6 +466,10 @@ def student_info_update(request):
                                 if user_info.two_inch_photo.picture_path:
                                     image_url = MEDIA_URL + str(
                                         user_info.two_inch_photo.picture_path)
+                                    idcard_heads_image_url = MEDIA_URL + str(
+                                        user_info.id_card_heads_photo.picture_path)
+                                    idcard_tails_image_url = MEDIA_URL + str(
+                                        user_info.id_card_tails_photo.picture_path)
                                     return render_result(
                                         request,
                                         "page_main_controller/user/report_user_info_update.html",
@@ -460,6 +479,8 @@ def student_info_update(request):
                                             student_info.user_info,
                                             'student_id': student_id,
                                             'image_url': image_url,
+                                            'idcard_heads_image_url': idcard_heads_image_url,
+                                            'idcard_tails_image_url': idcard_tails_image_url,
                                             'teacher_infos': teacher_infos,
                                             'teacher_info_id': teacher_info_id
                                         })
@@ -531,18 +552,18 @@ def to_student_info_update(request):
                     })
             else:
                 student_info = student_infos[0]
-                condition_selected_str = ''
-                if student_info.condition_selected:
-                    condition_query_set = ReportCondition.objects.\
-                        filter(condition_id=int(student_info.condition_selected)).\
-                            values('condition_id',
-                                   'condition_name',
-                                   'condition_level',
-                                   'record_status')
-                    print(condition_query_set)
-                    if len(condition_query_set) > 0:
-                        condition_selected_str = condition_query_set[0]['condition_name']
-                print(condition_selected_str)
+                # condition_selected_str = ''
+                # if student_info.condition_selected:
+                #     condition_query_set = ReportCondition.objects.\
+                #         filter(condition_id=student_info.condition_selected).\
+                #             values('condition_id',
+                #                    'condition_name',
+                #                    'condition_level',
+                #                    'record_status')
+                #     print(condition_query_set)
+                #     if len(condition_query_set) > 0:
+                #         condition_selected_str = condition_query_set[0]['condition_name']
+                # print(condition_selected_str)
                 
                 # 判断当前操作填报学期是否已经完结
 
@@ -597,6 +618,7 @@ def to_student_info_update(request):
                         if student_info.diploma_certificate_photos:
                             diploma_certificate_photos_url = MEDIA_URL + \
                                                              str(student_info.diploma_certificate_photos.picture_path)
+                        print(student_info.condition_selected)
                         return render_result(
                             request,
                             "page_main_controller/student/report_student_info_update.html",
@@ -607,8 +629,7 @@ def to_student_info_update(request):
                                 diploma_certificate_photos_url,
                                 'certificate_photos_url':
                                 certificate_photos_url,
-                                'not_report': False,
-                                'condition_selected': condition_selected_str
+                                'not_report': False
                             })
                     else:
                         # 状态修改修改权限也修改了

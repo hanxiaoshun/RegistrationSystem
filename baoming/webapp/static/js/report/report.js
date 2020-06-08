@@ -21,7 +21,7 @@ $(document).ready(function() {
 });
 
 /**
- * 更新性别的时候自动补全
+ * 更新的时候自动补全
  */
 function update_report() {
     // 写死的下拉框

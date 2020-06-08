@@ -62,6 +62,17 @@ class PictureAdmin(admin.ModelAdmin):
 
 admin.site.register(Picture, PictureAdmin)
 
+# 图片
+class IDCardPictureAdmin(admin.ModelAdmin):
+    obj = IDCardPicture()
+    list_display = tuple(obj.__dir__()[1:9])
+    readonly_fields = ('create_time', 'modify_time',)
+    list_display_links = ('picture_name',)
+    search_fields = ('id', 'picture_name')
+
+
+admin.site.register(IDCardPicture, IDCardPictureAdmin)
+
 
 # 图片
 class FileManageAdmin(admin.ModelAdmin):
@@ -114,7 +125,7 @@ admin.site.register(NationInfo, NationInfoAdmin)
 # 用户基本信息
 class UserInfoAdmin(admin.ModelAdmin):
     obj = UserInfo()
-    list_display = tuple(obj.__dir__()[1:33])
+    list_display = tuple(obj.__dir__()[1:35])
     readonly_fields = ('create_time', 'modify_time',)
     list_display_links = ('id', 'real_name',)
     search_fields = ('id', 'real_name', 'work_unit')
@@ -245,7 +256,7 @@ admin.site.register(ReportSkill, ReportSkillAdmin)
 
 class ReportConditionAdmin(admin.ModelAdmin):
     obj = ReportCondition()
-    list_display = tuple(obj.__dir__()[1:28])
+    list_display = tuple(obj.__dir__()[1:29])
     readonly_fields = ('create_time', 'modify_time',)
     list_display_links = ()
     search_fields = ('condition_id', 'condition_name',)

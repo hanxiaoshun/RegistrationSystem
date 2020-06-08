@@ -10,6 +10,7 @@ from baoming.settings import MEDIA_URL, MEDIA_ROOT
 from webapp.controller.common import *
 from webapp.controller.renderUtil import render_result
 from webapp.forms.PictureForm import PictureForm
+from webapp.forms.IDCardPictureForm import IDCardPictureForm
 from webapp.forms.WorkingHistoryForm import *
 from webapp.models import *
 from webapp.utils.form_to_obj import *
@@ -341,6 +342,132 @@ def image_upload(request):
                 # file is saved
                 print(form.cleaned_data.items())
                 instance = Picture(picture_path=request.FILES['file'])
+                # instance.picture_name = form.cleaned_data['picture_name']
+                username = request.session.get('username', None)  # 用户名
+                register_user_info = RegisterUserInfo.objects.get(username=username)
+                instance.user_operator = register_user_info
+                instance.save()
+                # 更换图片文件的名字开始，如果不处理，将受到系统和安全两个方面各种问题
+                old_path = str(instance.picture_path)
+                old_paths = old_path.split('/')
+                old_paths[len(old_paths) - 1] = str(instance.picture_uuid)[:16] + '.jpg'
+                new_path = "/".join(old_paths)
+                picture_old_os_path = MEDIA_ROOT + "\\" + str(instance.picture_path)
+                picture_old_os_path = picture_old_os_path.replace("\\", "/")
+                # 如果是上唇2寸照片需要判断
+
+                picture_new_os_path = MEDIA_ROOT + "\\" + new_path
+                picture_new_os_path = picture_new_os_path.replace("\\", "/")
+                os.rename(picture_old_os_path, picture_new_os_path)
+                instance.picture_path = new_path
+                instance.save()
+                operation_object = instance.id
+                # 更换图片文件的名字结束
+                file_type = request.POST.get('file_type', None)
+                print("file_type:::" + str(file_type))
+                # 将文件备份到学期的文件夹下
+                term_picture_root = MEDIA_ROOT + "/term_picture/" + school_term_name + "/"
+                if file_type:
+                    im = Image.open(picture_new_os_path)  # 返回一个Image对象
+
+                    resized = im.resize((64, 64))
+
+                    resized.save("test.jpg")
+
+                    print('宽：%d,高：%d' % (im.size[0], im.size[1]))
+                    # 介于一寸照片和二寸照片
+                    if 420 > im.size[0] > 280:
+                        if 650 > im.size[1] > 400:
+                            result['status'] = True
+                            result['data'] = MEDIA_URL + str(instance.picture_path)
+                            result['message'] = '图片上传状态正常！'
+                            result['picture'] = instance.id
+                        else:
+                            im = im.convert('RGB')
+                            resized = im.resize((400, 580))
+                            picture_new_os_path = picture_new_os_path.replace('.jpg', '_resize.jpg')
+                            resized.save(picture_new_os_path)
+                            instance.picture_path = new_path.replace('.jpg', '_resize.jpg')
+                            result['status'] = True
+                            result['data'] = MEDIA_URL + str(instance.picture_path)
+                            result['message'] = '图片上传状态正常！'
+                            result['picture'] = instance.id
+                            # result['status'] = False
+                            # result['message'] = '照片尺寸判断异常！请重新上传尺寸为：宽：380~413* 高：590~626像素 的二寸头像图片'
+                            # result['error'] = ''
+                    else:
+                        im = im.convert('RGB')
+                        resized = im.resize((400, 580))
+                        picture_new_os_path = picture_new_os_path.replace('.jpg', '_resize.jpg')
+                        resized.save(picture_new_os_path)
+                        instance.picture_path = new_path.replace('.jpg', '_resize.jpg')
+                        result['status'] = True
+                        result['data'] = MEDIA_URL + str(instance.picture_path)
+                        result['message'] = '图片上传状态正常！'
+                        result['picture'] = instance.id
+                        # result['status'] = False
+                        # result['message'] = '照片尺寸判断异常！请重新上传尺寸为：380~413*590~626像素 的二寸头像图片'
+                        # result['error'] = ''
+                else:
+                    result['status'] = True
+                    result['data'] = MEDIA_URL + str(instance.picture_path)
+                    result['message'] = '图片上传状态正常！'
+                    result['picture'] = instance.id
+                # return HttpResponseRedirect('/success/url/')
+        else:
+            result['status'] = False
+            result['message'] = '网络访问协议异常'
+            result['error'] = ''
+    except Exception as e:
+        result['status'] = False
+        result['message'] = '获取数据记录 0' + str(e)
+        result['error'] = ''
+    result["level"] = log_level_upload
+    save_operation_log(request, inspect.stack()[0][3], "uid:" + str(operation_object), result)
+    return JsonResponse(result, safe=False)
+
+def image_upload_id_card(request):
+    """
+    文件上传
+    :param request:
+    :return:
+    """
+    operation_object = None
+    school_term_name = None
+    school_terms = SchoolTerm.objects.all().order_by('-id')
+    if school_terms.count() > 0:
+        for school_term in school_terms:
+            school_term_name = school_term.school_term_name
+            school_term_start = school_term.school_term_start
+            school_term_end = school_term.school_term_end
+            school_term_start_timestamp = time.mktime(school_term_start.timetuple())
+            school_term_end_timestamp = time.mktime(school_term_end.timetuple())
+            if school_term_end_timestamp > time.time() > school_term_start_timestamp:
+                # print("在当前报名时间段内")
+                flag = False
+            else:
+                flag = True
+    # school_term = SchoolTerm.objects.last()
+    # school_term_start = school_term.school_term_start
+    # school_term_end = school_term.school_term_end
+    #
+    # school_term_start.timetuple()
+    # school_term_start_timestamp = time.mktime(school_term_start.timetuple())
+    # school_term_end_timestamp = time.mktime(school_term_end.timetuple())
+
+    # if school_term_end_timestamp > time.time() > school_term_start_timestamp:
+    #     # print("在当前报名时间段内")
+    #     flag = False
+    # else:
+    #     flag = True
+
+    try:
+        if request.method == 'POST':
+            form = IDCardPictureForm(request.POST, request.FILES)
+            if form.is_valid():
+                # file is saved
+                print(form.cleaned_data.items())
+                instance = IDCardPicture(picture_path=request.FILES['file'])
                 # instance.picture_name = form.cleaned_data['picture_name']
                 username = request.session.get('username', None)  # 用户名
                 register_user_info = RegisterUserInfo.objects.get(username=username)
