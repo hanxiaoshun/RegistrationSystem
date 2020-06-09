@@ -35,6 +35,7 @@ def download_apply(request):
             student = StudentInfo.objects.get(id=student_id)
             if student:
                 print(student.declaration_of_occupation)
+                print(student)
                 if '化工' in student.skill_main_class.skill_main_class_name:
                     file_uuid = apply_chemical(student)
                     print(str(file_uuid))

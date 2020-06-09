@@ -62,12 +62,18 @@ def add_student_info(request):
                 user_infos = UserInfo.objects.filter(
                     register_user_info=register_user_info)
                 image_url = ''
+                idcard_heads_image_url = ''
+                idcard_tails_image_url = ''
                 if len(user_infos) > 0:
                     user_info_old = user_infos[len(user_infos) - 1]
                     if user_info_old.two_inch_photo:
                         if user_info_old.two_inch_photo.picture_path:
                             image_url = MEDIA_URL + str(
                                 user_info_old.two_inch_photo.picture_path)
+                            idcard_heads_image_url = MEDIA_URL + str(
+                                user_info_old.id_card_heads_photo.picture_path)
+                            idcard_tails_image_url = MEDIA_URL + str(
+                                user_info_old.id_card_tails_photo.picture_path)
                     else:
                         image_url = ''
                         # 学生附属信息
@@ -185,6 +191,8 @@ def add_student_info(request):
                             'user_info': student_info.user_info,
                             'student_id': student_id,
                             'image_url': image_url,
+                            'idcard_heads_image_url': idcard_heads_image_url,
+                            'idcard_tails_image_url': idcard_tails_image_url,
                             'teacher_infos': teacher_infos
                         })
             else:
