@@ -841,7 +841,7 @@ class StudentInfo(models.Model):
     #                                         through_fields=('working_history', 'student_info'))
 
     school_name = models.CharField('毕业院校名称', max_length=50, null=True, blank=True, help_text='毕业院校名称')
-    graduation_status = models.IntegerField(help_text="毕业证件状态", verbose_name='毕业证件状态', null=True, default=0)
+    graduation_status = models.IntegerField(help_text="毕业证件上传状态,0-上传；1-不上传", verbose_name='毕业证件上传状态', null=True, default=0)
     graduation_result = models.CharField('毕业结业状态', max_length=50, default=1,
                                          choices=[('1', '已毕业'),
                                                   ('2', '未毕业')],
@@ -1283,11 +1283,19 @@ class ReportCondition(models.Model):
     
     skill_main_class = models.ForeignKey('ReportSkillMainClass', to_field='id',
                                      related_name="%(app_label)s_%(class)s_ReportSkillMainClass",
-                                     verbose_name='技能大类',
+                                     verbose_name='技能大类ID',
                                      blank=True,
                                      null=True,
                                      on_delete=models.CASCADE,
-                                     help_text='技能大类')
+                                     help_text='技能大类ID')
+    
+    skill_main_class_name = models.ForeignKey('ReportSkillMainClass', to_field='skill_main_class_name',
+                                     related_name="%(app_label)s_%(class)s_skill_main_class_name",
+                                     verbose_name='技能大类名称',
+                                     blank=True,
+                                     null=True,
+                                     on_delete=models.CASCADE,
+                                     help_text='技能大类名称')
     # 技能条件
     condition_for_skill = models.ForeignKey(ReportSkill, to_field='skill_id',
                                             on_delete=models.SET_NULL,
@@ -1309,7 +1317,7 @@ class ReportCondition(models.Model):
                                     help_text='1-填写/2-填写')
     work_of_this_occupation_status = models.CharField('从事本工作时间', max_length=50, default=2,
                                     choices=[('1', '填写'),
-                                             ('2', '不停用')],
+                                             ('2', '不填写')],
                                     help_text='1-填写/2-填写')
     
     work_of_this_occupation_requirement = models.SmallIntegerField('从事本工作时间要求', default=0, null=True, help_text='获得现有资格证书后工作年限要求', blank=True)

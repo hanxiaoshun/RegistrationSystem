@@ -256,7 +256,7 @@ admin.site.register(ReportSkill, ReportSkillAdmin)
 
 class ReportConditionAdmin(admin.ModelAdmin):
     obj = ReportCondition()
-    list_display = tuple(obj.__dir__()[1:29])
+    list_display = tuple(obj.__dir__()[1:30])
     readonly_fields = ('create_time', 'modify_time',)
     list_display_links = ()
     search_fields = ('condition_id', 'condition_name',)

@@ -306,7 +306,7 @@
                         <span class="input_text" id="student_source_value">考生来源：</span>
                     </td>
                     <td class="form-label td-input student_source">
-                        <input id='update_student_source_class' hidden value="{{ student_info.student_source.id}}">
+                        <input id='update_student_source_class' hidden value="{{ student_info.student_source_class.id}}">
                         <select name="student_source_class" id="id_student_source_class">
                             <option selected>退役人员</option>
                             <option></option>
@@ -575,7 +575,7 @@
                     var examineeIdentity = JSON.parse(data.data.examineeIdentity);
                     $("#id_identify_class").empty();
                     $.each(identifyClass, function(i, n) {
-                        if (n.pk === update_identify_class) {
+                        if (n.pk.toString() === update_identify_class) {
                             $("#id_identify_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
                         } else {
                             $("#id_identify_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
@@ -583,7 +583,7 @@
                     });
                     $("#id_identify_subject").empty();
                     $.each(identifySubject, function(i, n) {
-                        if (n.pk === update_identify_subject) {
+                        if (n.pk.toString() === update_identify_subject) {
                             $("#id_identify_subject").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
                         } else {
                             $("#id_identify_subject").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
@@ -591,7 +591,7 @@
                     });
                     $("#id_place_sign_up").empty();
                     $.each(placeSignUp, function(i, n) {
-                        if (n.pk === update_place_sign_up) {
+                        if (n.pk.toString() === update_place_sign_up) {
                             $("#id_place_sign_up").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
                         } else {
                             $("#id_place_sign_up").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
@@ -599,7 +599,8 @@
                     });
                     $("#id_student_source_class").empty();
                     $.each(studentSourceClass, function(i, n) {
-                        if (n.pk === update_student_source_class) {
+                        console.log(n);
+                        if (n.pk.toString() === update_student_source_class) {
                             $("#id_student_source_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
                         } else {
                             $("#id_student_source_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
@@ -607,7 +608,7 @@
                     });
                     $("#id_subside_certificate_class").empty();
                     $.each(subsideCertificateClass, function(i, n) {
-                        if (n.pk === update_subside_certificate_class) {
+                        if (n.pk.toString() === update_subside_certificate_class) {
                             $("#id_subside_certificate_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
                         } else {
                             $("#id_subside_certificate_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
@@ -615,7 +616,7 @@
                     });
                     $("#id_subside_class").empty();
                     $.each(subsideClass, function(i, n) {
-                        if (n.pk === update_subside_class) {
+                        if (n.pk.toString() === update_subside_class) {
                             $("#id_subside_class").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
                         } else {
                             $("#id_subside_class").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
@@ -623,7 +624,7 @@
                     });
                     $("#id_examinee_identity").empty();
                     $.each(examineeIdentity, function(i, n) {
-                        if (n.pk === update_examinee_identity) {
+                        if (n.pk.toString() === update_examinee_identity) {
                             $("#id_examinee_identity").append("<option value='" + n.pk + "' selected>" + n.fields.name + " </option>");
                         } else {
                             $("#id_examinee_identity").append("<option value='" + n.pk + "'>" + n.fields.name + " </option>");
