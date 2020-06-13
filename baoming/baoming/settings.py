@@ -89,8 +89,8 @@ DATABASES = {
         # 'NAME': 'reportdb_aliyun_data',
         'NAME': 'report_data',
         'USER': 'root',  # 用户名
-        'PASSWORD': 'nO!Ib!000Nj0Ro',
-        # 'PASSWORD': '123@QAZwsxedc',
+        # 'PASSWORD': 'nO!Ib!000Nj0Ro',
+        'PASSWORD': '____123@QA0000Zwsxedc____',
         'HOST': 'localhost',
         'PORT': '3306',
         'CHARSET': 'utf8',  # 设置字符集，不然会出现中文乱码

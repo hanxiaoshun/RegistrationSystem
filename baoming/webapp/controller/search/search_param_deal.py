@@ -6,28 +6,28 @@ from webapp.controller.renderUtil import render_result
 from webapp.controller.search.search_common import *
 from webapp.utils.date_encoder import *
 
-report_skill_main_classes = ReportSkillMainClass.objects.\
-        filter().values("id", "skill_main_class_code", "skill_main_class_name").order_by('-id')
-
-if len(report_skill_main_classes) > 0:
-    tmp_list = []
-    for i in report_skill_main_classes:
-        tmp_list.append(i)
-            # result['data'] = serializers.serialize('json', objects)
-    report_skill_main_list = json.dumps(tmp_list, ensure_ascii=False)
-    
-
-report_skill_result = ReportSkill.objects.\
-        filter().values("skill_id", "skill_name", "skill_main_class", "skill_main_class_name").order_by('-skill_id')
-if len(report_skill_result) > 0:
-    tmp_list = []
-    for i in report_skill_result:
-        tmp_list.append(i)
-            # result['data'] = serializers.serialize('json', objects)
-    report_skill_list = json.dumps(tmp_list, ensure_ascii=False)
-
 
 def search_parameter(request, search_type=None):
+    report_skill_main_classes = ReportSkillMainClass.objects.\
+        filter().values("id", "skill_main_class_code", "skill_main_class_name").order_by('-id')
+
+    if len(report_skill_main_classes) > 0:
+        tmp_list = []
+        for i in report_skill_main_classes:
+            tmp_list.append(i)
+                # result['data'] = serializers.serialize('json', objects)
+        report_skill_main_list = json.dumps(tmp_list, ensure_ascii=False)
+        
+
+    report_skill_result = ReportSkill.objects.\
+            filter().values("skill_id", "skill_name", "skill_main_class", "skill_main_class_name").order_by('-skill_id')
+    if len(report_skill_result) > 0:
+        tmp_list = []
+        for i in report_skill_result:
+            tmp_list.append(i)
+                # result['data'] = serializers.serialize('json', objects)
+        report_skill_list = json.dumps(tmp_list, ensure_ascii=False)
+        
     teacher_tmp = None
     role_name = request.session.get('role_name', None)  # 用户名
     if role_name is not None:
