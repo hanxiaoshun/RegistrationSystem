@@ -109,8 +109,11 @@ def receive(request):
     if username:
         registers = RegisterUserInfo.objects.filter(username=username)
         if len(registers) == 1:
+            print('ddddd')
             user_infos = UserInfo.objects.filter(register_user_info=registers[0]).order_by('-id')
+            system_messages_receiver = SystemMessage.objects.filter(hidden_status_receiver=2).order_by('-id')
             if len(user_infos) == 1:
+                print('kkkk')
                 system_messages_receiver = SystemMessage.objects.filter(receiver=user_infos[0],
                                                                         hidden_status_receiver=2).order_by('-id')
                 not_confirm = system_messages_receiver.filter(feedback_status=2).count()
@@ -124,6 +127,8 @@ def receive(request):
                     # 将未查看的信息状态设置为已查看
                     system_message.receive_status = "1"
                     system_message.save()
+    print(system_messages_receiver)
+    print(f'system_messages_receiver--{system_messages_receiver}')
     paginator = Paginator(system_messages_receiver, 10)
     page = request.GET.get('page')
     contacts = paginator.get_page(page)

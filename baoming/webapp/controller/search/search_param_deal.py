@@ -10,17 +10,18 @@ from webapp.utils.date_encoder import *
 def search_parameter(request, search_type=None):
     report_skill_main_classes = ReportSkillMainClass.objects.\
         filter().values("id", "skill_main_class_code", "skill_main_class_name").order_by('-id')
-
+    report_skill_main_list = json.dumps([], ensure_ascii=False)
     if len(report_skill_main_classes) > 0:
         tmp_list = []
         for i in report_skill_main_classes:
             tmp_list.append(i)
                 # result['data'] = serializers.serialize('json', objects)
         report_skill_main_list = json.dumps(tmp_list, ensure_ascii=False)
-        
+    
 
     report_skill_result = ReportSkill.objects.\
             filter().values("skill_id", "skill_name", "skill_main_class", "skill_main_class_name").order_by('-skill_id')
+    report_skill_list = json.dumps([], ensure_ascii=False)
     if len(report_skill_result) > 0:
         tmp_list = []
         for i in report_skill_result:
@@ -210,12 +211,8 @@ def search_parameter(request, search_type=None):
             #               {'title_msg': title_msg, "contacts": contacts, 'student_info': student_info,
             #                'teacher_infos': teacher_infos, 'teacher_info': teacher_info, 'school_terms': school_terms,
             #                'school_term': school_term, 'identification_level': identification_level})
-
-            if len(school_terms) <= 0:
-                return render_result(request, "index.html",
-                                     {'title_msg': title_msg, 'need_login': False, 'no_term': False})
-            else:
-                param_result = {'no_term': True, 'tmp_list':tmp_list,
+            print('-----------------------')
+            param_result = {'no_term': True, 'tmp_list':tmp_list,
                 'report_skill_main_list':report_skill_main_list,
                 'report_skill_list':report_skill_list,
                 'last_school_term':last_school_term,
@@ -231,7 +228,11 @@ def search_parameter(request, search_type=None):
                 'report_skill':report_skill,
                 'student_infos_all_term_count':student_infos_all_term_count,
                 'current_term_student_len': len(student_infos)}
-                return param_result
+            if len(school_terms) == 0:
+                # param_result =
+                pass
+            return param_result
+            
         else:
             print(user_search.error_class, user_search.errors)
             message = '系统提示：获取当前用户失败，请重新登陆后尝试，或联系管理员.'

@@ -24,7 +24,7 @@ import uuid
 
 class ProvinceCityCountry(models.Model):
     """
-    省市县信息汇总表，新增编码
+    公共数据-省市县信息汇总表，新增编码
     """
     id = models.AutoField('区域ID', primary_key=True)
     region_name = models.CharField('区域名称', max_length=50, help_text='区域名称', default='', blank=False)
@@ -57,8 +57,8 @@ class ProvinceCityCountry(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '省市县信息汇总表'
-        verbose_name_plural = '省市县信息汇总表'
+        verbose_name = '公共数据-省市县信息汇总表'
+        verbose_name_plural = '公共数据-省市县信息汇总表'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -69,7 +69,7 @@ class ProvinceCityCountry(models.Model):
 
 class EducationDegree(models.Model):
     """
-    学历信息管理
+    公共数据-学历信息管理
     """
     id = models.AutoField('学历ID', primary_key=True)
     education_name = models.CharField('学历名称', max_length=50, unique=True, null=False, help_text='学历级别的分类')
@@ -87,8 +87,8 @@ class EducationDegree(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '学历信息管理'
-        verbose_name_plural = '学历信息管理'
+        verbose_name = '公共数据-学历信息管理'
+        verbose_name_plural = '公共数据-学历信息管理'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -99,7 +99,7 @@ class EducationDegree(models.Model):
 
 class UnitNature(models.Model):
     """
-    单位性质管理
+    公共数据-单位性质管理
     """
     id = models.AutoField('学历ID', primary_key=True)
     unit_nature = models.CharField('单位性质名称', max_length=50, unique=True, null=False, help_text='学历级别的分类')
@@ -117,8 +117,8 @@ class UnitNature(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '单位性质管理'
-        verbose_name_plural = '单位性质管理'
+        verbose_name = '公共数据-单位性质管理'
+        verbose_name_plural = '公共数据-单位性质管理'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -129,7 +129,7 @@ class UnitNature(models.Model):
 
 class Picture(models.Model):
     """
-    系统图片管理表
+    用户-图片管理表
     """
     id = models.AutoField(primary_key=True, blank=False, verbose_name='图片ID')
     picture_uuid = models.UUIDField(verbose_name="图片UUID", default=uuid.uuid4, null=False, help_text="图片的唯一标识")
@@ -149,8 +149,8 @@ class Picture(models.Model):
     objects = models.Manager()
     class Meta:
         ordering = ['id']
-        verbose_name = '系统图片管理表'
-        verbose_name_plural = '系统图片管理表'
+        verbose_name = '用户-图片管理表'
+        verbose_name_plural = '用户-图片管理表'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -160,7 +160,7 @@ class Picture(models.Model):
 
 class IDCardPicture(models.Model):
     """
-    系统(身份证件)图片管理表
+    用户-(身份证件)图片管理表
     """
     id = models.AutoField(primary_key=True, blank=False, verbose_name='图片ID')
     picture_uuid = models.UUIDField(verbose_name="图片UUID", default=uuid.uuid4, null=False, help_text="图片的唯一标识")
@@ -180,8 +180,8 @@ class IDCardPicture(models.Model):
     objects = models.Manager()
     class Meta:
         ordering = ['id']
-        verbose_name = '系统(身份证件)图片管理表'
-        verbose_name_plural = '系统(身份证件)图片管理表'
+        verbose_name = '用户-系统(身份证件)图片管理表'
+        verbose_name_plural = '用户-系统(身份证件)图片管理表'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -192,7 +192,7 @@ class IDCardPicture(models.Model):
         
 class FileManage(models.Model):
     """
-    文件管理表
+    用户-文件管理表
     """
     id = models.AutoField(primary_key=True, blank=False, verbose_name='图片ID')
     file_uuid = models.UUIDField(verbose_name="文件UUID", default=uuid.uuid4, null=False, help_text="文件的唯一标识")
@@ -212,8 +212,8 @@ class FileManage(models.Model):
     objects = models.Manager()
     class Meta:
         ordering = ['id']
-        verbose_name = '文件管理表'
-        verbose_name_plural = '文件管理表'
+        verbose_name = '用户-文件管理表'
+        verbose_name_plural = '用户-文件管理表'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -224,7 +224,7 @@ class FileManage(models.Model):
 
 class WorkingHistory(models.Model):
     """
-    工作年限承诺书
+    用户-工作年限承诺书
     """
     id = models.AutoField('用户ID', primary_key=True)
     start_year = models.SmallIntegerField('起始年')
@@ -254,8 +254,8 @@ class WorkingHistory(models.Model):
     objects = models.Manager()
     class Meta:
         ordering = ['id']
-        verbose_name = '工作年限承诺书'
-        verbose_name_plural = '工作年限承诺书'
+        verbose_name = '用户-工作年限承诺书'
+        verbose_name_plural = '用户-工作年限承诺书'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -265,7 +265,7 @@ class WorkingHistory(models.Model):
 
 
 class AuthorityMenu(models.Model):
-    """ 权限菜单 """
+    """ 系统-权限菜单 """
     id = models.AutoField('权限ID', primary_key=True)
     authority_name = models.CharField('权限名称', default='', max_length=50)
     parent = models.ForeignKey('self', to_field='id', on_delete=models.SET_NULL, null=True, blank=True)
@@ -283,8 +283,8 @@ class AuthorityMenu(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '权限菜单'
-        verbose_name_plural = '权限菜单'
+        verbose_name = '系统-权限菜单'
+        verbose_name_plural = '系统-权限菜单'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -294,7 +294,7 @@ class AuthorityMenu(models.Model):
 
 
 class RoleInfo(models.Model):
-    """ 角色设置 """
+    """ 系统-角色设置 """
     id = models.AutoField('角色ID', primary_key=True)
     role_name = models.CharField('角色名称（英文）', default='', max_length=50)
     role_alias = models.CharField('角色别名（中文）', default='', max_length=50)
@@ -314,8 +314,8 @@ class RoleInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '角色设置'
-        verbose_name_plural = '角色设置'
+        verbose_name = '系统-角色设置'
+        verbose_name_plural = '系统-角色设置'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -325,7 +325,7 @@ class RoleInfo(models.Model):
 
 
 class UserRole(models.Model):
-    """ 用户除了角色限定以外的特殊权限 """
+    """ 系统-用户除了角色限定以外的特殊权限 """
     id = models.AutoField('用户角色ID', primary_key=True)
     role = models.ForeignKey('RoleInfo', to_field='id', on_delete=models.CASCADE, default=None)
     user = models.ForeignKey('RegisterUserInfo', to_field='id', on_delete=models.CASCADE, default=None)
@@ -344,8 +344,8 @@ class UserRole(models.Model):
     class Meta:
         ordering = ['id']
         unique_together = ("user", "role")
-        verbose_name = '用户角色外特权'
-        verbose_name_plural = '用户角色外特权'
+        verbose_name = '系统-用户角色外特权'
+        verbose_name_plural = '系统-用户角色外特权'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -355,7 +355,7 @@ class UserRole(models.Model):
 
 
 class UserAuthority(models.Model):
-    """ 用户除了角色限定以外的特殊权限 """
+    """ 系统-用户除了角色限定以外的特殊权限 """
     id = models.AutoField('用户权限ID', primary_key=True)
     authority = models.ForeignKey('AuthorityMenu', to_field='id', on_delete=models.CASCADE, default=None)
     user = models.ForeignKey('UserInfo', to_field='id', on_delete=models.CASCADE, default=None)
@@ -375,8 +375,8 @@ class UserAuthority(models.Model):
     class Meta:
         ordering = ['id']
         unique_together = ("user", "authority")
-        verbose_name = '用户特定权限'
-        verbose_name_plural = '用户特定权限'
+        verbose_name = '系统-用户特定权限'
+        verbose_name_plural = '系统-用户特定权限'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -387,7 +387,7 @@ class UserAuthority(models.Model):
 
 class NationInfo(models.Model):
     """
-    民族类别管理
+    公共数据-民族类别管理
     """
     id = models.AutoField('民族类别ID', primary_key=True)
     nation_name = models.CharField("民族类别名称", help_text="民族类别名称", max_length=30, default="", blank=False)
@@ -405,8 +405,8 @@ class NationInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '民族类别管理'
-        verbose_name_plural = '民族类别管理'
+        verbose_name = '公共数据-民族类别管理'
+        verbose_name_plural = '公共数据-民族类别管理'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -416,7 +416,7 @@ class NationInfo(models.Model):
 
 
 class RoleAuthority(models.Model):
-    """ 角色对应限定以外的特殊权限 """
+    """ 系统-角色对应限定以外的特殊权限 """
     id = models.AutoField('角色权限ID', primary_key=True)
     role = models.ForeignKey('RoleInfo', to_field='id', on_delete=models.CASCADE, default=None)
     authority = models.ForeignKey('AuthorityMenu', to_field='id', on_delete=models.CASCADE, default=None)
@@ -435,8 +435,8 @@ class RoleAuthority(models.Model):
     class Meta:
         ordering = ['id']
         unique_together = ("role", "authority")
-        verbose_name = '角色对应限定以外的特殊权限'
-        verbose_name_plural = '角色对应限定以外的特殊权限'
+        verbose_name = '系统-角色对应限定以外的特殊权限'
+        verbose_name_plural = '系统-角色对应限定以外的特殊权限'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -447,7 +447,7 @@ class RoleAuthority(models.Model):
 
 class RegisterUserInfo(models.Model):
     """
-    系统注册用户基础信息
+    用户-注册信息
     """
     id = models.AutoField('用户ID', primary_key=True)
     username = models.CharField(verbose_name='用户名', default='', max_length=50, unique=True, blank=False,
@@ -468,8 +468,8 @@ class RegisterUserInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '系统注册用户基础信息'
-        verbose_name_plural = '系统注册用户基础信息'
+        verbose_name = '用户-注册信息'
+        verbose_name_plural = '用户-注册信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -480,7 +480,7 @@ class RegisterUserInfo(models.Model):
 
 class UserInfo(models.Model):
     """
-    注册用户详细信息
+    用户-详细信息
     """
     id = models.AutoField('用户ID', primary_key=True)
     register_user_info = models.ForeignKey(RegisterUserInfo,
@@ -623,8 +623,8 @@ class UserInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '注册用户详细信息'
-        verbose_name_plural = '注册用户详细信息'
+        verbose_name = '用户-详细信息'
+        verbose_name_plural = '用户-详细信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -635,7 +635,7 @@ class UserInfo(models.Model):
 
 class SchoolTerm(models.Model):
     """
-    学期设置管理类
+    学期设置
     """
     id = models.AutoField('学期ID', primary_key=True, default=None)
     school_term_name = models.CharField('学期名字', max_length=50, null=True, blank=True, default='', help_text='学期名字')
@@ -679,8 +679,8 @@ class SchoolTerm(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '学期设置管理类'
-        verbose_name_plural = '学期设置管理类'
+        verbose_name = '学期设置'
+        verbose_name_plural = '学期设置'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -720,8 +720,8 @@ class TeacherInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '老师(负责人)基本信息'
-        verbose_name_plural = '老师(负责人)基本信息'
+        verbose_name = '用户-（负责人）基本信息'
+        verbose_name_plural = '用户-（负责人）基本信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -732,7 +732,7 @@ class TeacherInfo(models.Model):
 
 class StudentInfo(models.Model):
     """
-    学生填报详细信息
+    用户（学生）填报详细信息
     """
     id = models.AutoField('用户ID', primary_key=True, default=None)
     user_info = models.ForeignKey('UserInfo', to_field='id',
@@ -801,10 +801,10 @@ class StudentInfo(models.Model):
                                                    verbose_name='院校毕业证件照片',
                                                    help_text='院校毕业证件照片')
 
-    profession = models.CharField('从事职业(专业工种)', max_length=50, blank=True, null=True, help_text='从事职业(专业工种，单一种类)')
+    profession = models.CharField('从事职业(专业工种-)', max_length=50, blank=True, null=True, help_text='从事职业(专业工种-，单一种类)')
 
-    former_occupation = models.CharField('证书本职业（工种）或相关职业（工种）', max_length=20, null=True, blank=True,
-                                         help_text='证书本职业（工种）或相关职业（工种）')
+    former_occupation = models.CharField('证书本职业（工种-）或相关职业（工种-）', max_length=20, null=True, blank=True,
+                                         help_text='证书本职业（工种-）或相关职业（工种-）')
     primary_level = models.CharField('原级别', max_length=20, null=True, blank=True, help_text='原级别', default=99,
                                      choices=[('1', '高级技工'),
                                               ('2', '技工'),
@@ -991,8 +991,8 @@ class StudentInfo(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '学生填报详细信息'
-        verbose_name_plural = '学生填报详细信息'
+        verbose_name = '用户-（学生）填报详细信息'
+        verbose_name_plural = '用户-（学生）填报详细信息'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -1032,7 +1032,7 @@ class StudentInfo(models.Model):
 
 
 class InterviewAudit(models.Model):
-    """ 操作审计 不需要修改，只是查看"""
+    """ 系统-操作审计 不需要修改，只是查看"""
     id = models.AutoField('审计记录ID', primary_key=True)
     username = models.CharField('用户名', default='', blank=True, max_length=50, help_text='操作本次记录的用户名')
     operation = models.CharField('操作请求', default='', blank=True, max_length=50, help_text='操作本次记录的请求信息')
@@ -1058,8 +1058,8 @@ class InterviewAudit(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '操作审计(不需要修改，只是查看或者删除)'
-        verbose_name_plural = '操作审计(不需要修改，只是查看或者删除)'
+        verbose_name = '系统-操作审计(不需要修改，只是查看或者删除)'
+        verbose_name_plural = '系统-操作审计(不需要修改，只是查看或者删除)'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -1069,7 +1069,7 @@ class InterviewAudit(models.Model):
 
 
 class SystemMessage(models.Model):
-    """站内系统信息管理类"""
+    """系统-站内系统信息管理类"""
     id = models.AutoField('系统信息ID', primary_key=True)
     sender = models.ForeignKey(UserInfo,
                                to_field='id',
@@ -1143,8 +1143,8 @@ class SystemMessage(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '站内系统信息管理类'
-        verbose_name_plural = '站内系统信息管理类'
+        verbose_name = '系统-站内系统信息管理类'
+        verbose_name_plural = '系统-站内系统信息管理类'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -1154,7 +1154,7 @@ class SystemMessage(models.Model):
 
 class ReportSkillMainClass(models.Model):
     """
-    报名工种大类
+    工种-大类
     """
     id = models.AutoField('技能大类ID', primary_key=True)
     skill_main_class_code = models.CharField('技能大类编号',default='',
@@ -1190,8 +1190,8 @@ class ReportSkillMainClass(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '报名工种大类表'
-        verbose_name_plural = '报名工种大类表'
+        verbose_name = '工种-大类'
+        verbose_name_plural = '工种-大类'
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
             # return ' '.join(('%s' % item for item in self.__dict__.values()))
@@ -1201,7 +1201,7 @@ class ReportSkillMainClass(models.Model):
 # from .models_report import ReportBase
 class ReportSkill(models.Model):
     """
-    报名工种
+    工种-名称
     """
     skill_id = models.AutoField('技能ID', primary_key=True)
     skill_main_class = models.ForeignKey('ReportSkillMainClass', to_field='id',
@@ -1251,8 +1251,8 @@ class ReportSkill(models.Model):
 
     class Meta:
         ordering = ['skill_id']
-        verbose_name = '报名工种表'
-        verbose_name_plural = '报名工种表'
+        verbose_name = '工种-名称'
+        verbose_name_plural = '工种-名称'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1264,7 +1264,7 @@ class ReportSkill(models.Model):
 
 class ReportCondition(models.Model):
     """
-    报名条件
+    工种-条件
     """
     condition_id = models.AutoField('条件ID', primary_key=True)
     condition_level = models.CharField('条件等级', max_length=50, default=1, null=True, help_text='条件等级',
@@ -1439,8 +1439,8 @@ class ReportCondition(models.Model):
 
     class Meta:
         ordering = ['condition_id']
-        verbose_name = '报名条件设置表'
-        verbose_name_plural = '报名条件设置表'
+        verbose_name = '工种-条件'
+        verbose_name_plural = '工种-条件'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1452,7 +1452,7 @@ class ReportCondition(models.Model):
 
 class LevelCodeClass(models.Model):
     """
-    级别编码表
+    扩展-级别编码表
     """
     id = models.AutoField('自动编码ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1488,8 +1488,8 @@ class LevelCodeClass(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '级别编码表'
-        verbose_name_plural = '级别编码表'
+        verbose_name = '扩展-级别编码表'
+        verbose_name_plural = '扩展-级别编码表'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1500,7 +1500,7 @@ class LevelCodeClass(models.Model):
         
 class SexClass(models.Model):
     """
-    性别编码表
+    扩展-性别编码表
     """
     id = models.AutoField('自动编码ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1536,8 +1536,8 @@ class SexClass(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '性别编码表'
-        verbose_name_plural = '性别编码表'
+        verbose_name = '扩展-性别编码表'
+        verbose_name_plural = '扩展-性别编码表'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1549,7 +1549,7 @@ class SexClass(models.Model):
         
 class StudentSourceClass(models.Model):
     """
-    考生来源编码表
+    扩展-考生来源
     """
     id = models.AutoField('考生来源编码ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1585,8 +1585,8 @@ class StudentSourceClass(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '考生来源编码表'
-        verbose_name_plural = '考生来源编码表'
+        verbose_name = '扩展-考生来源'
+        verbose_name_plural = '扩展-考生来源'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1597,7 +1597,7 @@ class StudentSourceClass(models.Model):
         
 class IdentifySubject(models.Model):
     """
-    鉴定科目编码表
+    扩展-鉴定科目
     """
     id = models.AutoField('考生来源编码ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1633,8 +1633,8 @@ class IdentifySubject(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '鉴定科目编码表'
-        verbose_name_plural = '鉴定科目编码表'
+        verbose_name = '扩展-鉴定科目'
+        verbose_name_plural = '扩展-鉴定科目'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1646,7 +1646,7 @@ class IdentifySubject(models.Model):
 
 class IdentifyClass(models.Model):
     """
-    鉴定类别编码表
+    扩展-鉴定类别
     """
     id = models.AutoField('鉴定类别ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1682,8 +1682,8 @@ class IdentifyClass(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '鉴定类别编码表'
-        verbose_name_plural = '鉴定类别编码表'
+        verbose_name = '扩展-鉴定类别'
+        verbose_name_plural = '扩展-鉴定类别'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1694,7 +1694,7 @@ class IdentifyClass(models.Model):
         
 class SubsideClass(models.Model):
     """
-    补贴类别编码表
+    扩展-补贴类别
     """
     id = models.AutoField('补贴类别ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1730,8 +1730,8 @@ class SubsideClass(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '补贴类别编码表'
-        verbose_name_plural = '补贴类别编码表'
+        verbose_name = '扩展-补贴类别'
+        verbose_name_plural = '扩展-补贴类别'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1742,7 +1742,7 @@ class SubsideClass(models.Model):
         
 class SubsideCertificateClass(models.Model):
     """
-    补贴证件类别编码表
+    扩展-补贴证件类别
     """
     id = models.AutoField('补贴证件类别ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1778,8 +1778,8 @@ class SubsideCertificateClass(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '补贴证件类别编码表'
-        verbose_name_plural = '补贴证件类别编码表'
+        verbose_name = '扩展-补贴证件类别'
+        verbose_name_plural = '扩展-补贴证件类别'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1839,7 +1839,7 @@ class SubsideCertificateClass(models.Model):
 
 class ExamineeIdentity(models.Model):
     """
-    考生身份编码表
+    扩展-考生身份
     """
     id = models.AutoField('考生身份ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1875,8 +1875,8 @@ class ExamineeIdentity(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '考生身份编码表'
-        verbose_name_plural = '考生身份编码表'
+        verbose_name = '扩展-考生身份'
+        verbose_name_plural = '扩展-考生身份'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
@@ -1887,7 +1887,7 @@ class ExamineeIdentity(models.Model):
 
 class PlaceSignUp(models.Model):
     """
-    预报名地点表
+    扩展-预报名地点
     """
     id = models.AutoField('ID', primary_key=True)
     code = models.CharField('手动ID',default='',
@@ -1923,8 +1923,8 @@ class PlaceSignUp(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = '预报名地点表'
-        verbose_name_plural = '预报名地点表'
+        verbose_name = '扩展-预报名地点'
+        verbose_name_plural = '扩展-预报名地点'
 
     def __str__(self, print_all=False):  # 定义打印对象时打印的字符串
         if print_all:
