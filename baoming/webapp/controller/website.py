@@ -18,8 +18,8 @@ result = {'status': True, 'message': ''}
 
 
 def introduction(request):
-    return render_result(request, "introduction.html",
-                         {'title_msg': "报考说明"})
+    query_set = ReportCondition.objects.all()
+    return render_result(request, "introduction.html", {'query_set':query_set, 'title_msg': "报考说明"})
 
 
 def system_guide(request):

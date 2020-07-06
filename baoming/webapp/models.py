@@ -618,7 +618,7 @@ class UserInfo(models.Model):
                                       help_text='操作用户记录')
     create_time = models.DateTimeField('生成时间', default=timezone.now)
     modify_time = models.DateTimeField('修改时间', auto_now=True)  # 使用Model.save()来更新才会更新注意
-    user_Info_working_history = models.ManyToManyField(WorkingHistory)
+    user_Info_working_history = models.ManyToManyField(WorkingHistory, blank=True, null=True)
     objects = models.Manager()
 
     class Meta:
@@ -1232,6 +1232,13 @@ class ReportSkill(models.Model):
                                   choices=[('1', '启用'),
                                            ('2', '停用')],
                                   help_text='1-启用/2-停用')
+    
+    skill_explain = models.TextField('备注（条件项说明）',
+                               default='',
+                               max_length=500,
+                               blank=True,
+                               null=True)
+    
     explain = models.TextField('说明',
                                default='',
                                max_length=200,

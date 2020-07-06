@@ -1,63 +1,63 @@
 {% load filter_model %} {% load filter_status %}
 <div class="teacher_ordinary">
-	<label class="input_text_head">信息填报审核表</label> {%if no_term%} {% else %}
-	<p style="text-align: center"><label style="color: red">报名尚未开始或尚未设置报名学期，请不要继续操作</label></p>
-	{%endif%}
-	<p style="text-align: center">
-		<label style="color: lawngreen" class="school_term_name">
+    <label class="input_text_head">信息填报审核表</label> {%if no_term%} {% else %}
+    <p style="text-align: center"><label style="color: red">报名尚未开始或尚未设置报名学期，请不要继续操作</label></p>
+    {%endif%}
+    <p style="text-align: center">
+        <label style="color: lawngreen" class="school_term_name">
 			{% if school_term == 0%}
 			{{last_school_term.school_term_name}}
 			{% else %}
 			{{student_info.school_term.school_term_name}}
 			{% endif %}
 		</label> &nbsp;&nbsp;&nbsp;&nbsp;
-		<label style="color: whitesmoke">开始日期：</label><label style="color: red" class="school_term_start">
+        <label style="color: whitesmoke">开始日期：</label><label style="color: red" class="school_term_start">
 			{% if school_term == 0%}
 			{{last_school_term.school_term_start|date:"Y-m-d"}}
 			{% else %}
 			{{student_info.school_term.school_term_start|date:"Y-m-d"}}
 			{% endif %}
 		</label> &nbsp;&nbsp;&nbsp;&nbsp;
-		<label style="color: whitesmoke">结束日期：</label><label style="color: red" class="school_term_end">
+        <label style="color: whitesmoke">结束日期：</label><label style="color: red" class="school_term_end">
 			{% if school_term == 0%}
 			{{last_school_term.school_term_end|date:"Y-m-d"}}
 			{% else %}
 			{{student_info.school_term.school_term_end|date:"Y-m-d"}}
 			{% endif %}
 		</label>
-		<br>
-		<label style="color: whitesmoke">全部学生：</label><label style="color: red">{{student_infos_all_term_count}}</label>
-		<label style="color: whitesmoke">本期学生：</label><label style="color: red">{{current_term_student_len}}</label>
-	</p>
+        <br>
+        <label style="color: whitesmoke">全部学生：</label><label style="color: red">{{student_infos_all_term_count}}</label>
+        <label style="color: whitesmoke">本期学生：</label><label style="color: red">{{current_term_student_len}}</label>
+    </p>
 
-	<p style="text-align: right" class="p-search">
-		<!--        <a href="/report/all_student_base_info/" target="_blank">-->
-		<!--            <input type='button' style="color: midnightblue" value='下载全部' class='form-button'/>-->
-		<!--        </a>-->
-		<a href="javascript:void(0);">
-			<input type='button' style="color: hotpink" value='<<查询' onclick="recover_search();" class='form-button' />
-		</a>
-	</p>
+    <p style="text-align: right" class="p-search">
+        <!--        <a href="/report/all_student_base_info/" target="_blank">-->
+        <!--            <input type='button' style="color: midnightblue" value='下载全部' class='form-button'/>-->
+        <!--        </a>-->
+        <a href="javascript:void(0);">
+            <input type='button' style="color: hotpink" value='<<查询' onclick="recover_search();" class='form-button' />
+        </a>
+    </p>
 
-	<hr class="hr-search">
-	<form action="/report/teacher_search_wait_review/" method="get" id="form-search-all-student">
-		{% csrf_token %} {{ form }}
-		<table class='form-table form-table-search'>
-			<tbody>
-			<tr>
-				<td class="form-label td-span">
+    <hr class="hr-search">
+    <form action="/report/teacher_search_wait_review/" method="get" id="form-search-all-student">
+        {% csrf_token %} {{ form }}
+        <table class='form-table form-table-search'>
+            <tbody>
+                <tr>
+                    <td class="form-label td-span">
 
-				</td>
-				<td class="form-label td-input">
+                    </td>
+                    <td class="form-label td-input">
 
-				</td>
-				<td class="form-label td-span">
-					<font color='#ff0000'>* </font>
-					<label for='' class="input_text">报考学期：</label>
-				</td>
-				<td class="form-label td-input">
-					<input type="hidden" id='search_school_term' class="search_school_term" name="school_term" value="{{ school_term }}">
-					<select class='form-select school_term_search' id="school_term_search" onchange="school_term_a_search(this.options[this.options.selectedIndex].value,'{{tmp_list}}');">
+                    </td>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <label for='' class="input_text">报考学期：</label>
+                    </td>
+                    <td class="form-label td-input">
+                        <input type="hidden" id='search_school_term' class="search_school_term" name="school_term" value="{{ school_term }}">
+                        <select class='form-select school_term_search' id="school_term_search" onchange="school_term_a_search(this.options[this.options.selectedIndex].value,'{{tmp_list}}');">
 						<option value="0">--请选择--</option>
 						{% for term in school_terms%}
 						{% if term.id == school_term %}
@@ -67,57 +67,54 @@
 						{% endif%}
 						{% endfor%}
 					</select>
-					<label style='color:red'></label>
-				</td>
+                        <label style='color:red'></label>
+                    </td>
 
-				<td class="form-label td-span">
-					<font color='#ff0000'>* </font>
-					<span class="input_text">学员姓名：</span>
-				</td>
-				<td class="form-label td-input">
-					<input type='text' name='real_name' value='{{ student_info.user_info.real_name }}' maxlength="15" class='ipt' />
-					<label style='color:red'></label>
-				</td>
-				<td class="form-label td-span">
-				</td>
-				<td class="form-label td-input">
-				</td>
-				<td class="form-label td-span">
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text">学员姓名：</span>
+                    </td>
+                    <td class="form-label td-input">
+                        <input type='text' name='real_name' value='{{ student_info.user_info.real_name }}' maxlength="15" class='ipt' />
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span">
+                    </td>
+                    <td class="form-label td-input">
+                    </td>
+                    <td class="form-label td-span">
 
-				</td>
-				<td class="form-label td-input">
+                    </td>
+                    <td class="form-label td-input">
 
-				</td>
-			</tr>
-			<tr>
-				<td class="form-label td-span">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-label td-span">
 
-				</td>
-				<td class="form-label td-input">
+                    </td>
+                    <td class="form-label td-input">
 
-				</td>
-				<td class="form-label td-span">
-					<font color='#ff0000'>* </font>
-					<span class="input_text">申报鉴定职业：</span>
-					<br>
-					<span class="input_text">(申报职业)：</span>
-				</td>
-				<td class="form-label td-input">
-					<input type='text' name='declaration_of_occupation' value='{{student_info.declaration_of_occupation}}' onchange="declaration_of_occupation_clear_search(this.value);"
-					 id="declaration_of_occupation_search" class='ipt' />
-					<label style='color:red'></label>
-				</td>
-				<td class="form-label td-span">
-					<font color='#ff0000'>* </font>
-					<span class="input_text">申报鉴定级别：</span>
-					<br>
-					<span class="input_text">(鉴定级别)：</span>
-				</td>
-				<td class="form-label td-input">
-					<input type="hidden" value="{{ identification_level}}" name="identification_level" class="identification_level_search"
-					 id="search_identification_level">
-					<select class='form-select' style="width: 150px" onchange="identification_level_search_f(this.options[this.options.selectedIndex].value);"
-					 id='identification_level_search' title="高级（三级）、中级（四级）、初级（五级）">
+                    </td>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text">申报鉴定职业：</span>
+                        <br>
+                        <span class="input_text">(申报职业)：</span>
+                    </td>
+                    <td class="form-label td-input">
+                        <input type='text' name='declaration_of_occupation' value='{{student_info.declaration_of_occupation}}' onchange="declaration_of_occupation_clear_search(this.value);" id="declaration_of_occupation_search" class='ipt' />
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span">
+                        <font color='#ff0000'>* </font>
+                        <span class="input_text">申报鉴定级别：</span>
+                        <br>
+                        <span class="input_text">(鉴定级别)：</span>
+                    </td>
+                    <td class="form-label td-input">
+                        <input type="hidden" value="{{ identification_level}}" name="identification_level" class="identification_level_search" id="search_identification_level">
+                        <select class='form-select' style="width: 150px" onchange="identification_level_search_f(this.options[this.options.selectedIndex].value);" id='identification_level_search' title="高级（三级）、中级（四级）、初级（五级）">
 						<option value="0">--请选择--</option>
 						<!--                        <option value="1">高级技师</option>-->
 						<!--                        <option value="2">技师</option>-->
@@ -125,139 +122,137 @@
 						<option value="4">中级（四级）</option>
 						<option value="3">高级（三级）</option>
 					</select>
-					<label style='color:red'></label>
-				</td>
-				<td class="form-label td-span">
+                        <label style='color:red'></label>
+                    </td>
+                    <td class="form-label td-span">
 
-				</td>
-				<td class="form-label td-input">
+                    </td>
+                    <td class="form-label td-input">
 
-				</td>
-			</tr>
-			<tr></tr>
-			</tbody>
-		</table>
-		<a href="javascript:void(0);" class="a-search">
-			<input type="hidden" name="page" id="page_teacher_search" value="{{contacts.page}}" />
-			<input type="hidden" name="per_page" id="pagesize_teacher_search" value="{{contacts.paginator.per_page}}" />
-			<input type='submit' style="color: deeppink" value='查询' class='form-button' id="submit-reporter-all-student-search" />
-		</a>
-		<!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
-		<!--            <input type='reset' style="color: green" value='清空条件' class='submitBtn form-button'/>-->
-		<!--        </a>-->
-		<!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
-		<!--            <input type='button' style="color: blueviolet;width: 10%" value='下载本次查询结果'-->
-		<!--                   class='form-button' onclick="reporter_all_student_search();"/>-->
-		<!--        </a>-->
-		<!--        <a href="/report/all_student_base_info/" target="_blank" class="a-search">-->
-		<!--            <input type='button' style="color: midnightblue" value='下载全部' class='form-button'/>-->
-		<!--        </a>-->
-		<a href="javascript:void(0);" class="a-search-cancel">
+                    </td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+        <a href="javascript:void(0);" class="a-search">
+            <input type="hidden" name="page" id="page_teacher_search" value="{{contacts.page}}" />
+            <input type="hidden" name="per_page" id="pagesize_teacher_search" value="{{contacts.paginator.per_page}}" />
+            <input type='submit' style="color: deeppink" value='查询' class='form-button' id="submit-reporter-all-student-search" />
+        </a>
+        <!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
+        <!--            <input type='reset' style="color: green" value='清空条件' class='submitBtn form-button'/>-->
+        <!--        </a>-->
+        <!--        <a href="javascript:void(0);" target="_blank" class="a-search">-->
+        <!--            <input type='button' style="color: blueviolet;width: 10%" value='下载本次查询结果'-->
+        <!--                   class='form-button' onclick="reporter_all_student_search();"/>-->
+        <!--        </a>-->
+        <!--        <a href="/report/all_student_base_info/" target="_blank" class="a-search">-->
+        <!--            <input type='button' style="color: midnightblue" value='下载全部' class='form-button'/>-->
+        <!--        </a>-->
+        <a href="javascript:void(0);" class="a-search-cancel">
 			<input type='button' style="color: magenta;" value='>>收起查询条件' onclick="cancel_search();" class='form-button' />
 		</a>
-	</form>
-	<hr>
-	<div class="table-wrapper">
+    </form>
+    <hr>
+    <div class="table-wrapper">
 
-		<table class="fl-table" border="1.5">
-			<!--               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">-->
-			<thead>
-				<tr class="table-head">
-					<th>序号</th>
-					<th>学期</th>
-					<th>姓名</th>
-					<th>性别</th>
-					<th><label>申报鉴定职业</label><br><label>(申报职业)</label></th>
-					<th><label>申报鉴定级别</label><br><label>(鉴定级别)</label></th>
-					<th>提交状态</th>
-					<th>审核状态</th>
-					<th>报名结果</th>
-					<th>联系电话</th>
-					<!--            <th>缴费状态</th>-->
-					<th class="fix_width_middle"><label>已缴费</label><br><label>金额</label></th>
-					<th class="fix_width_middle"><label>欠缴费</label><br><label>金额</label></th>
-					<!--                <th>考核结果</th>-->
-					<th class="fix_width_middle"><label>理论</label><br><label>成绩</label></th>
-					<th class="fix_width_middle"><label>实际</label><br><label>操作</label></th>
-					<!--            <th>注销状态</th>-->
-					<th>填报时间</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for student in contacts %}
-				<tr class="table-tr">
-					<td>{{forloop.counter}}</td>
-					<td>{{ student.school_term.school_term_name }}</td>
-					<td>{{ student.user_info.real_name }}</td>
-					<td>{{ student.user_info.sex|get_sex }}</td>
-					{% if student.declaration_of_occupation != "无机化学反应生产工"%} {% if student.declaration_of_occupation != "起重装卸机械操作工"%}
-					{% if student.declaration_of_occupation != "工业固体废物处理处置工"%} 
-					{% if student.declaration_of_occupation != "工业固体废物处理处置工"%}
-					<td>{{student.declaration_of_occupation}}</td>
-					{% else %}
-					<td><label>工业固体废物</label><br><label>处理处置工</label></td>
-					{%endif%} {% else %}
-					<td><label>工业固体废物</label><br><label>处理处置工</label></td>
-					{%endif%} {% else %}
-					<td><label>起重装卸</label><br><label>机械操作工</label></td>
-					{%endif%} {% else %}
-					<td><label>无机化学</label><br><label>反应生产工</label></td>
-					{%endif%}
-					<td>{{ student.identification_level|get_identification_level }}</td>
-					<!--                <td>{{ student.submit_status|get_submit_status }}</td>-->
-					{% if student.submit_status == "1"%}
-					<td style="color:plum">{{ student.submit_status|get_submit_status }}</td>
-					{% else %}
-					<td style="color: yellow">{{ student.submit_status|get_submit_status }}</td>
-					{%endif%} {% if student.review_status == "1"%}
-					<td style="color: #00FF00">{{ student.review_status|get_review_status }}</td>
-					{% else %}
-					<td style="color: yellow">{{ student.review_status|get_review_status }}</td>
-					{% endif %} {% if student.confirm_status == "1"%}
-					<td style="color: red">{{ student.confirm_status|get_confirm_status }}</td>
-					{% else %}
-					<td style="color: yellow">{{ student.confirm_status|get_confirm_status }}</td>
-					{% endif %}
+        <table class="fl-table" border="1.5">
+            <!--               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">-->
+            <thead>
+                <tr class="table-head">
+                    <th>序号</th>
+                    <th>学期</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th><label>申报鉴定职业</label><br><label>(申报职业)</label></th>
+                    <th><label>申报鉴定级别</label><br><label>(鉴定级别)</label></th>
+                    <th>提交状态</th>
+                    <th>审核状态</th>
+                    <th>报名结果</th>
+                    <th>联系电话</th>
+                    <!--            <th>缴费状态</th>-->
+                    <th class="fix_width_middle"><label>已缴费</label><br><label>金额</label></th>
+                    <th class="fix_width_middle"><label>欠缴费</label><br><label>金额</label></th>
+                    <!--                <th>考核结果</th>-->
+                    <th class="fix_width_middle"><label>理论</label><br><label>成绩</label></th>
+                    <th class="fix_width_middle"><label>实际</label><br><label>操作</label></th>
+                    <!--            <th>注销状态</th>-->
+                    <th>填报时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in contacts %}
+                <tr class="table-tr">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ student.school_term.school_term_name }}</td>
+                    <td>{{ student.user_info.real_name }}</td>
+                    <td>{{ student.user_info.sex|get_sex }}</td>
+                    {% if student.declaration_of_occupation != "无机化学反应生产工"%} {% if student.declaration_of_occupation != "起重装卸机械操作工"%} {% if student.declaration_of_occupation != "工业固体废物处理处置工"%} {% if student.declaration_of_occupation != "工业固体废物处理处置工"%}
+                    <td>{{student.declaration_of_occupation}}</td>
+                    {% else %}
+                    <td><label>工业固体废物</label><br><label>处理处置工</label></td>
+                    {%endif%} {% else %}
+                    <td><label>工业固体废物</label><br><label>处理处置工</label></td>
+                    {%endif%} {% else %}
+                    <td><label>起重装卸</label><br><label>机械操作工</label></td>
+                    {%endif%} {% else %}
+                    <td><label>无机化学</label><br><label>反应生产工</label></td>
+                    {%endif%}
+                    <td>{{ student.identification_level|get_identification_level }}</td>
+                    <!--                <td>{{ student.submit_status|get_submit_status }}</td>-->
+                    {% if student.submit_status == "1"%}
+                    <td style="color:plum">{{ student.submit_status|get_submit_status }}</td>
+                    {% else %}
+                    <td style="color: yellow">{{ student.submit_status|get_submit_status }}</td>
+                    {%endif%} {% if student.review_status == "1"%}
+                    <td style="color: #00FF00">{{ student.review_status|get_review_status }}</td>
+                    {% else %}
+                    <td style="color: yellow">{{ student.review_status|get_review_status }}</td>
+                    {% endif %} {% if student.confirm_status == "1"%}
+                    <td style="color: red">{{ student.confirm_status|get_confirm_status }}</td>
+                    {% else %}
+                    <td style="color: yellow">{{ student.confirm_status|get_confirm_status }}</td>
+                    {% endif %}
 
-					<td>{{ student.user_info.contact_number|get_contact_number }}</td>
-					<!--            <td>{{ student.pay_status|get_pay_status }}</td>-->
-					<td>{{student.payment_amount|get_zero}}</td>
-					<td>{{student.unpaid_amount|get_zero}}</td>
-					<!--            <td>{{ student.examination_status|get_examination_status }}</td>-->
-					<td>{{student.theoretical_achievements|get_zero}}</td>
-					<td>{{student.practical_operation|get_zero}}</td>
-					<!--            <td>{{ student.cancel_status|get_cancel_status }}</td>-->
-					<td>{{ student.create_time|date:"Y-m-d" }}</td>
-					<!--            # 25个字符-->
-					<td>
-						<div class="dropdown">
-							<button class="dropbtn">操作</button>
-							<div class="dropdown-content action-content">
-								<a href='/report/student_info_detail?studentId={{student.pk}}'>
-									<button>资料详情</button>
-								</a>
+                    <td>{{ student.user_info.contact_number|get_contact_number }}</td>
+                    <!--            <td>{{ student.pay_status|get_pay_status }}</td>-->
+                    <td>{{student.payment_amount|get_zero}}</td>
+                    <td>{{student.unpaid_amount|get_zero}}</td>
+                    <!--            <td>{{ student.examination_status|get_examination_status }}</td>-->
+                    <td>{{student.theoretical_achievements|get_zero}}</td>
+                    <td>{{student.practical_operation|get_zero}}</td>
+                    <!--            <td>{{ student.cancel_status|get_cancel_status }}</td>-->
+                    <td>{{ student.create_time|date:"Y-m-d" }}</td>
+                    <!--            # 25个字符-->
+                    <td>
+                        <div class="dropdown">
+                            <button class="dropbtn">操作</button>
+                            <div class="dropdown-content action-content">
+                                <a href='/report/student_info_detail?studentId={{student.pk}}'>
+                                    <button>资料详情</button>
+                                </a>
 
-								<a href='/report/download_apply?studentId={{student.pk}}'>
-									<button>报表下载</button>
-								</a>
+                                <a href='/report/download_apply?studentId={{student.pk}}'>
+                                    <button>报表下载</button>
+                                </a>
 
-								{% if student.review_status == "2"%}
+                                {% if student.review_status == "2"%}
 
-								<a href='javascript:void(0);' onclick="review('/report/report_do_review/','{{student.pk}}')">
-									<button>确认审核</button>
-								</a>
+                                <a href='javascript:void(0);' onclick="review('/report/report_do_review/','{{student.pk}}')">
+                                    <button>确认审核</button>
+                                </a>
 
-								<a href='/report/message_to_receiver?record_id={{student.id}}' title="如果审核过程中发现什么问题可以向学员发送审核意见，通知其修改提交">
-									<button>审核意见</button>
-								</a>
-								<a href='/report/to_student_info_update?studentId={{student.pk}}' readonly="readonly">
-									<button>资料修改</button>
-								</a>
-								<a href='javascript:void(0);' onclick="del('/report/report_student_del/','{{student.pk}}')">
-									<button>删除记录</button>
-								</a>
-								<a href='javascript:void(0);' onclick="teacher_update_payment('{{student.id}}',
+                                <a href='/report/message_to_receiver?record_id={{student.id}}' title="如果审核过程中发现什么问题可以向学员发送审核意见，通知其修改提交">
+                                    <button>审核意见</button>
+                                </a>
+                                <a href='/report/to_student_info_update?studentId={{student.pk}}' readonly="readonly">
+                                    <button>资料修改</button>
+                                </a>
+                                <a href='javascript:void(0);' onclick="del('/report/report_student_del/','{{student.pk}}')">
+                                    <button>删除记录</button>
+                                </a>
+                                <a href='javascript:void(0);' onclick="teacher_update_payment('{{student.id}}',
                                '{{ student.school_term.school_term_name }}',
                                '{{ student.declaration_of_occupation }}',
                                '{{ student.identification_level|get_identification_level }}',
@@ -265,23 +260,23 @@
                                '{{ student.user_info.real_name }}',
                                '{{ student.payment_amount}}',
                                '{{ student.unpaid_amount}}')">
-									<button>修改报考费</button>
-								</a>
-								{% elif student.review_status == "1"%}
-								<a href='javascript:void(0);' onclick="review_cancel('/report/report_do_review_cancel/','{{student.pk}}')">
-									<button>取消确认审核</button>
-								</a>
-								{%else%} {%endif%}
-							</div>
-						</div>
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-	<div class="pagination" style="color: ghostwhite">
-		<span class="step-links">
+                                    <button>修改报考费</button>
+                                </a>
+                                {% elif student.review_status == "1"%}
+                                <a href='javascript:void(0);' onclick="review_cancel('/report/report_do_review_cancel/','{{student.pk}}')">
+                                    <button>取消确认审核</button>
+                                </a>
+                                {%else%} {%endif%}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination" style="color: ghostwhite">
+        <span class="step-links">
 			每页展示：<select onchange="getPageResizeWithSearch(this.options[this.options.selectedIndex].value, 'pagesize_teacher_search','submit-reporter-all-student-search');">
 				{% if contacts.paginator.per_page == 10 %}
 				<option value="{{contacts.paginator.per_page}}" selected>{{contacts.paginator.per_page}}</option>
@@ -304,23 +299,20 @@
 
 			<span class="current">
 				第 {{ contacts.number }} 页 ,总共 {{ contacts.paginator.num_pages }} 页.
-			</span>
-			
-			{% if contacts.has_next %}
-			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.next_page_number }},'page_teacher_search','submit-reporter-all-student-search');">下一页</a>
-			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.paginator.num_pages }},'page_teacher_search','submit-reporter-all-student-search');">尾页 &raquo;</a> 
-			{%endif %}
-			<span class="current">
+			</span> {% if contacts.has_next %}
+        <a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.next_page_number }},'page_teacher_search','submit-reporter-all-student-search');">下一页</a>
+        <a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.paginator.num_pages }},'page_teacher_search','submit-reporter-all-student-search');">尾页 &raquo;</a> {%endif %}
+        <span class="current">
 				总 <label>{{ contacts.paginator.count }}</label> 条记录数据.
 			</span>
-			
-			<span class="current">
+
+        <span class="current">
 				跳转至:<input type="text" placeholder="{{contacts.number}}" style="width: 50px;height: 20px;" value="" class="goto_page_appoint" id="goto_page_teacher_search"/>&nbsp;页
 				<a href="javascript:void(0)" onclick="gotoWithSearchToPage('goto_page_teacher_search','page_teacher_search','submit-reporter-all-student-search');">Go</a>
 			</span>
-		</span>
-	</div>
-	<!--    <div class="pagination" style="color: ghostwhite">
+        </span>
+    </div>
+    <!--    <div class="pagination" style="color: ghostwhite">
         <span class="step-links">
         {% if contacts.has_previous %}
             <a href="?page=1">&laquo; 首页</a>
@@ -338,123 +330,122 @@
 
 
 <div class="box box_payment_teacher">
-	<div class="regiest">
-		<form action="" id="form-payment_teacher" method="post">
-			{% csrf_token %} {{ form }}
-			<input type="hidden" value="" name='payment_id' id="payment_id">
-			<table style="margin: 5% auto 3% auto;">
-				<tbody>
-					<tr>
-						<td class="form-label td-span">
-							<font color='#ff0000'>* </font>
-							<span class="input_text">应缴纳金额：</span>
-						</td>
-						<td class="form-label td-input">
-							<input type="number" name="payment_amount" id="payment_amount" placeholder="输入已缴费金额" required="required" min="0"
-							 onblur="" onchange=""></td>
-						</td>
-					</tr>
-					<tr>
-						<td class="form-label td-span">
-							<font color='#ff0000'>* </font>
-							<span class="input_text">未缴纳金额：</span>
-						</td>
-						<td class="form-label td-input">
-							<input type="number" name="payment_amount" id="unpaid_amount" placeholder="未缴纳金额" min="0" onblur="" onchange=""></td>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<hr>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4" style="text-align: center">
-							<label style="color: lawngreen">请确认填报信息再确认输入缴纳金额并提交</label>
-						</td>
-					</tr>
-					<tr>
-						<td class="form-label td-span">
-							<font color='#ff0000'>* </font>
-							<span class="input_text">姓名：</span>
-						</td>
-						<td class="form-label td-input">
-							<label style='color:red' id="payment_real_name"></label>
-						</td>
-					</tr>
-					<tr>
-						<td class="form-label td-span">
-							<font color='#ff0000'>* </font>
-							<label for='' class="input_text">单位负责报名的负责人：</label>
-						</td>
-						<td class="form-label td-input">
-							<label style='color:red' id="teacher_payment"></label>
-						</td>
-					</tr>
-					<tr>
-						<td class="form-label td-span">
-							<font color='#ff0000'>* </font>
-							<span class="input_text">申报鉴定职业(申报职业)：</span>
-						</td>
-						<td class="form-label td-input">
-							<label style='color:red' id="declaration_of_occupation_payment"></label>
-						</td>
-					</tr>
-					<tr>
-						<td class="form-label td-span">
-							<font color='#ff0000'>* </font>
-							<span class="input_text">申报鉴定级别(鉴定级别)：</span>
-						</td>
-						<td class="form-label td-input">
-							<label style='color:red' id="identification_level_payment"></label>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<p>
-				<div id="btn2" style="margin-left: 20%;">
-					<ul>
-						<li><input type="button" value="提交" class="submit-payment" id='payment_button' style="color: white" onclick="add_payment();" /></li>
-						<li><input type="button" value="关闭" class="close_payment_teacher" style="color: white" /></li>
-					</ul>
-				</div>
-			</p>
-		</form>
-	</div>
+    <div class="regiest">
+        <form action="" id="form-payment_teacher" method="post">
+            {% csrf_token %} {{ form }}
+            <input type="hidden" value="" name='payment_id' id="payment_id">
+            <table style="margin: 5% auto 3% auto;">
+                <tbody>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">应缴纳金额：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <input type="number" name="payment_amount" id="payment_amount" placeholder="输入已缴费金额" required="required" min="0" onblur="" onchange=""></td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">未缴纳金额：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <input type="number" name="payment_amount" id="unpaid_amount" placeholder="未缴纳金额" min="0" onblur="" onchange=""></td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align: center">
+                            <label style="color: lawngreen">请确认填报信息再确认输入缴纳金额并提交</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">姓名：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="payment_real_name"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <label for='' class="input_text">单位负责报名的负责人：</label>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="teacher_payment"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">申报鉴定职业(申报职业)：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="declaration_of_occupation_payment"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">申报鉴定级别(鉴定级别)：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="identification_level_payment"></label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                <div id="btn2" style="margin-left: 20%;">
+                    <ul>
+                        <li><input type="button" value="提交" class="submit-payment" id='payment_button' style="color: white" onclick="add_payment();" /></li>
+                        <li><input type="button" value="关闭" class="close_payment_teacher" style="color: white" /></li>
+                    </ul>
+                </div>
+            </p>
+        </form>
+    </div>
 </div>
 
 <script type="text/javascript">
-	$.ajaxSetup({
-		data: {
-			csrfmiddlewaretoken: '{{ csrf_token }}'
-		}
-	});
-	$(function() {
-		// $(".form-button-add-term").click(function () {
-		//     let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
-		//     let height = ($(window).height() * (1 - 0.5)) / 2;
-		//     $(".box_school_term").addClass("animated bounceIn").show().css({left: left, top: height});
-		//     $(".opacity_bg").css("opacity", "0.3").show();
-		//     let form_button = $('#school_term_button');
-		//     form_button.attr('onclick', "add_school_term();");
-		// });
-		$(".close_payment_teacher").click(function() {
-			let left = ($(window).width() * (1 - 0.35)) / 2;
-			let top = ($(window).height() * (1 - 0.5)) / 2;
-			$(".box_payment_teacher").show().animate({
-				width: "-$(window).width()*0.35",
-				height: "-$(window).height()*0.5",
-				left: "-" + left + "px",
-				top: "-" + top + "px"
-			}, 1000, function() {
-				let width1 = $(window).width() * 0.35;
-				let height1 = $(window).height() * 0.5;
-				$(this).css({
-					width: width1,
-					height: height1
-				}).hide();
-			});
+    $.ajaxSetup({
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        }
+    });
+    $(function() {
+        // $(".form-button-add-term").click(function () {
+        //     let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+        //     let height = ($(window).height() * (1 - 0.5)) / 2;
+        //     $(".box_school_term").addClass("animated bounceIn").show().css({left: left, top: height});
+        //     $(".opacity_bg").css("opacity", "0.3").show();
+        //     let form_button = $('#school_term_button');
+        //     form_button.attr('onclick', "add_school_term();");
+        // });
+        $(".close_payment_teacher").click(function() {
+            let left = ($(window).width() * (1 - 0.35)) / 2;
+            let top = ($(window).height() * (1 - 0.5)) / 2;
+            $(".box_payment_teacher").show().animate({
+                width: "-$(window).width()*0.35",
+                height: "-$(window).height()*0.5",
+                left: "-" + left + "px",
+                top: "-" + top + "px"
+            }, 1000, function() {
+                let width1 = $(window).width() * 0.35;
+                let height1 = $(window).height() * 0.5;
+                $(this).css({
+                    width: width1,
+                    height: height1
+                }).hide();
+            });
 
-		});
-	});
+        });
+    });
 </script>

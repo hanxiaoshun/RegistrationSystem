@@ -306,25 +306,30 @@
                         <input type='text' name='unit_address' value='{{user_info.unit_address}}' maxlength="200" class='ipt' />
                         <label style='color:red'></label>
                     </td>
-
+                    {% if request.session.role_name == 'teacher' %}{% else %}
                     <td class="form-label td-span">
                         <font color='#ff0000'>* </font>
                         <label for='' class="input_text">单位负责报名的负责人：</label>
                     </td>
+
                     <td class="form-label td-input">
                         <!--                    <input type='text' name='nation' required='required' maxlength="30" value='{{ user_info.nation }}'-->
                         <!--                           class='ipt form-number'-->
                         <!--                           style="width: 100px"/>-->
                         <!--                    -->
+
+
                         <input type="hidden" id='update_teacher_info' value="{{ teacher_info_id }}">
                         <select class='form-select teacher-info' name='teacher_info_form' id="teacher_info_update" required="required">
                         <option>---请选择---</option>
                         {% for teacher in teacher_infos%}
                         <option value="{{teacher.id}}">{{teacher.user_info.real_name}}</option>
                         {% endfor%}
-                    </select>
+                        </select>
                         <label style='color:red'></label>
                     </td>
+                    {% endif %}
+
                 </tr>
                 <tr class="more_info">
 

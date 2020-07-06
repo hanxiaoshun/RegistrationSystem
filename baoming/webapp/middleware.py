@@ -1,3 +1,11 @@
+'''
+@Author: your name
+@Date: 2020-05-27 09:51:22
+@LastEditTime: 2020-07-06 01:02:51
+@LastEditors: Please set LastEditors
+@Description: In User Settings Edit
+@FilePath: \RegistrationSystem\baoming\webapp\middleware.py
+'''
 # -*- coding: utf-8 -*-
 import json
 
@@ -19,7 +27,7 @@ allow_urls = [
     '/love/', '/', '/report/to_login/', '/report/sign_in/',
     '/report/sign_out/', '/report/report_kill_info/', '/report/to_index/',
     '/report/check_username/', '/report/check_nickname/',
-    '/report/system_guide/', '/report/introduction/'
+    '/report/system_guide/', '/report/introduction/', '/report/report_skill_introduction/'
 ]
 
 sys_msg = '报名系统'

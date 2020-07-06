@@ -113,13 +113,51 @@ def report_condition_info(request):
             # result['data'] = tmp_list
         else:
             result['status'] = False
-            result['message'] = '获取数据记录 0'
+            result['message'] = '没有找到本级别的申报条件选项，请重新选择或联系负责人确认'
             result['data'] = ''
     except Exception as e:
         raise e
         result['status'] = False
-        result['message'] = '获取数据记录 0,错误提示：' + str(e)
+        result['message'] = '获取申报条件发生错误：' + str(e)
         result['data'] = ''
+    print(result)
+    return JsonResponse(result, safe=False)
+
+def report_skill_introduction(request):
+    query_set_skill = ReportSkill.objects.all().values("skill_id", 
+                                                          "skill_name",
+                                                          "skill_main_class",
+                                                          "skill_main_class_name","skill_explain").order_by('-skill_id')
+    print(query_set_skill)
+    query_set_condition = ReportCondition.objects.all().values(
+                'condition_id', 'condition_name', 'condition_level',
+                'record_status', 'condition_for_skill_id', 'explain_condition')
+    try:
+        if len(query_set_condition) > 0:
+            tmp_list_skill = []
+            if len(query_set_skill) > 0:
+                for j in query_set_skill:
+                    tmp_list_conditon = []
+                    for i in query_set_condition:
+                        if i['condition_for_skill_id'] == j['skill_id']:
+                            tmp_list_conditon.append(i)
+                    j['list_conditon'] = tmp_list_conditon
+                    tmp_list_skill.append(j)
+            # result['data'] = serializers.serialize('json', objects)
+            result['status'] = True
+            result['data'] = json.dumps(tmp_list_skill, ensure_ascii=False)
+            result['message'] = '获取成功'
+            # result['data'] = tmp_list
+        else:
+            result['status'] = False
+            result['message'] = '没有找到本级别的申报条件选项，请重新选择或联系负责人确认'
+            result['data'] = ''
+    except Exception as e:
+        raise e
+        result['status'] = False
+        result['message'] = '获取申报条件发生错误：' + str(e)
+        result['data'] = ''
+    print(result)
     return JsonResponse(result, safe=False)
 
 

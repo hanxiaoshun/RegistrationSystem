@@ -74,6 +74,8 @@
                     </td>
                     <td class="form-label td-input">
                         <input type='text' name='declaration_of_occupation' required='required' value='{{student_info.declaration_of_occupation}}' id="declaration_of_occupation" readonly="readonly" class='ipt' />
+                        <input type='text' hidden name='report_skill' required='required' value='{{student_info.skill_id.id}}' id="id_skill_id" readonly="readonly" class='ipt' />
+                        <input type='text' hidden name='skill_main_class' required='required' value='{{student_info.skill_main_class.id}}' id="id_skill_main_class" readonly="readonly" class='ipt' />
                         <label style='color:red'></label>
                     </td>
 
@@ -307,7 +309,7 @@
                     </td>
                     <td class="form-label td-input student_source">
                         <input id='update_student_source_class' hidden value="{{ student_info.student_source_class.id}}">
-                        <select name="student_source_class" id="id_student_source_class">
+                        <select class='form-select' name="student_source_class" id="id_student_source_class">
                             <option selected>退役人员</option>
                             <option></option>
                             <option></option>
@@ -320,7 +322,7 @@
                     </td>
                     <td class="form-label td-input subside_class">
                         <input id='update_subside_class' hidden value="{{ student_info.subside_class.id}}">
-                        <select name="subside_class" id="id_subside_class">
+                        <select class='form-select' name="subside_class" id="id_subside_class">
                             <option selected>不申请补贴</option>
                             <option></option>
                             <option></option>
@@ -335,7 +337,7 @@
                     </td>
                     <td class="form-label td-input subside_certificate_class">
                         <input id='update_subside_certificate_class' hidden value="{{ student_info.subside_certificate_class.id}}">
-                        <select name="subside_certificate_class" id="id_subside_certificate_class">
+                        <select class='form-select' name="subside_certificate_class" id="id_subside_certificate_class">
                             <option selected>没有证件</option>
                             <option></option>
                             <option></option>
@@ -358,7 +360,7 @@
                     </td>
                     <td class="form-label td-input examinee_identity">
                         <input id='update_examinee_identity' hidden value="{{ student_info.examinee_identity.id}}">
-                        <select name="examinee_identity" id="id_examinee_identity">
+                        <select class='form-select' name="examinee_identity" id="id_examinee_identity">
                             <option selected>是</option>
                             <option>不是</option>
                             <option></option>
@@ -371,7 +373,7 @@
                     </td>
                     <td class="form-label td-input place_sign_up">
                         <input id='update_place_sign_up' hidden value="{{ student_info.place_sign_up.id}}">
-                        <select name="place_sign_up" id="id_place_sign_up">
+                        <select class='form-select' name="place_sign_up" id="id_place_sign_up">
                             <option selected>报名点A</option>
                             <option></option>
                             <option></option>
@@ -386,7 +388,7 @@
                     </td>
                     <td class="form-label td-input identify_class">
                         <input id='update_identify_class' hidden value="{{ student_info.identify_class.id}}">
-                        <select name="identify_class" id="id_identify_class">
+                        <select class='form-select' name="identify_class" id="id_identify_class">
                             <option selected>正常鉴定</option>
                             <option value=""></option>
                             <option></option>
@@ -399,7 +401,7 @@
                     </td>
                     <td class="form-label td-input identify_subject">
                         <input id='update_identify_subject' hidden value="{{ student_info.identify_subject.id}}">
-                        <select name="identify_subject" id="id_identify_subject">
+                        <select class='form-select' name="identify_subject" id="id_identify_subject">
                         <option selected>正常鉴定</option>
                         <option value=""></option>
                         <option></option>

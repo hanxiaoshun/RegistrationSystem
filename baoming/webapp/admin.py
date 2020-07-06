@@ -245,7 +245,7 @@ admin.site.register(ReportSkillMainClass, ReportSkillMainClassAdmin)
 
 class ReportSkillAdmin(admin.ModelAdmin):
     obj = ReportSkill()
-    list_display = tuple(obj.__dir__()[1:10])
+    list_display = tuple(obj.__dir__()[1:11])
     readonly_fields = ('create_time', 'modify_time',)
     list_display_links = ()
     search_fields = ('skill_id', 'skill_name',)

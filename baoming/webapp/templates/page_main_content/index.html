@@ -49,11 +49,11 @@
                             <td style="width: 18%;padding-left:3%;">
                                 <table border="0" cellspacing="0" cellpadding="0" style="width: 100%">
                                     <tr>
-                                        <td style="width: 56%">
-                                            <img src="/static/image/index/xiaoxi01.png" height="18%" width="100%" title="消息" style="margin-right:
-                                                -1%" />
+                                        <td style="width: 56%;height:20%" class="index_img_aa">
+                                            <!-- <img src="/static/image/index/xiaoxi01.png" height="100%" width="100%" title="消息" style="margin-right:
+                                                -1%" /> -->
                                         </td>
-                                        <td style="" class="index_img_a">
+                                        <td style="width: 56%;height:20%" class="index_img_a">
                                             <a href='/report/receive/' style="margin-left: -1%;height:
                                                 30%">
                                                 <span style="color:
@@ -362,19 +362,31 @@
                 //alert(tmp_uniq);
                 //alert(JSON.stringify(tmp_list_uniq));
                 $.each(tmp_list_uniq, function(i, n) {
-                    var skill = "<div><div style='text-align: left;float:left'><span style='color:green'>" + n.skill_main_class_name + ":</span></div><div>";
+                    var skill = "<div><div style='text-align: left;float:left'><span style='color:red'>" + n.skill_main_class_name + ":</span></div><div>";
                     //$(".report_list").append("<span class ='worker_size'>" + n.skill_main_class_name + "</span><br>");
                     $.each(data_json, function(j, m) {
                         if (n.skill_main_class_name === m.skill_main_class_name) {
                             n.skills.push(m);
-                            skill_str = "<button class='skill_button '> <a class ='worker_size' href='/report/worker?skill_main_class=" + m.skill_main_class + "&skill_id=" + m.skill_id + "&skill_name=" + m.skill_name +
-                                "' title='" + m.skill_name + "'>" + m.skill_name + "</a></button >";
+                            //skill_name = m.skill_name;
+                            //skill_str = "<a class='worker_size' href='/report/worker?skill_main_class=" +
+                            //m.skill_main_class + "&skill_id=" + m.skill_id + "&skill_name=" + skill_name +
+                            //"'>" + skill_name + "</a>";
+                            //skill = skill + skill_str;
+                            console.log("/report/worker?skill_main_class=" + m.skill_main_class + "&skill_id=" + m.skill_id + "&skill_name=" + m.skill_name);
+                            var url_less = encodeURI("/report/worker?skill_main_class=" + m.skill_main_class + "&skill_id=" + m.skill_id + "&skill_name=" + m.skill_name);
+                            console.log(url_less)
+                            skill_str = "<button onclick=\"window.open('" +
+                                url_less +
+                                "')\" class='skill_button_radio'> <a class ='worker_size' >" + m.skill_name + "</a></button >";
+                            //skill_str = "<button onclick=\"window.open('/report/worker?skill_main_class=" +
+                            //m.skill_main_class + "&skill_id=" + m.skill_id + "&skill_name=" + m.skill_name +
+                            //"')\" class='skill_button_radio'> <a class ='worker_size' >" + m.skill_name + "</a></button >";
                             skill = skill + skill_str;
                         }
                     });
                     $(".report_list").append(skill + "</div><div>");
                 });
-                alert(JSON.stringify(tmp_list_uniq));
+                console.log(JSON.stringify(tmp_list_uniq));
                 //var skill = "";
                 // $.each(data_json, function(i, n) {
                 //  skill_str = "<button class='skill_button '> <a class ='worker_size' href='/report/worker?skill_id=" + n.skill_id + "&skill_name=" + n.skill_name +

@@ -331,33 +331,36 @@ def update_user_info(request):
                                                 "SFZ证件ZFM照",
                                                 form_object_user_info.id_card_tails_photo.picture_path)
                             return HttpResponseRedirect("/report/student_info_detail?studentId=" + str(student_id))
-                        # title_msg = sys_msg + '-填报详情'
-                        # image_url = MEDIA_URL + str(student_info.user_info.two_inch_photo.picture_path)
-                        # # 全部汇总在大填报表格里面
-                        # certificate_photos_url = ''
-                        # if student_info.certificate_photos:
-                        #     certificate_photos_url = MEDIA_URL + str(student_info.certificate_photos.picture_path)
-                        # diploma_certificate_photos_url = ''
-                        # if student_info.diploma_certificate_photos:
-                        #     diploma_certificate_photos_url = MEDIA_URL + str(
-                        #         student_info.diploma_certificate_photos.picture_path)
-                        #
-                        # return render_result(request,
-                        #                      "page_main_controller/student/report_student_user_info_detail.html",
-                        #                      {'title_msg': title_msg, 'student_info': student_info,
-                        #                       'image_url': image_url,
-                        #                       'certificate_photos_url': certificate_photos_url,
-                        #                       'diploma_certificate_photos_url': diploma_certificate_photos_url,
-                        #                       'not_exist': False})
+                        title_msg = sys_msg + '-填报详情'
+                        image_url = MEDIA_URL + str(student_info.user_info.two_inch_photo.picture_path)
+                        # 全部汇总在大填报表格里面
+                        certificate_photos_url = ''
+                        if student_info.certificate_photos:
+                            certificate_photos_url = MEDIA_URL + str(student_info.certificate_photos.picture_path)
+                        diploma_certificate_photos_url = ''
+                        if student_info.diploma_certificate_photos:
+                            diploma_certificate_photos_url = MEDIA_URL + str(
+                                student_info.diploma_certificate_photos.picture_path)
+                        
+                        return render_result(request,
+                                             "page_main_controller/student/report_student_user_info_detail.html",
+                                             {'title_msg': title_msg, 'student_info': student_info,
+                                              'image_url': image_url,
+                                              'certificate_photos_url': certificate_photos_url,
+                                              'diploma_certificate_photos_url': diploma_certificate_photos_url,
+                                              'not_exist': False})
                     else:
                         title_msg = sys_msg + '-填报详情'
                         return render_result(request,
                                              "page_main_controller/student/report_student_user_info_detail.html",
                                              {'title_msg': title_msg, 'not_exist': True})
                 else:
-                    title_msg = sys_msg + '-填报详情'
-                    return render_result(request, "page_main_controller/student/report_student_user_info_detail.html",
-                                         {'title_msg': title_msg, 'not_exist': True})
+                    # 未携带学生信息，只修改基础信息
+                    return HttpResponseRedirect('/report/user_setting/')
+
+                    # title_msg = sys_msg + '-填报详情'
+                    # return render_result(request, "page_main_controller/student/report_student_user_info_detail.html",
+                    #                      {'title_msg': title_msg, 'not_exist': True})
             else:
                 print(type(object_form.errors), object_form.errors)  # errors类型是ErrorDict，里面是ul，li标签
                 title_msg = sys_msg + '-继续填写信息'
@@ -371,7 +374,7 @@ def update_user_info(request):
         message = '系统提示：系统异常请稍后重试' + str(e)
         return render_result(request, "page_main_controller/message.html",
                              {'title_msg': title_msg, 'message': message})
-        raise e
+        # raise e
 
 
 def update_user_base_info(request):
@@ -523,10 +526,19 @@ def user_setting(request):
         if user_infos.count() == 1:
             user_info = user_infos[0]
             image_url = ''
+            idcard_heads_image_url = ''
+            idcard_tails_image_url = ''
             if user_info.two_inch_photo:
                 image_url = MEDIA_URL + str(user_info.two_inch_photo.picture_path)
+            if user_info.id_card_heads_photo:
+                idcard_heads_image_url = MEDIA_URL + str(user_info.id_card_heads_photo.picture_path)
+            if user_info.id_card_tails_photo:
+                idcard_tails_image_url = MEDIA_URL + str(user_info.id_card_tails_photo.picture_path)
             return render_result(request, "page_main_controller/user/user_info_detail.html",
-                                 {'title_msg': title_msg, 'image_url': image_url, 'user_info': user_info})
+                                 {'title_msg': title_msg, 'image_url': image_url,
+                                'id_card_heads_photo_url': idcard_heads_image_url,
+                                'id_card_tails_photo_url': idcard_tails_image_url,
+                                 'user_info': user_info})
 
         else:
             return render_result(request, "page_main_controller/user/user_info_update.html",
@@ -548,13 +560,28 @@ def to_user_info_update(request):
     title_msg = sys_msg + '-学生信息'
     if uid:
         user_infos = UserInfo.objects.filter(id=uid)
-        if user_infos.count() == 1:
+        teacher_infos = TeacherInfo.objects.all()
+        if teacher_infos.count() == 0:
+            title_msg = sys_msg + '-错误信息展示页面'
+            message = '负责人信息为空，请管理员添加负责人信息！'
+            return render_result(request, "page_main_controller/message.html",
+                                 {'title_msg': title_msg, 'message': message})
+        elif user_infos.count() == 1:
             user_info = user_infos[0]
             image_url = ''
+            idcard_heads_image_url = ''
+            idcard_tails_image_url = ''
             if user_info.two_inch_photo:
                 image_url = MEDIA_URL + str(user_info.two_inch_photo.picture_path)
+            if user_info.id_card_heads_photo:
+                idcard_heads_image_url = MEDIA_URL + str(user_info.id_card_heads_photo.picture_path)
+            if user_info.id_card_tails_photo:
+                idcard_tails_image_url = MEDIA_URL + str(user_info.id_card_tails_photo.picture_path)
             return render_result(request, "page_main_controller/user/user_info_update.html",
-                                 {'title_msg': title_msg, 'image_url': image_url, 'user_info': user_info})
+                                 {'title_msg': title_msg, 'image_url': image_url,
+                                'idcard_heads_image_url': idcard_heads_image_url,
+                                'idcard_tails_image_url': idcard_tails_image_url,
+                                 'user_info': user_info, 'teacher_infos':teacher_infos})
         else:
             title_msg = sys_msg + '-错误信息展示页面'
             message = '查看失败：系统没有此信息记录，请重试或联系管理员！'

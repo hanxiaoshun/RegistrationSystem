@@ -35,8 +35,9 @@ def download_apply(request):
             student = StudentInfo.objects.get(id=student_id)
             if student:
                 print(student.declaration_of_occupation)
-                print(student)
-                if '化工' in student.skill_main_class.skill_main_class_name:
+                print(student.condition_selected.skill_main_class.skill_main_class_name)
+                skill_main_class_name = student.condition_selected.skill_main_class.skill_main_class_name
+                if '化工' in skill_main_class_name:
                     file_uuid = apply_chemical(student)
                     print(str(file_uuid))
                     if file_uuid:
@@ -45,7 +46,7 @@ def download_apply(request):
                             '/report/report_download_page?file_uuid=' + file_uuid + file_message_one)
                     else:
                         return HttpResponseRedirect('/report/report_download_page/')
-                elif '电子' in student.skill_main_class.skill_main_class_name:
+                elif '电子' in skill_main_class_name:
                     file_uuid = apply_electronic_communiction(student)
                     print(str(file_uuid))
                     if file_uuid:

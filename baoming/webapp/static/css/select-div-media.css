@@ -1,11 +1,12 @@
 .dropbtn {
     background-color: #ff47eb;
     color: white;
-    padding: 5px;
+    padding: 0px;
     font-size: 12px;
     border: none;
     cursor: pointer;
-    line-height: 25px;
+    width: 80%;
+    line-height: 20px;
 }
 
 .dropdown {
@@ -101,18 +102,17 @@
     .dropbtn {
         background-color: #7f7caf;
         color: white;
-        padding: 4px;
+        padding: 0px;
         font-size: 10px;
         border: none;
         cursor: pointer;
+        width: 75%;
         line-height: 25px;
     }
-
     .dropdown {
         /*position: relative;*/
         display: inline-block;
     }
-
     .dropdown-content {
         display: none;
         position: absolute;
@@ -121,7 +121,6 @@
         line-height: 25px;
         /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
     }
-
     .dropdown-content a {
         color: black;
         font-size: 2px;
@@ -129,14 +128,12 @@
         text-decoration: none;
         display: block;
     }
-
     .dropdown-content a button {
         border: 1px;
         border-radius: 4px;
         background: #e3fffc;
         font-size: 10px;
     }
-
     .dropdown-content a span {
         line-height: 25px;
         border: 1px;
@@ -145,53 +142,43 @@
         font-size: 10px;
         width: 50px;
     }
-
     .dropdown-content a:hover {
         background-color: #9644ff
     }
-
     .dropdown-content a:hover button {
         background-color: #31ff8d
     }
-
     .dropdown-content a:hover span {
         background-color: #31ff8d;
         width: 50px;
         font-size: 10px;
     }
-
     .dropdown:hover .dropdown-content {
         display: inline-block;
         /*display: list-item;*/
         text-align: center;
     }
-
     .dropdown:hover .action-content {
         display: inline-block;
         /*display: list-item;*/
         /*text-align: center;*/
     }
-
     .dropdown:hover .length_level {
         /*display: inline-block;*/
         display: block;
         font-size: 10px;
         /*text-align: center;*/
     }
-
     .length_level {
         width: 130px;
     }
-
     .dropdown:hover .dropbtn {
         background-color: #aa45eb;
     }
-
     .dropdown:hover .length_level_dropbtn {
         background-color: #aa45eb;
         width: 130px;
     }
-
     .dropdown:hover .dropdown {
         background-color: #e42feb;
         position: relative;
@@ -206,14 +193,13 @@
         font-size: 8px;
         border: none;
         cursor: pointer;
+        width: 80%;
         line-height: 12px;
     }
-
     .dropdown {
         /*position: relative;*/
         display: inline-block;
     }
-
     .dropdown-content {
         display: none;
         position: absolute;
@@ -222,7 +208,6 @@
         line-height: 12px;
         /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
     }
-
     .dropdown-content a {
         color: black;
         font-size: 2px;
@@ -230,14 +215,12 @@
         text-decoration: none;
         display: block;
     }
-
     .dropdown-content a button {
         border: 1px;
         border-radius: 3px;
         background: #e3fffc;
         font-size: 8px;
     }
-
     .dropdown-content a span {
         line-height: 15px;
         border: 1px;
@@ -246,53 +229,43 @@
         font-size: 8px;
         width: 30px;
     }
-
     .dropdown-content a:hover {
         background-color: #9644ff
     }
-
     .dropdown-content a:hover button {
         background-color: #31ff8d
     }
-
     .dropdown-content a:hover span {
         background-color: #31ff8d;
         width: 30px;
         font-size: 8px;
     }
-
     .dropdown:hover .dropdown-content {
         display: inline-block;
         /*display: list-item;*/
         text-align: center;
     }
-
     .dropdown:hover .action-content {
         display: inline-block;
         /*display: list-item;*/
         /*text-align: center;*/
     }
-
     .dropdown:hover .length_level {
         /*display: inline-block;*/
         display: block;
         font-size: 8px;
         /*text-align: center;*/
     }
-
     .length_level {
         width: 120px;
     }
-
     .dropdown:hover .dropbtn {
         background-color: #aa45eb;
     }
-
     .dropdown:hover .length_level_dropbtn {
         background-color: #aa45eb;
         width: 120px;
     }
-
     .dropdown:hover .dropdown {
         background-color: #e42feb;
         position: relative;

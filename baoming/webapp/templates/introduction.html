@@ -1,378 +1,123 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-27 09:51:23
+ * @LastEditTime: 2020-07-06 08:22:22
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \RegistrationSystem\baoming\webapp\templates\introduction.html
+-->
 <!DOCTYPE html>
 <html lang="zh">
 {% include 'common/head_info.html' %}
+
 <body>
-{% include 'common/nav_main_return_index.html' %}
-
-<p class="desc-dev">国家资格证报名条件</p>
-<div class="desc-dev_content">
-<!--    <p class="sub_head">非化工工种报名条件-->
-    <p class='p_content'>
-    <p class='p_content second_content'>焊工报名条件</p>
-    <p class='p_content third_content'>五级/初级工 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 累计从事本职业工作１年( 含)以上。</p>
-    <p class='p_content'>(2) 本职业学徒期满。</p>
-    <p class='p_content third_content'>四级/中级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。</p>
-    <p class='p_content'>(2) 累计从事本职业工作６年(含)以上。</p>
-    <p class='p_content'>(3) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 (
-        含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>三级/高级工( 具备以下条件之一者 )</p>
-    <p class='p_content '>(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。</p>
-    <p class='p_content'>(2) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；或取得本职业四级/
-        中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。</p>
-    <p class='p_content comment_content'>注：相关专业：焊接加工、焊接技术应用、金属热加工（焊接）、焊接技术与自动化、焊接技术与工程。</p>
-    <p class='p_content  second_content'>电工报名条件</p>
-    <p class='p_content third_content'>五级/初级工 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 累计从事本职业工作１年( 含)以上。</p>
-    <p class='p_content'>(2) 本职业学徒期满。</p>
-    <p class='p_content third_content'>四级/中级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。</p>
-    <p class='p_content'>(2) 累计从事本职业工作６年(含)以上。</p>
-    <p class='p_content'>(3) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 (
-        含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>三级/高级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。</p>
-    <p class='p_content'>(2) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；或取得本职业四级/
-        中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。</p>
-    <p class='p_content comment_content'>注：本专业或相关专业: 数控机床装配与维修、机械设备装配与自动控制、制冷设备运用与维修、机电设备安装与维修、机电一体化、电气自动化设备安装与维修
-        、电梯工程技术、城市轨道交通车辆运用与检修 、煤矿电气设备维修、工业机器人应用与维护、工业网络技术、机电技术应用、电气运行与控制、电气技术应用、纺织机电技术、铁道供电技术、农业电气化技术等专业。</p>
-    <p class='p_content  second_content'>钳工报名条件</p>
-
-<!--    钳工
-——初级 ( 具备以下条件之一者 )
-(1) 经本职业初级正规培训达规定标准学时数，并取得结业证书。
-(2) 在本职业连续见习工作 2 年以上。
-(3) 本职业学徒期满。
-——中级 ( 具备下列条件之一者 )
-(1) 取得本职业初级职业资格证书后，连续从事本职业工作 3 年以上，经本职业中级正规培训达规定标准学时数，并取得结业证书。
-(2) 取得本职业初级职业资格证书后，连续从事本职业工作 5 年以上。
-(3) 连续从事本职业工作 7 年以上。
-(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。
-——高级 ( 具备下列条件之一者〉
-(1) 取得本职业中级职业资格证书后，连续从事本职业工作 4 年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。
-(2) 取得本职业中级职业资格证书后，连续从事本职业工作 7 年以上。
-(3) 取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校或高级技工学校本职业 ( 专业 ) 毕业证书。
-(4) 大专以上本专业或相关专业毕业生取得本职业中级职业资格证书后, 连续从事本职业工作 2 年以上。-->
-    <p class='p_content third_content'>初级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 经本职业初级正规培训达规定标准学时数，并取得结业证书。</p>
-    <p class='p_content'>(2) 在本职业连续见习工作 2 年以上。</p>
-    <p class='p_content'>(3) 本职业学徒期满。</p>
-
-    <p class='p_content third_content'>中级 ( 具备下列条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业初级职业资格证书后，连续从事本职业工作 3 年以上，经本职业中级正规培训达规定标准学时数，并取得结业证书。</p>
-    <p class='p_content'>(2) 取得本职业初级职业资格证书后，连续从事本职业工作 5 年以上。</p>
-    <p class='p_content'>(3) 连续从事本职业工作 7 年以上。</p>
-    <p class='p_content'>(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content third_content'>高级 ( 具备下列条件之一者〉</p>
-    <p class='p_content'>(1) 取得本职业中级职业资格证书后，连续从事本职业工作 4 年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。</p>
-    <p class='p_content'>(2) 取得本职业中级职业资格证书后，连续从事本职业工作 7 年以上。</p>
-    <p class='p_content'>(3) 取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校或高级技工学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content'>(4) 大专以上本专业或相关专业毕业生取得本职业中级职业资格证书后, 连续从事本职业工作 2 年以上。</p>
-    <p class='p_content  second_content'>育婴员报名条件</p>
-
-<!--    育婴员
- ——五级/初级工（具备以下条件之一者）
-（1）累计从事本职业或相关职业工作１年（含）以上。
-（2）本职业或相关职业学徒期满。
-——四级/中级工（具备以下条件之一者）
-（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。
-（2）累计从事本职业或相关职业工作 6 年（含）以上。
-（3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-（3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
-——三级/高级工（具备以下条件之一者）
-（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。
-（2-1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-（2-2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
-（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作２年（含）以上。
-注：
-1、相关职业：婴幼儿发展引导员、幼儿教育教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健调理师、健康管理师、保育员、家政服务员。
-2、本专业：学前教育、早期教育。
-3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健；高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、营养配餐、特殊教育、心理健康教育、幼儿发展与健康管理、中医康复技术；普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、针灸推拿、教育学、小学教育。-->
-    <p class='p_content third_content'>初级(具备以下条件之一者)</p>
-    <p class='p_content'>（1）累计从事本职业或相关职业工作１年（含）以上。</p>
-    <p class='p_content'>（2）本职业或相关职业学徒期满。</p>
-    <p class='p_content third_content'>中级(具备以下条件之一者)</p>
-    <p class='p_content'>（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。 </p>
-    <p class='p_content'>（2）累计从事本职业或相关职业工作 6 年（含）以上。 </p>
-    <p class='p_content'>（3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；</p>
-    <p class='p_content'>（3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。</p>
-    <p class='p_content third_content'>高级(具备以下条件之一者)</p>
-    <p class='p_content'>（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。 </p>
-    <p class='p_content'>（2-1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；</p>
-    <p class='p_content'>（2-2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。 </p>
-    <p class='p_content'>（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作２年（含）以上。 </p>
-    <p class='p_content'>注： 1.相关职业：包括婴幼儿发展引导员、幼儿教师、儿科医师、儿科护士、孤残儿童护理员、 母婴保健技术服务人员、保健护理师、健康管理师、育婴员、家政服务员等，下同。
-2.本专业：包括学前教育、早期教育，下同。
-3.相关专业：中职相关专业包括护理、中医护理、家政服务与管理、营养与保健、助产；高 职高专相关专业包括：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、 中医学、食品营养与卫生、健康管理、医学营养、心理咨询、特殊教育、心理健康教育、幼 儿发展与健康管理；普通高校相关专业包括护理学、基础医学、预防医学、中医学、妇幼保 健医学、教育学，下同。</p>
-
-<!--    保育员
- ——五级/初级工（具备以下条件之一者 ）
-（1）累计从事本职业或相关职业工作１年（含）以上。
-（2）本职业或相关职业学徒期满。
-——四级/中级工（具备以下条件之一者）
-（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。
-（2）累计从事本职业或相关职业工作 6 年（含）以上。
-（3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-（3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（ 含尚未取得毕业证书的在校应届毕业生）。
-——三级/高级工（具备以下条件之一者 ）
-（1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。
-（2-1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有高级技工学校、 技师学院毕业证书 （含尚未取得毕业证书的在校应届毕业生）；
-（2-2）或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 （ 含尚未取得毕业证书的在校应届毕业生）。
-（3） 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 （ 技能等级证书）后，累计从事本职业或相关职业工作２年（ 含） 以上。
-注：
-1、相关职业：婴幼儿发展引导员、幼儿教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健护理师、健康管理师、育婴员、家政服务员等。
-2、本专业：学前教育、早期教育。
-3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健、助产；高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、特殊教育、心理健康教育、幼儿发展与健康管理；普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、教育学。 -->
-
-    <p class='p_content  second_content'>保育员报名条件</p>
-    <p class='p_content third_content'>初级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>（1） 经本职业初级正规培训达规定标准学时数，并取得结业证书。</p>
-    <p class='p_content'>（2）本职业或相关职业学徒期满。 </p>
-    <p class='p_content third_content'>中级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。</p>
-    <p class='p_content'>（2）累计从事本职业或相关职业工作 6 年（含）以上。</p>
-    <p class='p_content'>（3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；</p>
-    <p class='p_content'>（3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（ 含尚未取得毕业证书的在校应届毕业生）。</p>
-    <p class='p_content third_content'>高级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>（1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。</p>
-    <p class='p_content'>（2-1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有高级技工学校、 技师学院毕业证书 （含尚未取得毕业证书的在校应届毕业生）；</p>
-    <p class='p_content'>（2-2）或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 （ 含尚未取得毕业证书的在校应届毕业生）。</p>
-    <p class='p_content'>（3） 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 （ 技能等级证书）后，累计从事本职业或相关职业工作２年（ 含） 以上。</p>
-    <p class='p_content'>注： 1、相关职业：婴幼儿发展引导员、幼儿教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健护理师、健康管理师、育婴员、家政服务员等。
-2、本专业：学前教育、早期教育。
-3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健、助产；高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、特殊教育、心理健康教育、幼儿发展与健康管理；普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、教育学。 </p>
+    {% include 'common/nav_main_return_index.html' %}
+    <p class="desc-dev">国家资格证报名条件</p>
 
 
-
-
-    <p class='p_content  second_content'>劳动关系协调员报名条件</p>
-    <p class='p_content third_content'>四级/中级工（具备以下条件之一者）</p>
-    <p class='p_content'>（1） 累计从事本职业或相关职业工作 4 年（含）以上。</p>
-    <p class='p_content'>（2）
-        取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。</p>
-    <p class='p_content'>（3）高等院校本专业或相关专业在校生。</p>
-    <p class='p_content third_content'>三级/高级工（ 具备以下条件之一者 ）</p>
-    <p class='p_content'>（1）取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。</p>
-    <p class='p_content'>
-        （2）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。</p>
-    <p class='p_content'>（3）具有大学专科本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书） 后，累计从事本职业或相关职业工作２年（含）以上。</p>
-    <p class='p_content'>（4）具有大学本科本专业或相关专业学历证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 1 年（含）以上。</p>
-    <p class='p_content'>（5）具有硕士研究生及以上本专业或相关专业学历证书（含尚未取得毕业证书的在校应届研究生毕业生）。</p>
-    <p class='p_content comment_content'>注：</p>
-    <p class='p_content comment_content'>1、相关职业：人力资源管理、劳动保障事务处理、社会工作等职业。</p>
-    <p class='p_content comment_content'>2、相关专业：劳动与社会保障、劳动经济学、人力资源管理、工商企业管理、法学、社会学等专业。</p>
-    <p class='p_content comment_content'>
-        3、相关职业资格证书（技能等级证书）:企业人力资源管理师、劳动保障协理员、劳动保障专理员、社会工作者等与劳动关系协调员职业功能具有关联性的职业资格证书。</p>
-    <p class="p_content second_content"> 车工报名条件</p>
-
-    <p class='p_content third_content'>五级/初级工 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 累计从事本职业工作１年( 含)以上。</p>
-    <p class='p_content'>(2) 本职业学徒期满。</p>
-    <p class='p_content'> 四级/中级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。</p>
-    <p class='p_content'>(2) 累计从事本职业工作６年(含)以上。</p>
-    <p class='p_content'>(3-1) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(3-2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>三级/高级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。</p>
-    <p class='p_content'>(2-1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(2-2)或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。 </p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。</p>
-
-
-    <p class='p_content second_content'>机床装调维修工</p>
-
-    <p class='p_content third_content'>四级/中级工( 具备以下条件之一者 ) </p>
-    <p class='p_content'>(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。</p>
-    <p class='p_content'>(2) 累计从事本职业或相关职业工作6年（含）以上。</p>
-    <p class='p_content'>(3-1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(3-2) 取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>三级/高级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。</p>
-    <p class='p_content'>(2-1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(2-2)或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (
-        含尚未取得毕业证书的在校应届毕业生)。 </p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。</p>
-
-    <p class="p_content second_content">电梯安装维修工、起重装卸机械操作工</p>
-    <p class='p_content'>申报条件</p>
-    <p class='p_content third_content'>五级/初级工 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 累计从事本职业或相关职业工作１年( 含)以上。</p>
-    <p class='p_content'>(2) 本职业或相关职业学徒期满。</p>
-    <p class='p_content'>(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。</p>
-    <p class='p_content'>(2) 累计从事本职业或相关职业工作6年（含）以上。</p>
-    <p class='p_content'>(3-1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(3-2)或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>三级/高级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。</p>
-    <p class='p_content'>(2-1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(2-2)或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (
-        含尚未取得毕业证书的在校应届毕业生)。 </p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。</p>
-    <p class='p_content comment_content'>注：</p>
-    <p class='p_content comment_content'>电梯安装维修工</p>
-    <p class='p_content comment_content'>1、相关职业：电梯装配调试工、特种设备检验检测工程技术人员（电梯）。</p>
-    <p class='p_content comment_content'>2、本专业：电梯工程技术专业。</p>
-    <p class='p_content comment_content'>3、相关专业: 理工科专业。</p>
-    <p class='p_content comment_content'>起重装卸机械操作工</p>
-    <p class='p_content comment_content'>本专业或相关专业: 机械、电气类专业 。</p>
-    <p class="p_content second_content">架子工、防水工、手工木工报名条件</p>
-    <p class='p_content third_content'>初级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1)经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。</p>
-    <p class='p_content'>(2) 在本职业连续见习工作 2 年以上。</p>
-    <p class='p_content'>(3) 本职业学徒期满。</p>
-    <p class='p_content third_content'>中级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作 3 年以上 , 经本职业中级正规培训达规定标准学时数 ,并取得毕 ( 结 ) 业证书。</p>
-    <p class='p_content'>(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。</p>
-    <p class='p_content'>(3) 连续从事本职业工作7年以上。</p>
-    <p class='p_content'>(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content third_content'>高级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 ,经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。</p>
-    <p class='p_content'>(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作6年以上。</p>
-    <p class='p_content'>(3-1) 取得高级技工学校审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content'>(3-2)或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content'>(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生 , 连续从事本职业工作2年以上。</p>
-
-    <p class="p_content second_content">砌筑工、钢筋工报名条件</p>
-    <p class='p_content third_content'>初级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1)经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。</p>
-    <p class='p_content'>(2) 在本职业连续见习工作 2 年以上。</p>
-    <p class='p_content third_content'>中级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作 3 年以上 , 经本职业中级正规培训达规定标准学时数 ,并取得毕 ( 结 ) 业证书。</p>
-    <p class='p_content'>(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。</p>
-    <p class='p_content'>(3) 连续从事本职业工作8年以上。</p>
-    <p class='p_content'>(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content third_content'>高级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 , 经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。</p>
-    <p class='p_content'>(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作6年以上。</p>
-    <p class='p_content'>(3-1) 取得高级技工学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content'>(3-2)或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content'>(4) 取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。</p>
-
-    <p class='p_content second_content'>混凝土工报名条件</p>
-
-    <p class='p_content third_content'>初级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1)经本职业初级正规培训达规定标准学时数 , 并取得毕 ( 结)业证书。</p>
-    <p class='p_content'>(2) 在本职业连续见习工作 2 年以上。</p>
-    <p class='p_content third_content'>中级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业初级职业资格证书后 , 连续从事本职业工作3年以上 , 经本职业中级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。</p>
-    <p class='p_content'>(2) 取得本职业初级职业资格证书后 , 连续从事本职业工作 5 年以上。</p>
-    <p class='p_content'>(3) 连续从事本职业工作 6 年以上。</p>
-    <p class='p_content'>(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content third_content'>高级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 , 经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。</p>
-    <p class='p_content'>(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作 6 年以上。</p>
-    <p class='p_content'>(3) 取得经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。</p>
-    <p class='p_content'>(4)取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。</p>
-    <p class="p_content second_content">智能楼宇管理员</p>
-    <p class='p_content third_content'>四级/中级工( 具备以下条件之一者 ) </p>
-    <p class='p_content'>(1) 累计从事本职业或相关职业工作6年（含）以上。</p>
-    <p class='p_content'>(2-1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(2-1)取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>三级/高级工( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。</p>
-    <p class='p_content'>(2-1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content'>(2-2)取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (
-        含尚未取得毕业证书的在校应届毕业生)。 </p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。</p>
-
-    <p class='p_content second_content'>中式面点师、中式烹调师</p>
-    <p class='p_content third_content'>初级/五级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 累计从事本职业或相关职业工作１年( 含)以上。</p>
-    <p class='p_content'>(2)本职业或相关职业学徒期满</p>
-    <p class='p_content third_content'>中级/四级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。</p>
-    <p class='p_content'>(2) 累计从事本职业或相关职业工作6年（含）以上。</p>
-    <p class='p_content'>(3__1) 取得技工学校本专业或相关专业毕业证书(含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(3__2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>高级/三级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。</p>
-    <p class='p_content'>(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(2__2) 或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (
-        含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级 / 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作２年(含)以上。</p>
-    <p class='p_content'>注：中式面点师</p>
-    <p class='p_content'>1、相关职业：中式烹调师、西式烹调师、西式面点师、糕点面包烘焙工、米面主食制作工。</p>
-    <p class='p_content'>2、相关专业: 中餐烹饪、西餐烹饪、中西面点工艺、烹调工艺与营养（烹饪工艺与营养）、烹饪与营养教育。</p>
-    <p class='p_content'>中式烹调师</p>
-    <p class='p_content'>1、相关职业：中式面点师、西式烹调师、西式面点师。</p>
-    <p class='p_content'>2、相关专业: 中餐烹饪、西餐烹饪、烹调工艺与营养（烹饪工艺与营养）、烹饪与营养教育。</p>
-    <p class='p_content second_content'>美容师</p>
-    <p class='p_content third_content'>初级/五级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 累计从事本职业工作１年( 含)以上。</p>
-    <p class='p_content'>(2) 本职业学徒期满。</p>
-    <p class='p_content third_content'>中级/四级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业五级/ 初级工职业资格证书( 技能等级证书)后，累计从事本职业工作４年(含)以上。</p>
-    <p class='p_content'>(2) 累计从事本职业工作６年(含)以上。</p>
-    <p class='p_content'>(3__1) 取得技工学校本专业或相关专业毕业证书( 含尚未取得毕业证书的在校应届毕业生)；</p>
-    <p class='p_content'>(3__2) 或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content third_content'>高级/三级 ( 具备以下条件之一者 )</p>
-    <p class='p_content'>(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。</p>
-    <p class='p_content'>(2__1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)</p>
-    <p class='p_content'>(2__2) 或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。</p>
-    <p class='p_content'>(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。</p>
-    <p class='p_content'>注：本专业和相关专业: 美容美体、服装与化妆造型、舞美、美容护理、美容养生、医疗美容、人物形象设计、美容美发形象设计等。</p>
-
-    <hr>
-    <p class="sub_head">化工类工种申报条件</p>
-    <p class='p_content'>（五个工种：工业废水处理工、无机化学反应生产工、有机合成工、防腐蚀工、工业固体废物处理处置工）</p>
-    <p class='p_content'>1、具备以下条件之一者，可申报五级/初级工：</p>
-    <p class='p_content'>（1）累计从事本职业或相关职业工作1年（含）以上。</p>
-    <p class='p_content'>（2）本职业或相关职业学徒期满。</p>
-    <p class='p_content'>2、具备以下条件之一者，可申报四级/中级工：</p>
-    <p class='p_content'>（1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作4年（含）以上。</p>
-    <p class='p_content'>（2）累计从事本职业或相关职业工作6年（含）以上。</p>
-    <p class='p_content'>
-        （3）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。</p>
-    <p class='p_content'>3、具备以下条件之一者，可申报三级/高级工：</p>
-    <p class='p_content'>（1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作5年（含）以上。</p>
-    <p class='p_content'>
-        （2）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。</p>
-    <p class='p_content'>（3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作2年（含）以上。</p>
-    <p class='p_content'>防腐蚀工的本职业包含但不限于下列工种：</p>
-    <p class='p_content'>耐蚀衬胶工  耐蚀喷涂工  耐蚀砖板衬里工  耐蚀塑料工  耐蚀纤维增强塑料工耐蚀混凝土工</p>
-    <p class='p_content'>无机化学反应生产工的本职业包含但不限于下列工种：</p>
-    <p class='p_content'>电化学反应工  窑炉反应工  黄磷生产工  电石生产工  钛白粉生产工  高频等离子工  二硫化碳生产工  炭黑生产工</p>
-</div>
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_02.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_03.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_04.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_05.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_06.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_07.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_08.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_09.png" style="width: 700px;height: 400px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-<!--    <div class="desc-dev" style="width: 700px;height: 400px;text-align: center;margin-left: auto;margin-right: auto">-->
-<!--        <img src="/static/image/index/report_desc/desc_10.png" style="width: 700px;height: 200px;" class='img-desc'-->
-<!--             alt="报名条件说明书">-->
-<!--    </div>-->
-{% include 'common/bottom.html' %}
+    <div class="desc-dev_content">
+        <!--    <p class="sub_head">非化工工种报名条件-->
+    </div>
+    {% include 'common/bottom.html' %}
 </body>
+
 </html>
+<script type="text/javascript">
+    $.ajaxSetup({
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        }
+    });
+    $(function() {
+        report_skill_introduction();
+    });
+
+    function report_skill_introduction() {
+        /**
+         * 获取技能列表
+         * @type {string}
+         */
+        let url = '/report/report_skill_introduction/';
+        // let form_data = new FormData();
+        // form_data.append("csrfmiddlewaretoken", document.getElementsByName('csrfmiddlewaretoken')[0].value);
+        // form_data.append("uid", obj.id);
+        $.ajax({
+            url: url,
+            type: 'GET',
+            // data: form_data,
+            data: {},
+            processData: false, // tell jquery not to process the data
+            contentType: false, // tell jquery not to set contentType
+            success: function(data) {
+                var data_json = JSON.parse(data.data);
+                var tmp_uniq = [];
+                var tmp_list = [];
+                var skill_list = [];
+                $.each(data_json, function(i, n) {
+                    // 工种大类工种
+                    skill_name = n.skill_name;
+                    skill_explain = n.skill_explain;
+                    var condition_level_uniq = [];
+                    var skill_tmp = {};
+                    skill_tmp['skill_name'] = skill_name;
+                    skill_tmp['skill_condition'] = [];
+                    skill_tmp['skill_explain'] = skill_explain;
+                    $.each(n.list_conditon, function(i, m) {
+                        // 工种大类工种
+                        condition_level = m.condition_level;
+                        condition_name = m.condition_name;
+                        var condition_dict = {};
+                        condition_dict['condition_level'] = condition_level;
+                        condition_dict['condition_name_list'] = [];
+                        if (condition_level_uniq.indexOf(m.condition_level) > -1) {
+                            if (condition_dict['condition_name_list'].indexOf(condition_name) > -1) {
+                                console.log(condition_name);
+                            } else {
+                                condition_dict['condition_name_list'].push(condition_name);
+                            }
+                        } else {
+                            condition_level_uniq.push(condition_level);
+                        }
+                        skill_tmp['skill_condition'].push(condition_dict);
+                    });
+                    skill_list.push(skill_tmp)
+                    condition_level_uniq.length = 0;
+                });
+                console.log(skill_list);
+                console.log('skill_list=-===============');
+
+                var skill_condition_str = '';
+                $.each(skill_list, function(i, n) {
+                    var skill_explain = n.skill_explain;
+                    skill_condition_str = skill_condition_str + "<p class='p_content second_content'>" + n.skill_name + "报名条件 </p>";
+                    console.log(skill_condition_str);
+                    var skill_condition_str_condition_name = '';
+                    var condition_str = '';
+                    $.each(n.skill_condition, function(ii, m) {
+                        var skill_condition_str_condition_level = '';
+                        if (m.condition_level == 5) {
+                            skill_condition_str_condition_level = skill_condition_str_condition_level + "<p class='p_content third_content'>五级/初级工 ( 具备以下条件之一者 ) </p>";
+                        } else if (m.condition_level == 4) {
+                            skill_condition_str_condition_level = skill_condition_str_condition_level + "<p class='p_content third_content'>四级/中级工 ( 具备以下条件之一者 ) </p>";
+                        } else if (m.condition_level == 3) {
+                            skill_condition_str_condition_level = skill_condition_str_condition_level + "<p class='p_content third_content'>三级/高级工 ( 具备以下条件之一者 ) </p>";
+                        }
+                        console.log('-------000-------9999--------------');
+                        console.log(m);
+                        $.each(m.condition_name_list, function(iii, j) {
+                            skill_condition_str_condition_name = skill_condition_str_condition_name + "<p class='p_content'>【" + iii.toString() + "】:" + j + "</p>";
+                        });
+                        condition_str = skill_condition_str_condition_level + skill_condition_str_condition_name;
+                    });
+
+                    if (skill_explain.length > 0) {
+                        condition_str = condition_str + "<p class='p_content comment_content'>" + skill_explain + "报名条件 < /p>";
+                    }
+                    skill_condition_str = skill_condition_str + condition_str;
+                });
+                console.log(skill_condition_str);
+                $(".desc-dev_content").append(skill_condition_str);
+            }
+        });
+    }
+</script>

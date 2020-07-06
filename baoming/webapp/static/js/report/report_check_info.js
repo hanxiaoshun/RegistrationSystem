@@ -98,32 +98,38 @@ function skill_condition(skill_id, condition_level) {
             condition_level: condition_level,
         },
         success: function(res) {
-            // conditionlist = JSON.parse(res.data);
-            let condition_selected = "";
-            var data_json = JSON.parse(res.data);
-            conditionlist = data_json;
-            $.each(data_json, function(i, n) {
-                var id_condition_radio = n.condition_id.toString() + "_condition_radio";
-                var id_str = n.condition_id.toString();
-                condition_selected =
-                    condition_selected +
-                    "<input type='radio' required='required' name='condition_selected'" +
-                    " value=" +
-                    id_str +
-                    " id=" +
-                    id_condition_radio +
-                    " onclick='condition_controller_enhance(this.value, \"add\");'/>" +
-                    "<label for='" +
-                    id_condition_radio +
-                    "' style='color:white'><span>" +
-                    n.condition_name +
-                    "</span></label>" +
-                    "<hr>";
-            });
-            let condition_selected_class = $(".condition_selected");
-            condition_selected_class.empty("");
-            condition_selected_class.append(condition_selected);
-            console.log(res); //在console中查看数据
+            if (res.status == false) {
+                alert(res.message);
+            } else {
+                // conditionlist = JSON.parse(res.data);
+                let condition_selected = "";
+                console.log(res);
+                var data_json = JSON.parse(res.data);
+                conditionlist = data_json;
+                $.each(data_json, function(i, n) {
+                    console.log(n.condition_id);
+                    var id_condition_radio = n.condition_id.toString() + "_condition_radio";
+                    var id_str = n.condition_id.toString();
+                    condition_selected =
+                        condition_selected +
+                        "<input type='radio' required='required' name='condition_selected'" +
+                        " value=" +
+                        id_str +
+                        " id=" +
+                        id_condition_radio +
+                        " onclick='condition_controller_enhance(this.value, \"add\");'/>" +
+                        "<label for='" +
+                        id_condition_radio +
+                        "' style='color:white'><span>" +
+                        n.condition_name +
+                        "</span></label>" +
+                        "<hr>";
+                });
+                let condition_selected_class = $(".condition_selected");
+                condition_selected_class.empty("");
+                condition_selected_class.append(condition_selected);
+                console.log(res); //在console中查看数据
+            }
         },
         error: function() {
             alert("failed!");
@@ -131,6 +137,38 @@ function skill_condition(skill_id, condition_level) {
     });
 }
 
+
+
+/**
+ * 清空输入框
+ * 
+ */
+function clear_input_label() {
+    $("#apprentice_start").val("");
+    $("#apprentice_end").val("");
+    $("#apprentice_year").val("");
+    $("#start_the_work_of_this_occupation").val("");
+    $("#career_life").val("");
+    $("#career_life_time").val("");
+    $("#original_certificate_number").val("");
+    $("#issue_unit").val("");
+    $("#issuance_time").val("");
+    $("#original_certificate_worker_year").val("");
+    $("#from_certificate_need_year").val("");
+    $("#school_name").val("");
+    $("#major").val("");
+    $("#course_hours").val("");
+    $("#graduation_time").val("");
+    $("#certificate_photos").val("");
+    $("#diploma_certificate_photos").val("");
+
+    $("#career_life_label_value").text("");
+    $("#apprentice_year_label").text("");
+    $("#apprentice_month_label").text("");
+    $("#original_certificate_worker_year_value").text("");
+    $("#career_life_label").text("");
+    $("#original_certificate_worker_year_label").text("");
+}
 /**
  * 按照条件显示输入框
  * @param condition_id_str 填报选项
@@ -281,7 +319,6 @@ function condition_controller_enhance(condition_id_str, status) {
             }
             // 证书级及信息
             if (n.primary_level_status === "1") {
-                alert(n.primary_level_requirement);
                 check_has_qualification(
                     1,
                     parseInt(n.primary_level_requirement),

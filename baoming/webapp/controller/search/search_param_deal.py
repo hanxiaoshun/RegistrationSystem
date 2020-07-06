@@ -230,16 +230,34 @@ def search_parameter(request, search_type=None):
                 'current_term_student_len': len(student_infos)}
             if len(school_terms) == 0:
                 # param_result =
-                pass
+                param_result = {'school_term': None}
             return param_result
-            
         else:
-            print(user_search.error_class, user_search.errors)
-            message = '系统提示：获取当前用户失败，请重新登陆后尝试，或联系管理员.'
-
+            return {'user_search_error_class':user_search.error_class, 'user_search_errors':user_search.errors}
     else:
-        print(student_search.error_class, student_search.errors)
-        message = '系统提示：参数传输错误.' + str(student_search.errors)
-
-    return render_result(request, "page_main_controller/message.html",
-                         {'title_msg': title_msg, 'message': message})
+        return {'student_search_error_class':student_search.error_class, 'student_search_errors':student_search.errors}
+    
+    
+def search_return(request, title_msg, param_result):
+    if isinstance(param_result, dict):
+        print('aaaaaaa')
+        if 'school_term' in param_result:
+            print('ssssss')
+            if param_result['school_term'] is None:
+                print('school_term---------------')
+                message = '尚未添加->报考学期->信息，请->管理员->添加相关信息'
+                return render_result(request, "page_main_controller/message.html",
+                            {'title_msg': title_msg, 'message': message})
+        if 'user_search_error_class' in param_result:
+            if param_result['user_search_error_class'] is not None:
+                print(param_result['user_search_error_class'], param_result['user_search_errors'])
+                message = '系统提示：参数传输错误：' + param_result['user_search_errors']
+                return render_result(request, "page_main_controller/message.html",
+                            {'title_msg': title_msg, 'message': message})
+        if 'student_search_error_class' in param_result:
+            if param_result['student_search_error_class'] is  not None:
+                print(param_result['student_search_error_class'], param_result['student_search_errors'])
+                message = '系统提示：获取当前用户信息失败：' + param_result['student_search_errors']
+                return render_result(request, "page_main_controller/message.html",
+                            {'title_msg': title_msg, 'message': message})
+        return True

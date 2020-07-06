@@ -392,6 +392,20 @@ nav {
     z-index: 0;
 }
 
+.skill_button_radio {
+    text-align: center;
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-bottom: 2%;
+    /*border: 1px solid #000;*/
+    max-width: 80%;
+    position: relative;
+    padding-bottom: 0;
+    height: 100%;
+    z-index: 0;
+    border-radius: 7px;
+}
+
 .main_pic {
     height: 50px;
     top: 25px;

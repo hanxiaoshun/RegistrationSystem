@@ -258,4 +258,8 @@ urlpatterns = [
     path('report_condition_info/',
          v.report_condition_info,
          name='report_condition_info'),
+    path('report_skill_introduction/',
+         v.report_skill_introduction,
+         name='report_skill_introduction'),
+    
 ]

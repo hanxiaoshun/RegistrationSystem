@@ -1000,6 +1000,12 @@ def report_condition_info(request):
     """
     return report_skill.report_condition_info(request)
 
+def report_skill_introduction(request):
+    """
+    获取技能申报条件
+    """
+    return report_skill.report_skill_introduction(request)
+
 
 def love(request):
     return love_m.love(request)

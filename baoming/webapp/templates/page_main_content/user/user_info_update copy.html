@@ -1,0 +1,672 @@
+<!--电工、焊工、钳工、劳动员、育婴员、保育员 填报页面-->
+{% load filter_model %}
+<div class="like_form">
+    <label class="input_text_head">国家资格证乐陵杏林学校报名系统</label>
+    <hr>
+    <div class="image-box">
+        <div class="images">
+            <form action="/report/image_upload/" id='imageUpload-form' method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <input type="hidden" name='photo_type' id="photo_type" value="">
+                <table>
+                    <tbody>
+                    <!--                    <tr>-->
+                    <!--                        <td><label style="color: honeydew;float: right">&nbsp;&nbsp;&nbsp;&nbsp;图片说明:</label></td>-->
+                    <!--                        <td><input type="text" name="picture_name" id="picture_name" style="float: left" placeholder="可以为空"></td>-->
+                    <!--                        <td style="width: auto;"><span class="message-label" style="color:red;margin-left: 1%; float: left;"></span></td>-->
+                    <!--                    </tr>-->
+                    <tr>
+                        <td colspan="3" style="text-align: left">
+                            <label style="color: greenyellow" class="input_text">
+                                请认真阅读以下图片上传说明，以便更好地为您服务
+                            </label>
+                            <br>
+                            <label style="color: white" class="input_text">
+                                ①图片格式为:jpg
+                            </label>
+                            <br>
+                            <label style="color: white" class="input_text">
+                                ②大小不大于100k
+                            </label>
+                            <br>
+                            <label style="color: white" class="input_text">
+                                ③把大体积图片缩小为小于100k图片的方法：在电脑上点"开始"→"所有程序"→"附件"→"画图"n→点菜单中
+                                的"打开"→选择要缩小的图片→点击"调整大小和扭曲"→按照图片大小小于100k的要求
+                                缩小"重新调整大小"的"百分比"数值→确定→菜单栏"另存为"到指定路径→确认照片体积是否符合要求
+                                （尽量使处理后的图片为100k，不能小太多，否则不清晰。）
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center">
+                            <!--                            <label for="file" style="color: honeydew"-->
+                            <!--                                   class="input_text">&nbsp;&nbsp;&nbsp;&nbsp;选择图片:</label>-->
+                            <input type="file" accept="image/*" name="file" id="file" required="required" class="ipt"
+                                   value="选择图片"
+                                   title="请选择将要上传的图片">
+                        </td>
+                        <td style="width: auto;"><span class="message-label"
+                                                       style="color:red;margin-left: 1%; float: left;"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p>
+                <div id="btn2" style="margin-left: 20%;">
+                    <ul>
+                        <li><input type="button" value="提交" class="image-submit" style="color: white"
+                                   onclick="image_upload(1)"/></li>
+                        <li><input type="button" value="关闭" class="image-close" style="color: white"/></li>
+                    </ul>
+                </div>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <form action="/report/update_user_base_info/" method="post" class="more_info_user">
+        {% csrf_token %}
+        {{ form }}
+        <table class='form-table' border="1">
+            <tbody>
+
+            <tr class="more_info">
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">姓名：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='real_name' required='required' value='{{ user_info.real_name }}'
+                           maxlength="15" minlength="2" class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">性别：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" id='update_sex' value="{{ user_info.sex}}">
+                    <select class='form-select' id='sex' name="sex" required="required">
+                        <option value="MALE">男</option>
+                        <option value="FEMALE">女</option>
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">政治面貌：</span>
+                    <input type="hidden" value="{{ user_info.political_status}}"
+                           id="update_political_status">
+                </td>
+                <td class="form-label td-input">
+                    <select class='form-select' name="political_status" id="political_status"
+                            required="required">
+                        <option value="1">中共党员</option>
+                        <option value="2">中共预备党员</option>
+                        <option value="3">共青团员</option>
+                        <option value="4">民革党员</option>
+                        <option value="5">民盟盟员</option>
+                        <option value="6">民建会员</option>
+                        <option value="7">农工党党员</option>
+                        <option value="8">致公党党员</option>
+                        <option value="9">九三学社社员</option>
+                        <option value="10">台盟盟员</option>
+                        <option value="11">无党派人士</option>
+                        <option value="12">群众(普通居民)</option>
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+            </tr>
+            <!--            第 2 行-->
+            <tr class="more_info">
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">身份证号：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='id_number' required='required' value='{{ user_info.id_number }}'
+                           minlength="18" maxlength="18"
+                           placeholder="请认真核对身份证号码"
+                           title="请认真核对身份证号码"
+                           class='ipt' id="id-number"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">民族：</span>
+                </td>
+                <td class="form-label td-input">
+                    <!--                    <input type='text' name='nation' required='required' maxlength="30" value='{{ user_info.nation }}'-->
+                    <!--                           class='ipt form-number'-->
+                    <!--                           style="width: 100px"/>-->
+                    <!--                    -->
+                    <input type="hidden" id='update_nation_info'
+                           value="{{ user_info.nation_info.id }}">
+                    <select class='form-select nation-info' name='nation_info_form' id="nation_info"
+                            required="required">
+
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">邮箱：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type='email' name='email' required='required' value='{{ user_info.email }}' class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+            </tr>
+            <!--            第 3 行-->
+            <tr class="more_info">
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">身份证住址：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='id_card_address' required='required'
+                           value='{{ user_info.id_card_address }}' class='ipt'
+                           maxlength="200"
+                           minlength="5"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">户口所在地：</span>
+                </td>
+                <td class="form-label td-input" colspan="3">
+                    <input type="hidden" value="{{ user_info.hukou_province.id }}"
+                           id="update_hukou_province">
+                    <select class='form-select province_update' name="hukou_province_form"
+                            required="required"
+                            onchange="city(this.options[this.options.selectedIndex].value, 1, null);"
+                            id="hukou_province_update">
+                        <option>---省---</option>
+                    </select>
+                    <input type="hidden" value="{{ user_info.hukou_city.id }}" id="update_hukou_city">
+                    <select class='form-select city_update' name="hukou_city_form"
+                            required="required"
+                            onchange="county(this.options[this.options.selectedIndex].value, 1, null);"
+                            id="hukou_city_update">
+                        <option>---市---</option>
+                    </select>
+                    <input type="hidden" value="{{ user_info.hukou_county.id }}" id="update_hukou_county">
+                    <select class='form-select county_update' name="hukou_county_form"
+                            id="hukou_county_update">
+                        <option>---县---</option>
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+
+            </tr>
+            <tr>
+
+<!--                <td class="form-label td-span">-->
+<!--                    <span class="input_text">初级中学：</span>-->
+<!--                </td>-->
+<!--                <td class="form-label td-input">-->
+<!--                    <input type='text' name='middle_school' value='{{ user_info.middle_school }}'-->
+<!--                           class='ipt'-->
+<!--                           maxlength="200"-->
+<!--                           minlength="2"/>-->
+<!--                    <label style='color:red'></label>-->
+<!--                </td>-->
+                <td class="form-label td-span education_degree_form">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">文化程度：</span>
+                </td>
+                <td class="form-label td-input education_degree_form">
+                    <input type="hidden" id='update_education_degree'
+                           value="{{user_info.education_degree.id}}">
+                    <select class='form-select education-degree' name='education_degree_form'
+                            id="education_degree_update" required="required">
+                        <option value="0">---请选择---</option>
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+                 <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">联系电话：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='contact_number' maxlength="11" required="required"
+                           id="contact_number"
+                           minlength="11" value='{{user_info.contact_number}}'
+                           class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <label for='' class="input_text">联系电话(区号)：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='fixed_telephone'
+                           value='{{ user_info.fixed_telephone }}' class='ipt' minlength="8" maxlength="16"
+                           placeholder="例如: 0532-22223333"
+                           id="fixed_telephone"/>
+                    <label style='color:red'></label>
+                </td>
+
+            </tr>
+            <!--            第 4 行-->
+            <tr class="more_info">
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">常住住址：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='address' required='required' value='{{ user_info.address }}' class='ipt'
+                           maxlength="200"
+                           minlength="2"/>
+                    <label style='color:red'></label>
+                </td>
+
+<!--                <td class="form-label td-span">-->
+<!--                    <span class="input_text">原职业（工种）：</span>-->
+<!--                </td>-->
+<!--                <td class="form-label td-input">-->
+<!--                    <input type='text' name='former_occupation' value='{{ user_info.former_occupation|get_none }}'-->
+<!--                           class='ipt'-->
+<!--                           maxlength="200"-->
+<!--                           minlength="2"/>-->
+<!--                    <label style='color:red'></label>-->
+<!--                </td>-->
+                <td class="form-label td-span">
+                    <span class="input_text">邮政编码：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='postal_code' value='{{ user_info.postal_code }}'
+                           maxlength="6"
+                           title="邮政编码"
+                           id="postal_code"
+                           class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+
+
+
+            </tr>
+            <tr class="more_info">
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">参加工作时间：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='date' name='start_working_date' required='required' maxlength="10" minlength="10"
+                           value='{{ user_info.start_working_date|date:"Y-m-d" }}' class='ipt'
+                           placeholder="格式:1990-01-20"
+                           title="格式:1990-01-20"/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">从事职业：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='main_occupation' value='{{user_info.main_occupation}}' maxlength="20"
+                           required="required"
+                           class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <input type="button" value="上传二寸证件照" id='val1' title="请确认上传照片为二寸头像照片" class="form-button image-btn"
+                           style="color: purple"/>
+                    <input type="hidden" name="two_inch_photo_form" value="{{user_info.two_inch_photo.id}}"
+                           id="two_inch_photo" required="required">
+                </td>
+                <td class="form-label td-input" rowspan="2" style="text-align: center">
+                    <img src="{{image_url}}" id='two-inch-photo' width="70px" height="80px" alt="二寸证件照">
+                </td>
+            </tr>
+            <tr class="more_info">
+
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <span class="input_text">工作单位：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='work_unit' required='required' maxlength="50"
+                           value='{{ user_info.work_unit }}'
+                           class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+                <td class="form-label td-span">
+                    <font color='#ff0000'>* </font>
+                    <label class="input_text">单位性质：</label>
+                </td>
+                <td class="form-label td-input">
+                    <input type="hidden" value="{{ user_info.unit_nature.id }}" id="update_unit_nature">
+                    <select class='form-select unit-nature' name="unit_nature_form"
+                            required="required" onchange=""
+                            id="unit_nature_update">
+                        <option>---请选择---</option>
+                    </select>
+                    <label style='color:red'></label>
+                </td>
+            </tr>
+
+            <!--            第 7 行-->
+            <tr class="more_info">
+
+                <td class="form-label td-span">
+                    <span class="input_text">现工作单位地址：</span>
+                </td>
+                <td class="form-label td-input">
+                    <input type='text' name='unit_address' value='{{user_info.unit_address}}' maxlength="200"
+                           class='ipt'/>
+                    <label style='color:red'></label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+        <input type='hidden' value='{{user_info.id}}' name='uid' id="user_info_id"/>
+        <input type='submit' style="color: green" value='确认提交' class='form-button more_info'/>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+//院校毕业证书情况
+
+
+        // $("#val2").attr("disabled", "disabled");
+        // $("#val2").attr("title", "请正确填写从事本工种工龄(职业年限)的选项,再继续操作！");
+        $(".image-btn").click(function () {
+            alert("①图片格式为:jpg\n②大小不大于100k\n③把大体积图片缩小为小于100k图片的方法：\n   在电脑上点\"开始\"→\"所有程序\"→\"附件\"→\"画图\"\n→点菜单中的\"打开\"→选择要缩小的图片→点击\"调整大小和扭曲\"→按照图片大小小于100k的要求缩小\"重新调整大小\"的\"百分比\"数值→确定→菜单栏\"另存为\"\n到指定路径→确认照片体积是否符合要求\n（尽量使处理后的图片为100k，不能小太多，否则不清晰。）");
+            $('#photo_type').val('val1');
+            let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
+            let height = ($(window).height() * (1 - 0.5)) / 2;
+            $(".image-box").addClass("animated bounceIn").show().css({left: left, top: height});
+            $(".image-opacity-bg").css("opacity", "0.3").show();
+        });
+
+
+        $(".image-close").click(function () {
+            let left = ($(window).width() * (1 - 0.35)) / 2;
+            let top = ($(window).height() * (1 - 0.5)) / 2;
+            $(".image-box").show().animate({
+                width: "-$(window).width()*0.35",
+                height: "-$(window).height()*0.5",
+                left: "-" + left + "px",
+                top: "-" + top + "px"
+            }, 1000, function () {
+                let width1 = $(window).width() * 0.35;
+                let height1 = $(window).height() * 0.5;
+                console.log(width1);
+                $(this).css({width: width1, height: height1}).hide();
+            });
+        });
+
+        $(".more_info_user").submit(function () {
+                let unit_nature_update = $("#unit_nature_update").val();
+                let nation_info = $("#nation_info").val();
+                let hukou_province_update = $("#hukou_province_update").val();
+                let hukou_city_update = $("#hukou_city_update").val();
+                let education_degree_update = $("#education_degree_update").val();
+                let teacher_info_update = $("#teacher_info_update").val();
+                let fix_tel = $("#fixed_telephone").val();
+                let phone = $("#contact_number").val();
+                let postal_code = $("#postal_code").val();
+                let id_number = $("#id-number").val();
+
+                if (unit_nature_update.length > 0) {
+                    if (parseInt(unit_nature_update) > 0) {
+                        console.log("单位名称选择正确！")
+                    } else {
+                        alert("单位性质不能为空");
+                        return false;
+                    }
+                } else {
+                    alert("单位性质不能为空");
+                    return false;
+                }
+                if (nation_info.length > 0) {
+                    if (parseInt(nation_info) > 0) {
+                        console.log("名族选择正确！")
+                    } else {
+                        alert("民族不能为空");
+                        return false;
+                    }
+                } else {
+                    alert("民族不能为空");
+                    return false;
+                }
+                if (hukou_province_update.length > 0) {
+                    if (parseInt(hukou_province_update) > 0) {
+                        console.log("户口所在地省选择正确！")
+                    } else {
+                        alert("户口所在省信息不能为空");
+                        return false;
+                    }
+                } else {
+                    alert("户口所在省信息不能为空");
+                    return false;
+                }
+                if (hukou_city_update.length > 0) {
+                    if (parseInt(hukou_city_update) > 0) {
+                        console.log("户口所在市信息选择正确！")
+                    } else {
+                        alert("户口所在市信息不能为空");
+                        return false;
+                    }
+                } else {
+                    alert("户口所在市信息不能为空");
+                    return false;
+                }
+                if (education_degree_update.length > 0) {
+                    if (parseInt(education_degree_update) > 0) {
+                        console.log("文化程度选择正确！")
+                    } else {
+                        alert("文化程度不能为空");
+                        return false;
+                    }
+                } else {
+                    alert("文化程度不能为空");
+                    return false;
+                }
+
+                if (teacher_info_update.length > 0) {
+                    if (parseInt(teacher_info_update) > 0) {
+                        console.log("负责人选择正确！")
+                    } else {
+                        alert("负责人选择不能为空");
+                        return false;
+                    }
+                } else {
+                    alert("负责人不能为空");
+                    return false;
+                }
+
+                let two_inch_photo = $("#two_inch_photo").val();
+                if (two_inch_photo.length === 0) {
+                    alert("请上传二寸证件照片");
+                    return false;
+                }
+
+
+                if (id_number.length === 18) {
+
+                    let p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+                    //输出 true
+                    console.log(p.test("11010519491231002X"));
+                    if (p.test(id_number)) {
+
+                        let sex = $("#sex");
+                        let sex_value = sex.val();
+                        let sex_identify = id_number.substr(16, 1);
+                        if (parseInt(sex_identify) % 2 === 0) {
+                            if (sex_value.length > 0) {
+                                if (sex_value === "MALE") {
+                                    alert("身份证性别信息与性别选择不符！");
+                                    return false;
+                                }else{
+                                    console.log("18位身份证号验证程序，暂时通过验证");
+                                }
+                            } else {
+                                alert("请您先选择性别");
+                                sex.focus();
+                                return false;
+                            }
+                        } else {
+                            if (sex_value.length > 0) {
+                                if (sex_value === "FEMALE") {
+                                    alert("身份证性别信息与性别选择不符！");
+                                    return false;
+                                }else{
+                                    console.log("18位身份证号验证程序，暂时通过验证");
+                                }
+                            } else {
+                                alert("起您先选择性别");
+                                sex.focus();
+                                return false;
+                            }
+                        }
+
+                    } else {
+                        alert("18位身份证号码输入可能有误，请您重新核验输入，如您确定号码输入无误，相关问题请联系系统管理员。");
+                        return false;
+                    }
+
+                    let birthday_string = id_number.substr(6, 14);
+                    let year = parseInt(birthday_string.substr(0, 4));
+                    let month = parseInt(birthday_string.substr(4, 6));
+                    let day = parseInt(birthday_string.substr(6, 8));
+
+                    let date = new Date();
+
+                    if (year > date.getFullYear()) {
+                        alert("身份证生日年份不应大于：" + date.getFullYear() + ":年");
+                        return false;
+                    } else if (year === date.getFullYear()) {
+                        if (month > date.getMonth() + 1) {
+                            alert("身份证生日年份不应大于：" + date.getFullYear() + ":年，" + (date.getMonth() + 1) + ":月");
+                            return false;
+                        } else if (month === date.getMonth() + 1) {
+                            alert(date.getDate());
+                            if (day >= date.getDate() + 1) {
+                                alert("身份证生日日期不应大于：" + date.getFullYear() + ":年，" + (date.getMonth() + 1) + ":月, " + date.getDate() + ":日");
+                                return false;
+                            } else {
+                                console.log('18位-身份证出生日期验证通过');
+                            }
+                        } else {
+                            console.log('18位-身份证出月份检测验证通过');
+                        }
+                    } else {
+                        console.log('18位-身份证出生年份验证通过');
+                    }
+                } else if (id_number.length === 15) {
+                    let birthday_string = id_number.substr(6, 12);
+                    birthday_string = "19" + birthday_string;
+                    let year = parseInt(birthday_string.substr(0, 4));
+                    let month = parseInt(birthday_string.substr(4, 6));
+                    let day = parseInt(birthday_string.substr(6, 8));
+
+                    let date = new Date();
+
+                    if (year > date.getFullYear()) {
+                        alert("身份证生日年份不应大于：" + date.getFullYear() + ":年");
+                        return false;
+                    } else if (year === date.getFullYear()) {
+                        if (month > date.getMonth() + 1) {
+                            alert("身份证生日年份不应大于：" + date.getFullYear() + ":年，" + (date.getMonth() + 1) + ":月");
+                            return false;
+                        } else if (month === date.getMonth() + 1) {
+                            alert(date.getDate());
+                            if (day >= date.getDate() + 1) {
+                                alert("身份证生日日期不应大于：" + date.getFullYear() + ":年，" + (date.getMonth() + 1) + ":月, " + date.getDate() + ":日");
+                                return false;
+                            } else {
+                                console.log('15位-身份证出生日期验证通过');
+                            }
+                        } else {
+                            console.log('15位-身份证出月份检测验证通过');
+                        }
+                    } else {
+                        console.log('15位-身份证出生年份验证通过');
+                    }
+                } else {
+                    alert("身份证位数不正确，请验证重新输入18或15位的身份证号码！");
+                    return false;
+                }
+
+                if (fix_tel.length > 0) {
+                    if (!/^(\d3,4|\d{3,4}-)?\d{7,8}$/.test(fix_tel)) {
+                        alert('固定电话有误，请重填');
+                        return false;
+                    } else {
+                        console.log("固定电话号码验证程序，暂时通过");
+                    }
+                } else {
+                    console.log("不填写将不验证固定电话格式！");
+                }
+
+
+                if (!(/^0?1[3|4|5|6|7|8][0-9]\d{8}$/.test(phone))) {
+                    alert("手机号码有误，请重填");
+                    return false;
+                } else {
+                    console.log("手机号码验证程序，暂时通过");
+                }
+
+                if (postal_code.length > 0) {
+                    if (!(/^[1-9][0-9]{5}$/.test(postal_code))) {
+                        alert("邮政编码有误，请重填");
+                        return false;
+                    } else {
+                        console.log("邮政编码验证程序，暂时通过");
+                    }
+                } else {
+                    console.log("不填写将不验证邮政编码格式！");
+                }
+
+
+            }
+        );
+
+
+        //     let file_before = document.getElementById('file');
+        // let file_info = document.getElementById('file').files[0];
+        // if (file_before.files.length === 0) {
+        //     alert("未选择任何文件，请重新选择！");
+        // }else if (file_info.size > 102400){
+        //     alert("图片大小不能超过100KB");
+        // } else if (file_info.type !== 'jpg'){
+        //     alert("请上传后缀为 .jpg 格式的图片！");
+        // }
+        //
+        // $("#file").change(function () {
+        //         let s = $('#file').val();
+        //         let start = s.indexOf(".") + 1;
+        //         let name = s.substring(start, s.length).toLowerCase();
+        //         if (name !== "jpg") {
+        //             alert("图片格式必须为.jpg格式");
+        //             $("#image-upload").attr("disabled", true);
+        //             return false;
+        //         }
+        //         if (this.files[0].size > 102400) {
+        //             alert("图片不能超过100KB");
+        //             $("#image-upload").attr("disabled", true);
+        //             return;
+        //         }
+        //
+        //         // let objUrl = getObjectURL(this.files[0]);
+        //         // if (objUrl) {
+        //         //     $("#img0").attr("src", objUrl);
+        //         // }
+        //         $("#image-upload").attr("disabled", false);
+        //     });
+    });
+</script>
+
+

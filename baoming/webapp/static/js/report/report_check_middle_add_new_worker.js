@@ -48,7 +48,7 @@ function new_add_worker(condition_string) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("cg04_3__1") > -1) {
 
@@ -125,7 +125,7 @@ function new_add_worker(condition_string) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("jcztwxg04_3__1") > -1) {
 
@@ -229,7 +229,7 @@ function new_add_worker(condition_string) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("dtanwxg04_3__1") > -1) {
 
@@ -333,7 +333,7 @@ function new_add_worker(condition_string) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("qzzxjxczg04_3__1") > -1) {
 
@@ -355,11 +355,11 @@ function new_add_worker(condition_string) {
             }
         } else if (condition_string.indexOf("qzzxjxczg03") > -1) {
             //高级（三级）
-// qzzxjxczg03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-//     '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
-//     '(2__2)或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
-//     '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。', '注：电梯安装维修工 1、相关职业：电梯装配调试工、特种设备检验检测工程技术人员（电梯）。2、本专业：电梯工程技术专业。\n' +
-//     '3、相关专业: 理工科专业。起重装卸机械操作工 本专业或相关专业: 机械、电气类专业 。'];
+            // qzzxjxczg03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
+            //     '(2__1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
+            //     '(2__2)或取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
+            //     '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。', '注：电梯安装维修工 1、相关职业：电梯装配调试工、特种设备检验检测工程技术人员（电梯）。2、本专业：电梯工程技术专业。\n' +
+            //     '3、相关专业: 理工科专业。起重装卸机械操作工 本专业或相关专业: 机械、电气类专业 。'];
             if (condition_string.indexOf("qzzxjxczg03_1") > -1) {
                 //第1个条件
 
@@ -795,7 +795,7 @@ function new_add_worker(condition_string) {
                 career_life_time();
                 apprentice_check(false);
                 check_has_qualification(1, 5, 5);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("qzg04_3") > -1) {
 
@@ -1040,10 +1040,10 @@ function new_add_worker(condition_string) {
             }
         } else if (condition_string.indexOf("hntg03") > -1) {
             //高级（三级）
-// hntg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 , 经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
-//     '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作 6 年以上。',
-//     '(3) 取得经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
-//     '(4)取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。'];
+            // hntg03 = ['(1) 取得本职业中级职业资格证书后 , 连续从事本职业工作 4 年以上 , 经本职业高级正规培训达规定标准学时数 , 并取得毕 ( 结 ) 业证书。',
+            //     '(2) 取得本职业中级职业资格证书后 , 连续从事本职业工作 6 年以上。',
+            //     '(3) 取得经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校本职业 ( 专业 ) 毕业证书。',
+            //     '(4)取得本职业中级职业资格证书的大专以上本专业或相关专业毕业生，连续从事本职业工作2年以上。'];
             if (condition_string.indexOf("hntg03_1") > -1) {
                 //第1个条件
 
@@ -1109,11 +1109,11 @@ function new_add_worker(condition_string) {
             }
         } else if (condition_string.indexOf("znlugly03") > -1) {
             //高级（三级）
-//             znlugly03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
-//     '(2-1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。',
-//     '(2-2)取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
-//     '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。'
-// ];
+            //             znlugly03 = ['(1) 取得本职业或相关职业四级/ 中级工职业资格证书(技能等级证书)后，累计从事本职业或相关职业工作５年(含)以上。',
+            //     '(2-1) 取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) ，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。',
+            //     '(2-2)取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)。 ',
+            //     '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书 ( 技能等级证书) 后，累计从事本职业或相关职业工作２年( 含) 以上。'
+            // ];
             if (condition_string.indexOf("znlugly03_1") > -1) {
                 //第1个条件
 
@@ -1200,7 +1200,7 @@ function new_add_worker_plus(condition_string) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("zsmds04_3__1") > -1) {
 
@@ -1306,7 +1306,7 @@ function new_add_worker_plus(condition_string) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("zspts04_3__1") > -1) {
 
@@ -1411,7 +1411,7 @@ function new_add_worker_plus(condition_string) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("mrs04_3__1") > -1) {
 
@@ -1433,7 +1433,7 @@ function new_add_worker_plus(condition_string) {
             }
         } else if (condition_string.indexOf("mrs03") > -1) {
             //高级（三级）
-// mrs03 = ['(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。',
+            // mrs03 = ['(1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)后，累计从事本职业工作５ 年( 含) 以上。',
             // '(2__1) 取得本职业四级/ 中级工职业资格证书 ( 技能等级证书)，并具有高级技工学校、 技师学院毕业证书 ( 含尚未取得毕业证书的在校应届毕业生)；',
             // '(2__2) 或取得本职业四级/ 中级工职业资格证书，并具有经评估论证、 以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书 (含尚未取得毕业证书的在校应届毕业生)。',
             // '(3) 具有大专及以上本专业或相关专业毕业证书，并取得本职业四级/ 中级工职业资格证书  ( 技能等级证书) 后，累计从事本职业工作２年( 含) 以上。',

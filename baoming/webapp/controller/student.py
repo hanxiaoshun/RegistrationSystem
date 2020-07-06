@@ -13,6 +13,8 @@ from webapp.models import *
 from webapp.utils.form_to_obj import *
 from webapp.utils.save_operation_log import save_operation_log
 from webapp.utils.shutilwhichUtil import term_worker_picture
+from webapp.forms_search.PageSearchForm import *
+
 
 sys_msg = '报名系统'
 result = {'status': True, 'message': ''}
@@ -183,18 +185,24 @@ def add_student_info(request):
                     if not user_info.main_occupation:
                         user_info.main_occupation = ""
                     teacher_infos = TeacherInfo.objects.all()
-                    return render_result(
-                        request,
-                        "page_main_controller/user/report_user_info_update.html",
-                        {
-                            'title_msg': title_msg,
-                            'user_info': student_info.user_info,
-                            'student_id': student_id,
-                            'image_url': image_url,
-                            'idcard_heads_image_url': idcard_heads_image_url,
-                            'idcard_tails_image_url': idcard_tails_image_url,
-                            'teacher_infos': teacher_infos
-                        })
+                    if teacher_infos.count() == 0:
+                        title_msg = sys_msg + '-错误信息展示页面'
+                        message = '负责人信息为空，请管理员添加负责人信息！'
+                        return render_result(request, "page_main_controller/message.html",
+                                            {'title_msg': title_msg, 'message': message})
+                    else:
+                        return render_result(
+                            request,
+                            "page_main_controller/user/report_user_info_update.html",
+                            {
+                                'title_msg': title_msg,
+                                'user_info': student_info.user_info,
+                                'student_id': student_id,
+                                'image_url': image_url,
+                                'idcard_heads_image_url': idcard_heads_image_url,
+                                'idcard_tails_image_url': idcard_tails_image_url,
+                                'teacher_infos': teacher_infos
+                            })
             else:
                 print(type(object_form.errors),
                       object_form.errors)  # errors类型是ErrorDict，里面是ul，li标签
@@ -235,9 +243,20 @@ def report_student_info_list(request):
     register_user_info = RegisterUserInfo.objects.get(username=username)
     students = StudentInfo.objects.filter(
         user_info__register_user_info=register_user_info).order_by('-id')
-    paginator = Paginator(students, 10)
-    page = request.GET.get('page')
+    page_search = PageSearchForm(request.GET)
+    per_page = 10
+    page = 1
+    if page_search.is_valid():
+        if page_search.cleaned_data.get('per_page', None):
+            per_page = page_search.cleaned_data.get('per_page', None)
+        if page_search.cleaned_data.get('page', None):
+            page = page_search.cleaned_data.get('page', None)
+
+    paginator = Paginator(students, per_page)
     contacts = paginator.get_page(page)
+    # paginator = Paginator(students, 10)
+    # page = request.GET.get('page')
+    # contacts = paginator.get_page(page)
 
     if SchoolTerm.objects.count() > 0:
         school_term = SchoolTerm.objects.last()

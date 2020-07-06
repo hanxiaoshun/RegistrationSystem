@@ -337,7 +337,7 @@ def save_system_message(request):
                                 form_object_system_message_admin.save()
                         else:
                             title_msg = sys_msg + '-错误信息展示页面'
-                            message = '系统提示：学校管理员信息获取失败！'
+                            message = '系统提示：学校管理员信息获取失败,请完善学校管理员的用户基础信息！'
                             return render(request, "page_main_controller/message.html",
                                           {'title_msg': title_msg, 'message': message})
                     elif str(message_range) == '3':

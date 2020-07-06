@@ -26,6 +26,7 @@ def worker(request):
     :param request:
     :return:
     """
+    print(request.GET)
     title_msg = sys_msg + '-系统提示页面'
     try:
         school_terms = SchoolTerm.objects.filter()
@@ -110,7 +111,15 @@ def worker(request):
         else:
             skill_main_class = request.GET.get('skill_main_class', None)
             skill_id = request.GET.get('skill_id', None)
-            skill_name = request.GET.get('skill_name', None)
+            skill_name_test = request.GET.get('skill_name', None)
+            print(f'skill_name_test{skill_name_test}')
+            # query_set = ReportSkill.objects.\
+            # filter({'skill_id':skill_id}).values("skill_id", "skill_name", "skill_main_class", "skill_main_class_name").order_by('-skill_id')
+            skill_name = ''
+            if skill_id is not None:
+                skill_object = ReportSkill.objects.get(skill_id=skill_id)
+                skill_name = skill_object.skill_name
+                # skill_name = request.GET.get('skill_name', None)
             if skill_name:
                 username = request.session.get('username', None)  # 用户名
                 title_msg = sys_msg + '-' + skill_name
@@ -142,6 +151,7 @@ def worker(request):
                 return render_result(request, "page_main_controller/message.html",
                                      {'title_msg': title_msg, 'message': message})
     except Exception as e:
+        # raise e
         message = "系统异常，请稍后尝试，或者联系管理员！错误提示：" + str(e)
         return render_result(request, "page_main_controller/message.html",
                              {'title_msg': title_msg, 'message': message})

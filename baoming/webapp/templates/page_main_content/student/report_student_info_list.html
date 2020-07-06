@@ -1,9 +1,7 @@
-{% load filter_model %}
-{% load filter_status %}
+{% load filter_model %} {% load filter_status %}
 <div class="teacher_ordinary">
     <label class="input_text_head">学员填报信息汇总表</label>
-    <hr>
-    {% if school_term %}
+    <hr> {% if school_term %}
     <p style="text-align: center">
         <label style="color: lawngreen">{{school_term.school_term_name}}</label>
         <label style="color: whitesmoke">开始日期：</label><label style="color: lawngreen">{{school_term.school_term_start|date:"Y-m-d"}}</label>
@@ -17,8 +15,7 @@
 
     <div>
         <form>
-            {% csrf_token %}
-            {{ form }}
+            {% csrf_token %} {{ form }}
         </form>
     </div>
     <div class="table-wrapper">
@@ -26,114 +23,105 @@
         <table class="fl-table" border="1.5">
             <!--               style="overflow-x: scroll; white-space: nowrap; text-align: center !important; color: #000000;">-->
             <thead>
-            <tr class="table-head">
-                <th>序号</th>
-                <th>学期</th>
-                <th><label>申报鉴定职业</label><br><label>(申报职业)</label></th>
-                <th><label>申报鉴定级别</label><br><label>(鉴定级别)</label></th>
-                <th>提交状态</th>
-                <th>审核状态</th>
-                <th>报名结果</th>
-                <th>联系电话</th>
-                <!--                <th>缴费状态</th>-->
-                <th class="fix_width_middle"><label>已缴费</label><br><label>金额</label></th>
-                <th class="fix_width_middle"><label>欠缴费</label><br><label>金额</label></th>
-                <!--                <th>考核结果</th>-->
-                <th class="fix_width_middle"><label>理论</label><br><label>成绩</label></th>
-                <th class="fix_width_middle"><label>实际</label><br><label>操作</label></th>
-                <th><label>单位负责</label><br><label>报名的负责人</label></th>
-                <!--            <th>注销状态</th>-->
-                <th>填报时间</th>
-                <th>操作</th>
-            </tr>
+                <tr class="table-head">
+                    <th>序号</th>
+                    <th>学期</th>
+                    <th><label>申报鉴定职业</label><br><label>(申报职业)</label></th>
+                    <th><label>申报鉴定级别</label><br><label>(鉴定级别)</label></th>
+                    <th>提交状态</th>
+                    <th>审核状态</th>
+                    <th>报名结果</th>
+                    <th>联系电话</th>
+                    <!--                <th>缴费状态</th>-->
+                    <th class="fix_width_middle"><label>已缴费</label><br><label>金额</label></th>
+                    <th class="fix_width_middle"><label>欠缴费</label><br><label>金额</label></th>
+                    <!--                <th>考核结果</th>-->
+                    <th class="fix_width_middle"><label>理论</label><br><label>成绩</label></th>
+                    <th class="fix_width_middle"><label>实际</label><br><label>操作</label></th>
+                    <th><label>单位负责</label><br><label>报名的负责人</label></th>
+                    <!--            <th>注销状态</th>-->
+                    <th>填报时间</th>
+                    <th>操作</th>
+                </tr>
             </thead>
             <tbody>
-            {% for student in contacts %}
-            <tr class="table-tr">
-                <td class="td-title">{{forloop.counter}}</td>
-                <td class="td-title">{{ student.school_term.school_term_name }}</td>
-               {% if student.declaration_of_occupation != "无机化学反应生产工"%}
-                    {% if student.declaration_of_occupation != "起重装卸机械操作工"%}
-                        {% if student.declaration_of_occupation != "工业固体废物处理处置工"%}
-                            <td>{{student.declaration_of_occupation}}</td>
-                        {% else %}
-                        <td><label>工业固体废物</label><br><label>处理处置工</label></td>
-                        {%endif%}
+                {% for student in contacts %}
+                <tr class="table-tr">
+                    <td class="td-title">{{forloop.counter}}</td>
+                    <td class="td-title">{{ student.school_term.school_term_name }}</td>
+                    {% if student.declaration_of_occupation != "无机化学反应生产工"%} {% if student.declaration_of_occupation != "起重装卸机械操作工"%} {% if student.declaration_of_occupation != "工业固体废物处理处置工"%}
+                    <td>{{student.declaration_of_occupation}}</td>
                     {% else %}
+                    <td><label>工业固体废物</label><br><label>处理处置工</label></td>
+                    {%endif%} {% else %}
                     <td><label>起重装卸</label><br><label>机械操作工</label></td>
+                    {%endif%} {% else %}
+                    <td><label>无机化学</label><br><label>反应生产工</label></td>
                     {%endif%}
-                {% else %}
-                <td><label>无机化学</label><br><label>反应生产工</label></td>
-                {%endif%}
-                <td class="td-title">{{ student.identification_level|get_identification_level }}</td>
-                {% if student.submit_status == "1"%}
-                <td style="color:plum">{{ student.submit_status|get_submit_status }}</td>
-                {% else %}
-                <td style="color: yellow">{{ student.submit_status|get_submit_status }}</td>
-                {%endif%}
-                {% if student.review_status == "1"%}
-                <td style="color: #00FF00">{{ student.review_status|get_review_status }}</td>
-                {% else %}
-                <td style="color: yellow">{{ student.review_status|get_review_status }}</td>
-                {%endif %}
-                {% if student.confirm_status == "1"%}
-                <td style="color: red">{{ student.confirm_status|get_confirm_status }}</td>
-                {% else %}
-                <td style="color: yellow">{{ student.confirm_status|get_confirm_status }}</td>
-                {% endif %}
+                    <td class="td-title">{{ student.identification_level|get_identification_level }}</td>
+                    {% if student.submit_status == "1"%}
+                    <td style="color:plum">{{ student.submit_status|get_submit_status }}</td>
+                    {% else %}
+                    <td style="color: yellow">{{ student.submit_status|get_submit_status }}</td>
+                    {%endif%} {% if student.review_status == "1"%}
+                    <td style="color: #00FF00">{{ student.review_status|get_review_status }}</td>
+                    {% else %}
+                    <td style="color: yellow">{{ student.review_status|get_review_status }}</td>
+                    {%endif %} {% if student.confirm_status == "1"%}
+                    <td style="color: red">{{ student.confirm_status|get_confirm_status }}</td>
+                    {% else %}
+                    <td style="color: yellow">{{ student.confirm_status|get_confirm_status }}</td>
+                    {% endif %}
 
-                <td class="td-title">{{ student.user_info.contact_number|get_contact_number }}</td>
-                <!--                <td class="td-title">{{ student.pay_status|get_pay_status }}</td>-->
-                <td class="td-title">{{student.payment_amount|get_zero}}</td>
-                <td class="td-title">{{student.unpaid_amount|get_zero}}</td>
-                <!--                <td class="td-title">{{ student.examination_status|get_examination_status }}</td>-->
-                <td class="td-title">{{student.theoretical_achievements|get_zero}}</td>
-                <td class="td-title">{{student.practical_operation|get_zero}}</td>
-                <td class="td-title">{{ student.teacher_info.user_info.real_name }}</td>
-                <!--            <td class="td-title">{{ student.cancel_status|get_cancel_status }}</td>-->
-                <td class="td-title">{{ student.create_time|date:"Y-m-d" }}</td>
-                <!--            # 25个字符-->
-                <td class="td-title">
-                    <div class="dropdown">
-                        <button class="dropbtn">操作</button>
-                        <div class="dropdown-content action-content">
-                            <!--                        <a href='javascript:void(0)' onclick='edit_obj("{{student.pk}}",1,"+orgType+")'>-->
-                            <!--                            <button>详情</button>-->
-                            <!--                        </a>-->
-                            <!--                        <a href='javascript:void(0)' onclick='edit_obj("{{student.pk}}",2,"+orgType+")'>-->
-                            <!--                            <button>修改</button>-->
-                            <!--                        </a>-->
-                            <!--                        <a href='javascript:void(0)' onclick='cancel_obj("{{student.pk}}")'>-->
-                            <!--                            <button>注销</button>-->
-                            <!--                        </a>-->
-                            <!--                        <a href='javascript:void(0)' onclick='cancel_obj("{{student.pk}}")'>-->
-                            <!--                            <button>下载</button>-->
-                            <!--                        </a>-->
-                            <a href='/report/student_info_detail?studentId={{student.pk}}'>
-                                <button>详情</button>
-                            </a>
+                    <td class="td-title">{{ student.user_info.contact_number|get_contact_number }}</td>
+                    <!--                <td class="td-title">{{ student.pay_status|get_pay_status }}</td>-->
+                    <td class="td-title">{{student.payment_amount|get_zero}}</td>
+                    <td class="td-title">{{student.unpaid_amount|get_zero}}</td>
+                    <!--                <td class="td-title">{{ student.examination_status|get_examination_status }}</td>-->
+                    <td class="td-title">{{student.theoretical_achievements|get_zero}}</td>
+                    <td class="td-title">{{student.practical_operation|get_zero}}</td>
+                    <td class="td-title">{{ student.teacher_info.user_info.real_name }}</td>
+                    <!--            <td class="td-title">{{ student.cancel_status|get_cancel_status }}</td>-->
+                    <td class="td-title">{{ student.create_time|date:"Y-m-d" }}</td>
+                    <!--            # 25个字符-->
+                    <td class="td-title">
+                        <div class="dropdown">
+                            <button class="dropbtn">操作</button>
+                            <div class="dropdown-content action-content">
+                                <!--                        <a href='javascript:void(0)' onclick='edit_obj("{{student.pk}}",1,"+orgType+")'>-->
+                                <!--                            <button>详情</button>-->
+                                <!--                        </a>-->
+                                <!--                        <a href='javascript:void(0)' onclick='edit_obj("{{student.pk}}",2,"+orgType+")'>-->
+                                <!--                            <button>修改</button>-->
+                                <!--                        </a>-->
+                                <!--                        <a href='javascript:void(0)' onclick='cancel_obj("{{student.pk}}")'>-->
+                                <!--                            <button>注销</button>-->
+                                <!--                        </a>-->
+                                <!--                        <a href='javascript:void(0)' onclick='cancel_obj("{{student.pk}}")'>-->
+                                <!--                            <button>下载</button>-->
+                                <!--                        </a>-->
+                                <a href='/report/student_info_detail?studentId={{student.pk}}'>
+                                    <button>详情</button>
+                                </a>
 
-                            <a href='/report/download_apply?studentId={{student.pk}}'>
-                                <button>下载</button>
-                            </a>
-                            {% if student.submit_status == "2"%}
-                            <a href='javascript:void(0);'
-                               onclick="submit('/report/report_student_submit/','{{student.pk}}')">
-                                <button>提交</button>
-                            </a>
-                            <a href='javascript:void(0);' onclick="del('/report/report_student_del/','{{student.pk}}')">
-                                <button>删除</button>
-                            </a>
-                            <a href='/report/to_student_info_update?studentId={{student.pk}}' readonly="readonly">
-                                <button>修改</button>
-                            </a>
-                            {% elif student.submit_status == "1"%}
-                            <a href='javascript:void(0);'
-                               onclick="cancel('/report/report_student_cancel/','{{student.pk}}')">
-                                <button>注销提交</button>
-                            </a>
-                            <a href='javascript:void(0);'
-                               onclick="payment('{{student.id}}',
+                                <a href='/report/download_apply?studentId={{student.pk}}'>
+                                    <button>下载</button>
+                                </a>
+                                {% if student.submit_status == "2"%}
+                                <a href='javascript:void(0);' onclick="submit('/report/report_student_submit/','{{student.pk}}')">
+                                    <button>提交</button>
+                                </a>
+                                <a href='javascript:void(0);' onclick="del('/report/report_student_del/','{{student.pk}}')">
+                                    <button>删除</button>
+                                </a>
+                                <a href='/report/to_student_info_update?studentId={{student.pk}}' readonly="readonly">
+                                    <button>修改</button>
+                                </a>
+                                {% elif student.submit_status == "1"%}
+                                <a href='javascript:void(0);' onclick="cancel('/report/report_student_cancel/','{{student.pk}}')">
+                                    <button>注销提交</button>
+                                </a>
+                                <a href='javascript:void(0);' onclick="payment('{{student.id}}',
                                '{{ student.school_term.school_term_name }}',
                                '{{ student.declaration_of_occupation }}',
                                '{{ student.identification_level|get_identification_level }}',
@@ -141,38 +129,44 @@
                                '{{ student.user_info.real_name }}',
                                '{{ student.payment_amount}}',
                                '{{ student.unpaid_amount}}')">
-                                <button>
+                                    <button>
                                     <label>支付<br></label>
                                     <label>报考费</label>
                                 </button>
-                            </a>
-                            <!--                            {% if student.cancel_status == "2"%}-->
-                            <!--                                <a href='javascript:void(0);'-->
-                            <!--                                   onclick="cancel('/report/report_student_cancel/','{{student.pk}}')">-->
-                            <!--                                    <button>注销提交</button>-->
-                            <!--                                </a>-->
-                            <!--                            {% elif student.cancel_status == "1" %}-->
-                            <!--                            <a href='javascript:void(0);'-->
-                            <!--                               onclick="cancel_return('/report/report_student_cancel_return/','{{student.pk}}')">-->
-                            <!--                                <button>撤销注销申请</button>-->
-                            <!--                            </a>-->
-                            <!--                            {%else%}-->
-                            <!--                            {%endif%}-->
+                                </a>
+                                <!--                            {% if student.cancel_status == "2"%}-->
+                                <!--                                <a href='javascript:void(0);'-->
+                                <!--                                   onclick="cancel('/report/report_student_cancel/','{{student.pk}}')">-->
+                                <!--                                    <button>注销提交</button>-->
+                                <!--                                </a>-->
+                                <!--                            {% elif student.cancel_status == "1" %}-->
+                                <!--                            <a href='javascript:void(0);'-->
+                                <!--                               onclick="cancel_return('/report/report_student_cancel_return/','{{student.pk}}')">-->
+                                <!--                                <button>撤销注销申请</button>-->
+                                <!--                            </a>-->
+                                <!--                            {%else%}-->
+                                <!--                            {%endif%}-->
 
-                            {% else %}
-                            {%endif%}
+                                {% else %} {%endif%}
 
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
-	<div class="pagination" style="color: ghostwhite">
-		<span class="step-links">
-			每页展示：<select onchange="getPageResizeWithSearch(this.options[this.options.selectedIndex].value, 'pagesize_teacher_search','submit-reporter-all-student-search');">
+    <form action="/report/report_student_info_list/" method="get" id="form-search-all-student">
+        <a href="javascript:void(0);" class="a-search">
+            <input type="hidden" name="page" id="page_student_search" value="{{contacts.page}}" />
+            <input type="hidden" name="per_page" id="pagesize_student_search" value="{{contacts.paginator.per_page}}" />
+            <input type='submit' style="color: deeppink" value='查询' class='form-button' id="submit-reporter-all-student-search" />
+        </a>
+    </form>
+    <div class="pagination" style="color: ghostwhite">
+        <span class="step-links">
+			每页展示：<select onchange="getPageResizeWithSearch(this.options[this.options.selectedIndex].value, 'pagesize_student_search','submit-reporter-all-student-search');">
 				{% if contacts.paginator.per_page == 10 %}
 				<option value="{{contacts.paginator.per_page}}" selected>{{contacts.paginator.per_page}}</option>
 				<option value="20">20</option>
@@ -188,29 +182,26 @@
 				{%else%} {%endif%}
 			</select>&nbsp;条&nbsp;
 			{% if contacts.has_previous %}
-			<a href="javascript:void(0)" onclick="gotoPageWithSearch(1,'page_teacher_search','submit-reporter-all-student-search');">&laquo; 首页</a>
-			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.previous_page_number }}, 'page_teacher_search', 'submit-reporter-all-student-search');">上一页</a>
+			<a href="javascript:void(0)" onclick="gotoPageWithSearch(1,'page_student_search','submit-reporter-all-student-search');">&laquo; 首页</a>
+			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.previous_page_number }}, 'page_student_search', 'submit-reporter-all-student-search');">上一页</a>
 			{% endif %}
 	
 			<span class="current">
 				第 {{ contacts.number }} 页 ,总共 {{ contacts.paginator.num_pages }} 页.
-			</span>
-			
-			{% if contacts.has_next %}
-			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.next_page_number }},'page_teacher_search','submit-reporter-all-student-search');">下一页</a>
-			<a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.paginator.num_pages }},'page_teacher_search','submit-reporter-all-student-search');">尾页 &raquo;</a> 
-			{%endif %}
-			<span class="current">
+			</span> {% if contacts.has_next %}
+        <a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.next_page_number }},'page_student_search','submit-reporter-all-student-search');">下一页</a>
+        <a href="javascript:void(0)" onclick="gotoPageWithSearch({{ contacts.paginator.num_pages }},'page_student_search','submit-reporter-all-student-search');">尾页 &raquo;</a> {%endif %}
+        <span class="current">
 				总 <label>{{ contacts.paginator.count }}</label> 条记录数据.
 			</span>
-			
-			<span class="current">
-				跳转至:<input type="text" placeholder="{{contacts.number}}" style="width: 50px;height: 20px;" value="" class="goto_page_appoint" id="goto_page_teacher_search"/>&nbsp;页
-				<a href="javascript:void(0)" onclick="gotoWithSearchToPage('goto_page_teacher_search','page_teacher_search','submit-reporter-all-student-search');">Go</a>
+
+        <span class="current">
+				跳转至:<input type="text" placeholder="{{contacts.number}}" style="width: 50px;height: 20px;" value="" class="goto_page_appoint" id="goto_page_student_search"/>&nbsp;页
+				<a href="javascript:void(0)" onclick="gotoWithSearchToPage('goto_page_student_search','page_student_search','submit-reporter-all-student-search');">Go</a>
 			</span>
-		</span>
-	</div>
-<!--    <div class="pagination" style="color: ghostwhite">
+        </span>
+    </div>
+    <!--    <div class="pagination" style="color: ghostwhite">
     <span class="step-links">
         {% if contacts.has_previous %}
             <a style="color: #00FF00" href="?page=1">&laquo; 首页</a>
@@ -233,98 +224,95 @@
 <div class="box box_payment">
     <div class="regiest">
         <form action="" id='form-payment' method="post">
-            {% csrf_token %}
-            {{ form }}
+            {% csrf_token %} {{ form }}
             <input type="hidden" value="" name='payment_id' id="payment_id">
             <table style="margin: 5% auto 3% auto;">
                 <tbody>
-                <tr>
-                    <td class="form-label td-span">
-                        <font color='#ff0000'>* </font>
-                        <span class="input_text">应缴纳金额：</span>
-                    </td>
-                    <td class="form-label td-input">
-                        <input type="number" name="payment_amount" id="payment_amount" placeholder="输入已缴费金额"
-                               required="required" min="0"
-                               onblur="" onchange=""></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="form-label td-span">
-                        <font color='#ff0000'>* </font>
-                        <span class="input_text">未缴纳金额：</span>
-                    </td>
-                    <td class="form-label td-input">
-                        <input type="number" name="payment_amount" id="unpaid_amount" placeholder="未缴纳金额"
-                               min="0"
-                               onblur="" onchange=""></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <hr>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: center">
-                        <label style="color: lawngreen;font-size: 14px">请确认填报信息再确认输入缴纳金额并提交</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="form-label td-span">
-                        <font color='#ff0000'>* </font>
-                        <span class="input_text">姓名：</span>
-                    </td>
-                    <td class="form-label td-input">
-                        <label style='color:red' id="payment_real_name"></label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="form-label td-span">
-                        <font color='#ff0000'>* </font>
-                        <label for='' class="input_text" style="font-size: 12px">单位负责报名的负责人：</label>
-                    </td>
-                    <td class="form-label td-input">
-                        <label style='color:red' id="teacher_payment"></label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="form-label td-span">
-                        <font color='#ff0000'>* </font>
-                        <span class="input_text" style="font-size: 12px">申报鉴定职业(申报职业)：</span>
-                    </td>
-                    <td class="form-label td-input">
-                        <label style='color:red' id="declaration_of_occupation_payment"></label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="form-label td-span">
-                        <font color='#ff0000'>* </font>
-                        <span class="input_text" style="font-size: 12px">申报鉴定级别(鉴定级别)：</span>
-                    </td>
-                    <td class="form-label td-input">
-                        <label style='color:red' id="identification_level_payment"></label>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">应缴纳金额：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <input type="number" name="payment_amount" id="payment_amount" placeholder="输入已缴费金额" required="required" min="0" onblur="" onchange=""></td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">未缴纳金额：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <input type="number" name="payment_amount" id="unpaid_amount" placeholder="未缴纳金额" min="0" onblur="" onchange=""></td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align: center">
+                            <label style="color: lawngreen;font-size: 14px">请确认填报信息再确认输入缴纳金额并提交</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text">姓名：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="payment_real_name"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <label for='' class="input_text" style="font-size: 12px">单位负责报名的负责人：</label>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="teacher_payment"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text" style="font-size: 12px">申报鉴定职业(申报职业)：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="declaration_of_occupation_payment"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-label td-span">
+                            <font color='#ff0000'>* </font>
+                            <span class="input_text" style="font-size: 12px">申报鉴定级别(鉴定级别)：</span>
+                        </td>
+                        <td class="form-label td-input">
+                            <label style='color:red' id="identification_level_payment"></label>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <p>
-            <div id="btn2" style="margin-left: 20%;">
-                <ul>
-                    <li><input type="button" value="提交" class="submit-payment" id='payment_button'
-                               style="color: white"
-                               onclick="add_payment();"/></li>
-                    <li><input type="button" value="关闭" class="close_payment" style="color: white"/></li>
-                </ul>
-            </div>
+                <div id="btn2" style="margin-left: 20%;">
+                    <ul>
+                        <li><input type="button" value="提交" class="submit-payment" id='payment_button' style="color: white" onclick="add_payment();" /></li>
+                        <li><input type="button" value="关闭" class="close_payment" style="color: white" /></li>
+                    </ul>
+                </div>
             </p>
         </form>
     </div>
 </div>
 
 <script type="text/javascript">
-    $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}'}});
-    $(function () {
+    $.ajaxSetup({
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        }
+    });
+    $(function() {
         // $(".form-button-add-term").click(function () {
         //     let left = ($(window).width() * (1 - 0.35)) / 2;//box弹出框距离左边的额距离
         //     let height = ($(window).height() * (1 - 0.5)) / 2;
@@ -333,7 +321,7 @@
         //     let form_button = $('#school_term_button');
         //     form_button.attr('onclick', "add_school_term();");
         // });
-        $(".close_payment").click(function () {
+        $(".close_payment").click(function() {
             let left = ($(window).width() * (1 - 0.35)) / 2;
             let top = ($(window).height() * (1 - 0.5)) / 2;
             $(".box_payment").show().animate({
@@ -341,10 +329,13 @@
                 height: "-$(window).height()*0.5",
                 left: "-" + left + "px",
                 top: "-" + top + "px"
-            }, 1000, function () {
+            }, 1000, function() {
                 let width1 = $(window).width() * 0.35;
                 let height1 = $(window).height() * 0.5;
-                $(this).css({width: width1, height: height1}).hide();
+                $(this).css({
+                    width: width1,
+                    height: height1
+                }).hide();
             });
 
         });

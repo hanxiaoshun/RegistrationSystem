@@ -22,40 +22,40 @@ function condition_controller(condition_string, status) {
 
     let apprentice_start_class = $(".apprentice_start").hide();
     $(".apprentice_end").hide();
-//========================================================================================
+    //========================================================================================
     //是否需要
     let qualification_class = $('.has_qualification');
     let graduation_status_class = $('.graduation_status');
     let condition_selected_class = $('.condition_selected');
-//职业年限
+    //职业年限
     let career_life_class = $(".career_life");
-//从事本职业工作开始时间
+    //从事本职业工作开始时间
     let start_the_work_of_this_occupation_class = $(".start_the_work_of_this_occupation");
-//术等级（原级别）
+    //术等级（原级别）
     let primary_level_class = $(".primary_level");
-// 现持有职业资格证书编号(原证书编号)
+    // 现持有职业资格证书编号(原证书编号)
     let original_certificate_number_class = $(".original_certificate_number");
-// 现有证件发证单位
+    // 现有证件发证单位
     let issue_unit_class = $(".issue_unit");
-//现有职业资格证发证时间
+    //现有职业资格证发证时间
     let issuance_time_class = $(".issuance_time");
 
-// 职业资格证图片上传
+    // 职业资格证图片上传
     let certificate_photos_class = $('.certificate_photos');
-//=========================================================================================
+    //=========================================================================================
 
-// // 学历程度
-//     let education_degree_class = $(".education_degree");
-//毕业（应届）院校名称
+    // // 学历程度
+    //     let education_degree_class = $(".education_degree");
+    //毕业（应届）院校名称
     let school_name_class = $(".school_name");
-// 毕业时间(或即将毕业时间)
+    // 毕业时间(或即将毕业时间)
     let graduation_time_class = $(".graduation_time");
-//专业工种(或相关专业工种)
+    //专业工种(或相关专业工种)
     let profession_class = $(".profession");
 
-//被授予毕业资格证书名称
+    //被授予毕业资格证书名称
     let diploma_granted_class = $(".diploma_granted");
-// 毕业证图片上传
+    // 毕业证图片上传
     let diploma_certificate_photos_class = $('.diploma_certificate_photos');
 
     apprentice_class.hide();
@@ -69,7 +69,7 @@ function condition_controller(condition_string, status) {
     start_the_work_of_this_occupation_class.hide();
     $('.career_life_time').hide();
     $(".course_hours").hide();
-//有关证书情况
+    //有关证书情况
     primary_level_class.hide();
     original_certificate_number_class.hide();
     issue_unit_class.hide();
@@ -78,7 +78,7 @@ function condition_controller(condition_string, status) {
     $('.original_certificate_worker_time').hide();
 
     certificate_photos_class.hide();
-// 院校毕业证书情况
+    // 院校毕业证书情况
     $('.education_degree_form').hide();
     school_name_class.hide();
     graduation_time_class.hide();
@@ -172,14 +172,14 @@ function condition_controller(condition_string, status) {
                 career_life_time();
                 apprentice_check(false);
                 check_has_qualification(1, 4);
-                check_graduation_status(1, 2, false, false, 4);//======================================
+                check_graduation_status(1, 2, false, false, 4); //======================================
 
             } else if (condition_string.indexOf("dhg03_3__2") > -1) {
 
                 career_life_time();
                 apprentice_check(false);
                 check_has_qualification(1, 4);
-                check_graduation_status(1, 2, false, false, 5);//======================================
+                check_graduation_status(1, 2, false, false, 5); //======================================
 
             } else if (condition_string.indexOf("dhg03_4") > -1) {
 
@@ -323,9 +323,9 @@ function condition_controller(condition_string, status) {
         } else if (condition_string.indexOf("qg04") > -1) {
             //四级（中级）
             // let qg04 = ['(1) 取得本职业初级职业资格证书后，连续从事本职业工作 3 年以上，经本职业中级正规培训达规定标准学时数，并取得结业证书。',
-//      '(2) 取得本职业初级职业资格证书后，连续从事本职业工作 5 年以上。',
-//     '(3) 连续从事本职业工作 7 年以上。',
-//     '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
+            //      '(2) 取得本职业初级职业资格证书后，连续从事本职业工作 5 年以上。',
+            //     '(3) 连续从事本职业工作 7 年以上。',
+            //     '(4) 取得经人力资源和社会保障行政部门审核认定的、以中级技能为培养目标的中等以上职业学校本职业 ( 专业 ) 毕业证书。'];
 
             if (condition_string.indexOf("qg04_1") > -1) {
                 //第1个条件
@@ -369,11 +369,11 @@ function condition_controller(condition_string, status) {
             // '(3__3)或高级技工学校本职业 ( 专业 ) 毕业证书。',
             // '(4) 大专以上本专业或相关专业毕业生取得本职业中级职业资格证书后, 连续从事本职业工作 2 年以上。'];
 
-//             ——高级 ( 具备下列条件之一者〉
-// (1) 取得本职业中级职业资格证书后，连续从事本职业工作 4 年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。
-// (2) 取得本职业中级职业资格证书后，连续从事本职业工作 7 年以上。
-// (3) 取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校或高级技工学校本职业 ( 专业 ) 毕业证书。
-// (4) 大专以上本专业或相关专业毕业生取得本职业中级职业资格证书后, 连续从事本职业工作 2 年以上。
+            //             ——高级 ( 具备下列条件之一者〉
+            // (1) 取得本职业中级职业资格证书后，连续从事本职业工作 4 年以上，经本职业高级正规培训达规定标准学时数，并取得结业证书。
+            // (2) 取得本职业中级职业资格证书后，连续从事本职业工作 7 年以上。
+            // (3) 取得高级技工学校或经人力资源和社会保障行政部门审核认定的、以高级技能为培养目标的高等职业学校或高级技工学校本职业 ( 专业 ) 毕业证书。
+            // (4) 大专以上本专业或相关专业毕业生取得本职业中级职业资格证书后, 连续从事本职业工作 2 年以上。
 
             if (condition_string.indexOf("qg03_1") > -1) {
                 //第1个条件
@@ -440,11 +440,11 @@ function condition_controller(condition_string, status) {
         } else if (condition_string.indexOf("yyy04") > -1) {
             //四级（中级）
             //2019-0903 修订
-//——四级/中级工（具备以下条件之一者）
-// （1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。
-// （2）累计从事本职业或相关职业工作 6 年（含）以上。
-// （3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-// （3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
+            //——四级/中级工（具备以下条件之一者）
+            // （1）取得本职业或相关职业五级/初级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作 4 年（含）以上。
+            // （2）累计从事本职业或相关职业工作 6 年（含）以上。
+            // （3-1）取得技工学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）；
+            // （3-2）或取得经评估论证、以中级技能为培养目标的中等及以上职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
             if (condition_string.indexOf("yyy04_1") > -1) {
                 //第1个条件
 
@@ -480,14 +480,14 @@ function condition_controller(condition_string, status) {
             //高级（三级）
 
             //——三级/高级工（具备以下条件之一者）
-// （1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。
-// （2-1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；
-// （2-2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
-// （3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作２年（含）以上。
-// 注：
-// 1、相关职业：婴幼儿发展引导员、幼儿教育教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健调理师、健康管理师、保育员、家政服务员。
-// 2、本专业：学前教育、早期教育。
-// 3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健；高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、营养配餐、特殊教育、心理健康教育、幼儿发展与健康管理、中医康复技术；普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、针灸推拿、教育学、小学教育。
+            // （1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作５年（含）以上。
+            // （2-1）取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有高级技工学校、技师学院毕业证书（含尚未取得毕业证书的在校应届毕业生）；
+            // （2-2）或取得本职业或相关职业四级/中级工职业资格证书（技能等级证书），并具有经评估论证、以高级技能为培养目标的高等职业学校本专业或相关专业毕业证书（含尚未取得毕业证书的在校应届毕业生）。
+            // （3）具有大专及以上本专业或相关专业毕业证书，并取得本职业或相关职业四级/ 中级工职业资格证书（技能等级证书）后，累计从事本职业或相关职业工作２年（含）以上。
+            // 注：
+            // 1、相关职业：婴幼儿发展引导员、幼儿教育教师、儿科医师、儿科护士、孤残儿童护理员、母婴保健技术服务人员、保健调理师、健康管理师、保育员、家政服务员。
+            // 2、本专业：学前教育、早期教育。
+            // 3、相关专业:中职：护理、中医护理、家政服务与管理、营养与保健；高职高专：护理、预防医学、公共卫生管理、人口与家庭发展服务、临床医学、中医学、食品营养与卫生、健康管理、医学营养、心理咨询、营养配餐、特殊教育、心理健康教育、幼儿发展与健康管理、中医康复技术；普通高校：护理学、基础医学、预防医学、中医学、妇幼保健医学、针灸推拿、教育学、小学教育。
 
             if (condition_string.indexOf("yyy03_1") > -1) {
                 //第1个条件
@@ -522,7 +522,7 @@ function condition_controller(condition_string, status) {
 
                 career_life_time();
                 apprentice_check(false);
-                check_has_qualification(1, 4,2);
+                check_has_qualification(1, 4, 2);
                 check_graduation_status(1, 3, false, true);
 
             } else {
@@ -533,9 +533,9 @@ function condition_controller(condition_string, status) {
         // 保育员
         if (condition_string.indexOf("byy05") > -1) {
             //五级（初级）
-//              ——五级/初级工（具备以下条件之一者 ）
-// （1）累计从事本职业或相关职业工作１年（含）以上。
-// （2）本职业或相关职业学徒期满。
+            //              ——五级/初级工（具备以下条件之一者 ）
+            // （1）累计从事本职业或相关职业工作１年（含）以上。
+            // （2）本职业或相关职业学徒期满。
             if (condition_string.indexOf("byy05_1") > -1) {
                 //第1个条件
 
@@ -544,7 +544,7 @@ function condition_controller(condition_string, status) {
                 check_has_qualification(2);
                 check_graduation_status(2);
 
-            }  else if (condition_string.indexOf("byy05_2") > -1) {
+            } else if (condition_string.indexOf("byy05_2") > -1) {
 
                 career_life_time();
                 apprentice_check(true);
@@ -619,7 +619,7 @@ function condition_controller(condition_string, status) {
 
             } else if (condition_string.indexOf("byy03_3") > -1) {
 
-                 career_life_time();
+                career_life_time();
                 apprentice_check(false);
                 check_has_qualification(1, 4);
                 check_graduation_status(1, 4, false, true);
@@ -687,7 +687,7 @@ function condition_controller(condition_string, status) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
             } else if (condition_string.indexOf("hg04_3__1") > -1) {
 
                 career_life_time();
@@ -791,7 +791,7 @@ function condition_controller(condition_string, status) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
             } else if (condition_string.indexOf("hxjyy04_3__1") > -1) {
 
                 career_life_time();
@@ -894,7 +894,7 @@ function condition_controller(condition_string, status) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
 
             } else if (condition_string.indexOf("ffsg04_3__1") > -1) {
 
@@ -997,7 +997,7 @@ function condition_controller(condition_string, status) {
                 career_life_time(6);
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(2,);
+                check_graduation_status(2);
             } else if (condition_string.indexOf("wjhxfyscg04_3__1") > -1) {
 
                 career_life_time();
@@ -1074,13 +1074,13 @@ function condition_controller(condition_string, status) {
                 career_life_time();
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(1, 2, false, false);  //-------------------------------------------
+                check_graduation_status(1, 2, false, false); //-------------------------------------------
             } else if (condition_string.indexOf("04_3__2") > -1) {
 
                 career_life_time();
                 apprentice_check(false);
                 check_has_qualification(2);
-                check_graduation_status(1, 3, true, false);  //-------------------------------------------
+                check_graduation_status(1, 3, true, false); //-------------------------------------------
             } else if (condition_string.indexOf("04_4") > -1) {
 
                 career_life_time();
@@ -1130,13 +1130,13 @@ function condition_controller(condition_string, status) {
 
                 career_life_time();
                 apprentice_check(false);
-                check_has_qualification(1, 4, 1);  //==========================================
+                check_has_qualification(1, 4, 1); //==========================================
                 check_graduation_status(1, 7, false, true);
             } else if (condition_string.indexOf("03_6") > -1) {
 
                 career_life_time();
                 apprentice_check(false);
-                check_has_qualification(2);  //==========================================
+                check_has_qualification(2); //==========================================
                 check_graduation_status(1, 8, true, false);
             } else {
                 alert("没有相关的信息填报条件！，请查证后重新选择。");
